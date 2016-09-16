@@ -1,5 +1,9 @@
 /**
  * Created by Владимир on 16.09.2016.
  */
-public class Snake {
+public class Snake
+{
+    public Snake()
+    {
+    }
 }
