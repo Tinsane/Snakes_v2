@@ -3,6 +3,8 @@
  */
 public class Vector
 {
+    public static final Vector zero = new Vector(0, 0);
+
     int x, y;
     Vector(int x, int y)
     {
