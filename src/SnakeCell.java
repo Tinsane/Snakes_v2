@@ -15,7 +15,7 @@ public class SnakeCell extends DynamicMapObject
     {
         // probably need to check if cell is head
         berry.setIsDestructed(true);
-        game.snake.extend(berry.satisfactionCoefficient);
+        game.snake.extend(berry.getSatisfactionCoefficient());
     }
 
     public void processCollision(SandGlass sandGlass, Game game)

@@ -4,13 +4,18 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Created by Владимир on 16.09.2016.
  */
 
-public class Berry extends StaticMapObject
+public abstract class Berry extends StaticMapObject
 {
-    public final int satisfactionCoefficient;
+    private final int satisfactionCoefficient;
 
     public Berry(int satisfactionCoefficient)
     {
         this.satisfactionCoefficient = satisfactionCoefficient;
+    }
+
+    public int getSatisfactionCoefficient()
+    {
+        return satisfactionCoefficient;
     }
 
     public void processCollision(SnakeCell snakeCell, Game game)
