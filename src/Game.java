@@ -6,12 +6,16 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Random;
 
 public class Game
 {
     private final int UPDATE_DELAY = 300;
     public LinkedList<MapObject[][]> maps;
     public Snake snake;
+    private Timer gameTimer;
+    private Random gameRandom;
     private static MapObject[][] loadMap(String fileName)
     {
         throw new NotImplementedException();
@@ -22,17 +26,52 @@ public class Game
         maps = new LinkedList<>();
         maps.addFirst(loadMap(levelFileName));
         snake = new Snake();
+        gameRandom = new Random();
     }
 
     public void rollback(int turnsNumber)
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < turnsNumber && maps.size() > 1; ++i)
+            maps.removeFirst();
     }
 
     public void start()
     {
-        Timer timer = new Timer(UPDATE_DELAY, e -> update());
-        timer.start();
+        gameTimer = new Timer(UPDATE_DELAY, e -> update());
+        gameTimer.start();
+    }
+
+    public void stop()
+    {
+        gameTimer.stop();
+    }
+
+    private static void clearDestructedObjects(MapObject[][] map)
+    {
+        for (int x = 0; x < map.length; ++x)
+            for (int y = 0; y < map[0].length; ++y)
+                if (map[x][y] != null && map[x][y].getIsDestructed())
+                    map[x][y] = null;
+    }
+
+    private void generateBerry(MapObject[][] map)
+    {
+        int freeCellsCnt = 0;
+        for (MapObject[] row : map)
+            for (MapObject cell : row)
+                if (cell == null)
+                    ++freeCellsCnt;
+        if (freeCellsCnt == 0)
+            return;
+        int berryCellNumber = gameRandom.nextInt(freeCellsCnt);
+        for (int x = 0; x < map.length; ++x)
+            for (int y = 0; y < map[0].length; ++y)
+            {
+                if (berryCellNumber == 0)
+                    map[x][y] = new Berry(); // TODO: satisfactionCoefficient?
+                if (map[x][y] == null)
+                    --berryCellNumber;
+            }
     }
 
     private void update()
@@ -46,19 +85,24 @@ public class Game
                 if (curObject == null || curObject.getIsDestructed())
                     continue;
                 Vector velocity = curObject.getVelocity();
-                int newX = x + velocity.x, newY = y + velocity.y; // smirnov: better to split into 2 strings
-                if (curMap[newX][newY] != null && curMap[newX][newY] != curObject && // smirnov: better to create a function fot checking this
+                int newX = x + velocity.x;
+                int newY = y + velocity.y;
+                // no need now
+                /*if (curMap[newX][newY] != null && curMap[newX][newY] != curObject && // smirnov: better to create a function fot checking this
                         curMap[newX][newY].getVelocity() == velocity.getReversed()) // smirnov: and change it for new solution
                 {
                     curObject.processCollision(curMap[newX][newY], this);
                     if (curObject.getIsDestructed())
                         continue;
-                }
+                }*/
                 if (newMap[newX][newY] != null)
                     curObject.processCollision(newMap[newX][newY], this);
                 if (!curObject.getIsDestructed())
                     newMap[newX][newY] = curObject;
             }
+        clearDestructedObjects(newMap);
         maps.addFirst(newMap);
+        if (snake.getIsDestructed())
+            stop();
     }
 }

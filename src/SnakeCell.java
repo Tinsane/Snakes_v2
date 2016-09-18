@@ -9,7 +9,6 @@ public class SnakeCell extends DynamicMapObject
     {
         // let's just kill the snake
         game.snake.setIsDestructed(true);
-        // TODO: and finish the game
     }
 
     public void processCollision(Berry berry, Game game)
@@ -28,6 +27,5 @@ public class SnakeCell extends DynamicMapObject
     public void processCollision(Wall wall, Game game)
     {
         game.snake.setIsDestructed(true);
-        // TODO: and finish the game
     }
 }
