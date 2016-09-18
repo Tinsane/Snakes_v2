@@ -13,20 +13,16 @@ import java.util.Random;
 public class Game
 {
     private final int UPDATE_DELAY = 300;
-    public LinkedList<MapObject[][]> maps;
+    private LinkedList<MapObject[][]> maps;
     public Snake snake;
     private Timer gameTimer;
     private Random gameRandom;
-    private static MapObject[][] loadMap(String fileName)
-    {
-        throw new NotImplementedException();
-    }
 
-    public Game(String levelFileName)
+    public Game(MapObject[][] map, Snake snake)
     {
         maps = new LinkedList<>();
-        maps.addFirst(loadMap(levelFileName));
-        snake = new Snake();
+        maps.addFirst(map);
+        this.snake = snake;
         gameRandom = new Random();
     }
 
@@ -74,7 +70,7 @@ public class Game
             for (int y = 0; y < map[0].length; ++y)
             {
                 if (berryCellNumber == 0)
-                    map[x][y] = new Berry(); // TODO: satisfactionCoefficient?
+                    map[x][y] = gameRandom.nextBoolean() ? new Blueberry() : new Strawberry();
                 if (map[x][y] == null)
                     --berryCellNumber;
             }

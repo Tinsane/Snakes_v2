@@ -3,7 +3,7 @@
  */
 public abstract class DynamicMapObject extends BaseMapObject
 {
-    public Vector velocity;
+    private Vector velocity;
 
     @Override
     public Vector getVelocity()
