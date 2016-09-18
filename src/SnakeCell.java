@@ -1,21 +1,15 @@
 import javafx.util.Pair;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by Владимир on 16.09.2016.
  */
 public class SnakeCell extends DynamicMapObject
 {
-    private SnakeCell previous;
+    public SnakeCell previous;
 
     SnakeCell(SnakeCell previous)
     {
         this.previous = previous;
-    }
-
-    public SnakeCell getPrevious()
-    {
-        return previous;
     }
 
     public Pair<Integer, Integer> getCoordinates(MapObject[][] map)
@@ -36,7 +30,7 @@ public class SnakeCell extends DynamicMapObject
         {
             int newX = currentX + dx[i];
             int newY = currentY + dy[i];
-            if (map[newX][newY] == currentCell.getPrevious())
+            if (map[newX][newY] == currentCell.previous)
                 return new Pair<>(newX, newY);
         }
         return null;

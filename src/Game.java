@@ -87,7 +87,7 @@ public class Game
             moveObject(newMap, currentX, currentY);
             SnakeCell current = (SnakeCell) curMap[currentX][currentY];
             currentCoordinates = SnakeCell.getPreviousCoordinates(curMap, currentX, currentY);
-            SnakeCell previous = current.getPrevious();
+            SnakeCell previous = current.previous;
             if (previous != null)
                 previous.setVelocity(current.getVelocity());
         }

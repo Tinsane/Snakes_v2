@@ -1,3 +1,4 @@
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.util.Pair;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -9,9 +10,13 @@ public class Snake
     SnakeCell head;
     SnakeCell tail;
 
-    public Snake()
+    public Snake(int length)
     {
-        throw new NotImplementedException();
+        if (length <= 0)
+            throw new IllegalArgumentException();
+        head = new SnakeCell(null);
+        tail = head;
+        extend(length - 1);
     }
 
     public Snake(SnakeCell head, SnakeCell tail)
@@ -29,13 +34,22 @@ public class Snake
         while (current != null)
         {
             current.setIsDestructed(isDestructed);
-            current = current.getPrevious();
+            current = current.previous;
         }
+    }
+
+    public void incLength()
+    {
+        SnakeCell newTail = new SnakeCell(null);
+        tail.previous = newTail;
     }
 
     public void extend(int length)
     {
-        throw new NotImplementedException();
+        if (length < 0)
+            throw new IllegalArgumentException();
+        for (int i = 0; i < length; ++i)
+            incLength();
     }
 
     public boolean getIsDestructed()
