@@ -2,6 +2,7 @@
  * Created by Владимир on 16.09.2016.
  */
 
+import javafx.util.Pair;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
@@ -27,6 +28,11 @@ public class Game
         maps.addFirst(loadMap(levelFileName));
         snake = new Snake();
         gameRandom = new Random();
+    }
+
+    public MapObject[][] getCurrentMap()
+    {
+        return maps.peekFirst();
     }
 
     public void rollback(int turnsNumber)
@@ -74,6 +80,44 @@ public class Game
             }
     }
 
+    private void moveSnake(MapObject[][] newMap)
+    {
+        MapObject[][] curMap = getCurrentMap();
+        Pair<Integer, Integer> currentCoordinates = snake.head.getCoordinates(curMap);
+        while (currentCoordinates != null)
+        {
+            int currentX = currentCoordinates.getKey();
+            int currentY = currentCoordinates.getValue();
+            moveObject(newMap, currentX, currentY);
+            SnakeCell current = (SnakeCell) curMap[currentX][currentY];
+            currentCoordinates = SnakeCell.getPreviousCoordinates(curMap, currentX, currentY);
+            SnakeCell previous = current.getPrevious();
+            if (previous != null)
+                previous.setVelocity(current.getVelocity());
+        }
+    }
+
+    private void moveObject(MapObject[][] newMap, int x, int y)
+    {
+        MapObject[][] curMap = getCurrentMap();
+        MapObject curObject = curMap[x][y];
+        Vector velocity = curObject.getVelocity();
+        int newX = x + velocity.x;
+        int newY = y + velocity.y;
+        // no need now
+        /*if (curMap[newX][newY] != null && curMap[newX][newY] != curObject && // smirnov: better to create a function fot checking this
+                curMap[newX][newY].getVelocity() == velocity.getReversed()) // smirnov: and change it for new solution
+        {
+            curObject.processCollision(curMap[newX][newY], this);
+            if (curObject.getIsDestructed())
+                continue;
+        }*/
+        if (newMap[newX][newY] != null)
+            curObject.processCollision(newMap[newX][newY], this);
+        if (!curObject.getIsDestructed())
+            newMap[newX][newY] = curObject;
+    }
+
     private void update()
     {
         MapObject[][] curMap = maps.peekFirst();
@@ -84,22 +128,11 @@ public class Game
                 MapObject curObject = curMap[x][y];
                 if (curObject == null || curObject.getIsDestructed())
                     continue;
-                Vector velocity = curObject.getVelocity();
-                int newX = x + velocity.x;
-                int newY = y + velocity.y;
-                // no need now
-                /*if (curMap[newX][newY] != null && curMap[newX][newY] != curObject && // smirnov: better to create a function fot checking this
-                        curMap[newX][newY].getVelocity() == velocity.getReversed()) // smirnov: and change it for new solution
-                {
-                    curObject.processCollision(curMap[newX][newY], this);
-                    if (curObject.getIsDestructed())
-                        continue;
-                }*/
-                if (newMap[newX][newY] != null)
-                    curObject.processCollision(newMap[newX][newY], this);
-                if (!curObject.getIsDestructed())
-                    newMap[newX][newY] = curObject;
+                if (curObject.getClass() == SnakeCell.class)
+                    continue;
+                moveObject(newMap, x, y);
             }
+        moveSnake(newMap);
         clearDestructedObjects(newMap);
         maps.addFirst(newMap);
         if (snake.getIsDestructed())

@@ -5,8 +5,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class Snake
 {
-    SnakeCell first;
-    SnakeCell last;
+    SnakeCell head;
+    SnakeCell tail;
 
     public Snake()
     {
@@ -17,7 +17,13 @@ public class Snake
 
     public void setIsDestructed(boolean isDestructed)
     {
-        //TODO: destruct all the snake cells
+        this.isDestructed = isDestructed;
+        SnakeCell current = head;
+        while (current != null)
+        {
+            current.setIsDestructed(isDestructed);
+            current = current.getPrevious();
+        }
     }
 
     public void extend(int length)
