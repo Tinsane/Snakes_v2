@@ -5,12 +5,18 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class Snake
 {
-    SnakeCell first;
-    SnakeCell last;
+    SnakeCell head;
+    SnakeCell tail;
 
     public Snake()
     {
         throw new NotImplementedException();
+    }
+
+    public Snake(SnakeCell head, SnakeCell tail)
+    {
+        this.head = head;
+        this.tail = tail;
     }
 
     private boolean isDestructed = false;

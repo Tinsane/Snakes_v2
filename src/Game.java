@@ -6,26 +6,45 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Random;
 
 public class Game
 {
+    public static class GameCreator
+    {
+        private static MapObject[][] loadMap(String fileName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Game createGame(MapObject[][] map, Snake snake)
+        {
+            return new Game(map, snake);
+        }
+
+        public Game createGame(MapObject[][] map, Vector snakePosition)
+        {
+            if (!(0 <= snakePosition.x && snakePosition.x < map.length) ||
+                    !(0 <= snakePosition.y && snakePosition.y < map[0].length) ||
+                    map[snakePosition.x][snakePosition.y] != null)
+                throw new IllegalArgumentException("Invalid snake position!");
+            SnakeCell cell = new SnakeCell();
+            map[snakePosition.x][snakePosition.y] = cell;
+            Snake snake = new Snake(cell, cell);
+            return new Game(map, snake);
+        }
+    }
     private final int UPDATE_DELAY = 300;
-    public LinkedList<MapObject[][]> maps;
+    private LinkedList<MapObject[][]> maps;
     public Snake snake;
     private Timer gameTimer;
     private Random gameRandom;
-    private static MapObject[][] loadMap(String fileName)
-    {
-        throw new NotImplementedException();
-    }
 
-    public Game(String levelFileName)
+    private Game(MapObject[][] map, Snake snake)
     {
         maps = new LinkedList<>();
-        maps.addFirst(loadMap(levelFileName));
-        snake = new Snake();
+        maps.addFirst(map);
+        this.snake = snake;
         gameRandom = new Random();
     }
 
@@ -68,7 +87,7 @@ public class Game
             for (int y = 0; y < map[0].length; ++y)
             {
                 if (berryCellNumber == 0)
-                    map[x][y] = new Berry(); // TODO: satisfactionCoefficient?
+                    map[x][y] = gameRandom.nextBoolean() ? new Blueberry() : new Strawberry();
                 if (map[x][y] == null)
                     --berryCellNumber;
             }
@@ -87,14 +106,6 @@ public class Game
                 Vector velocity = curObject.getVelocity();
                 int newX = x + velocity.x;
                 int newY = y + velocity.y;
-                // no need now
-                /*if (curMap[newX][newY] != null && curMap[newX][newY] != curObject && // smirnov: better to create a function fot checking this
-                        curMap[newX][newY].getVelocity() == velocity.getReversed()) // smirnov: and change it for new solution
-                {
-                    curObject.processCollision(curMap[newX][newY], this);
-                    if (curObject.getIsDestructed())
-                        continue;
-                }*/
                 if (newMap[newX][newY] != null)
                     curObject.processCollision(newMap[newX][newY], this);
                 if (!curObject.getIsDestructed())
