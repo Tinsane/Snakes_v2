@@ -15,16 +15,16 @@ public class GameCreator
 
     GameCreator()
     {
+        map = new MapObject[0][0];
     }
 
-    public Game createGame(Vector snakePosition)
+    public Game createGame(int snakeX, int snakeY)
     {
-        if (!(0 <= snakePosition.x && snakePosition.x < map.length) ||
-                !(0 <= snakePosition.y && snakePosition.y < map[0].length) ||
-                map[snakePosition.x][snakePosition.y] != null)
+        if (!isCellInMap(snakeX, snakeY) ||
+                map[snakeX][snakeY] != null)
             throw new IllegalArgumentException("Invalid snake position!");
         SnakeCell cell = new SnakeCell(null);
-        map[snakePosition.x][snakePosition.y] = cell;
+        map[snakeX][snakeY] = cell;
         Snake snake = new Snake(cell, cell);
         return new Game(map, snake);
     }
