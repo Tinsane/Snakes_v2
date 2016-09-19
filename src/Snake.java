@@ -25,6 +25,11 @@ public class Snake
         this.tail = tail;
     }
 
+    public void setVelocity(Vector vector)
+    {
+        head.setVelocity(vector);
+    }
+
     private boolean isDestructed = false;
 
     public void setIsDestructed(boolean isDestructed)
