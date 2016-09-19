@@ -3,15 +3,15 @@
  */
 public class ChangeSnakeVelocityCommand implements GameCommand
 {
-    public Vector velocity;
+    public VelocityVector velocity;
 
-    public ChangeSnakeVelocityCommand(Vector velocity)
+    public ChangeSnakeVelocityCommand(VelocityVector velocity)
     {
         this.velocity = velocity;
     }
 
     @Override
-    public void Execute(Game game)
+    public void execute(Game game)
     {
         game.snake.setVelocity(velocity);
     }

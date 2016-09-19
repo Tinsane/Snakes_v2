@@ -3,15 +3,15 @@
  */
 public abstract class DynamicMapObject extends BaseMapObject
 {
-    private Vector velocity;
+    private VelocityVector velocity;
 
     @Override
-    public Vector getVelocity()
+    public VelocityVector getVelocity()
     {
         return velocity;
     }
 
-    public boolean setVelocity(Vector velocity)
+    public boolean setVelocity(VelocityVector velocity)
     {
         this.velocity = velocity;
     }

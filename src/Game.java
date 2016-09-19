@@ -2,15 +2,14 @@
  * Created by Владимир on 16.09.2016.
  */
 
-import javafx.util.Pair;
-
 import javax.swing.*;
 import java.util.LinkedList;
 import java.util.Random;
 
 public class Game
 {
-    private final int UPDATE_DELAY = 300;
+    private static final int DEFAULT_UPDATE_DELAY = 300;
+    private final int UPDATE_DELAY;
     private LinkedList<MapObject[][]> maps;
     public Snake snake;
     private Timer gameTimer;
@@ -18,10 +17,21 @@ public class Game
 
     public Game(MapObject[][] map, Snake snake)
     {
+        this(map, snake, DEFAULT_UPDATE_DELAY);
+    }
+
+    public Game(MapObject[][] map, Snake snake, int updateDelay)
+    {
         maps = new LinkedList<>();
         maps.addFirst(map);
         this.snake = snake;
         gameRandom = new Random();
+        UPDATE_DELAY = updateDelay;
+    }
+
+    public void executeCommand(GameCommand command)
+    {
+        command.execute(this);
     }
 
     public MapObject[][] getCurrentMap()
@@ -77,14 +87,12 @@ public class Game
     private void moveSnake(MapObject[][] newMap)
     {
         MapObject[][] curMap = getCurrentMap();
-        Pair<Integer, Integer> currentCoordinates = snake.head.getCoordinates(curMap);
-        while (currentCoordinates != null)
+        IntPair coordinates = snake.head.getCoordinates(curMap);
+        while (coordinates != null)
         {
-            int currentX = currentCoordinates.getKey();
-            int currentY = currentCoordinates.getValue();
-            moveObject(newMap, currentX, currentY);
-            SnakeCell current = (SnakeCell) curMap[currentX][currentY];
-            currentCoordinates = SnakeCell.getPreviousCoordinates(curMap, currentX, currentY);
+            moveObject(newMap, coordinates.x, coordinates.y);
+            SnakeCell current = (SnakeCell) curMap[coordinates.x][coordinates.y];
+            coordinates = SnakeCell.getPreviousCoordinates(curMap, coordinates);
             SnakeCell previous = current.previous;
             if (previous != null)
                 previous.setVelocity(current.getVelocity());
@@ -95,7 +103,7 @@ public class Game
     {
         MapObject[][] curMap = getCurrentMap();
         MapObject curObject = curMap[x][y];
-        Vector velocity = curObject.getVelocity();
+        VelocityVector velocity = curObject.getVelocity();
         int newX = x + velocity.x;
         int newY = y + velocity.y;
         // no need now

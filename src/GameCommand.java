@@ -3,5 +3,5 @@
  */
 public interface GameCommand
 {
-    public void Execute(Game game);
+    public void execute(Game game);
 }

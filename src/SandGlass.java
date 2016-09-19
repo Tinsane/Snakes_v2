@@ -5,12 +5,14 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class SandGlass extends StaticMapObject
 {
-    public final int rollbackTurnsNumber;
+    private final int rollbackTurnsNumber;
 
     public SandGlass(int rollbackTurnsNumber)
     {
         this.rollbackTurnsNumber = rollbackTurnsNumber;
     }
+
+    public int getRollbackTurnsNumber() {return rollbackTurnsNumber;}
 
     public void processCollision(SnakeCell snakeCell, Game game)
     {

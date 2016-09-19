@@ -5,7 +5,7 @@
 // here interfaces don't start with I
 public interface MapObject
 {
-    Vector getVelocity();
+    VelocityVector getVelocity();
     boolean getIsDestructed();
     void processCollision(MapObject collidedObject, Game game);
 }

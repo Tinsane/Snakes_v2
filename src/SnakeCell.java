@@ -1,4 +1,3 @@
-import javafx.util.Pair;
 
 /**
  * Created by Владимир on 16.09.2016.
@@ -12,26 +11,29 @@ public class SnakeCell extends DynamicMapObject
         this.previous = previous;
     }
 
-    public Pair<Integer, Integer> getCoordinates(MapObject[][] map)
+    public IntPair getCoordinates(MapObject[][] map)
     {
         for (int x = 0; x < map.length; ++x)
             for (int y = 0; y < map[0].length; ++y)
                 if (map[x][y] == this)
-                    return new Pair<>(x, y);
+                    return new IntPair(x, y);
         throw new IllegalArgumentException();
     }
 
-    public static Pair<Integer, Integer> getPreviousCoordinates(MapObject[][] map, int currentX, int currentY)
+    public static IntPair getPreviousCoordinates(MapObject[][] map, IntPair coordinates)
     {
-        SnakeCell currentCell = (SnakeCell)map[currentX][currentY];
-        int[] dx = new int[]{1, -1, 0, 0};
-        int[] dy = new int[]{0, 0, 1, -1};
+        SnakeCell currentCell = (SnakeCell)map[coordinates.x][coordinates.y];
+        IntPair[] diffs = new IntPair[] {
+                        new IntPair(1, 0),
+                        new IntPair(-1, 0),
+                        new IntPair(0, 1),
+                        new IntPair(0, -1)
+        };
         for (int i = 0; i < 4; ++i)
         {
-            int newX = currentX + dx[i];
-            int newY = currentY + dy[i];
-            if (map[newX][newY] == currentCell.previous)
-                return new Pair<>(newX, newY);
+            IntPair newPair = coordinates.getAdded(diffs[i]);
+            if (map[newPair.x][newPair.y] == currentCell.previous)
+                return newPair;
         }
         return null;
     }
@@ -51,7 +53,7 @@ public class SnakeCell extends DynamicMapObject
 
     public void processCollision(SandGlass sandGlass, Game game)
     {
-        game.rollback(sandGlass.rollbackTurnsNumber);
+        game.rollback(sandGlass.getRollbackTurnsNumber());
         sandGlass.setIsDestructed(true);
     }
 

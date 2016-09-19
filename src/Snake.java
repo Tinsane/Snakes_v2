@@ -1,7 +1,3 @@
-import com.sun.javaws.exceptions.InvalidArgumentException;
-import javafx.util.Pair;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * Created by Владимир on 16.09.2016.
  */
@@ -28,7 +24,7 @@ public class Snake
         extend(length - 1);
     }
 
-    public void setVelocity(Vector vector)
+    public void setVelocity(VelocityVector vector)
     {
         head.setVelocity(vector);
     }
