@@ -19,10 +19,13 @@ public class Snake
         extend(length - 1);
     }
 
-    public Snake(SnakeCell head, SnakeCell tail)
+    public Snake(int length, SnakeCell head)
     {
+        if (length <= 0)
+            throw new IllegalArgumentException();
         this.head = head;
-        this.tail = tail;
+        tail = head;
+        extend(length - 1);
     }
 
     public void setVelocity(Vector vector)
@@ -45,8 +48,8 @@ public class Snake
 
     public void incLength()
     {
-        SnakeCell newTail = new SnakeCell(null);
-        tail.previous = newTail;
+        tail.previous = new SnakeCell(null);
+        tail = tail.previous;
     }
 
     public void extend(int length)

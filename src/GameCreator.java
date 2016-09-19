@@ -18,14 +18,14 @@ public class GameCreator
         map = new MapObject[0][0];
     }
 
-    public Game createGame(int snakeX, int snakeY)
+    public Game createGame(int snakeX, int snakeY, int snakeLength)
     {
         if (!isCellInMap(snakeX, snakeY) ||
                 map[snakeX][snakeY] != null)
             throw new IllegalArgumentException("Invalid snake position!");
         SnakeCell cell = new SnakeCell(null);
+        Snake snake = new Snake(snakeLength, cell);
         map[snakeX][snakeY] = cell;
-        Snake snake = new Snake(cell, cell);
         return new Game(map, snake);
     }
 
