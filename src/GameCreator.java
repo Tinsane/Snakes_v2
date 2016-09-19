@@ -11,15 +11,59 @@ public class GameCreator
         throw new NotImplementedException();
     }
 
-    public static Game createGame(MapObject[][] map, Vector snakePosition)
+    private MapObject[][] map;
+
+    GameCreator()
+    {
+    }
+
+    public Game createGame(Vector snakePosition)
     {
         if (!(0 <= snakePosition.x && snakePosition.x < map.length) ||
                 !(0 <= snakePosition.y && snakePosition.y < map[0].length) ||
                 map[snakePosition.x][snakePosition.y] != null)
             throw new IllegalArgumentException("Invalid snake position!");
-        SnakeCell cell = new SnakeCell();
+        SnakeCell cell = new SnakeCell(null);
         map[snakePosition.x][snakePosition.y] = cell;
         Snake snake = new Snake(cell, cell);
         return new Game(map, snake);
+    }
+
+    public boolean isCellInMap(int x, int y)
+    {
+        return 0 <= x && x < map.length &&
+                0 <= y && y < map[0].length;
+    }
+
+    public void createMap(int width, int height)
+    {
+        map = new MapObject[height][width];
+    }
+
+    private void placeMapObject(int x, int y, MapObject mapObject)
+    {
+        if (!isCellInMap(x, y))
+            throw new IllegalArgumentException("No such cell in the map.");
+        map[x][y] = mapObject;
+    }
+
+    public void placeWall(int x, int y)
+    {
+        placeMapObject(x, y, new Wall());
+    }
+
+    public void placeBlueberry(int x, int y)
+    {
+        placeMapObject(x, y, new Blueberry());
+    }
+
+    public void placeStrawberry(int x, int y)
+    {
+        placeMapObject(x, y, new Strawberry());
+    }
+
+    public void placeSandGlass(int x, int y, int rollbackTurnsCount)
+    {
+        placeMapObject(x, y, new SandGlass(rollbackTurnsCount));
     }
 }
