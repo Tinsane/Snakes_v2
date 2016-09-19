@@ -3,11 +3,9 @@
  */
 
 import javafx.util.Pair;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Random;
 
 public class Game
@@ -114,7 +112,7 @@ public class Game
             newMap[newX][newY] = curObject;
     }
 
-    private void update()
+    public void update()
     {
         MapObject[][] curMap = maps.peekFirst();
         MapObject[][] newMap = new MapObject[curMap.length][curMap[0].length];
@@ -122,11 +120,8 @@ public class Game
             for(int y = 0; y < curMap[0].length; ++y)
             {
                 MapObject curObject = curMap[x][y];
-                if (curObject == null || curObject.getIsDestructed())
-                    continue;
-                if (curObject.getClass() == SnakeCell.class)
-                    continue;
-                moveObject(newMap, x, y);
+                if (!(curObject == null || curObject.getIsDestructed() || curObject.getClass() == SnakeCell.class))
+                    moveObject(newMap, x, y);
             }
         moveSnake(newMap);
         clearDestructedObjects(newMap);
