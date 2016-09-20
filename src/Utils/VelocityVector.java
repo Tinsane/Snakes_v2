@@ -7,10 +7,10 @@ public class VelocityVector
 {
     // these are all the possibles vectors
     public static final VelocityVector zero = new VelocityVector(0, 0);
-    public static final VelocityVector up = new VelocityVector(0, -1);
-    public static final VelocityVector down = new VelocityVector(0, 1);
-    public static final VelocityVector left = new VelocityVector(-1, 0);
-    public static final VelocityVector right = new VelocityVector(1, 0);
+    public static final VelocityVector up = new VelocityVector(-1, 0);
+    public static final VelocityVector down = new VelocityVector(1, 0);
+    public static final VelocityVector left = new VelocityVector(0, -1);
+    public static final VelocityVector right = new VelocityVector(0, 1);
 
     public int x;
     public int y;

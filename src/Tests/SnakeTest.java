@@ -31,24 +31,12 @@ public class SnakeTest
         }
     }
 
-    private int getSnakeLength()
-    {
-        int length = 0;
-        for (SnakeCell cell : snake)
-        {
-            if (cell.getIsDestructed())
-                break;
-            ++length;
-        }
-        return length;
-    }
-
     @org.junit.Test
     public void incLength() throws Exception
     {
         for (int expectedLength = 1; expectedLength <= 10; ++expectedLength)
         {
-            assertEquals(expectedLength, getSnakeLength());
+            assertEquals(expectedLength, snake.getLength());
             snake.incLength();
         }
     }
@@ -61,7 +49,7 @@ public class SnakeTest
         {
             expectedLength += extension;
             snake.extend(extension);
-            assertEquals(expectedLength, getSnakeLength());
+            assertEquals(expectedLength, snake.getLength());
         }
     }
 
