@@ -21,7 +21,7 @@ public class SnakeTest
     }
 
     @org.junit.Test
-    public void setVelocity() throws Exception
+    public void setVelocity()
     {
         for (VelocityVector velocity : new VelocityVector[]{VelocityVector.down, VelocityVector.left,
                 VelocityVector.zero})
@@ -32,7 +32,7 @@ public class SnakeTest
     }
 
     @org.junit.Test
-    public void incLength() throws Exception
+    public void incLength()
     {
         for (int expectedLength = 1; expectedLength <= 10; ++expectedLength)
         {
@@ -42,7 +42,7 @@ public class SnakeTest
     }
 
     @org.junit.Test
-    public void extend() throws Exception
+    public void extend()
     {
         int expectedLength = 1;
         for (int extension : new int[]{1, 2, 3, 4, 5, 30})
