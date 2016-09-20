@@ -11,7 +11,7 @@ public abstract class DynamicMapObject extends BaseMapObject
         return velocity;
     }
 
-    public boolean setVelocity(VelocityVector velocity)
+    public void setVelocity(VelocityVector velocity)
     {
         this.velocity = velocity;
     }
