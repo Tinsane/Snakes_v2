@@ -59,5 +59,6 @@ public class GameTest
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
         game.update();
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.right));
+        // not finished
     }
 }
