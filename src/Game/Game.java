@@ -101,14 +101,15 @@ public class Game
         {
             moveObject(newMap, coordinates.x, coordinates.y);
             SnakeCell current = (SnakeCell) curMap[coordinates.x][coordinates.y];
-            coordinates = SnakeCell.getPreviousCoordinates(curMap, coordinates);
+            IntPair newCoordinates = SnakeCell.getPreviousCoordinates(curMap, coordinates);
             SnakeCell previous = current.previous;
             if (previous != null)
             {
                 previous.setVelocity(current.getVelocity());
-                if (coordinates != null)
+                if (newCoordinates == null)
                     newMap[coordinates.x][coordinates.y] = previous;
             }
+            coordinates = newCoordinates;
         }
     }
 
