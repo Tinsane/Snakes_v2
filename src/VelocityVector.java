@@ -5,10 +5,10 @@ public class VelocityVector
 {
     // these are all the possibles vectors
     public static final VelocityVector zero = new VelocityVector(0, 0);
-    public static final VelocityVector up = new VelocityVector   ( 0, -1);
-    public static final VelocityVector down = new VelocityVector ( 0,  1);
-    public static final VelocityVector left = new VelocityVector (-1,  0);
-    public static final VelocityVector right = new VelocityVector( 1,  0);
+    public static final VelocityVector up = new VelocityVector(0, -1);
+    public static final VelocityVector down = new VelocityVector(0, 1);
+    public static final VelocityVector left = new VelocityVector(-1, 0);
+    public static final VelocityVector right = new VelocityVector(1, 0);
 
     int x;
     int y;
@@ -23,13 +23,13 @@ public class VelocityVector
         this.y = y;
     }
 
-    public VelocityVector getReversed()
-    {
-        return new VelocityVector(-x, -y);
-    }
-
     private static boolean inRange(int x, int rangeLowerBound, int rangeUpperBound)
     {
         return rangeLowerBound <= x && x <= rangeUpperBound;
+    }
+
+    public VelocityVector getReversed()
+    {
+        return new VelocityVector(-x, -y);
     }
 }

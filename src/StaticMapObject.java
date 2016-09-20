@@ -4,5 +4,8 @@
 public abstract class StaticMapObject extends BaseMapObject
 {
     @Override
-    public VelocityVector getVelocity() { return VelocityVector.zero; }
+    public VelocityVector getVelocity()
+    {
+        return VelocityVector.zero;
+    }
 }

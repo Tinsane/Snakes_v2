@@ -12,7 +12,10 @@ public class SandGlass extends StaticMapObject
         this.rollbackTurnsNumber = rollbackTurnsNumber;
     }
 
-    public int getRollbackTurnsNumber() {return rollbackTurnsNumber;}
+    public int getRollbackTurnsNumber()
+    {
+        return rollbackTurnsNumber;
+    }
 
     public void processCollision(SnakeCell snakeCell, Game game)
     {

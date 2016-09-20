@@ -5,6 +5,7 @@ public class Snake
 {
     SnakeCell head;
     SnakeCell tail;
+    private boolean isDestructed = false;
 
     public Snake(int length)
     {
@@ -29,19 +30,6 @@ public class Snake
         head.setVelocity(vector);
     }
 
-    private boolean isDestructed = false;
-
-    public void setIsDestructed(boolean isDestructed)
-    {
-        this.isDestructed = isDestructed;
-        SnakeCell current = head;
-        while (current != null)
-        {
-            current.setIsDestructed(isDestructed);
-            current = current.previous;
-        }
-    }
-
     public void incLength()
     {
         tail.previous = new SnakeCell(null);
@@ -59,5 +47,16 @@ public class Snake
     public boolean getIsDestructed()
     {
         return isDestructed;
+    }
+
+    public void setIsDestructed(boolean isDestructed)
+    {
+        this.isDestructed = isDestructed;
+        SnakeCell current = head;
+        while (current != null)
+        {
+            current.setIsDestructed(isDestructed);
+            current = current.previous;
+        }
     }
 }

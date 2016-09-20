@@ -7,15 +7,15 @@ public abstract class BaseMapObject implements MapObject
 {
     public boolean isDestructed = false;
 
-    public void setIsDestructed(boolean isDestructed)
-    {
-        this.isDestructed = isDestructed;
-    }
-
     @Override
     public boolean getIsDestructed()
     {
         return isDestructed;
+    }
+
+    public void setIsDestructed(boolean isDestructed)
+    {
+        this.isDestructed = isDestructed;
     }
 
     @Override

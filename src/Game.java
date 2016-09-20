@@ -10,8 +10,8 @@ public class Game
 {
     private static final int DEFAULT_UPDATE_DELAY = 300;
     private final int UPDATE_DELAY;
-    private LinkedList<MapObject[][]> maps;
     public Snake snake;
+    private LinkedList<MapObject[][]> maps;
     private Timer gameTimer;
     private Random gameRandom;
 
@@ -27,6 +27,14 @@ public class Game
         this.snake = snake;
         gameRandom = new Random();
         UPDATE_DELAY = updateDelay;
+    }
+
+    private static void clearDestructedObjects(MapObject[][] map)
+    {
+        for (int x = 0; x < map.length; ++x)
+            for (int y = 0; y < map[0].length; ++y)
+                if (map[x][y] != null && map[x][y].getIsDestructed())
+                    map[x][y] = null;
     }
 
     public void executeCommand(GameCommand command)
@@ -54,14 +62,6 @@ public class Game
     public void stop()
     {
         gameTimer.stop();
-    }
-
-    private static void clearDestructedObjects(MapObject[][] map)
-    {
-        for (int x = 0; x < map.length; ++x)
-            for (int y = 0; y < map[0].length; ++y)
-                if (map[x][y] != null && map[x][y].getIsDestructed())
-                    map[x][y] = null;
     }
 
     private void generateBerry(MapObject[][] map)
@@ -124,8 +124,8 @@ public class Game
     {
         MapObject[][] curMap = maps.peekFirst();
         MapObject[][] newMap = new MapObject[curMap.length][curMap[0].length];
-        for(int x = 0; x < curMap.length; ++x)
-            for(int y = 0; y < curMap[0].length; ++y)
+        for (int x = 0; x < curMap.length; ++x)
+            for (int y = 0; y < curMap[0].length; ++y)
             {
                 MapObject curObject = curMap[x][y];
                 if (!(curObject == null || curObject.getIsDestructed() || curObject.getClass() == SnakeCell.class))

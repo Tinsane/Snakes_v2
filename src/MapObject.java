@@ -6,6 +6,8 @@
 public interface MapObject
 {
     VelocityVector getVelocity();
+
     boolean getIsDestructed();
+
     void processCollision(MapObject collidedObject, Game game);
 }

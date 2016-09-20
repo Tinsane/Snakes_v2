@@ -6,16 +6,16 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class GameCreator
 {
-    private static MapObject[][] loadMap(String fileName)
-    {
-        throw new NotImplementedException();
-    }
-
     private MapObject[][] map;
 
     GameCreator()
     {
         map = new MapObject[0][0];
+    }
+
+    private static MapObject[][] loadMap(String fileName)
+    {
+        throw new NotImplementedException();
     }
 
     public Game createGame(int snakeX, int snakeY, int snakeLength)
