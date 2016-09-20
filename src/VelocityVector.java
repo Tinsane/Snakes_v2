@@ -15,10 +15,8 @@ public class VelocityVector
 
     VelocityVector(int x, int y) // TODO: maybe better to make it private
     {
-        int absX = Math.abs(x);
-        int absY = Math.abs(y);
-        if ((x != 0 && y != 0) || absX > 1 || absY > 1)
-            throw new IllegalArgumentException("x and y should be coordinates of vector parallel to axis and with length 1 or a zero vector");
+        if (Math.abs(x) + Math.abs(y) > 1)
+            throw new IllegalArgumentException("x and y should be coordinates of axis parallel unit or zero vector");
         this.x = x;
         this.y = y;
     }

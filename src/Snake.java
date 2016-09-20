@@ -9,19 +9,14 @@ public class Snake
 
     public Snake(int length)
     {
-        if (length <= 0)
-            throw new IllegalArgumentException();
-        head = new SnakeCell(null);
-        tail = head;
-        extend(length - 1);
+        this(length, new SnakeCell(null));
     }
 
     public Snake(int length, SnakeCell head)
     {
         if (length <= 0)
             throw new IllegalArgumentException();
-        this.head = head;
-        tail = head;
+        tail = this.head = head;
         extend(length - 1);
     }
 
@@ -52,11 +47,7 @@ public class Snake
     public void setIsDestructed(boolean isDestructed)
     {
         this.isDestructed = isDestructed;
-        SnakeCell current = head;
-        while (current != null)
-        {
+        for (SnakeCell current = head; current != null; current = current.previous)
             current.setIsDestructed(isDestructed);
-            current = current.previous;
-        }
     }
 }

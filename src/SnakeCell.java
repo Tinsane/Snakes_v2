@@ -19,9 +19,9 @@ public class SnakeCell extends DynamicMapObject
                 new IntPair(0, 1),
                 new IntPair(0, -1)
         };
-        for (int i = 0; i < 4; ++i)
+        for (IntPair diff : diffs)
         {
-            IntPair newPair = coordinates.getAdded(diffs[i]);
+            IntPair newPair = coordinates.getAdded(diff);
             if (map[newPair.x][newPair.y] == currentCell.previous)
                 return newPair;
         }
