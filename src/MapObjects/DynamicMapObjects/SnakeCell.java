@@ -46,12 +46,14 @@ public class SnakeCell extends DynamicMapObject
         throw new IllegalArgumentException();
     }
 
+    @Override
     public void processCollision(SnakeCell snakeCell, Game game)
     {
         // let's just kill the snake
         game.snake.setIsDestructed(true);
     }
 
+    @Override
     public void processCollision(Berry berry, Game game)
     {
         // probably need to check if cell is head
@@ -59,12 +61,14 @@ public class SnakeCell extends DynamicMapObject
         game.snake.extend(berry.getSatisfactionCoefficient());
     }
 
+    @Override
     public void processCollision(SandGlass sandGlass, Game game)
     {
         game.rollback(sandGlass.getRollbackTurnsNumber());
         sandGlass.setIsDestructed(true);
     }
 
+    @Override
     public void processCollision(Wall wall, Game game)
     {
         game.snake.setIsDestructed(true);

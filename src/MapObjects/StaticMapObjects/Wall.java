@@ -16,21 +16,25 @@ public class Wall extends StaticMapObject
     {
     }
 
+    @Override
     public void processCollision(SnakeCell snakeCell, Game game)
     {
         snakeCell.processCollision(this, game);
     }
 
+    @Override
     public void processCollision(Berry berry, Game game)
     {
         throw new NotImplementedException(); // TODO: shouldn't happen
     }
 
+    @Override
     public void processCollision(SandGlass sandGlass, Game game)
     {
         throw new NotImplementedException(); // TODO: shouldn't happen
     }
 
+    @Override
     public void processCollision(Wall wall, Game game)
     {
         throw new NotImplementedException(); // TODO: shouldn't happen
