@@ -24,12 +24,12 @@ public class Game
     private Timer gameTimer;
     private Random gameRandom;
 
-    public Game(MapObject[][] map, Snake snake)
+    Game(MapObject[][] map, Snake snake)
     {
         this(map, snake, DEFAULT_UPDATE_DELAY);
     }
 
-    public Game(MapObject[][] map, Snake snake, int updateDelay)
+    Game(MapObject[][] map, Snake snake, int updateDelay)
     {
         maps = new LinkedList<>();
         maps.addFirst(map);
@@ -104,7 +104,11 @@ public class Game
             coordinates = SnakeCell.getPreviousCoordinates(curMap, coordinates);
             SnakeCell previous = current.previous;
             if (previous != null)
+            {
                 previous.setVelocity(current.getVelocity());
+                if (coordinates != null)
+                    newMap[coordinates.x][coordinates.y] = previous;
+            }
         }
     }
 
