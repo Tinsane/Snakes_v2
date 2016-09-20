@@ -1,10 +1,10 @@
 package MapObjects.DynamicMapObjects;
 
-import MapObjects.DynamicMapObjects.*;
-import MapObjects.*;
-import MapObjects.StaticMapObjects.*;
-import MapObjects.StaticMapObjects.Berries.*;
 import Game.Game;
+import MapObjects.MapObject;
+import MapObjects.StaticMapObjects.Berries.Berry;
+import MapObjects.StaticMapObjects.SandGlass;
+import MapObjects.StaticMapObjects.Wall;
 import Utils.IntPair;
 
 /**
@@ -22,8 +22,6 @@ public class SnakeCell extends DynamicMapObject
     public static IntPair getPreviousCoordinates(MapObject[][] map, IntPair coordinates)
     {
         SnakeCell currentCell = (SnakeCell) map[coordinates.x][coordinates.y];
-        if (currentCell.previous == null)
-            return null;
         IntPair[] diffs = new IntPair[]{
                 new IntPair(1, 0),
                 new IntPair(-1, 0),

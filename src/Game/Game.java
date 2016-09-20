@@ -94,6 +94,7 @@ public class Game
             }
     }
 
+    // TODO: rewrite
     private void moveSnake(MapObject[][] newMap)
     {
         MapObject[][] curMap = getCurrentMap();
@@ -102,14 +103,13 @@ public class Game
         {
             moveObject(newMap, coordinates.x, coordinates.y);
             SnakeCell current = (SnakeCell) curMap[coordinates.x][coordinates.y];
-            IntPair newCoordinates = SnakeCell.getPreviousCoordinates(curMap, coordinates);
             SnakeCell previous = current.previous;
-            if (previous != null)
-            {
-                previous.setVelocity(current.getVelocity());
-                if (newCoordinates == null)
-                    newMap[coordinates.x][coordinates.y] = previous;
-            }
+            if (previous == null)
+                break;
+            IntPair newCoordinates = SnakeCell.getPreviousCoordinates(curMap, coordinates);
+            previous.setVelocity(current.getVelocity());
+            if (newCoordinates == null)
+                newMap[coordinates.x][coordinates.y] = previous;
             coordinates = newCoordinates;
         }
     }
