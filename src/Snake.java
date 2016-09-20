@@ -1,7 +1,9 @@
+import java.util.Iterator;
+
 /**
  * Created by Владимир on 16.09.2016.
  */
-public class Snake
+public class Snake implements Iterable<SnakeCell>
 {
     SnakeCell head;
     SnakeCell tail;
@@ -47,7 +49,13 @@ public class Snake
     public void setIsDestructed(boolean isDestructed)
     {
         this.isDestructed = isDestructed;
-        for (SnakeCell current = head; current != null; current = current.previous)
-            current.setIsDestructed(isDestructed);
+        for (SnakeCell cell : this)
+            cell.setIsDestructed(isDestructed);
+    }
+
+    @Override
+    public Iterator<SnakeCell> iterator()
+    {
+        return new SnakeCellIterator(head);
     }
 }

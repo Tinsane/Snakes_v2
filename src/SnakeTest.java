@@ -28,8 +28,12 @@ public class SnakeTest
     private int getSnakeLength()
     {
         int length = 0;
-        for (SnakeCell current = snake.head; current != null; current = current.previous)
+        for (SnakeCell cell : snake)
+        {
+            if (cell.getIsDestructed())
+                break;
             ++length;
+        }
         return length;
     }
 
@@ -61,8 +65,8 @@ public class SnakeTest
         snake.extend(10);
         snake.setIsDestructed(true);
         assertTrue(snake.getIsDestructed());
-        for (SnakeCell curCell = snake.head; curCell != null; curCell = curCell.previous)
-            assertTrue(curCell.getIsDestructed());
+        for (SnakeCell cell : snake)
+            assertTrue(cell.getIsDestructed());
     }
 
 }
