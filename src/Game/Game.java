@@ -70,7 +70,8 @@ public class Game
 
     public void stop()
     {
-        gameTimer.stop();
+        if (gameTimer != null)
+            gameTimer.stop();
     }
 
     private void generateBerry(MapObject[][] map)

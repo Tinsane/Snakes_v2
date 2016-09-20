@@ -36,11 +36,7 @@ public class Snake implements Iterable<SnakeCell>
     {
         int length = 0;
         for (SnakeCell cell : this)
-        {
-            if (cell.getIsDestructed())
-                break;
             ++length;
-        }
         return length;
     }
 

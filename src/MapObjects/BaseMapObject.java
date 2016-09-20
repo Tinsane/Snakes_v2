@@ -4,6 +4,7 @@ import MapObjects.DynamicMapObjects.*;
 import MapObjects.*;
 import MapObjects.StaticMapObjects.*;
 import MapObjects.StaticMapObjects.Berries.*;
+import Snake.Snake;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import Game.Game;
 
@@ -15,6 +16,8 @@ import java.lang.reflect.Method;
 public abstract class BaseMapObject implements MapObject
 {
     public boolean isDestructed = false;
+
+    private Class[] possibleClasses = new Class[]{SnakeCell.class, Berry.class, SandGlass.class, Wall.class};
 
     @Override
     public boolean getIsDestructed()
@@ -38,12 +41,18 @@ public abstract class BaseMapObject implements MapObject
         try
         {
             Class objectClass = getClass();
-            Method processCollision = objectClass.getMethod("processCollision", collidedObject.getClass(), Game.class);
-            processCollision.invoke(this, collidedObject, game);
+            Class collidedObjectClass = collidedObject.getClass();
+            for (Class possibleClass: possibleClasses)
+                if (possibleClass.isAssignableFrom(collidedObjectClass))
+                {
+                    Method processCollision = objectClass.getMethod("processCollision", possibleClass, Game.class);
+                    processCollision.invoke(this, collidedObject, game);
+                }
         }
         catch (Exception e)
         {
             System.out.println("Problems with processing collision.");
+            throw new IllegalArgumentException();
         }
     }
 }
