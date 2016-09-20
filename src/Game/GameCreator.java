@@ -1,10 +1,12 @@
 package Game;
 
-import MapObjects.DynamicMapObjects.*;
-import MapObjects.*;
-import MapObjects.StaticMapObjects.*;
-import MapObjects.StaticMapObjects.Berries.*;
-import Snake.*;
+import MapObjects.DynamicMapObjects.SnakeCell;
+import MapObjects.MapObject;
+import MapObjects.StaticMapObjects.Berries.Blueberry;
+import MapObjects.StaticMapObjects.Berries.Strawberry;
+import MapObjects.StaticMapObjects.SandGlass;
+import MapObjects.StaticMapObjects.Wall;
+import Snake.Snake;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -15,7 +17,7 @@ public class GameCreator
 {
     private MapObject[][] map;
 
-    GameCreator()
+    public GameCreator()
     {
         map = new MapObject[0][0];
     }

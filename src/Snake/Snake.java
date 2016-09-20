@@ -32,6 +32,18 @@ public class Snake implements Iterable<SnakeCell>
         head.setVelocity(vector);
     }
 
+    public int getLength()
+    {
+        int length = 0;
+        for (SnakeCell cell : this)
+        {
+            if (cell.getIsDestructed())
+                break;
+            ++length;
+        }
+        return length;
+    }
+
     public void incLength()
     {
         tail.previous = new SnakeCell(null);
