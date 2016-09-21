@@ -111,7 +111,11 @@ public class Game
         private void placeObject(MapObject object, IntPair position)
         {
             if (newMap[position.x][position.y] != null)
+            {
                 object.processCollision(newMap[position.x][position.y], game);
+                if (!newMap[position.x][position.y].getIsDestructed() && !object.getIsDestructed())
+                    throw new IllegalArgumentException("Objects can't decide which one stays alive.");
+            }
             if (!object.getIsDestructed())
                 newMap[position.x][position.y] = object;
         }
