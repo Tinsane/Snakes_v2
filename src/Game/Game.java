@@ -9,7 +9,6 @@ import MapObjects.StaticMapObjects.Berries.Blueberry;
 import MapObjects.StaticMapObjects.Berries.Strawberry;
 import Snake.Snake;
 import Utils.IntPair;
-import Utils.VelocityVector;
 
 import javax.swing.*;
 import java.util.LinkedList;
@@ -18,7 +17,6 @@ import java.util.Random;
 public class Game
 {
     private static final int DEFAULT_UPDATE_DELAY = 300;
-    private final int UPDATE_DELAY;
     public Snake snake;
     private LinkedList<MapObject[][]> maps;
     private Timer gameTimer;
@@ -35,7 +33,7 @@ public class Game
         maps.addFirst(map);
         this.snake = snake;
         gameRandom = new Random();
-        UPDATE_DELAY = updateDelay;
+        gameTimer = new Timer(updateDelay, e -> update());
     }
 
     private static void clearDestructedObjects(MapObject[][] map)
@@ -64,14 +62,12 @@ public class Game
 
     public void start()
     {
-        gameTimer = new Timer(UPDATE_DELAY, e -> update());
         gameTimer.start();
     }
 
     public void stop()
     {
-        if (gameTimer != null)
-            gameTimer.stop();
+        gameTimer.stop();
     }
 
     private void generateBerry(MapObject[][] map)
@@ -94,45 +90,39 @@ public class Game
             }
     }
 
-    // TODO: rewrite
-    private void moveSnake(MapObject[][] newMap)
+    private void placeObject(MapObject[][] map, MapObject object, IntPair position)
     {
-        MapObject[][] curMap = getCurrentMap();
-        IntPair coordinates = snake.head.getCoordinates(curMap);
-        while (coordinates != null)
-        {
-            moveObject(newMap, coordinates.x, coordinates.y);
-            SnakeCell current = (SnakeCell) curMap[coordinates.x][coordinates.y];
-            SnakeCell previous = current.previous;
-            if (previous == null)
-                break;
-            IntPair newCoordinates = SnakeCell.getPreviousCoordinates(curMap, coordinates);
-            previous.setVelocity(current.getVelocity());
-            if (newCoordinates == null)
-                newMap[coordinates.x][coordinates.y] = previous;
-            coordinates = newCoordinates;
-        }
+        if (map[position.x][position.y] != null)
+            object.processCollision(map[position.x][position.y], this);
+        if (!object.getIsDestructed())
+            map[position.x][position.y] = object;
     }
 
-    private void moveObject(MapObject[][] newMap, int x, int y)
+    private void moveSnakeCell(MapObject[][] newMap, SnakeCell cell, IntPair cellPosition)
+    {
+        if (cell.previous != null)
+        {
+            IntPair previousPosition = SnakeCell.getPreviousCoordinates(getCurrentMap(), cellPosition);
+            if (previousPosition == null)
+                placeObject(newMap, cell.previous, cellPosition);
+            else
+                moveSnakeCell(newMap, cell.previous, previousPosition);
+            cell.previous.setVelocity(cell.getVelocity());
+        }
+        moveObject(newMap, cellPosition);
+    }
+
+    private void moveSnake(MapObject[][] newMap)
+    {
+        moveSnakeCell(newMap, snake.head, snake.head.getCoordinates(getCurrentMap()));
+    }
+
+    private void moveObject(MapObject[][] newMap, IntPair position)
     {
         MapObject[][] curMap = getCurrentMap();
-        MapObject curObject = curMap[x][y];
-        VelocityVector velocity = curObject.getVelocity();
-        int newX = x + velocity.x;
-        int newY = y + velocity.y;
-        // no need now
-        /*if (curMap[newX][newY] != null && curMap[newX][newY] != curObject && // smirnov: better to create a function fot checking this
-                curMap[newX][newY].getVelocity() == velocity.getReversed()) // smirnov: and change it for new solution
-        {
-            curObject.processCollision(curMap[newX][newY], this);
-            if (curObject.getIsDestructed())
-                continue;
-        }*/
-        if (newMap[newX][newY] != null)
-            curObject.processCollision(newMap[newX][newY], this);
-        if (!curObject.getIsDestructed())
-            newMap[newX][newY] = curObject;
+        MapObject curObject = curMap[position.x][position.y];
+        IntPair newPosition = position.getAdded(curObject.getVelocity().getIntPair());
+        placeObject(newMap, curObject, newPosition);
     }
 
     public void update()
@@ -144,7 +134,7 @@ public class Game
             {
                 MapObject curObject = curMap[x][y];
                 if (!(curObject == null || curObject.getIsDestructed() || curObject.getClass() == SnakeCell.class))
-                    moveObject(newMap, x, y);
+                    moveObject(newMap, new IntPair(x, y));
             }
         moveSnake(newMap);
         clearDestructedObjects(newMap);

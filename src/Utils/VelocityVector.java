@@ -32,4 +32,9 @@ public class VelocityVector
     {
         return new VelocityVector(-x, -y);
     }
+
+    public IntPair getIntPair()
+    {
+        return new IntPair(x, y);
+    }
 }

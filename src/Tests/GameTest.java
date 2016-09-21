@@ -8,8 +8,7 @@ import Utils.VelocityVector;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by Владимир on 20.09.2016.
@@ -94,6 +93,7 @@ public class GameTest
         game.update();
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.up));
         game.update();
+        assertFalse(game.snake.getIsDestructed());
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.left));
         game.update();
         assertTrue(game.snake.getIsDestructed());
