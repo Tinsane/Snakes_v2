@@ -29,6 +29,8 @@ public class GameCreator
 
     public Game createGame(int snakeX, int snakeY, int snakeLength)
     {
+        snakeX += 1;
+        snakeY += 1;
         if (!isCellInMap(snakeX, snakeY) ||
                 map[snakeX][snakeY] != null)
             throw new IllegalArgumentException("Invalid snake position!");
@@ -40,20 +42,30 @@ public class GameCreator
 
     private boolean isCellInMap(int x, int y)
     {
-        return 0 <= x && x < map.length &&
-                0 <= y && y < map[0].length;
+        return 0 < x && x + 1 < map.length &&
+                0 < y && y + 1 < map[0].length;
     }
 
     public void setMapSize(int width, int height)
     {
-        map = new MapObject[height][width];
+        map = new MapObject[height + 2][width + 2];
+        for (int i = 0; i < map.length; ++i)
+        {
+            map[i][0] = new Wall();
+            map[i][map[0].length - 1] = new Wall();
+        }
+        for (int i = 1; i + 1 < map[0].length; ++i)
+        {
+            map[0][i] = new Wall();
+            map[map.length - 1][i] = new Wall();
+        }
     }
 
     private void placeMapObject(int x, int y, MapObject mapObject)
     {
         if (!isCellInMap(x, y))
             throw new IllegalArgumentException("No such cell in the map.");
-        map[x][y] = mapObject;
+        map[x + 1][y + 1] = mapObject;
     }
 
     public void placeWall(int x, int y)
@@ -76,8 +88,8 @@ public class GameCreator
         placeMapObject(x, y, new SandGlass(rollbackTurnsCount));
     }
 
-    // LU - left down angle of rectangle
-    // RD - right up angle of rectangle
+    // LU - left up angle of rectangle
+    // RD - right down angle of rectangle
     public void placeMapObjectsInRectangle(int xLU, int yLU, int xRD, int yRD, MapObject mapObject)
     {
         for (int x = xLU; x <= xRD; ++x)
