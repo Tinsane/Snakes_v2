@@ -1,13 +1,9 @@
 package MapObjects.StaticMapObjects.Berries;
 
-import MapObjects.BaseMapObject;
 import MapObjects.DynamicMapObjects.*;
 import MapObjects.*;
 import MapObjects.StaticMapObjects.*;
-import MapObjects.StaticMapObjects.Berries.*;
 import Game.Game;
-import Utils.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by Владимир on 16.09.2016.
@@ -28,26 +24,14 @@ public abstract class Berry extends StaticMapObject
     }
 
     @Override
-    public void processCollision(SnakeCell snakeCell, Game game)
+    public void processCollision(MapObject visitor, Game game)
     {
-        snakeCell.processCollision(this, game);
+        visitor.berryProcessCollision(this, game);
     }
 
     @Override
-    public void processCollision(Berry berry, Game game)
+    public void snakeCellProcessCollision(SnakeCell snakeCell, Game game)
     {
-        throw new NotImplementedException(); // TODO: shouldn't happen
-    }
-
-    @Override
-    public void processCollision(SandGlass sandGlass, Game game)
-    {
-        throw new NotImplementedException(); // TODO: shouldn't happen
-    }
-
-    @Override
-    public void processCollision(Wall wall, Game game)
-    {
-        throw new NotImplementedException(); // TODO: shouldn't happen
+        snakeCell.berryProcessCollision(this, game);
     }
 }

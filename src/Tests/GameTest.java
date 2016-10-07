@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Владимир on 20.09.2016.
  */
-public class GameTest 
+public class GameTest
 {
     Game game;
 

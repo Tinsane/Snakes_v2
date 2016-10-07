@@ -47,14 +47,13 @@ public class SnakeCell extends DynamicMapObject
     }
 
     @Override
-    public void processCollision(SnakeCell snakeCell, Game game)
+    public void processCollision(MapObject visitor, Game game)
     {
-        // let's just kill the snake
-        game.snake.setIsDestructed(true);
+        visitor.snakeCellProcessCollision(this, game);
     }
 
     @Override
-    public void processCollision(Berry berry, Game game)
+    public void berryProcessCollision(Berry berry, Game game)
     {
         // probably need to check if cell is head
         berry.setIsDestructed(true);
@@ -62,15 +61,22 @@ public class SnakeCell extends DynamicMapObject
     }
 
     @Override
-    public void processCollision(SandGlass sandGlass, Game game)
+    public void snakeCellProcessCollision(SnakeCell snakeCell, Game game)
     {
-        game.rollback(sandGlass.getRollbackTurnsNumber());
-        sandGlass.setIsDestructed(true);
+        // let's just kill the snake
+        game.snake.setIsDestructed(true);
     }
 
     @Override
-    public void processCollision(Wall wall, Game game)
+    public void wallProcessCollision(Wall wall, Game game)
     {
         game.snake.setIsDestructed(true);
+    }
+
+    @Override
+    public void sandGlassProcessCollision(SandGlass sandGlass, Game game)
+    {
+        game.rollback(sandGlass.getRollbackTurnsNumber());
+        sandGlass.setIsDestructed(true);
     }
 }
