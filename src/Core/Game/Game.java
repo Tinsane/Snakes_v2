@@ -1,37 +1,38 @@
-package Game; /**
+package Core.Game; /**
  * Created by Владимир on 16.09.2016.
  */
 
-import GameCommands.GameCommand;
-import MapObjects.DynamicMapObjects.SnakeCell;
-import MapObjects.MapObject;
-import MapObjects.StaticMapObjects.Berries.Blueberry;
-import MapObjects.StaticMapObjects.Berries.Strawberry;
-import Snake.Snake;
-import Utils.IntPair;
+import Core.GameCommands.GameCommand;
+import Core.MapObjects.DynamicMapObjects.SnakeCell;
+import Core.MapObjects.MapObject;
+import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
+import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
+import Core.Snake.Snake;
+import Core.Utils.IntPair;
 
+import javax.naming.OperationNotSupportedException;
 import javax.swing.*;
 import java.util.LinkedList;
 import java.util.Random;
 
 public class Game
 {
-    private static final int DEFAULT_UPDATE_DELAY = 300;
     public Snake snake;
     private GameUpdater gameUpdater;
     private LinkedList<MapObject[][]> maps;
-    private Timer gameTimer;
-    Game(MapObject[][] map, Snake snake)
+
+    private boolean isFinished;
+
+    public boolean isFinished()
     {
-        this(map, snake, DEFAULT_UPDATE_DELAY);
+        return snake.getIsDestructed();
     }
 
-    Game(MapObject[][] map, Snake snake, int updateDelay)
+    Game(MapObject[][] map, Snake snake)
     {
         maps = new LinkedList<>();
         maps.addFirst(map);
         this.snake = snake;
-        gameTimer = new Timer(updateDelay, e -> update());
         gameUpdater = new GameUpdater(this);
     }
 
@@ -51,21 +52,11 @@ public class Game
             maps.removeFirst();
     }
 
-    public void start()
-    {
-        gameTimer.start();
-    }
-
-    public void stop()
-    {
-        gameTimer.stop();
-    }
-
     public void update()
     {
+        if (isFinished())
+            throw new UnsupportedOperationException("Game finished. Impossible to update.");
         maps.addFirst(gameUpdater.getNewMap());
-        if (snake.getIsDestructed())
-            stop();
     }
 
     private class GameUpdater

@@ -1,7 +1,7 @@
-package MapObjects.DynamicMapObjects;
+package Core.MapObjects.DynamicMapObjects;
 
-import MapObjects.BaseMapObject;
-import Utils.VelocityVector;
+import Core.MapObjects.BaseMapObject;
+import Core.Utils.VelocityVector;
 
 /**
  * Created by ISmir on 17.09.2016.

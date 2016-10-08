@@ -1,7 +1,7 @@
-package Snake;
+package Core.Snake;
 
-import MapObjects.DynamicMapObjects.SnakeCell;
-import Utils.VelocityVector;
+import Core.MapObjects.DynamicMapObjects.SnakeCell;
+import Core.Utils.VelocityVector;
 
 import java.util.Iterator;
 

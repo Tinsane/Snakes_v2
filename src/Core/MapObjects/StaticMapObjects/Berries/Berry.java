@@ -1,9 +1,9 @@
-package MapObjects.StaticMapObjects.Berries;
+package Core.MapObjects.StaticMapObjects.Berries;
 
-import MapObjects.DynamicMapObjects.*;
-import MapObjects.*;
-import MapObjects.StaticMapObjects.*;
-import Game.Game;
+import Core.MapObjects.DynamicMapObjects.*;
+import Core.MapObjects.*;
+import Core.MapObjects.StaticMapObjects.*;
+import Core.Game.Game;
 
 /**
  * Created by Владимир on 16.09.2016.

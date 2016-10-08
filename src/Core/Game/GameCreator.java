@@ -1,12 +1,12 @@
-package Game;
+package Core.Game;
 
-import MapObjects.DynamicMapObjects.SnakeCell;
-import MapObjects.MapObject;
-import MapObjects.StaticMapObjects.Berries.Blueberry;
-import MapObjects.StaticMapObjects.Berries.Strawberry;
-import MapObjects.StaticMapObjects.SandGlass;
-import MapObjects.StaticMapObjects.Wall;
-import Snake.Snake;
+import Core.MapObjects.DynamicMapObjects.SnakeCell;
+import Core.MapObjects.MapObject;
+import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
+import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
+import Core.MapObjects.StaticMapObjects.SandGlass;
+import Core.MapObjects.StaticMapObjects.Wall;
+import Core.Snake.Snake;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

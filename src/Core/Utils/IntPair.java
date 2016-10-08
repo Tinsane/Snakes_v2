@@ -1,4 +1,4 @@
-package Utils;
+package Core.Utils;
 
 /**
  * Created by ISmir on 19.09.2016.

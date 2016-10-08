@@ -1,11 +1,11 @@
-package MapObjects;
+package Core.MapObjects;
 
-import MapObjects.DynamicMapObjects.SnakeCell;
-import MapObjects.StaticMapObjects.Berries.Berry;
-import MapObjects.StaticMapObjects.SandGlass;
-import MapObjects.StaticMapObjects.Wall;
-import Utils.VelocityVector;
-import Game.Game;
+import Core.MapObjects.DynamicMapObjects.SnakeCell;
+import Core.MapObjects.StaticMapObjects.Berries.Berry;
+import Core.MapObjects.StaticMapObjects.SandGlass;
+import Core.MapObjects.StaticMapObjects.Wall;
+import Core.Utils.VelocityVector;
+import Core.Game.Game;
 
 /**
  * Created by Владимир on 16.09.2016.

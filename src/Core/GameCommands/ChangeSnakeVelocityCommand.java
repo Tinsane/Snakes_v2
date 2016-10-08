@@ -1,12 +1,7 @@
-package GameCommands;
+package Core.GameCommands;
 
-import MapObjects.BaseMapObject;
-import MapObjects.DynamicMapObjects.*;
-import MapObjects.*;
-import MapObjects.StaticMapObjects.*;
-import MapObjects.StaticMapObjects.Berries.*;
-import Game.Game;
-import Utils.*;
+import Core.Game.Game;
+import Core.Utils.*;
 
 /**
  * Created by ISmir on 19.09.2016.

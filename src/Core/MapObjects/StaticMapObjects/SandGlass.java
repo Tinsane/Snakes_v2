@@ -1,8 +1,8 @@
-package MapObjects.StaticMapObjects;
+package Core.MapObjects.StaticMapObjects;
 
-import MapObjects.DynamicMapObjects.*;
-import MapObjects.*;
-import Game.Game;
+import Core.MapObjects.DynamicMapObjects.*;
+import Core.MapObjects.*;
+import Core.Game.Game;
 
 /**
  * Created by Владимир on 16.09.2016.

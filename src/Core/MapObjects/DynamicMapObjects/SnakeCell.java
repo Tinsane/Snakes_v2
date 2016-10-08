@@ -1,11 +1,11 @@
-package MapObjects.DynamicMapObjects;
+package Core.MapObjects.DynamicMapObjects;
 
-import Game.Game;
-import MapObjects.MapObject;
-import MapObjects.StaticMapObjects.Berries.Berry;
-import MapObjects.StaticMapObjects.SandGlass;
-import MapObjects.StaticMapObjects.Wall;
-import Utils.IntPair;
+import Core.Game.Game;
+import Core.MapObjects.MapObject;
+import Core.MapObjects.StaticMapObjects.Berries.Berry;
+import Core.MapObjects.StaticMapObjects.SandGlass;
+import Core.MapObjects.StaticMapObjects.Wall;
+import Core.Utils.IntPair;
 
 /**
  * Created by Владимир on 16.09.2016.

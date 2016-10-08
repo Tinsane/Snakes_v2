@@ -1,14 +1,4 @@
-package MapObjects;
-
-import MapObjects.DynamicMapObjects.*;
-import MapObjects.*;
-import MapObjects.StaticMapObjects.*;
-import MapObjects.StaticMapObjects.Berries.*;
-import Snake.Snake;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-import Game.Game;
-
-import java.lang.reflect.Method;
+package Core.MapObjects;
 
 /**
  * Created by ISmir on 17.09.2016.

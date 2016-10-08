@@ -1,6 +1,6 @@
-package Snake;
+package Core.Snake;
 
-import MapObjects.DynamicMapObjects.SnakeCell;
+import Core.MapObjects.DynamicMapObjects.SnakeCell;
 
 import java.util.Iterator;
 

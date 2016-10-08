@@ -1,12 +1,9 @@
-package MapObjects.StaticMapObjects;
+package Core.MapObjects.StaticMapObjects;
 
-import MapObjects.BaseMapObject;
-import MapObjects.DynamicMapObjects.*;
-import MapObjects.*;
-import MapObjects.StaticMapObjects.*;
-import MapObjects.StaticMapObjects.Berries.*;
-import Game.Game;
-import Utils.*;
+import Core.MapObjects.BaseMapObject;
+import Core.MapObjects.StaticMapObjects.Berries.*;
+import Core.Game.Game;
+import Core.Utils.*;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**

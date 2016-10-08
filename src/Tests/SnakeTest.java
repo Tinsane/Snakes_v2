@@ -1,8 +1,8 @@
-package Tests;
+package Core.Tests;
 
-import MapObjects.DynamicMapObjects.SnakeCell;
-import Snake.Snake;
-import Utils.VelocityVector;
+import Core.MapObjects.DynamicMapObjects.SnakeCell;
+import Core.Snake.Snake;
+import Core.Utils.VelocityVector;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

@@ -1,6 +1,4 @@
-package MapObjects.StaticMapObjects.Berries;
-
-import MapObjects.StaticMapObjects.Berries.Berry;
+package Core.MapObjects.StaticMapObjects.Berries;
 
 /**
  * Created by ISmir on 18.09.2016.
