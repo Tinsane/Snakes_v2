@@ -1,4 +1,4 @@
-package Core.Tests;
+package Tests;
 
 import Core.Game.Game;
 import Core.Game.GameCreator;

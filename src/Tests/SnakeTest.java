@@ -1,4 +1,4 @@
-package Core.Tests;
+package Tests;
 
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.Snake.Snake;

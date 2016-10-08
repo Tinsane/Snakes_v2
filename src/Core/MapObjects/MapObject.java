@@ -6,12 +6,13 @@ import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
 import Core.Game.Game;
+import View.Drawable;
 
 /**
  * Created by Владимир on 16.09.2016.
  */
 
-public interface MapObject
+public interface MapObject extends Drawable
 {
     VelocityVector getVelocity();
 
@@ -23,4 +24,5 @@ public interface MapObject
     void snakeCellProcessCollision(SnakeCell snakeCell, Game game);
     void wallProcessCollision(Wall wall, Game game);
     void sandGlassProcessCollision(SandGlass sandGlass, Game game);
+
 }
