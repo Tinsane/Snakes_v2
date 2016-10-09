@@ -1,10 +1,10 @@
 package Tests;
 
-import Game.Game;
-import Game.GameCreator;
-import GameCommands.ChangeSnakeVelocityCommand;
-import Utils.IntPair;
-import Utils.VelocityVector;
+import Core.Game.Game;
+import Core.Game.GameCreator;
+import Core.GameCommands.ChangeSnakeVelocityCommand;
+import Core.Utils.IntPair;
+import Core.Utils.VelocityVector;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
