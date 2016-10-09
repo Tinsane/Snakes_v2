@@ -11,23 +11,37 @@ import javax.swing.*;
  */
 public class GameView extends JFrame
 {
-    public int DEFAULT_UPDATE_INTERVAL = 300;
     private Game game;
-    private GameStyle style;
     private Timer updateTimer;
+    private JLabel[][] field;
+    private GameViewSettings settings;
 
-    public GameView(int updateInterval, GameStyle style)
+    public GameView()
     {
         super();
+        init(new GameViewSettings());
+    }
+
+    public GameView(GameViewSettings settings)
+    {
+        super();
+        init(settings);
+    }
+
+    public void init(GameViewSettings settings)
+    {
+        this.settings = settings;
 
         GameCreator creator = new GameCreator();
         creator.setMapSize(5, 5);
         game = creator.createGame(0, 0, 1); // need to use saved map here
 
-        updateTimer = new Timer(updateInterval, x -> paint());
+        updateTimer = new Timer(settings.updateInterval, x -> paint());
         updateTimer.setRepeats(true);
 
-        this.style = style;
+        for (int i = 0; i < game.getWidth(); ++i)
+            for (int j = 0; j < game.getHeight(); ++j)
+                field[i][j] = new JLabel();
     }
 
     public void start()
@@ -40,11 +54,13 @@ public class GameView extends JFrame
         updateTimer.stop();
     }
 
-    public void paint()
+    private void paint()
     {
         game.update();
 
         Drawable[][] map = game.getCurrentMap();
-        // now need to paint it somehow
+        for (int i = 0; i < field.length; ++i)
+            for (int j = 0; j < field[0].length; ++j)
+                field[i][j].setIcon(map[i][j].getIcon(settings.style, game));
     }
 }

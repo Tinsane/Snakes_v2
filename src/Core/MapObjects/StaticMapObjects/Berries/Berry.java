@@ -24,9 +24,9 @@ public abstract class Berry extends StaticMapObject
     }
 
     @Override
-    public void processCollision(MapObject visitor, Game game)
+    public void processCollision(MapObject mapObject, Game game)
     {
-        visitor.berryProcessCollision(this, game);
+        mapObject.berryProcessCollision(this, game);
     }
 
     @Override

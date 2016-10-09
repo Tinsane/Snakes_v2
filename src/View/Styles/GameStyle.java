@@ -4,6 +4,7 @@ import Core.Game.Game;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
+import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 
@@ -19,4 +20,5 @@ public interface GameStyle
     Icon getStrawberryIcon(Strawberry strawberry, Game game);
     Icon getBlueberryIcon(Blueberry blueberry, Game game);
     Icon getSnakeCellIcon(SnakeCell snakeCell, Game game);
+    Icon getEmptyCellIcon(EmptyCell emptyCell, Game game);
 }

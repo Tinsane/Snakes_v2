@@ -7,6 +7,7 @@ import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
+import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.Snake.Snake;
 import Core.Utils.IntPair;
 
@@ -27,6 +28,10 @@ public class Game
     {
         return snake.getIsDestructed();
     }
+
+    public int getWidth() { return getCurrentMap().length; }
+
+    public int getHeight() { return getCurrentMap()[0].length; }
 
     Game(MapObject[][] map, Snake snake)
     {
@@ -99,6 +104,14 @@ public class Game
                         newMap[x][y] = null;
         }
 
+        private void fillEmptyCells()
+        {
+            for (int x = 0; x < newMap.length; ++x)
+                for (int y = 0; y < newMap[0].length; ++y)
+                    if (newMap[x][y] == null)
+                        newMap[x][y] = new EmptyCell();
+        }
+
         private void placeObject(MapObject object, IntPair position)
         {
             if (newMap[position.x][position.y] != null)
@@ -152,6 +165,7 @@ public class Game
                 }
             moveSnake();
             clearDestructedObjects();
+            fillEmptyCells();
             return newMap;
         }
     }

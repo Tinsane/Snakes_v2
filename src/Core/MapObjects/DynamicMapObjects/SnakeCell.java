@@ -50,9 +50,9 @@ public class SnakeCell extends DynamicMapObject
     }
 
     @Override
-    public void processCollision(MapObject visitor, Game game)
+    public void processCollision(MapObject mapObject, Game game)
     {
-        visitor.snakeCellProcessCollision(this, game);
+        mapObject.snakeCellProcessCollision(this, game);
     }
 
     @Override
