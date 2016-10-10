@@ -63,7 +63,7 @@ public class GameCreator
 
     private void placeMapObject(int x, int y, MapObject mapObject)
     {
-        if (!isCellInMap(x, y))
+        if (!isCellInMap(x + 1, y + 1))
             throw new IllegalArgumentException("No such cell in the map.");
         map[x + 1][y + 1] = mapObject;
     }

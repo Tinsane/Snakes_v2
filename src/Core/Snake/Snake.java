@@ -3,12 +3,13 @@ package Core.Snake;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.Utils.VelocityVector;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
  * Created by Владимир on 16.09.2016.
  */
-public class Snake implements Iterable<SnakeCell>
+public class Snake implements Iterable<SnakeCell>, Serializable
 {
     public SnakeCell head;
     public SnakeCell tail;

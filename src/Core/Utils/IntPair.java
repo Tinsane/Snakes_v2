@@ -1,9 +1,11 @@
 package Core.Utils;
 
+import java.io.Serializable;
+
 /**
  * Created by ISmir on 19.09.2016.
  */
-public class IntPair
+public class IntPair implements Serializable
 {
     public int x;
     public int y;

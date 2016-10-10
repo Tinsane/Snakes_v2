@@ -1,9 +1,11 @@
 package Core.Utils;
 
+import java.io.Serializable;
+
 /**
  * Created by Владимир on 16.09.2016.
  */
-public class VelocityVector
+public class VelocityVector implements Serializable
 {
     // these are all the possibles vectors
     public static final VelocityVector zero = new VelocityVector(0, 0);

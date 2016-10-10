@@ -10,12 +10,11 @@ import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.Snake.Snake;
 import Core.Utils.IntPair;
 
-import javax.naming.OperationNotSupportedException;
-import javax.swing.*;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class Game
+public class Game implements Serializable
 {
     public Snake snake;
     private GameUpdater gameUpdater;
@@ -23,17 +22,17 @@ public class Game
 
     private boolean isFinished;
 
-    public boolean isFinished()
-    {
-        return snake.getIsDestructed();
-    }
-
     Game(MapObject[][] map, Snake snake)
     {
         maps = new LinkedList<>();
         maps.addFirst(map);
         this.snake = snake;
         gameUpdater = new GameUpdater(this);
+    }
+
+    public boolean isFinished()
+    {
+        return snake.getIsDestructed();
     }
 
     public void executeCommand(GameCommand command)
@@ -59,7 +58,7 @@ public class Game
         maps.addFirst(gameUpdater.getNewMap());
     }
 
-    private class GameUpdater
+    private class GameUpdater implements Serializable
     {
         private Game game;
         private Random updaterRandom;
