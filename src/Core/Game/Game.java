@@ -159,7 +159,8 @@ public class Game implements Serializable
                 for (int y = 0; y < curMap[0].length; ++y)
                 {
                     MapObject curObject = curMap[x][y];
-                    if (!(curObject == null || curObject.getIsDestructed() || curObject.getClass() == SnakeCell.class))
+                    if (!(curObject.getIsDestructed() ||
+                            curObject.getClass() == SnakeCell.class || curObject.getClass() == EmptyCell.class))
                         moveObject(new IntPair(x, y));
                 }
             moveSnake();

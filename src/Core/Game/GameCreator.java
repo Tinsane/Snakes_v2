@@ -4,6 +4,7 @@ import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
+import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Snake.Snake;
@@ -32,7 +33,7 @@ public class GameCreator
         snakeX += 1;
         snakeY += 1;
         if (!isCellInMap(snakeX, snakeY) ||
-                map[snakeX][snakeY] != null)
+                map[snakeX][snakeY].getClass() != EmptyCell.class)
             throw new IllegalArgumentException("Invalid snake position!");
         SnakeCell cell = new SnakeCell(null);
         Snake snake = new Snake(snakeLength, cell);
@@ -49,6 +50,9 @@ public class GameCreator
     public void setMapSize(int width, int height)
     {
         map = new MapObject[height + 2][width + 2];
+        for (int i = 0; i < map.length; ++i)
+            for(int j = 0; j < map[0].length; ++j)
+                map[i][j] = new EmptyCell();
         for (int i = 0; i < map.length; ++i)
         {
             map[i][0] = new Wall();

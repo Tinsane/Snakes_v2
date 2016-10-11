@@ -1,6 +1,7 @@
 package Core.MapObjects.StaticMapObjects.Berries;
 
 import Core.Game.Game;
+import View.Styles.GameStyle;
 
 import javax.swing.*;
 
@@ -12,5 +13,11 @@ public class Strawberry extends Berry
     public Strawberry()
     {
         super(3);
+    }
+
+    @Override
+    public Icon getIcon(GameStyle style, Game game)
+    {
+        return style.getStrawberryIcon(this, game);
     }
 }
