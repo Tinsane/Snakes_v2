@@ -7,7 +7,7 @@ import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.Utils.VelocityVector;
 import View.Styles.GameStyle;
 
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by ISmir on 09.10.2016.
@@ -15,9 +15,9 @@ import javax.swing.*;
 public class EmptyCell extends StaticMapObject
 {
     @Override
-    public Icon getIcon(GameStyle style, Game game)
+    public Image getImage(GameStyle style, Game game)
     {
-        return null;
+        return style.getEmptyCellIcon(this, game);
     }
 
     @Override

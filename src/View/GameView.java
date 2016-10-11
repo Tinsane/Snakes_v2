@@ -2,7 +2,6 @@ package View;
 
 import Core.Game.Game;
 import Core.Game.GameCreator;
-import View.Styles.GameStyle;
 
 import javax.swing.*;
 
@@ -13,35 +12,32 @@ public class GameView extends JFrame
 {
     private Game game;
     private Timer updateTimer;
-    private JLabel[][] field;
     private GameViewSettings settings;
+    GameCanvas canvas;
 
     public GameView()
     {
-        super();
-        init(new GameViewSettings());
+        this(new GameViewSettings());
     }
 
     public GameView(GameViewSettings settings)
     {
         super();
-        init(settings);
-    }
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setSize(400, 400);
+        setTitle("Snakes_v2");
 
-    public void init(GameViewSettings settings)
-    {
         this.settings = settings;
 
         GameCreator creator = new GameCreator();
         creator.setMapSize(5, 5);
         game = creator.createGame(0, 0, 1); // need to use saved map here
 
-        updateTimer = new Timer(settings.updateInterval, x -> paint());
+        updateTimer = new Timer(settings.updateInterval, x -> update());
         updateTimer.setRepeats(true);
 
-        for (int i = 0; i < game.getWidth(); ++i)
-            for (int j = 0; j < game.getHeight(); ++j)
-                field[i][j] = new JLabel();
+        canvas = new GameCanvas(game, settings.style, false);
+        add(canvas);
     }
 
     public void start()
@@ -54,13 +50,16 @@ public class GameView extends JFrame
         updateTimer.stop();
     }
 
-    private void paint()
+    private void update()
     {
+        if (game.isFinished())
+        {
+            stop();
+            return;
+        }
+
         game.update();
 
-        Drawable[][] map = game.getCurrentMap();
-        for (int i = 0; i < field.length; ++i)
-            for (int j = 0; j < field[0].length; ++j)
-                field[i][j].setIcon(map[i][j].getIcon(settings.style, game));
+        canvas.repaint();
     }
 }

@@ -5,7 +5,7 @@ import Core.MapObjects.*;
 import Core.Game.Game;
 import View.Styles.GameStyle;
 
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Владимир on 16.09.2016.
@@ -29,7 +29,7 @@ public class Wall extends StaticMapObject
     }
 
     @Override
-    public Icon getIcon(GameStyle style, Game game)
+    public Image getImage(GameStyle style, Game game)
     {
         return style.getWallIcon(this, game);
     }

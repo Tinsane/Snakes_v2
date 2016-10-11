@@ -8,17 +8,17 @@ import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by ISmir on 08.10.2016.
  */
 public interface GameStyle
 {
-    Icon getWallIcon(Wall wall, Game game);
-    Icon getSandGlassIcon(SandGlass sandGlass, Game game);
-    Icon getStrawberryIcon(Strawberry strawberry, Game game);
-    Icon getBlueberryIcon(Blueberry blueberry, Game game);
-    Icon getSnakeCellIcon(SnakeCell snakeCell, Game game);
-    Icon getEmptyCellIcon(EmptyCell emptyCell, Game game);
+    Image getWallIcon(Wall wall, Game game);
+    Image getSandGlassIcon(SandGlass sandGlass, Game game);
+    Image getStrawberryIcon(Strawberry strawberry, Game game);
+    Image getBlueberryIcon(Blueberry blueberry, Game game);
+    Image getSnakeCellIcon(SnakeCell snakeCell, Game game);
+    Image getEmptyCellIcon(EmptyCell emptyCell, Game game);
 }

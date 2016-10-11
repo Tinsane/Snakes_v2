@@ -3,12 +3,12 @@ package View;
 import Core.Game.Game;
 import View.Styles.GameStyle;
 
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by ISmir on 08.10.2016.
  */
 public interface Drawable
 {
-    Icon getIcon(GameStyle style, Game game);
+    Image getImage(GameStyle style, Game game);
 }
