@@ -6,7 +6,6 @@ import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.IntPair;
-import View.Styles.GameStyle;
 
 import javax.swing.*;
 
@@ -81,11 +80,5 @@ public class SnakeCell extends DynamicMapObject
     {
         game.rollback(sandGlass.getRollbackTurnsNumber());
         sandGlass.setIsDestructed(true);
-    }
-
-    @Override
-    public Icon getIcon(GameStyle style, Game game)
-    {
-        return style.getSnakeCellIcon(this, game);
     }
 }

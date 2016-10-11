@@ -7,13 +7,12 @@ import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
 import Core.Game.Game;
-import View.Drawable;
 
 /**
  * Created by Владимир on 16.09.2016.
  */
 
-public interface MapObject extends Drawable
+public interface MapObject
 {
     VelocityVector getVelocity();
 

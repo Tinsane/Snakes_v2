@@ -3,7 +3,6 @@ package Core.MapObjects.StaticMapObjects;
 import Core.MapObjects.DynamicMapObjects.*;
 import Core.MapObjects.*;
 import Core.Game.Game;
-import View.Styles.GameStyle;
 
 import javax.swing.*;
 
@@ -26,11 +25,5 @@ public class Wall extends StaticMapObject
     public void snakeCellProcessCollision(SnakeCell snakeCell, Game game)
     {
         snakeCell.wallProcessCollision(this, game);
-    }
-
-    @Override
-    public Icon getIcon(GameStyle style, Game game)
-    {
-        return style.getWallIcon(this, game);
     }
 }

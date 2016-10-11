@@ -5,7 +5,6 @@ import Core.Game.GameCreator;
 import Core.GameCommands.ChangeSnakeVelocityCommand;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,33 +14,12 @@ import static org.junit.Assert.*;
  */
 public class GameTest
 {
-    Game game;
-
-    @Before
-    public void setUp()
-    {
-        // that's how the map looks like
-        // snake length is 5
-        // S - snake
-        // B - blueberry
-        // W - wall
-        // C - Ctrawberry
-        //.....
-        //..S..
-        //..BC.
-        //..W..
-        //.....
-        GameCreator gameCreator = new GameCreator();
-        gameCreator.setMapSize(5, 5);
-        gameCreator.placeBlueberry(2, 2);
-        gameCreator.placeStrawberry(3, 2);
-        gameCreator.placeWall(2, 3);
-        game = gameCreator.createGame(2, 1, 5);
-    }
-
     @Test
     public void testCommandsExecution()
     {
+        GameCreator gameCreator = new GameCreator();
+        gameCreator.setMapSize(1, 1);
+        Game game = gameCreator.createGame(0, 0, 1);
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
         assertEquals(VelocityVector.down, game.snake.head.getVelocity());
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.left));
@@ -51,22 +29,30 @@ public class GameTest
     @Test
     public void testSnakeMovement()
     {
+        GameCreator gameCreator = new GameCreator();
+        gameCreator.setMapSize(3, 3);
+        Game game = gameCreator.createGame(1, 1, 10);
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.left));
         game.update();
         IntPair snakeHeadPos = game.snake.head.getCoordinates(game.getCurrentMap());
         assertEquals(1, snakeHeadPos.x);
-        assertEquals(1, snakeHeadPos.y);
+        assertEquals(2, snakeHeadPos.y);
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.up));
         game.update();
         snakeHeadPos = game.snake.head.getCoordinates(game.getCurrentMap());
         assertEquals(1, snakeHeadPos.x);
-        assertEquals(0, snakeHeadPos.y);
+        assertEquals(1, snakeHeadPos.y);
     }
 
 
     @Test
     public void testSnakeExtension()
     {
+        GameCreator gameCreator = new GameCreator();
+        gameCreator.setMapSize(3, 3);
+        gameCreator.placeBlueberry(1, 2);
+        gameCreator.placeStrawberry(2, 2);
+        Game game = gameCreator.createGame(1, 1, 5);
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
         game.update();
         assertEquals(game.snake.getLength(), 6);
@@ -78,8 +64,11 @@ public class GameTest
     @Test
     public void testSnakeDestruction()
     {
+        GameCreator gameCreator = new GameCreator();
+        gameCreator.setMapSize(3, 3);
+        gameCreator.placeWall(1, 2);
+        Game game = gameCreator.createGame(1, 1, 5);
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
-        game.update();
         game.update();
         assertTrue(game.snake.getIsDestructed());
     }
@@ -87,6 +76,9 @@ public class GameTest
     @Test
     public void testSelfIntersection()
     {
+        GameCreator gameCreator = new GameCreator();
+        gameCreator.setMapSize(3, 3);
+        Game game = gameCreator.createGame(1, 1, 10);
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
         game.update();
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.right));

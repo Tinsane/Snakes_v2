@@ -2,11 +2,12 @@ package Core.MapObjects;
 
 import Core.Game.Game;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
+import java.io.Serializable;
 
 /**
  * Created by ISmir on 17.09.2016.
  */
-public abstract class BaseMapObject implements MapObject
+public abstract class BaseMapObject implements MapObject, Serializable
 {
     public boolean isDestructed = false;
 

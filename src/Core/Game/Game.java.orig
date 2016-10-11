@@ -23,10 +23,18 @@ public class Game implements Serializable
 
     private boolean isFinished;
 
+<<<<<<< HEAD
+    public boolean isFinished()
+    {
+        return snake.getIsDestructed();
+    }
+
     public int getWidth() { return getCurrentMap().length; }
 
     public int getHeight() { return getCurrentMap()[0].length; }
 
+=======
+>>>>>>> master
     Game(MapObject[][] map, Snake snake)
     {
         maps = new LinkedList<>();
