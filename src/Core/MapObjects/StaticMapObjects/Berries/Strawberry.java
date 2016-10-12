@@ -18,6 +18,6 @@ public class Strawberry extends Berry
     @Override
     public Image getImage(GameStyle style, Game game)
     {
-        return style.getStrawberryIcon(this, game);
+        return style.getStrawberryImage(this, game);
     }
 }

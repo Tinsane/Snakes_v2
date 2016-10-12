@@ -7,10 +7,8 @@ import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
@@ -19,79 +17,55 @@ import java.io.IOException;
  */
 public class DefaultStyle implements GameStyle
 {
-    @Override
-    public Image getWallIcon(Wall wall, Game game)
+    private final Image wallImage;
+    private final Image sandGlassImage;
+    private final Image strawberryImage;
+    private final Image blueberryImage;
+    private final Image snakeCellImage;
+    private final Image emptyCellImage;
+    public DefaultStyle() throws IOException
     {
-        try
-        {
-        return ImageIO.read(getClass().getResource("wall.bmp"));
-    }
-        catch (IOException e)
-        {
-            // TODO: logging here
-        }
-        return null;
-    }
-
-    @Override
-    public Image getSandGlassIcon(SandGlass sandGlass, Game game)
-    {
-        try
-        {
-            return ImageIO.read(getClass().getResource("sandglass.bmp"));
-        }
-        catch (IOException e)
-        {
-            // TODO: logging here
-        }
-        return null;
+        wallImage = ImageIO.read(getClass().getResource("wall.bmp"));
+        sandGlassImage = null;
+        strawberryImage = ImageIO.read(getClass().getResource("kekberry_v2.bmp"));
+        blueberryImage = ImageIO.read(getClass().getResource("blueberry.bmp"));
+        snakeCellImage = ImageIO.read(getClass().getResource("snake_body.bmp"));
+        emptyCellImage = ImageIO.read(getClass().getResource("empty_cell.bmp"));
     }
 
     @Override
-    public Image getStrawberryIcon(Strawberry strawberry, Game game)
+    public Image getWallImage(Wall wall, Game game)
     {
-        try
-        {
-            return ImageIO.read(getClass().getResource("kekberry_v2.bmp"));
-        }
-        catch (IOException e)
-        {
-            // TODO: logging here
-        }
-        return null;
+        return wallImage;
     }
 
     @Override
-    public Image getBlueberryIcon(Blueberry blueberry, Game game)
+    public Image getSandGlassImage(SandGlass sandGlass, Game game)
     {
-        throw new NotImplementedException();
+        return sandGlassImage;
     }
 
     @Override
-    public Image getSnakeCellIcon(SnakeCell snakeCell, Game game)
+    public Image getStrawberryImage(Strawberry strawberry, Game game)
     {
-        try
-        {
-            return ImageIO.read(getClass().getResource("snake_body.bmp"));
-        }
-        catch (IOException e)
-        {
-            // TODO: logging here
-        }
-        return null;
+        return strawberryImage;
     }
 
     @Override
-    public Image getEmptyCellIcon(EmptyCell emptyCell, Game game)
+    public Image getBlueberryImage(Blueberry blueberry, Game game)
     {
-        try
-        {
-            return ImageIO.read(getClass().getResource("empty_cell.bmp"));
-        }
-        catch (IOException e)
-        {
-            // TODO: logging here
-        }
-        return null;
+        return blueberryImage;
+    }
+
+    @Override
+    public Image getSnakeCellImage(SnakeCell snakeCell, Game game)
+    {
+        return snakeCellImage;
+    }
+
+    @Override
+    public Image getEmptyCellImage(EmptyCell emptyCell, Game game)
+    {
+        return emptyCellImage;
     }
 }

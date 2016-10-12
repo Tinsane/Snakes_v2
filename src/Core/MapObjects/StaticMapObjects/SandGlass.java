@@ -39,6 +39,6 @@ public class SandGlass extends StaticMapObject
     @Override
     public Image getImage(GameStyle style, Game game)
     {
-        return style.getSandGlassIcon(this, game);
+        return style.getSandGlassImage(this, game);
     }
 }

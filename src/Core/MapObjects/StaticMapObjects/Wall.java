@@ -31,6 +31,6 @@ public class Wall extends StaticMapObject
     @Override
     public Image getImage(GameStyle style, Game game)
     {
-        return style.getWallIcon(this, game);
+        return style.getWallImage(this, game);
     }
 }

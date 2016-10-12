@@ -19,5 +19,10 @@ public class GameViewSettings
     private static final int DEFAULT_UPDATE_INTERVAL = 300;
 
     public int updateInterval = DEFAULT_UPDATE_INTERVAL;
-    public GameStyle style = new DefaultStyle();
+    public GameStyle style;
+
+    public GameViewSettings(GameStyle style)
+    {
+        this.style = style;
+    }
 }

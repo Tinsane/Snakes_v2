@@ -93,6 +93,6 @@ public class SnakeCell extends DynamicMapObject
     @Override
     public Image getImage(GameStyle style, Game game)
     {
-        return style.getSnakeCellIcon(this, game);
+        return style.getSnakeCellImage(this, game);
     }
 }

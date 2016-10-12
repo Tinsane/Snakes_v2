@@ -2,8 +2,10 @@ package View;
 
 import Core.Game.Game;
 import Core.Game.GameCreator;
+import View.Styles.DefaultStyle;
 
 import javax.swing.*;
+import java.io.IOException;
 
 /**
  * Created by ISmir on 08.10.2016.
@@ -15,9 +17,9 @@ public class GameView extends JFrame
     private GameViewSettings settings;
     GameCanvas canvas;
 
-    public GameView()
+    public GameView() throws IOException
     {
-        this(new GameViewSettings());
+        this(new GameViewSettings(new DefaultStyle()));
     }
 
     public GameView(GameViewSettings settings)

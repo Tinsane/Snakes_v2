@@ -18,6 +18,6 @@ public class Blueberry extends Berry
     @Override
     public Image getImage(GameStyle style, Game game)
     {
-        return style.getBlueberryIcon(this, game);
+        return style.getBlueberryImage(this, game);
     }
 }

@@ -17,7 +17,7 @@ public class EmptyCell extends StaticMapObject
     @Override
     public Image getImage(GameStyle style, Game game)
     {
-        return style.getEmptyCellIcon(this, game);
+        return style.getEmptyCellImage(this, game);
     }
 
     @Override

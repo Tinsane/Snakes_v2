@@ -15,10 +15,10 @@ import java.awt.*;
  */
 public interface GameStyle
 {
-    Image getWallIcon(Wall wall, Game game);
-    Image getSandGlassIcon(SandGlass sandGlass, Game game);
-    Image getStrawberryIcon(Strawberry strawberry, Game game);
-    Image getBlueberryIcon(Blueberry blueberry, Game game);
-    Image getSnakeCellIcon(SnakeCell snakeCell, Game game);
-    Image getEmptyCellIcon(EmptyCell emptyCell, Game game);
+    Image getWallImage(Wall wall, Game game);
+    Image getSandGlassImage(SandGlass sandGlass, Game game);
+    Image getStrawberryImage(Strawberry strawberry, Game game);
+    Image getBlueberryImage(Blueberry blueberry, Game game);
+    Image getSnakeCellImage(SnakeCell snakeCell, Game game);
+    Image getEmptyCellImage(EmptyCell emptyCell, Game game);
 }
