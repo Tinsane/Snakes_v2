@@ -6,8 +6,10 @@ import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.IntPair;
+import Core.Utils.VelocityVector;
+import View.Styles.GameStyle;
 
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Владимир on 16.09.2016.
@@ -18,7 +20,13 @@ public class SnakeCell extends DynamicMapObject
 
     public SnakeCell(SnakeCell previous)
     {
+        this(previous, VelocityVector.right);
+    }
+
+    public SnakeCell(SnakeCell previous, VelocityVector velocity)
+    {
         this.previous = previous;
+        this.setVelocity(velocity);
     }
 
     public static IntPair getPreviousCoordinates(MapObject[][] map, IntPair coordinates)
@@ -49,9 +57,9 @@ public class SnakeCell extends DynamicMapObject
     }
 
     @Override
-    public void processCollision(MapObject visitor, Game game)
+    public void processCollision(MapObject mapObject, Game game)
     {
-        visitor.snakeCellProcessCollision(this, game);
+        mapObject.snakeCellProcessCollision(this, game);
     }
 
     @Override
@@ -80,5 +88,11 @@ public class SnakeCell extends DynamicMapObject
     {
         game.rollback(sandGlass.getRollbackTurnsNumber());
         sandGlass.setIsDestructed(true);
+    }
+
+    @Override
+    public Image getImage(GameStyle style, Game game)
+    {
+        return style.getSnakeCellImage(this, game);
     }
 }

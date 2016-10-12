@@ -1,5 +1,7 @@
 package Core.MapObjects;
 
+import Core.Game.Game;
+import Core.MapObjects.StaticMapObjects.EmptyCell;
 import java.io.Serializable;
 
 /**
@@ -18,5 +20,11 @@ public abstract class BaseMapObject implements MapObject, Serializable
     public void setIsDestructed(boolean isDestructed)
     {
         this.isDestructed = isDestructed;
+    }
+
+    @Override
+    public void emptyCellProcessCollision(EmptyCell emptyCell, Game game)
+    {
+        emptyCell.setIsDestructed(true);
     }
 }

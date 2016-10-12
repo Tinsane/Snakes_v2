@@ -3,8 +3,9 @@ package Core.MapObjects.StaticMapObjects;
 import Core.MapObjects.DynamicMapObjects.*;
 import Core.MapObjects.*;
 import Core.Game.Game;
+import View.Styles.GameStyle;
 
-import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Владимир on 16.09.2016.
@@ -24,14 +25,20 @@ public class SandGlass extends StaticMapObject
     }
 
     @Override
-    public void processCollision(MapObject visitor, Game game)
+    public void processCollision(MapObject mapObject, Game game)
     {
-        visitor.sandGlassProcessCollision(this, game);
+        mapObject.sandGlassProcessCollision(this, game);
     }
 
     @Override
     public void snakeCellProcessCollision(SnakeCell snakeCell, Game game)
     {
         snakeCell.sandGlassProcessCollision(this, game);
+    }
+
+    @Override
+    public Image getImage(GameStyle style, Game game)
+    {
+        return style.getSandGlassImage(this, game);
     }
 }

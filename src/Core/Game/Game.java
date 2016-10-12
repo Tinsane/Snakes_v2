@@ -7,10 +7,13 @@ import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
+import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.Snake.Snake;
 import Core.Utils.IntPair;
 
 import java.io.Serializable;
+import javax.naming.OperationNotSupportedException;
+import javax.swing.*;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -21,6 +24,14 @@ public class Game implements Serializable
     private LinkedList<MapObject[][]> maps;
 
     private boolean isFinished;
+
+    public int getWidth() { return getCurrentMap().length; }
+
+    public int getHeight() { return getCurrentMap()[0].length; }
+    public boolean isFinished()
+    {
+        return snake.getIsDestructed();
+    }
 
     Game(MapObject[][] map, Snake snake)
     {
@@ -98,6 +109,14 @@ public class Game implements Serializable
                         newMap[x][y] = null;
         }
 
+        private void fillEmptyCells()
+        {
+            for (int x = 0; x < newMap.length; ++x)
+                for (int y = 0; y < newMap[0].length; ++y)
+                    if (newMap[x][y] == null)
+                        newMap[x][y] = new EmptyCell();
+        }
+
         private void placeObject(MapObject object, IntPair position)
         {
             if (newMap[position.x][position.y] != null)
@@ -146,11 +165,13 @@ public class Game implements Serializable
                 for (int y = 0; y < curMap[0].length; ++y)
                 {
                     MapObject curObject = curMap[x][y];
-                    if (!(curObject == null || curObject.getIsDestructed() || curObject.getClass() == SnakeCell.class))
+                    if (!(curObject.getIsDestructed() ||
+                            curObject.getClass() == SnakeCell.class || curObject.getClass() == EmptyCell.class))
                         moveObject(new IntPair(x, y));
                 }
             moveSnake();
             clearDestructedObjects();
+            fillEmptyCells();
             return newMap;
         }
     }
