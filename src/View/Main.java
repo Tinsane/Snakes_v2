@@ -16,12 +16,10 @@ public class Main
         {
             GameCreator creator = new GameCreator();
             creator.setMapSize(10, 10);
-            creator.placeStrawberry(3, 3);
             creator.placeWall(5, 5);
             creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
             GameView view = new GameView(creator.createGame(0, 0, 1));
             view.start();
-            view.setVisible(true);
         }
         catch (IOException e)
         {

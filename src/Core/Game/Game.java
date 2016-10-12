@@ -5,6 +5,7 @@ package Core.Game; /**
 import Core.GameCommands.GameCommand;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
+import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
@@ -22,8 +23,6 @@ public class Game implements Serializable
     public Snake snake;
     private GameUpdater gameUpdater;
     private LinkedList<MapObject[][]> maps;
-
-    private boolean isFinished;
 
     public int getWidth() { return getCurrentMap().length; }
 
@@ -81,18 +80,23 @@ public class Game implements Serializable
             int freeCellsCnt = 0;
             for (MapObject[] row : newMap)
                 for (MapObject cell : row)
-                    if (cell == null)
+                    if (cell instanceof EmptyCell)
                         ++freeCellsCnt;
             if (freeCellsCnt == 0)
                 return;
             int berryCellNumber = updaterRandom.nextInt(freeCellsCnt);
+            outerloop:
             for (int x = 0; x < newMap.length; ++x)
                 for (int y = 0; y < newMap[0].length; ++y)
                 {
+                    if (!(newMap[x][y] instanceof EmptyCell))
+                        continue;
                     if (berryCellNumber == 0)
+                    {
                         newMap[x][y] = updaterRandom.nextBoolean() ? new Blueberry() : new Strawberry();
-                    if (newMap[x][y] == null)
-                        --berryCellNumber;
+                        break outerloop;
+                    }
+                    --berryCellNumber;
                 }
         }
 
@@ -167,6 +171,13 @@ public class Game implements Serializable
             moveSnake();
             clearDestructedObjects();
             fillEmptyCells();
+            boolean doesMapContainBerries = false;
+            for(MapObject[] row : newMap)
+                for(MapObject cell : row)
+                    if (cell instanceof Berry)
+                        doesMapContainBerries = true;
+            if (!doesMapContainBerries)
+                generateBerry();
             return newMap;
         }
     }

@@ -41,6 +41,7 @@ public class GameView extends JFrame
         canvas = new GameCanvas(game, settings.style, false);
         add(canvas);
         addKeyListener(new ArrowsKeyListener(game));
+        setVisible(true);
     }
 
     public void start()
