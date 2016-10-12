@@ -1,5 +1,6 @@
 package View;
 
+import Controller.ArrowsKeyListener;
 import Core.Game.Game;
 import Core.Game.GameCreator;
 import View.Styles.DefaultStyle;
@@ -17,29 +18,29 @@ public class GameView extends JFrame
     private GameViewSettings settings;
     GameCanvas canvas;
 
-    public GameView() throws IOException
+    public GameView(Game game) throws IOException
     {
-        this(new GameViewSettings(new DefaultStyle()));
+        this(game, new GameViewSettings(new DefaultStyle()));
     }
 
-    public GameView(GameViewSettings settings)
+    public GameView(Game game, GameViewSettings settings)
     {
         super();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(8 * settings.style.getTileSize(), 8 * settings.style.getTileSize());
+        setSize((game.getWidth() + 1) * settings.style.getTileSize(),
+                (game.getHeight() + 1) * settings.style.getTileSize());
         setTitle("Snakes_v2");
 
         this.settings = settings;
 
-        GameCreator creator = new GameCreator();
-        creator.setMapSize(5, 5);
-        game = creator.createGame(0, 0, 1); // need to use saved map here
+        this.game = game;
 
         updateTimer = new Timer(settings.updateInterval, x -> update());
         updateTimer.setRepeats(true);
 
         canvas = new GameCanvas(game, settings.style, false);
         add(canvas);
+        addKeyListener(new ArrowsKeyListener(game));
     }
 
     public void start()

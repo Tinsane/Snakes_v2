@@ -41,11 +41,6 @@ public class Game implements Serializable
         gameUpdater = new GameUpdater(this);
     }
 
-    public boolean isFinished()
-    {
-        return snake.getIsDestructed();
-    }
-
     public void executeCommand(GameCommand command)
     {
         command.execute(this);

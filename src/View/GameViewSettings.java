@@ -16,7 +16,7 @@ Maybe a good solution would be to copy settings while initializing game.
  */
 public class GameViewSettings
 {
-    private static final int DEFAULT_UPDATE_INTERVAL = 300;
+    private static final int DEFAULT_UPDATE_INTERVAL = 200;
 
     public int updateInterval = DEFAULT_UPDATE_INTERVAL;
     public GameStyle style;
