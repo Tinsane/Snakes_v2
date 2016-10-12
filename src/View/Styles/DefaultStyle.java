@@ -68,4 +68,10 @@ public class DefaultStyle implements GameStyle
     {
         return emptyCellImage;
     }
+
+    @Override
+    public int getTileSize()
+    {
+        return 50;
+    }
 }

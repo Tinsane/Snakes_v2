@@ -26,7 +26,7 @@ public class GameView extends JFrame
     {
         super();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(400, 400);
+        setSize(8 * settings.style.getTileSize(), 8 * settings.style.getTileSize());
         setTitle("Snakes_v2");
 
         this.settings = settings;
@@ -57,6 +57,8 @@ public class GameView extends JFrame
         if (game.isFinished())
         {
             stop();
+            setVisible(false);
+            dispose();
             return;
         }
 

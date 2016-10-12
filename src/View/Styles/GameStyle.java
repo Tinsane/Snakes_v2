@@ -21,4 +21,5 @@ public interface GameStyle
     Image getBlueberryImage(Blueberry blueberry, Game game);
     Image getSnakeCellImage(SnakeCell snakeCell, Game game);
     Image getEmptyCellImage(EmptyCell emptyCell, Game game);
+    int getTileSize();
 }
