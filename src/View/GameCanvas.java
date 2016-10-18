@@ -1,7 +1,6 @@
 package View;
 
 import Core.Game.Game;
-import Core.MapObjects.MapObject;
 import View.Styles.GameDrawer;
 import View.Styles.GameStyle;
 
@@ -22,9 +21,11 @@ public class GameCanvas extends JPanel
         this.game = game;
         this.style = style;
     }
+
     @Override
     public void paint(Graphics g)
     {
-
+        GameDrawer drawer = style.CreateDrawer((Graphics2D) g, game, 0);
+        drawer.draw();
     }
 }

@@ -20,8 +20,7 @@ public class Main
             creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
             GameView view = new GameView(creator.createGame(0, 0, 1));
             view.start();
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             // TODO: logging
         }

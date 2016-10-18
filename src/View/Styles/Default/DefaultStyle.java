@@ -14,19 +14,19 @@ import java.io.IOException;
  */
 public class DefaultStyle implements GameStyle
 {
-    private final BufferedImage wallImage;
-    private final BufferedImage sandGlassImage;
-    private final BufferedImage strawberryImage;
-    private final BufferedImage blueberryImage;
-    private final BufferedImage snakeCellImage;
-    private final BufferedImage emptyCellImage;
+    public final BufferedImage wallImage;
+    public final BufferedImage sandGlassImage;
+    public final BufferedImage strawberryImage;
+    public final BufferedImage blueberryImage;
+    public final BufferedImage snakeCellImage;
+    public final BufferedImage emptyCellImage;
 
     public DefaultStyle() throws IOException
     {
         wallImage = ImageIO.read(getClass().getResource("wall.bmp"));
         sandGlassImage = null;
-        strawberryImage = ImageIO.read(getClass().getResource("kekberry_v2.bmp"));
-        blueberryImage = ImageIO.read(getClass().getResource("blueberry.bmp"));
+        strawberryImage = ImageIO.read(getClass().getResource("strawberry.png"));
+        blueberryImage = ImageIO.read(getClass().getResource("blueberry.png"));
         snakeCellImage = ImageIO.read(getClass().getResource("snake_body.bmp"));
         emptyCellImage = ImageIO.read(getClass().getResource("empty_cell.bmp"));
     }

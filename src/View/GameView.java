@@ -2,7 +2,6 @@ package View;
 
 import Controller.ArrowsKeyListener;
 import Core.Game.Game;
-import View.Styles.Default.DefaultDrawer;
 import View.Styles.Default.DefaultStyle;
 
 import javax.swing.*;

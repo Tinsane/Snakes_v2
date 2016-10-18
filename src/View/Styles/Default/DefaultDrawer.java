@@ -9,12 +9,8 @@ import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import View.Styles.GameDrawer;
-import View.Styles.GameStyle;
-import com.sun.corba.se.impl.orbutil.graph.Graph;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
-import java.util.function.Consumer;
 
 /**
  * Created by ISmir on 08.10.2016.
@@ -25,7 +21,7 @@ public class DefaultDrawer implements GameDrawer
     private Game game;
     private double turnPartLeft;
     private Graphics2D graphics;
-    private GameStyle style;
+    private DefaultStyle style;
 
     public DefaultDrawer(DefaultStyle style, Graphics2D graphics, Game game, double turnPartLeft)
     {
@@ -38,37 +34,37 @@ public class DefaultDrawer implements GameDrawer
     @Override
     public void draw(Wall wall)
     {
-        throw new NotImplementedException();
+        graphics.drawImage(style.wallImage, x * style.getTileSize(), y * style.getTileSize(), null);
     }
 
     @Override
     public void draw(SandGlass sandGlass)
     {
-        throw new NotImplementedException();
+        graphics.drawImage(style.sandGlassImage, x * style.getTileSize(), y * style.getTileSize(), null);
     }
 
     @Override
     public void draw(Strawberry strawberry)
     {
-        throw new NotImplementedException();
+        graphics.drawImage(style.strawberryImage, x * style.getTileSize(), y * style.getTileSize(), null);
     }
 
     @Override
     public void draw(Blueberry blueberry)
     {
-        throw new NotImplementedException();
+        graphics.drawImage(style.blueberryImage, x * style.getTileSize(), y * style.getTileSize(), null);
     }
 
     @Override
     public void draw(SnakeCell snakeCell)
     {
-        throw new NotImplementedException();
+        graphics.drawImage(style.snakeCellImage, x * style.getTileSize(), y * style.getTileSize(), null);
     }
 
     @Override
     public void draw(EmptyCell emptyCell)
     {
-        throw new NotImplementedException();
+        graphics.drawImage(style.emptyCellImage, x * style.getTileSize(), y * style.getTileSize(), null);
     }
 
     public void draw(MapObject mapObject, int x, int y)
@@ -82,13 +78,7 @@ public class DefaultDrawer implements GameDrawer
     {
         MapObject[][] map = game.getCurrentMap();
         for (int i = 0; i < map.length; ++i)
-            for(int j = 0; j < map[0].length; ++j)
-            {
-                int finalI = i;
-                int finalJ = j;
+            for (int j = 0; j < map[0].length; ++j)
                 draw(map[i][j], i, j);
-//                map[i][j].draw(style, game, (Image image) ->
-//                        graphics.drawImage(image, finalI * style.getTileSize(), finalJ * style.getTileSize(), null));
-            }
     }
 }

@@ -9,7 +9,7 @@ import java.awt.*;
  */
 public interface GameStyle
 {
-    GameDrawer CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft);
+    public GameDrawer CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft);
 
     public int getTileSize();
 }
