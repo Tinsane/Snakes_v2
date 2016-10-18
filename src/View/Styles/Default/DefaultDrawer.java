@@ -66,8 +66,8 @@ public class DefaultDrawer implements GameDrawer
 
     private BufferedImage getRotated(BufferedImage image, double angle)
     {
-        int centerX = image.getWidth() / 2;
-        int centerY = image.getHeight() / 2;
+        double centerX = image.getWidth() / 2.0;
+        double centerY = image.getHeight() / 2.0;
         return new AffineTransformOp(AffineTransform.getRotateInstance(angle, centerX, centerY),
                 AffineTransformOp.TYPE_BILINEAR).filter(image, null);
     }
@@ -75,14 +75,8 @@ public class DefaultDrawer implements GameDrawer
     @Override
     public void draw(SnakeCell snakeCell)
     {
-        if (snakeCell == game.snake.head)
-        {
-            VelocityVector velocity = snakeCell.getVelocity();
-            drawImage(getRotated(style.snakeHeadImage, Math.atan2(VelocityVector.up.getCrossProduct(velocity),
-                    VelocityVector.up.getScalarProduct(velocity))));
-        }
-        else
-            drawImage(style.snakeCellImage);
+        drawImage(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
+                VelocityVector.up.getAngle(snakeCell.getVelocity())));
     }
 
     @Override

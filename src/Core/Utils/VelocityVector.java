@@ -35,6 +35,11 @@ public class VelocityVector implements Serializable
         return x * v.y - y * v.x;
     }
 
+    public double getAngle(VelocityVector v)
+    {
+        return Math.atan2(getCrossProduct(v), getScalarProduct(v));
+    }
+
     private static boolean inRange(int x, int rangeLowerBound, int rangeUpperBound)
     {
         return rangeLowerBound <= x && x <= rangeUpperBound;

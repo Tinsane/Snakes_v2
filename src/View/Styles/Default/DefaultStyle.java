@@ -22,15 +22,20 @@ public class DefaultStyle implements GameStyle
     public final BufferedImage emptyCellImage;
     public final BufferedImage snakeHeadImage;
 
+    private BufferedImage loadImage(String filename) throws IOException
+    {
+        return ImageIO.read(getClass().getResource(filename));
+    }
+
     public DefaultStyle() throws IOException
     {
-        wallImage = ImageIO.read(getClass().getResource("wall.bmp"));
+        wallImage = loadImage("wall.bmp");
         sandGlassImage = null;
-        strawberryImage = ImageIO.read(getClass().getResource("strawberry.bmp"));
-        blueberryImage = ImageIO.read(getClass().getResource("blueberry.bmp"));
-        snakeCellImage = ImageIO.read(getClass().getResource("snake_body.bmp"));
-        emptyCellImage = ImageIO.read(getClass().getResource("empty_cell.bmp"));
-        snakeHeadImage = ImageIO.read(getClass().getResource("head.bmp"));
+        strawberryImage = loadImage("strawberry.bmp");
+        blueberryImage = loadImage("blueberry.bmp");
+        snakeCellImage = loadImage("snake_body.bmp");
+        emptyCellImage = loadImage("empty_cell.bmp");
+        snakeHeadImage = loadImage("head.bmp");
     }
 
     @Override
