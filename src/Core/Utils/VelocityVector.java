@@ -25,6 +25,16 @@ public class VelocityVector implements Serializable
         this.y = y;
     }
 
+    public int getScalarProduct(VelocityVector v)
+    {
+        return x * v.x + y * v.y;
+    }
+
+    public int getCrossProduct(VelocityVector v)
+    {
+        return x * v.y - y * v.x;
+    }
+
     private static boolean inRange(int x, int rangeLowerBound, int rangeUpperBound)
     {
         return rangeLowerBound <= x && x <= rangeUpperBound;

@@ -8,9 +8,12 @@ import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
+import Core.Utils.VelocityVector;
 import View.Styles.GameDrawer;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 /**
@@ -61,12 +64,22 @@ public class DefaultDrawer implements GameDrawer
         drawImage(style.blueberryImage);
     }
 
+    private BufferedImage getRotated(BufferedImage image, double angle)
+    {
+        int centerX = image.getWidth() / 2;
+        int centerY = image.getHeight() / 2;
+        return new AffineTransformOp(AffineTransform.getRotateInstance(angle, centerX, centerY),
+                AffineTransformOp.TYPE_BILINEAR).filter(image, null);
+    }
+
     @Override
     public void draw(SnakeCell snakeCell)
     {
         if (snakeCell == game.snake.head)
         {
-            drawImage(style.snakeHeadImage);
+            VelocityVector velocity = snakeCell.getVelocity();
+            drawImage(getRotated(style.snakeHeadImage, Math.atan2(VelocityVector.up.getCrossProduct(velocity),
+                    VelocityVector.up.getScalarProduct(velocity))));
         }
         else
             drawImage(style.snakeCellImage);
