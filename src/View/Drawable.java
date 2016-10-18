@@ -1,7 +1,7 @@
 package View;
 
 import Core.Game.Game;
-import View.Styles.GameStyle;
+import View.Styles.GameDrawer;
 
 import java.awt.*;
 import java.util.function.Consumer;
@@ -11,5 +11,5 @@ import java.util.function.Consumer;
  */
 public interface Drawable
 {
-    void draw(GameStyle style, Game game, Consumer<Image> drawer);
+    void draw(GameDrawer drawer);
 }

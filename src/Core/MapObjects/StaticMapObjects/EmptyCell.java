@@ -5,7 +5,7 @@ import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.Utils.VelocityVector;
-import View.Styles.GameStyle;
+import View.Styles.GameDrawer;
 
 import java.awt.*;
 import java.util.function.Consumer;
@@ -59,8 +59,8 @@ public class EmptyCell extends StaticMapObject
     }
 
     @Override
-    public void draw(GameStyle style, Game game, Consumer<Image> drawer)
+    public void draw(GameDrawer drawer)
     {
-        style.draw(this, game, drawer);
+        drawer.draw(this);
     }
 }

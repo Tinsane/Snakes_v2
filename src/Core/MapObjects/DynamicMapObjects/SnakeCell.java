@@ -7,7 +7,7 @@ import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
-import View.Styles.GameStyle;
+import View.Styles.GameDrawer;
 
 import java.awt.*;
 import java.util.function.Consumer;
@@ -92,8 +92,8 @@ public class SnakeCell extends DynamicMapObject
     }
 
     @Override
-    public void draw(GameStyle style, Game game, Consumer<Image> drawer)
+    public void draw(GameDrawer drawer)
     {
-        style.draw(this, game, drawer);
+        drawer.draw(this);
     }
 }

@@ -1,6 +1,5 @@
 package View;
 
-import View.Styles.DefaultStyle;
 import View.Styles.GameStyle;
 
 /**

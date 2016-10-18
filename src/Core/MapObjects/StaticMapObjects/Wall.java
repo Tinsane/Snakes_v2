@@ -3,7 +3,7 @@ package Core.MapObjects.StaticMapObjects;
 import Core.MapObjects.DynamicMapObjects.*;
 import Core.MapObjects.*;
 import Core.Game.Game;
-import View.Styles.GameStyle;
+import View.Styles.GameDrawer;
 
 import java.awt.*;
 import java.util.function.Consumer;
@@ -30,8 +30,8 @@ public class Wall extends StaticMapObject
     }
 
     @Override
-    public void draw(GameStyle style, Game game, Consumer<Image> drawer)
+    public void draw(GameDrawer drawer)
     {
-        style.draw(this, game, drawer);
+        drawer.draw(this);
     }
 }

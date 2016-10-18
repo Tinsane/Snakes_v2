@@ -2,8 +2,8 @@ package View;
 
 import Controller.ArrowsKeyListener;
 import Core.Game.Game;
-import Core.Game.GameCreator;
-import View.Styles.DefaultStyle;
+import View.Styles.Default.DefaultDrawer;
+import View.Styles.Default.DefaultStyle;
 
 import javax.swing.*;
 import java.io.IOException;
