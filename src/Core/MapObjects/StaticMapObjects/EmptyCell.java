@@ -35,27 +35,27 @@ public class EmptyCell extends StaticMapObject
     }
 
     @Override
-    public void berryProcessCollision(Berry berry, Game game)
+    public void processCollision(Berry berry, Game game)
     {
-        berry.emptyCellProcessCollision(this, game);
+        berry.processCollision(this, game);
     }
 
     @Override
-    public void snakeCellProcessCollision(SnakeCell snakeCell, Game game)
+    public void processCollision(SnakeCell snakeCell, Game game)
     {
-        snakeCell.emptyCellProcessCollision(this, game);
+        snakeCell.processCollision(this, game);
     }
 
     @Override
-    public void wallProcessCollision(Wall wall, Game game)
+    public void processCollision(Wall wall, Game game)
     {
-        wall.emptyCellProcessCollision(this, game);
+        wall.processCollision(this, game);
     }
 
     @Override
-    public void sandGlassProcessCollision(SandGlass sandGlass, Game game)
+    public void processCollision(SandGlass sandGlass, Game game)
     {
-        sandGlass.emptyCellProcessCollision(this, game);
+        sandGlass.processCollision(this, game);
     }
 
     @Override

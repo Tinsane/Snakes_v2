@@ -23,7 +23,7 @@ public abstract class BaseMapObject implements MapObject, Serializable
     }
 
     @Override
-    public void emptyCellProcessCollision(EmptyCell emptyCell, Game game)
+    public void processCollision(EmptyCell emptyCell, Game game)
     {
         emptyCell.setIsDestructed(true);
     }

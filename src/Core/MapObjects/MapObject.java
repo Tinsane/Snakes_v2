@@ -21,9 +21,9 @@ public interface MapObject extends Drawable
 
     void processCollision(MapObject mapObject, Game game);
 
-    void berryProcessCollision(Berry berry, Game game);
-    void snakeCellProcessCollision(SnakeCell snakeCell, Game game);
-    void wallProcessCollision(Wall wall, Game game);
-    void sandGlassProcessCollision(SandGlass sandGlass, Game game);
-    void emptyCellProcessCollision(EmptyCell emptyCell, Game game);
+    void processCollision(Berry berry, Game game);
+    void processCollision(SnakeCell snakeCell, Game game);
+    void processCollision(Wall wall, Game game);
+    void processCollision(SandGlass sandGlass, Game game);
+    void processCollision(EmptyCell emptyCell, Game game);
 }

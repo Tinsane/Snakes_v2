@@ -20,13 +20,13 @@ public class Wall extends StaticMapObject
     @Override
     public void processCollision(MapObject mapObject, Game game)
     {
-        mapObject.wallProcessCollision(this, game);
+        mapObject.processCollision(this, game);
     }
 
     @Override
-    public void snakeCellProcessCollision(SnakeCell snakeCell, Game game)
+    public void processCollision(SnakeCell snakeCell, Game game)
     {
-        snakeCell.wallProcessCollision(this, game);
+        snakeCell.processCollision(this, game);
     }
 
     @Override

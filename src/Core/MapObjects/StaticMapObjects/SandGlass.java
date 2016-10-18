@@ -28,13 +28,13 @@ public class SandGlass extends StaticMapObject
     @Override
     public void processCollision(MapObject mapObject, Game game)
     {
-        mapObject.sandGlassProcessCollision(this, game);
+        mapObject.processCollision(this, game);
     }
 
     @Override
-    public void snakeCellProcessCollision(SnakeCell snakeCell, Game game)
+    public void processCollision(SnakeCell snakeCell, Game game)
     {
-        snakeCell.sandGlassProcessCollision(this, game);
+        snakeCell.processCollision(this, game);
     }
 
     @Override
