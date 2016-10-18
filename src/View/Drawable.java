@@ -4,11 +4,12 @@ import Core.Game.Game;
 import View.Styles.GameStyle;
 
 import java.awt.*;
+import java.util.function.Consumer;
 
 /**
  * Created by ISmir on 08.10.2016.
  */
 public interface Drawable
 {
-    Image getImage(GameStyle style, Game game);
+    void draw(GameStyle style, Game game, Consumer<Image> drawer);
 }

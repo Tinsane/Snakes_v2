@@ -28,6 +28,11 @@ public class GameCanvas extends JPanel
         MapObject[][] map = game.getCurrentMap();
         for (int i = 0; i < map.length; ++i)
             for(int j = 0; j < map[0].length; ++j)
-                g2d.drawImage(map[i][j].getImage(style, game), i * style.getTileSize(), j * style.getTileSize(), null);
+            {
+                int finalI = i;
+                int finalJ = j;
+                map[i][j].draw(style, game, (Image image) ->
+                        g2d.drawImage(image, finalI * style.getTileSize(), finalJ * style.getTileSize(), null));
+            }
     }
 }

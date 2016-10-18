@@ -8,17 +8,13 @@ import Core.Utils.VelocityVector;
 import View.Styles.GameStyle;
 
 import java.awt.*;
+import java.util.function.Consumer;
 
 /**
  * Created by ISmir on 09.10.2016.
  */
 public class EmptyCell extends StaticMapObject
 {
-    @Override
-    public Image getImage(GameStyle style, Game game)
-    {
-        return style.getEmptyCellImage(this, game);
-    }
 
     @Override
     public VelocityVector getVelocity()
@@ -60,5 +56,11 @@ public class EmptyCell extends StaticMapObject
     public void sandGlassProcessCollision(SandGlass sandGlass, Game game)
     {
         sandGlass.emptyCellProcessCollision(this, game);
+    }
+
+    @Override
+    public void draw(GameStyle style, Game game, Consumer<Image> drawer)
+    {
+        style.draw(this, game, drawer);
     }
 }

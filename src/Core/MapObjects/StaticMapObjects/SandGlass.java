@@ -6,6 +6,7 @@ import Core.Game.Game;
 import View.Styles.GameStyle;
 
 import java.awt.*;
+import java.util.function.Consumer;
 
 /**
  * Created by Владимир on 16.09.2016.
@@ -37,8 +38,8 @@ public class SandGlass extends StaticMapObject
     }
 
     @Override
-    public Image getImage(GameStyle style, Game game)
+    public void draw(GameStyle style, Game game, Consumer<Image> drawer)
     {
-        return style.getSandGlassImage(this, game);
+        style.draw(this, game, drawer);
     }
 }

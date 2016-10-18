@@ -10,19 +10,21 @@ import Core.MapObjects.StaticMapObjects.Wall;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.function.Consumer;
 
 /**
  * Created by ISmir on 08.10.2016.
  */
 public class DefaultStyle implements GameStyle
 {
-    private final Image wallImage;
-    private final Image sandGlassImage;
-    private final Image strawberryImage;
-    private final Image blueberryImage;
-    private final Image snakeCellImage;
-    private final Image emptyCellImage;
+    private final BufferedImage wallImage;
+    private final BufferedImage sandGlassImage;
+    private final BufferedImage strawberryImage;
+    private final BufferedImage blueberryImage;
+    private final BufferedImage snakeCellImage;
+    private final BufferedImage emptyCellImage;
     public DefaultStyle() throws IOException
     {
         wallImage = ImageIO.read(getClass().getResource("wall.bmp"));
@@ -34,39 +36,39 @@ public class DefaultStyle implements GameStyle
     }
 
     @Override
-    public Image getWallImage(Wall wall, Game game)
+    public void draw(Wall wall, Game game, Consumer<Image> drawer)
     {
-        return wallImage;
+        drawer.accept(wallImage);
     }
 
     @Override
-    public Image getSandGlassImage(SandGlass sandGlass, Game game)
+    public void draw(SandGlass sandGlass, Game game, Consumer<Image> drawer)
     {
-        return sandGlassImage;
+        drawer.accept(sandGlassImage);
     }
 
     @Override
-    public Image getStrawberryImage(Strawberry strawberry, Game game)
+    public void draw(Strawberry strawberry, Game game, Consumer<Image> drawer)
     {
-        return strawberryImage;
+        drawer.accept(strawberryImage);
     }
 
     @Override
-    public Image getBlueberryImage(Blueberry blueberry, Game game)
+    public void draw(Blueberry blueberry, Game game, Consumer<Image> drawer)
     {
-        return blueberryImage;
+        drawer.accept(blueberryImage);
     }
 
     @Override
-    public Image getSnakeCellImage(SnakeCell snakeCell, Game game)
+    public void draw(SnakeCell snakeCell, Game game, Consumer<Image> drawer)
     {
-        return snakeCellImage;
+        drawer.accept(snakeCellImage);
     }
 
     @Override
-    public Image getEmptyCellImage(EmptyCell emptyCell, Game game)
+    public void draw(EmptyCell emptyCell, Game game, Consumer<Image> drawer)
     {
-        return emptyCellImage;
+        drawer.accept(emptyCellImage);
     }
 
     @Override

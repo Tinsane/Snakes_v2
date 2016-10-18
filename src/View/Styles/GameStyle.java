@@ -9,17 +9,18 @@ import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 
 import java.awt.*;
+import java.util.function.Consumer;
 
 /**
  * Created by ISmir on 08.10.2016.
  */
 public interface GameStyle
 {
-    Image getWallImage(Wall wall, Game game);
-    Image getSandGlassImage(SandGlass sandGlass, Game game);
-    Image getStrawberryImage(Strawberry strawberry, Game game);
-    Image getBlueberryImage(Blueberry blueberry, Game game);
-    Image getSnakeCellImage(SnakeCell snakeCell, Game game);
-    Image getEmptyCellImage(EmptyCell emptyCell, Game game);
+    void draw(Wall wall, Game game, Consumer<Image> drawer);
+    void draw(SandGlass sandGlass, Game game, Consumer<Image> drawer);
+    void draw(Strawberry strawberry, Game game, Consumer<Image> drawer);
+    void draw(Blueberry blueberry, Game game, Consumer<Image> drawer);
+    void draw(SnakeCell snakeCell, Game game, Consumer<Image> drawer);
+    void draw(EmptyCell emptyCell, Game game, Consumer<Image> drawer);
     int getTileSize();
 }

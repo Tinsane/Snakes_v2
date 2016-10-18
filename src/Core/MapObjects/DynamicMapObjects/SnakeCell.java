@@ -10,6 +10,7 @@ import Core.Utils.VelocityVector;
 import View.Styles.GameStyle;
 
 import java.awt.*;
+import java.util.function.Consumer;
 
 /**
  * Created by Владимир on 16.09.2016.
@@ -91,8 +92,8 @@ public class SnakeCell extends DynamicMapObject
     }
 
     @Override
-    public Image getImage(GameStyle style, Game game)
+    public void draw(GameStyle style, Game game, Consumer<Image> drawer)
     {
-        return style.getSnakeCellImage(this, game);
+        style.draw(this, game, drawer);
     }
 }

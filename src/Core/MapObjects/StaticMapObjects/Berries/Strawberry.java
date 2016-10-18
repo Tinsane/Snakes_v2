@@ -4,6 +4,7 @@ import Core.Game.Game;
 import View.Styles.GameStyle;
 
 import java.awt.*;
+import java.util.function.Consumer;
 
 /**
  * Created by ISmir on 18.09.2016.
@@ -16,8 +17,8 @@ public class Strawberry extends Berry
     }
 
     @Override
-    public Image getImage(GameStyle style, Game game)
+    public void draw(GameStyle style, Game game, Consumer<Image> drawer)
     {
-        return style.getStrawberryImage(this, game);
+        style.draw(this, game, drawer);
     }
 }
