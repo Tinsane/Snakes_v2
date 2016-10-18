@@ -20,6 +20,7 @@ public class DefaultStyle implements GameStyle
     public final BufferedImage blueberryImage;
     public final BufferedImage snakeCellImage;
     public final BufferedImage emptyCellImage;
+    public final BufferedImage snakeHeadImage;
 
     public DefaultStyle() throws IOException
     {
@@ -29,6 +30,7 @@ public class DefaultStyle implements GameStyle
         blueberryImage = ImageIO.read(getClass().getResource("blueberry.png"));
         snakeCellImage = ImageIO.read(getClass().getResource("snake_body.bmp"));
         emptyCellImage = ImageIO.read(getClass().getResource("empty_cell.bmp"));
+        snakeHeadImage = ImageIO.read(getClass().getResource("head.png"));
     }
 
     @Override

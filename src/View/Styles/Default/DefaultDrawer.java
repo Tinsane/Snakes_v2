@@ -64,7 +64,12 @@ public class DefaultDrawer implements GameDrawer
     @Override
     public void draw(SnakeCell snakeCell)
     {
-        drawImage(style.snakeCellImage);
+        if (snakeCell == game.snake.head)
+        {
+            drawImage(style.snakeHeadImage);
+        }
+        else
+            drawImage(style.snakeCellImage);
     }
 
     @Override
