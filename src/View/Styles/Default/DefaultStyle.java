@@ -26,11 +26,11 @@ public class DefaultStyle implements GameStyle
     {
         wallImage = ImageIO.read(getClass().getResource("wall.bmp"));
         sandGlassImage = null;
-        strawberryImage = ImageIO.read(getClass().getResource("strawberry.png"));
-        blueberryImage = ImageIO.read(getClass().getResource("blueberry.png"));
+        strawberryImage = ImageIO.read(getClass().getResource("strawberry.bmp"));
+        blueberryImage = ImageIO.read(getClass().getResource("blueberry.bmp"));
         snakeCellImage = ImageIO.read(getClass().getResource("snake_body.bmp"));
         emptyCellImage = ImageIO.read(getClass().getResource("empty_cell.bmp"));
-        snakeHeadImage = ImageIO.read(getClass().getResource("head.png"));
+        snakeHeadImage = ImageIO.read(getClass().getResource("head.bmp"));
     }
 
     @Override
