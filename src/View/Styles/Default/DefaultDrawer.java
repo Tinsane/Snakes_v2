@@ -11,6 +11,7 @@ import Core.MapObjects.StaticMapObjects.Wall;
 import View.Styles.GameDrawer;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by ISmir on 08.10.2016.
@@ -31,40 +32,45 @@ public class DefaultDrawer implements GameDrawer
         this.style = style;
     }
 
+    private void drawImage(BufferedImage image)
+    {
+        graphics.drawImage(image, x * style.getTileSize(), y * style.getTileSize(), null);
+    }
+
     @Override
     public void draw(Wall wall)
     {
-        graphics.drawImage(style.wallImage, x * style.getTileSize(), y * style.getTileSize(), null);
+        drawImage(style.wallImage);
     }
 
     @Override
     public void draw(SandGlass sandGlass)
     {
-        graphics.drawImage(style.sandGlassImage, x * style.getTileSize(), y * style.getTileSize(), null);
+        drawImage(style.sandGlassImage);
     }
 
     @Override
     public void draw(Strawberry strawberry)
     {
-        graphics.drawImage(style.strawberryImage, x * style.getTileSize(), y * style.getTileSize(), null);
+        drawImage(style.strawberryImage);
     }
 
     @Override
     public void draw(Blueberry blueberry)
     {
-        graphics.drawImage(style.blueberryImage, x * style.getTileSize(), y * style.getTileSize(), null);
+        drawImage(style.blueberryImage);
     }
 
     @Override
     public void draw(SnakeCell snakeCell)
     {
-        graphics.drawImage(style.snakeCellImage, x * style.getTileSize(), y * style.getTileSize(), null);
+        drawImage(style.snakeCellImage);
     }
 
     @Override
     public void draw(EmptyCell emptyCell)
     {
-        graphics.drawImage(style.emptyCellImage, x * style.getTileSize(), y * style.getTileSize(), null);
+        drawImage(style.emptyCellImage);
     }
 
     public void draw(MapObject mapObject, int x, int y)
