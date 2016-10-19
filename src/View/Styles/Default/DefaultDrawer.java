@@ -41,7 +41,7 @@ public class DefaultDrawer implements GameDrawer
 
     private void drawImage(BufferedImage image, double x, double y)
     {
-        graphics.drawImage(image, (int)(x * style.getTileSize()), (int)(y * style.getTileSize()), null);
+        graphics.drawImage(image, (int)Math.round(x * style.getTileSize()), (int)Math.round(y * style.getTileSize()), null);
     }
 
     @Override
@@ -81,6 +81,8 @@ public class DefaultDrawer implements GameDrawer
     {
         visualItems.add(new VisualItem(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
                 VelocityVector.up.getAngle(snakeCell.getVelocity())), x, y, 2));
+//        if (snakeCell != game.snake.head)
+//            visualItems.add(new VisualItem(style.snakeSquareImage, (int)x, (int)y, 2));
     }
 
     private void draw(MapObject mapObject, int x, int y)

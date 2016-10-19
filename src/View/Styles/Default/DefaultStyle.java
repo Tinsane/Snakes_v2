@@ -21,6 +21,7 @@ public class DefaultStyle implements GameStyle
     public final BufferedImage snakeCellImage;
     public final BufferedImage emptyCellImage;
     public final BufferedImage snakeHeadImage;
+    public final BufferedImage snakeSquareImage;
 
     private BufferedImage loadImage(String filename) throws IOException
     {
@@ -36,6 +37,7 @@ public class DefaultStyle implements GameStyle
         snakeCellImage = loadImage("snake_body_thick.png");
         emptyCellImage = loadImage("empty_cell.bmp");
         snakeHeadImage = loadImage("head.png");
+        snakeSquareImage = loadImage("snake_body_sqr.png");
     }
 
     @Override
