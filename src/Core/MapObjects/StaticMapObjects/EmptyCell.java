@@ -4,23 +4,19 @@ import Core.Game.Game;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
-import Core.Utils.VelocityVector;
 import View.Styles.GameDrawer;
-
-import java.awt.*;
-import java.util.function.Consumer;
 
 /**
  * Created by ISmir on 09.10.2016.
  */
 public class EmptyCell extends StaticMapObject
 {
-
-    @Override
-    public VelocityVector getVelocity()
-    {
-        return null;
-    }
+//
+//    @Override
+//    public VelocityVector getVelocity()
+//    {
+//        return null;
+//    }
 
     @Override
     public boolean getIsDestructed()
@@ -61,6 +57,5 @@ public class EmptyCell extends StaticMapObject
     @Override
     public void draw(GameDrawer drawer)
     {
-        drawer.draw(this);
     }
 }

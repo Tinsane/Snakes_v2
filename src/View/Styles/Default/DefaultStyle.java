@@ -31,11 +31,11 @@ public class DefaultStyle implements GameStyle
     {
         wallImage = loadImage("wall.bmp");
         sandGlassImage = null;
-        strawberryImage = loadImage("strawberry.bmp");
-        blueberryImage = loadImage("blueberry.bmp");
-        snakeCellImage = loadImage("snake_body.bmp");
+        strawberryImage = loadImage("strawberry.png");
+        blueberryImage = loadImage("blueberry.png");
+        snakeCellImage = loadImage("snake_body_thick.png");
         emptyCellImage = loadImage("empty_cell.bmp");
-        snakeHeadImage = loadImage("head.bmp");
+        snakeHeadImage = loadImage("head.png");
     }
 
     @Override

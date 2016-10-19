@@ -15,17 +15,20 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by ISmir on 08.10.2016.
  */
 public class DefaultDrawer implements GameDrawer
 {
-    private int x, y;
+    private double x, y;
     private Game game;
     private double turnPartLeft;
     private Graphics2D graphics;
     private DefaultStyle style;
+    private ArrayList<VisualItem> visualItems;
 
     public DefaultDrawer(DefaultStyle style, Graphics2D graphics, Game game, double turnPartLeft)
     {
@@ -33,35 +36,36 @@ public class DefaultDrawer implements GameDrawer
         this.turnPartLeft = turnPartLeft;
         this.graphics = graphics;
         this.style = style;
+        visualItems = new ArrayList<>();
     }
 
-    private void drawImage(BufferedImage image)
+    private void drawImage(BufferedImage image, double x, double y)
     {
-        graphics.drawImage(image, x * style.getTileSize(), y * style.getTileSize(), null);
+        graphics.drawImage(image, (int)(x * style.getTileSize()), (int)(y * style.getTileSize()), null);
     }
 
     @Override
     public void draw(Wall wall)
     {
-        drawImage(style.wallImage);
+        visualItems.add(new VisualItem(style.wallImage, x, y, 3));
     }
 
     @Override
     public void draw(SandGlass sandGlass)
     {
-        drawImage(style.sandGlassImage);
+        visualItems.add(new VisualItem(style.sandGlassImage, x, y, 1));
     }
 
     @Override
     public void draw(Strawberry strawberry)
     {
-        drawImage(style.strawberryImage);
+        visualItems.add(new VisualItem(style.strawberryImage, x, y, 1));
     }
 
     @Override
     public void draw(Blueberry blueberry)
     {
-        drawImage(style.blueberryImage);
+        visualItems.add(new VisualItem(style.blueberryImage, x, y, 1));
     }
 
     private BufferedImage getRotated(BufferedImage image, double angle)
@@ -75,20 +79,14 @@ public class DefaultDrawer implements GameDrawer
     @Override
     public void draw(SnakeCell snakeCell)
     {
-        drawImage(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
-                VelocityVector.up.getAngle(snakeCell.getVelocity())));
+        visualItems.add(new VisualItem(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
+                VelocityVector.up.getAngle(snakeCell.getVelocity())), x, y, 2));
     }
 
-    @Override
-    public void draw(EmptyCell emptyCell)
+    private void draw(MapObject mapObject, int x, int y)
     {
-        drawImage(style.emptyCellImage);
-    }
-
-    public void draw(MapObject mapObject, int x, int y)
-    {
-        this.x = x;
-        this.y = y;
+        this.x = x + mapObject.getVelocity().x * turnPartLeft;
+        this.y = y + mapObject.getVelocity().y * turnPartLeft;
         mapObject.draw(this);
     }
 
@@ -97,6 +95,12 @@ public class DefaultDrawer implements GameDrawer
         MapObject[][] map = game.getCurrentMap();
         for (int i = 0; i < map.length; ++i)
             for (int j = 0; j < map[0].length; ++j)
+            {
+                drawImage(style.emptyCellImage, i, j);
                 draw(map[i][j], i, j);
+            }
+        visualItems.sort((a, b) -> a.priority.compareTo(b.priority));
+        for (VisualItem item : visualItems)
+            drawImage(item.image, item.x, item.y);
     }
 }

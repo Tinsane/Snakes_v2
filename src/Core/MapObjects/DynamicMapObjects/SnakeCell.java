@@ -9,9 +9,6 @@ import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
 import View.Styles.GameDrawer;
 
-import java.awt.*;
-import java.util.function.Consumer;
-
 /**
  * Created by Владимир on 16.09.2016.
  */

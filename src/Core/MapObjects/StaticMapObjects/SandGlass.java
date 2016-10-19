@@ -1,12 +1,9 @@
 package Core.MapObjects.StaticMapObjects;
 
-import Core.MapObjects.DynamicMapObjects.*;
-import Core.MapObjects.*;
 import Core.Game.Game;
+import Core.MapObjects.DynamicMapObjects.SnakeCell;
+import Core.MapObjects.MapObject;
 import View.Styles.GameDrawer;
-
-import java.awt.*;
-import java.util.function.Consumer;
 
 /**
  * Created by Владимир on 16.09.2016.

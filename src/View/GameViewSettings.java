@@ -17,7 +17,8 @@ public class GameViewSettings
 {
     private static final int DEFAULT_UPDATE_INTERVAL = 200;
 
-    public int updateInterval = DEFAULT_UPDATE_INTERVAL;
+    public int gameUpdateFrequency = 5;
+    public int updateInterval = DEFAULT_UPDATE_INTERVAL / gameUpdateFrequency;
     public GameStyle style;
 
     public GameViewSettings(GameStyle style)

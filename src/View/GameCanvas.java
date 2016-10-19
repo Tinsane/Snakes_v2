@@ -14,6 +14,7 @@ public class GameCanvas extends JPanel
 {
     Game game;
     GameStyle style;
+    private double goneTurnPart;
 
     GameCanvas(Game game, GameStyle style, boolean doubleBuffered)
     {
@@ -22,10 +23,16 @@ public class GameCanvas extends JPanel
         this.style = style;
     }
 
+    public void repaint(double goneTurnPart)
+    {
+        this.goneTurnPart = goneTurnPart;
+        repaint();
+    }
+
     @Override
     public void paint(Graphics g)
     {
-        GameDrawer drawer = style.CreateDrawer((Graphics2D) g, game, 0);
+        GameDrawer drawer = style.CreateDrawer((Graphics2D) g, game, goneTurnPart);
         drawer.draw();
     }
 }

@@ -22,7 +22,5 @@ public interface GameDrawer
 
     void draw(SnakeCell snakeCell);
 
-    void draw(EmptyCell emptyCell);
-
     void draw();
 }

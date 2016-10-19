@@ -14,6 +14,7 @@ public class GameView extends JFrame
 {
     private Game game;
     private Timer updateTimer;
+    private int currentTick;
     private GameViewSettings settings;
     GameCanvas canvas;
 
@@ -31,6 +32,7 @@ public class GameView extends JFrame
         setTitle("Snakes_v2");
 
         this.settings = settings;
+        currentTick = settings.gameUpdateFrequency;
 
         this.game = game;
 
@@ -63,8 +65,13 @@ public class GameView extends JFrame
             return;
         }
 
-        game.update();
+        if (currentTick == settings.gameUpdateFrequency)
+        {
+            game.update();
+            currentTick = 0;
+        }
 
-        canvas.repaint();
+        canvas.repaint((double)currentTick / settings.gameUpdateFrequency);
+        ++currentTick;
     }
 }
