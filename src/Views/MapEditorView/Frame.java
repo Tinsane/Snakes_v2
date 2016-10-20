@@ -2,12 +2,11 @@ package Views.MapEditorView;
 
 import Controllers.MapEditorController;
 import Core.Game.GameCreator;
+import Views.MainMenuView.MainMenuRestorer;
 import Views.Styles.Default.DefaultStyle;
 import Views.Styles.GameStyle;
 
 import javax.swing.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 /**
@@ -15,7 +14,6 @@ import java.io.IOException;
  */
 public class Frame extends JFrame
 {
-    private final Views.MainMenuView.Frame mainMenuFrame;
     GameStyle style;
     GameCreator gameCreator;
     public Frame(Views.MainMenuView.Frame mainMenuFrame) throws IOException
@@ -25,18 +23,8 @@ public class Frame extends JFrame
     Frame(Views.MainMenuView.Frame mainMenuFrame, GameStyle style)
     {
         super();
-        this.mainMenuFrame = mainMenuFrame;
         setTitle("SnakeMapEditor");
-        addWindowListener(new WindowAdapter()
-        {
-            @Override
-            public void windowClosing(WindowEvent e)
-            {
-                super.windowClosing(e);
-                dispose();
-                mainMenuFrame.setVisible(true);
-            }
-        });
+        addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
 
         this.style = style;
         gameCreator = new GameCreator();

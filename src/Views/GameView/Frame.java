@@ -2,11 +2,10 @@ package Views.GameView;
 
 import Controllers.GameController;
 import Core.Game.Game;
+import Views.MainMenuView.MainMenuRestorer;
 import Views.Styles.Default.DefaultStyle;
 
 import javax.swing.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 /**
@@ -32,16 +31,7 @@ public class Frame extends JFrame
         this.mainMenuFrame = mainMenuFrame;
         setSize((game.getWidth() + 1) * settings.style.getTileSize(),
                 (game.getHeight() + 1) * settings.style.getTileSize());
-        addWindowListener(new WindowAdapter()
-        {
-            @Override
-            public void windowClosing(WindowEvent e)
-            {
-                super.windowClosing(e);
-                dispose();
-                mainMenuFrame.setVisible(true);
-            }
-        });
+        addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
         setTitle("Snakes_v2");
 
         this.settings = settings;
