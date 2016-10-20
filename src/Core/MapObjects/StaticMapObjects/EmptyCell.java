@@ -4,7 +4,7 @@ import Core.Game.Game;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
-import View.Styles.GameDrawer;
+import Core.MapObjects.MapObjectVisitor;
 
 /**
  * Created by ISmir on 09.10.2016.
@@ -55,7 +55,7 @@ public class EmptyCell extends StaticMapObject
     }
 
     @Override
-    public void draw(GameDrawer drawer)
+    public void acceptVisitor(MapObjectVisitor visitor)
     {
     }
 }

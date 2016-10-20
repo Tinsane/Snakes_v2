@@ -5,11 +5,10 @@ import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
-import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
-import View.Styles.GameDrawer;
+import Core.MapObjects.MapObjectVisitor;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -19,18 +18,16 @@ import java.awt.image.BufferedImage;
 /**
  * Created by ISmir on 08.10.2016.
  */
-public class DefaultDiscreteDrawer implements GameDrawer
+public class DefaultDiscreteDrawer implements MapObjectVisitor
 {
     private int x, y;
     private Game game;
-    private double turnPartLeft;
     private Graphics2D graphics;
     private DefaultDiscreteStyle style;
 
     public DefaultDiscreteDrawer(DefaultDiscreteStyle style, Graphics2D graphics, Game game, double turnPartLeft)
     {
         this.game = game;
-        this.turnPartLeft = turnPartLeft;
         this.graphics = graphics;
         this.style = style;
     }
@@ -41,25 +38,25 @@ public class DefaultDiscreteDrawer implements GameDrawer
     }
 
     @Override
-    public void draw(Wall wall)
+    public void visit(Wall wall)
     {
         drawImage(style.wallImage);
     }
 
     @Override
-    public void draw(SandGlass sandGlass)
+    public void visit(SandGlass sandGlass)
     {
         drawImage(style.sandGlassImage);
     }
 
     @Override
-    public void draw(Strawberry strawberry)
+    public void visit(Strawberry strawberry)
     {
         drawImage(style.strawberryImage);
     }
 
     @Override
-    public void draw(Blueberry blueberry)
+    public void visit(Blueberry blueberry)
     {
         drawImage(style.blueberryImage);
     }
@@ -73,7 +70,7 @@ public class DefaultDiscreteDrawer implements GameDrawer
     }
 
     @Override
-    public void draw(SnakeCell snakeCell)
+    public void visit(SnakeCell snakeCell)
     {
         drawImage(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
                 VelocityVector.up.getAngle(snakeCell.getVelocity())));
@@ -84,10 +81,10 @@ public class DefaultDiscreteDrawer implements GameDrawer
         this.x = x;
         this.y = y;
         drawImage(style.emptyCellImage);
-        mapObject.draw(this);
+        mapObject.acceptVisitor(this);
     }
 
-    public void draw()
+    public void visitAll()
     {
         MapObject[][] map = game.getCurrentMap();
         for (int i = 0; i < map.length; ++i)

@@ -1,7 +1,7 @@
 package View.Styles.Default;
 
 import Core.Game.Game;
-import View.Styles.GameDrawer;
+import Core.MapObjects.MapObjectVisitor;
 import View.Styles.GameStyle;
 
 import javax.imageio.ImageIO;
@@ -39,7 +39,7 @@ public class DefaultStyle implements GameStyle
     }
 
     @Override
-    public GameDrawer CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft)
+    public MapObjectVisitor CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft)
     {
         return new DefaultDrawer(this, g2d, game, turnPartLeft);
     }

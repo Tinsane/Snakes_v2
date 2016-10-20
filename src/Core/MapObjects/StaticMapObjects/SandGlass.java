@@ -3,7 +3,7 @@ package Core.MapObjects.StaticMapObjects;
 import Core.Game.Game;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
-import View.Styles.GameDrawer;
+import Core.MapObjects.MapObjectVisitor;
 
 /**
  * Created by Владимир on 16.09.2016.
@@ -35,8 +35,8 @@ public class SandGlass extends StaticMapObject
     }
 
     @Override
-    public void draw(GameDrawer drawer)
+    public void acceptVisitor(MapObjectVisitor visitor)
     {
-        drawer.draw(this);
+        visitor.visit(this);
     }
 }

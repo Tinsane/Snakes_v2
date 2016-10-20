@@ -7,7 +7,7 @@ import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
-import View.Styles.GameDrawer;
+import Core.MapObjects.MapObjectVisitor;
 
 /**
  * Created by Владимир on 16.09.2016.
@@ -89,8 +89,8 @@ public class SnakeCell extends DynamicMapObject
     }
 
     @Override
-    public void draw(GameDrawer drawer)
+    public void acceptVisitor(MapObjectVisitor visitor)
     {
-        drawer.draw(this);
+        visitor.visit(this);
     }
 }

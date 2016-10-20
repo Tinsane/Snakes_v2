@@ -5,23 +5,21 @@ import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
-import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
-import View.Styles.GameDrawer;
+import Core.MapObjects.MapObjectVisitor;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by ISmir on 08.10.2016.
  */
-public class DefaultDrawer implements GameDrawer
+public class DefaultDrawer implements MapObjectVisitor
 {
     private double x, y;
     private Game game;
@@ -45,25 +43,25 @@ public class DefaultDrawer implements GameDrawer
     }
 
     @Override
-    public void draw(Wall wall)
+    public void visit(Wall wall)
     {
         visualItems.add(new VisualItem(style.wallImage, x, y, 3));
     }
 
     @Override
-    public void draw(SandGlass sandGlass)
+    public void visit(SandGlass sandGlass)
     {
         visualItems.add(new VisualItem(style.sandGlassImage, x, y, 1));
     }
 
     @Override
-    public void draw(Strawberry strawberry)
+    public void visit(Strawberry strawberry)
     {
         visualItems.add(new VisualItem(style.strawberryImage, x, y, 1));
     }
 
     @Override
-    public void draw(Blueberry blueberry)
+    public void visit(Blueberry blueberry)
     {
         visualItems.add(new VisualItem(style.blueberryImage, x, y, 1));
     }
@@ -77,7 +75,7 @@ public class DefaultDrawer implements GameDrawer
     }
 
     @Override
-    public void draw(SnakeCell snakeCell)
+    public void visit(SnakeCell snakeCell)
     {
         visualItems.add(new VisualItem(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
                 VelocityVector.up.getAngle(snakeCell.getVelocity())), x, y, 2));
@@ -89,10 +87,10 @@ public class DefaultDrawer implements GameDrawer
     {
         this.x = x + mapObject.getVelocity().x * turnPartLeft;
         this.y = y + mapObject.getVelocity().y * turnPartLeft;
-        mapObject.draw(this);
+        mapObject.acceptVisitor(this);
     }
 
-    public void draw()
+    public void visitAll()
     {
         MapObject[][] map = game.getCurrentMap();
         for (int i = 0; i < map.length; ++i)

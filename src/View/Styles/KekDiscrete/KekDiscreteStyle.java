@@ -1,9 +1,8 @@
 package View.Styles.KekDiscrete;
 
 import Core.Game.Game;
-import View.Styles.GameDrawer;
+import Core.MapObjects.MapObjectVisitor;
 import View.Styles.GameStyle;
-import View.Styles.KekDiscrete.KekDiscreteDrawer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -40,7 +39,7 @@ public class KekDiscreteStyle implements GameStyle
     }
 
     @Override
-    public GameDrawer CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft)
+    public MapObjectVisitor CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft)
     {
         return new KekDiscreteDrawer(this, g2d, game, turnPartLeft);
     }

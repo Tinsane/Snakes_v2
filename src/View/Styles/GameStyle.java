@@ -1,6 +1,7 @@
 package View.Styles;
 
 import Core.Game.Game;
+import Core.MapObjects.MapObjectVisitor;
 
 import java.awt.*;
 
@@ -9,7 +10,7 @@ import java.awt.*;
  */
 public interface GameStyle
 {
-    public GameDrawer CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft);
+    public MapObjectVisitor CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft);
 
     public int getTileSize();
 }

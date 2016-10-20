@@ -1,6 +1,6 @@
 package Core.MapObjects.StaticMapObjects.Berries;
 
-import View.Styles.GameDrawer;
+import Core.MapObjects.MapObjectVisitor;
 
 /**
  * Created by ISmir on 18.09.2016.
@@ -13,8 +13,8 @@ public class Blueberry extends Berry
     }
 
     @Override
-    public void draw(GameDrawer drawer)
+    public void acceptVisitor(MapObjectVisitor visitor)
     {
-        drawer.draw(this);
+        visitor.visit(this);
     }
 }

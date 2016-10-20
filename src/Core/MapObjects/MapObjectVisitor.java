@@ -1,4 +1,4 @@
-package View.Styles;
+package Core.MapObjects;
 
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -10,17 +10,17 @@ import Core.MapObjects.StaticMapObjects.Wall;
 /**
  * Created by ISmir on 08.10.2016.
  */
-public interface GameDrawer
+public interface MapObjectVisitor
 {
-    void draw(Wall wall);
+    void visit(Wall wall);
 
-    void draw(SandGlass sandGlass);
+    void visit(SandGlass sandGlass);
 
-    void draw(Strawberry strawberry);
+    void visit(Strawberry strawberry);
 
-    void draw(Blueberry blueberry);
+    void visit(Blueberry blueberry);
 
-    void draw(SnakeCell snakeCell);
+    void visit(SnakeCell snakeCell);
 
-    void draw();
+    void visitAll();
 }

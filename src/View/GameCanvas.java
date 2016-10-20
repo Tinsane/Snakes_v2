@@ -1,7 +1,7 @@
 package View;
 
 import Core.Game.Game;
-import View.Styles.GameDrawer;
+import Core.MapObjects.MapObjectVisitor;
 import View.Styles.GameStyle;
 
 import javax.swing.*;
@@ -32,7 +32,7 @@ public class GameCanvas extends JPanel
     @Override
     public void paint(Graphics g)
     {
-        GameDrawer drawer = style.CreateDrawer((Graphics2D) g, game, goneTurnPart);
-        drawer.draw();
+        MapObjectVisitor drawer = style.CreateDrawer((Graphics2D) g, game, goneTurnPart);
+        drawer.visitAll();
     }
 }
