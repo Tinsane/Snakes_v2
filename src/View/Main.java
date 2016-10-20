@@ -2,6 +2,7 @@ package View;
 
 import Core.Game.GameCreator;
 import Core.MapObjects.StaticMapObjects.Wall;
+import View.Styles.Default.DefaultStyle;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class Main
             creator.setMapSize(10, 10);
             creator.placeWall(5, 5);
             creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
-            GameView view = new GameView(creator.createGame(0, 0, 1));
+            GameView view = new GameView(creator.createGame(0, 0, 1), new GameViewSettings(new DefaultStyle()));
             view.start();
         } catch (IOException e)
         {
