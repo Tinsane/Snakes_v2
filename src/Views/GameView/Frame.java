@@ -5,6 +5,8 @@ import Core.Game.Game;
 import Views.Styles.Default.DefaultStyle;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 /**
@@ -12,23 +14,34 @@ import java.io.IOException;
  */
 public class Frame extends JFrame
 {
+    private final Views.MainMenuView.Frame mainMenuFrame;
     private Game game;
     private Timer updateTimer;
     private int currentTick;
     private Settings settings;
     Canvas canvas;
 
-    public Frame(Game game) throws IOException
+    public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game) throws IOException
     {
-        this(game, new Settings(new DefaultStyle()));
+        this(mainMenuFrame, game, new Settings(new DefaultStyle()));
     }
 
-    public Frame(Game game, Settings settings)
+    public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game, Settings settings)
     {
         super();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.mainMenuFrame = mainMenuFrame;
         setSize((game.getWidth() + 1) * settings.style.getTileSize(),
                 (game.getHeight() + 1) * settings.style.getTileSize());
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                super.windowClosing(e);
+                dispose();
+                mainMenuFrame.setVisible(true);
+            }
+        });
         setTitle("Snakes_v2");
 
         this.settings = settings;
@@ -62,6 +75,7 @@ public class Frame extends JFrame
             stop();
             setVisible(false);
             dispose();
+            mainMenuFrame.setVisible(true);
             return;
         }
 

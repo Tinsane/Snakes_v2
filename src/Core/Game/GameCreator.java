@@ -10,6 +10,9 @@ import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Snake.Snake;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import static java.lang.Integer.max;
+import static java.lang.Integer.min;
+
 /**
  * Created by Владимир on 19.09.2016.
  */
@@ -63,6 +66,15 @@ public class GameCreator
             map[0][i] = new Wall();
             map[map.length - 1][i] = new Wall();
         }
+    }
+
+    public void resizeMap(int newWidth, int newHeight)
+    {
+        MapObject[][] prevMap = map;
+        setMapSize(newWidth, newHeight);
+        for(int i = 0; i < min(prevMap.length, map.length) - 2; ++i)
+            for(int j = 0; j < min(prevMap[0].length, map[0].length) - 2; ++j)
+                placeMapObject(i, j, prevMap[i + 1][j + 1]);
     }
 
     private void placeMapObject(int x, int y, MapObject mapObject)
