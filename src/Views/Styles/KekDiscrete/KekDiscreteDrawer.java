@@ -1,4 +1,4 @@
-package View.Styles.KekDiscrete;
+package Views.Styles.KekDiscrete;
 
 import Core.Game.Game;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;

@@ -1,8 +1,8 @@
-package View;
+package Views.GameView;
 
-import Controller.ArrowsKeyListener;
+import Controllers.GameController;
 import Core.Game.Game;
-import View.Styles.Default.DefaultStyle;
+import Views.Styles.Default.DefaultStyle;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -10,20 +10,20 @@ import java.io.IOException;
 /**
  * Created by ISmir on 08.10.2016.
  */
-public class GameView extends JFrame
+public class Frame extends JFrame
 {
     private Game game;
     private Timer updateTimer;
     private int currentTick;
-    private GameViewSettings settings;
-    GameCanvas canvas;
+    private Settings settings;
+    Canvas canvas;
 
-    public GameView(Game game) throws IOException
+    public Frame(Game game) throws IOException
     {
-        this(game, new GameViewSettings(new DefaultStyle()));
+        this(game, new Settings(new DefaultStyle()));
     }
 
-    public GameView(Game game, GameViewSettings settings)
+    public Frame(Game game, Settings settings)
     {
         super();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -39,9 +39,9 @@ public class GameView extends JFrame
         updateTimer = new Timer(settings.updateInterval, x -> update());
         updateTimer.setRepeats(true);
 
-        canvas = new GameCanvas(game, settings.style, false);
+        canvas = new Canvas(game, settings.style, false);
         add(canvas);
-        addKeyListener(new ArrowsKeyListener(game));
+        addKeyListener(new GameController(game));
         setVisible(true);
     }
 

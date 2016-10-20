@@ -1,4 +1,4 @@
-package View.Styles.Default;
+package Views.Styles.Default;
 
 import java.awt.image.BufferedImage;
 

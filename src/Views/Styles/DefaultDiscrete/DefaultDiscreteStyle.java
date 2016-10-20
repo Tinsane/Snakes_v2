@@ -1,8 +1,8 @@
-package View.Styles.DefaultDiscrete;
+package Views.Styles.DefaultDiscrete;
 
 import Core.Game.Game;
 import Core.MapObjects.MapObjectVisitor;
-import View.Styles.GameStyle;
+import Views.Styles.GameStyle;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

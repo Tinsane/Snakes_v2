@@ -1,8 +1,8 @@
-package View;
+package Views.GameView;
 
 import Core.Game.Game;
 import Core.MapObjects.MapObjectVisitor;
-import View.Styles.GameStyle;
+import Views.Styles.GameStyle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +10,13 @@ import java.awt.*;
 /**
  * Created by Владимир on 11.10.2016.
  */
-public class GameCanvas extends JPanel
+public class Canvas extends JPanel
 {
     Game game;
     GameStyle style;
     private double goneTurnPart;
 
-    GameCanvas(Game game, GameStyle style, boolean doubleBuffered)
+    Canvas(Game game, GameStyle style, boolean doubleBuffered)
     {
         super(doubleBuffered);
         this.game = game;

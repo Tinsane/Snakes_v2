@@ -1,8 +1,8 @@
-package View.Styles.KekDiscrete;
+package Views.Styles.Default;
 
 import Core.Game.Game;
 import Core.MapObjects.MapObjectVisitor;
-import View.Styles.GameStyle;
+import Views.Styles.GameStyle;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created by ISmir on 18.10.2016.
  */
-public class KekDiscreteStyle implements GameStyle
+public class DefaultStyle implements GameStyle
 {
     public final BufferedImage wallImage;
     public final BufferedImage sandGlassImage;
@@ -27,21 +27,21 @@ public class KekDiscreteStyle implements GameStyle
         return ImageIO.read(getClass().getResource(filename));
     }
 
-    public KekDiscreteStyle() throws IOException
+    public DefaultStyle() throws IOException
     {
-        wallImage = loadImage("wall.jpg");
+        wallImage = loadImage("wall.bmp");
         sandGlassImage = null;
-        strawberryImage = loadImage("golden_sugar.jpg");
-        blueberryImage = loadImage("sugar.jpg");
-        snakeCellImage = loadImage("snake_body.bmp");
-        emptyCellImage = loadImage("emptyCell.jpg");
-        snakeHeadImage = loadImage("Yura.jpg");
+        strawberryImage = loadImage("strawberry.png");
+        blueberryImage = loadImage("blueberry.png");
+        snakeCellImage = loadImage("snake_body_thick.png");
+        emptyCellImage = loadImage("empty_cell.bmp");
+        snakeHeadImage = loadImage("head.png");
     }
 
     @Override
     public MapObjectVisitor CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft)
     {
-        return new KekDiscreteDrawer(this, g2d, game, turnPartLeft);
+        return new DefaultDrawer(this, g2d, game, turnPartLeft);
     }
 
     public int getTileSize()

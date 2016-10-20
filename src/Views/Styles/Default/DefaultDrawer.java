@@ -1,4 +1,4 @@
-package View.Styles.DefaultDiscrete;
+package Views.Styles.Default;
 
 import Core.Game.Game;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
@@ -14,51 +14,56 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * Created by ISmir on 08.10.2016.
  */
-public class DefaultDiscreteDrawer implements MapObjectVisitor
+public class DefaultDrawer implements MapObjectVisitor
 {
-    private int x, y;
+    private double x, y;
     private Game game;
+    private double turnPartLeft;
     private Graphics2D graphics;
-    private DefaultDiscreteStyle style;
+    private DefaultStyle style;
+    private ArrayList<VisualItem> visualItems;
 
-    public DefaultDiscreteDrawer(DefaultDiscreteStyle style, Graphics2D graphics, Game game, double turnPartLeft)
+    public DefaultDrawer(DefaultStyle style, Graphics2D graphics, Game game, double turnPartLeft)
     {
         this.game = game;
+        this.turnPartLeft = turnPartLeft;
         this.graphics = graphics;
         this.style = style;
+        visualItems = new ArrayList<>();
     }
 
-    private void drawImage(BufferedImage image)
+    private void drawImage(BufferedImage image, double x, double y)
     {
-        graphics.drawImage(image, x * style.getTileSize(), y * style.getTileSize(), null);
+        graphics.drawImage(image, (int)Math.round(x * style.getTileSize()), (int)Math.round(y * style.getTileSize()), null);
     }
 
     @Override
     public void visit(Wall wall)
     {
-        drawImage(style.wallImage);
+        visualItems.add(new VisualItem(style.wallImage, x, y, 3));
     }
 
     @Override
     public void visit(SandGlass sandGlass)
     {
-        drawImage(style.sandGlassImage);
+        visualItems.add(new VisualItem(style.sandGlassImage, x, y, 1));
     }
 
     @Override
     public void visit(Strawberry strawberry)
     {
-        drawImage(style.strawberryImage);
+        visualItems.add(new VisualItem(style.strawberryImage, x, y, 1));
     }
 
     @Override
     public void visit(Blueberry blueberry)
     {
-        drawImage(style.blueberryImage);
+        visualItems.add(new VisualItem(style.blueberryImage, x, y, 1));
     }
 
     private BufferedImage getRotated(BufferedImage image, double angle)
@@ -72,15 +77,16 @@ public class DefaultDiscreteDrawer implements MapObjectVisitor
     @Override
     public void visit(SnakeCell snakeCell)
     {
-        drawImage(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
-                VelocityVector.up.getAngle(snakeCell.getVelocity())));
+        visualItems.add(new VisualItem(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
+                VelocityVector.up.getAngle(snakeCell.getVelocity())), x, y, 2));
+//        if (snakeCell != game.snake.head)
+//            visualItems.add(new VisualItem(style.snakeSquareImage, (int)x, (int)y, 2));
     }
 
-    public void draw(MapObject mapObject, int x, int y)
+    private void draw(MapObject mapObject, int x, int y)
     {
-        this.x = x;
-        this.y = y;
-        drawImage(style.emptyCellImage);
+        this.x = x + mapObject.getVelocity().x * turnPartLeft;
+        this.y = y + mapObject.getVelocity().y * turnPartLeft;
         mapObject.acceptVisitor(this);
     }
 
@@ -89,6 +95,12 @@ public class DefaultDiscreteDrawer implements MapObjectVisitor
         MapObject[][] map = game.getCurrentMap();
         for (int i = 0; i < map.length; ++i)
             for (int j = 0; j < map[0].length; ++j)
+            {
+                drawImage(style.emptyCellImage, i, j);
                 draw(map[i][j], i, j);
+            }
+        visualItems.sort((a, b) -> a.priority.compareTo(b.priority));
+        for (VisualItem item : visualItems)
+            drawImage(item.image, item.x, item.y);
     }
 }
