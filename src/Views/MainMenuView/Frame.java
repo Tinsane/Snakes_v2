@@ -4,9 +4,13 @@ import Core.Game.GameCreator;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Views.GameView.Settings;
 import Views.Styles.Default.DefaultStyle;
+import Views.Utils.ImageButton;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -14,20 +18,26 @@ import java.io.IOException;
  */
 public class Frame extends JFrame
 {
-    public Frame()
+    public Frame() throws IOException
     {
         super();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("SnakeMainMenu");
+        setIconImage(loadImage("snakeIcon.png"));
 
-        setSize(200, 200);
+        setSize(400, 400);
+        setResizable(false);
 
         JPanel panel = new JPanel();
         add(panel);
         panel.setLayout(new GridLayout(4, 1));
 
         JButton startGameButton = new JButton();
+        startGameButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        startGameButton.setForeground(Color.green);
         startGameButton.setBorder(null);
+        startGameButton.setContentAreaFilled(false);
+        startGameButton.setFocusPainted(false);
         startGameButton.setText("Start Game");
         startGameButton.addActionListener(e -> {
             setVisible(false);
@@ -48,7 +58,11 @@ public class Frame extends JFrame
         });
 
         JButton mapEditorButton = new JButton();
+        mapEditorButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        mapEditorButton.setForeground(Color.green);
         mapEditorButton.setBorder(null);
+        mapEditorButton.setContentAreaFilled(false);
+        mapEditorButton.setFocusPainted(false);
         mapEditorButton.setText("Map Editor");
         mapEditorButton.addActionListener(e -> {
             setVisible(false);
@@ -64,11 +78,19 @@ public class Frame extends JFrame
         });
 
         JButton settingsButton = new JButton();
+        settingsButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        settingsButton.setForeground(Color.green);
         settingsButton.setBorder(null);
+        settingsButton.setContentAreaFilled(false);
+        settingsButton.setFocusPainted(false);
         settingsButton.setText("Settings");
 
         JButton exitButton = new JButton();
+        exitButton.setFont(new Font("Tahoma", Font.BOLD, 45));
+        exitButton.setForeground(Color.green);
         exitButton.setBorder(null);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setFocusPainted(false);
         exitButton.setText("Exit");
         exitButton.addActionListener(e -> {setVisible(false); dispose();});
 
@@ -77,5 +99,10 @@ public class Frame extends JFrame
         panel.add(settingsButton);
         panel.add(exitButton);
         setVisible(true);
+    }
+
+    private BufferedImage loadImage(String filename) throws IOException
+    {
+        return ImageIO.read(getClass().getResource(filename));
     }
 }
