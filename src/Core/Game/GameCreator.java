@@ -8,6 +8,7 @@ import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Snake.Snake;
+import Core.Utils.IntPair;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static java.lang.Integer.max;
@@ -44,10 +45,15 @@ public class GameCreator
         return new Game(map, snake);
     }
 
-    private boolean isCellInMap(int x, int y)
+    protected boolean isCellInMap(int x, int y)
     {
         return 0 < x && x + 1 < map.length &&
                 0 < y && y + 1 < map[0].length;
+    }
+
+    protected boolean isCellInMap(IntPair cell)
+    {
+        return isCellInMap(cell.x, cell.y);
     }
 
     public void setMapSize(int width, int height)
@@ -77,7 +83,7 @@ public class GameCreator
                 placeMapObject(i, j, prevMap[i + 1][j + 1]);
     }
 
-    private void placeMapObject(int x, int y, MapObject mapObject)
+    protected void placeMapObject(int x, int y, MapObject mapObject)
     {
         if (!isCellInMap(x + 1, y + 1))
             throw new IllegalArgumentException("No such cell in the map.");

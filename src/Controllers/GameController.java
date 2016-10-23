@@ -28,25 +28,9 @@ public class GameController implements KeyListener
     @Override
     public void keyPressed(KeyEvent e)
     {
-        VelocityVector newSnakeVelocity;
-        switch (e.getKeyCode())
-        {
-            case KeyEvent.VK_RIGHT:
-                newSnakeVelocity = VelocityVector.right;
-                break;
-            case KeyEvent.VK_LEFT:
-                newSnakeVelocity = VelocityVector.left;
-                break;
-            case KeyEvent.VK_DOWN:
-                newSnakeVelocity = VelocityVector.down;
-                break;
-            case KeyEvent.VK_UP:
-                newSnakeVelocity = VelocityVector.up;
-                break;
-            default:
-                return;
-        }
-        game.executeCommand(new ChangeSnakeVelocityCommand(newSnakeVelocity));
+        VelocityVector newSnakeVelocity = Utils.getDirection(e);
+        if (newSnakeVelocity != null)
+            game.executeCommand(new ChangeSnakeVelocityCommand(newSnakeVelocity));
     }
 
     @Override

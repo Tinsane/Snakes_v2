@@ -2,6 +2,7 @@ package Views.MapEditorView;
 
 import Controllers.MapEditorController;
 import Core.Game.GameCreator;
+import Core.Game.GameCreatorWrapper;
 import Views.MainMenuView.MainMenuRestorer;
 import Views.Styles.Default.DefaultStyle;
 import Views.Styles.GameStyle;
@@ -15,7 +16,7 @@ import java.io.IOException;
 public class Frame extends JFrame
 {
     GameStyle style;
-    GameCreator gameCreator;
+    GameCreatorWrapper gameCreator;
     public Frame(Views.MainMenuView.Frame mainMenuFrame) throws IOException
     {
         this(mainMenuFrame, new DefaultStyle());
@@ -27,7 +28,7 @@ public class Frame extends JFrame
         addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
 
         this.style = style;
-        gameCreator = new GameCreator();
+        gameCreator = new GameCreatorWrapper();
 
         addKeyListener(new MapEditorController(gameCreator));
 
