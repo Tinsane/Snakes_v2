@@ -65,7 +65,7 @@ public class Frame extends JFrame
             stop();
             setVisible(false);
             dispose();
-            mainMenuFrame.setVisible(true);
+            new Views.FinalScoreView.Frame(mainMenuFrame, game.getSnake().getLength());
             return;
         }
 

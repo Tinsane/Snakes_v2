@@ -25,7 +25,14 @@ public class KekDiscreteStyle implements GameStyle
 
     private BufferedImage loadImage(String filename) throws IOException
     {
-        return ImageIO.read(getClass().getResource(filename));
+        try
+        {
+            return ImageIO.read(getClass().getResource(filename));
+        }
+        catch (IllegalArgumentException e)
+        {
+            throw new IOException("Error: pictures weren't found.");
+        }
     }
 
     public KekDiscreteStyle() throws IOException

@@ -4,13 +4,12 @@ import Core.Game.GameCreator;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Views.GameView.Settings;
 import Views.Styles.Default.DefaultStyle;
-import Views.Utils.ImageButton;
+import Views.Utils.TextButton;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -31,17 +30,11 @@ public class Frame extends JFrame
         JPanel panel = new JPanel();
         add(panel);
         panel.setLayout(new GridLayout(4, 1));
+        Font buttonFont = new Font("Tahoma", Font.BOLD, 45);
 
-        JButton startGameButton = new JButton();
-        startGameButton.setFont(new Font("Tahoma", Font.BOLD, 45));
-        startGameButton.setForeground(Color.green);
-        startGameButton.setBorder(null);
-        startGameButton.setContentAreaFilled(false);
-        startGameButton.setFocusPainted(false);
-        startGameButton.setText("Start Game");
+        TextButton startGameButton = new TextButton("Start Game", buttonFont);
         startGameButton.addActionListener(e -> {
             setVisible(false);
-            dispose();
             try
             {
                 GameCreator creator = new GameCreator();
@@ -53,45 +46,30 @@ public class Frame extends JFrame
                 gameFrame.start();
             } catch (IOException exception)
             {
-                // TODO: something
+                JOptionPane.showMessageDialog(this, "Error: can't load something.",
+                        "Snake feels herself sick", JOptionPane.ERROR_MESSAGE);
+                setVisible(true);
             }
         });
 
-        JButton mapEditorButton = new JButton();
-        mapEditorButton.setFont(new Font("Tahoma", Font.BOLD, 45));
-        mapEditorButton.setForeground(Color.green);
-        mapEditorButton.setBorder(null);
-        mapEditorButton.setContentAreaFilled(false);
-        mapEditorButton.setFocusPainted(false);
-        mapEditorButton.setText("Map Editor");
+        TextButton mapEditorButton = new TextButton("Map Editor", buttonFont);
         mapEditorButton.addActionListener(e -> {
             setVisible(false);
-            dispose();
             try
             {
                 new Views.MapEditorView.Frame(this);
             }
             catch (IOException exception)
             {
-                // TODO: something
+                JOptionPane.showMessageDialog(this, "Error: can't load something.",
+                        "Snake feels herself sick", JOptionPane.ERROR_MESSAGE);
+                setVisible(true);
             }
         });
 
-        JButton settingsButton = new JButton();
-        settingsButton.setFont(new Font("Tahoma", Font.BOLD, 45));
-        settingsButton.setForeground(Color.green);
-        settingsButton.setBorder(null);
-        settingsButton.setContentAreaFilled(false);
-        settingsButton.setFocusPainted(false);
-        settingsButton.setText("Settings");
+        TextButton settingsButton = new TextButton("Settings", buttonFont);
 
-        JButton exitButton = new JButton();
-        exitButton.setFont(new Font("Tahoma", Font.BOLD, 45));
-        exitButton.setForeground(Color.green);
-        exitButton.setBorder(null);
-        exitButton.setContentAreaFilled(false);
-        exitButton.setFocusPainted(false);
-        exitButton.setText("Exit");
+        TextButton exitButton = new TextButton("Exit", buttonFont);
         exitButton.addActionListener(e -> {setVisible(false); dispose();});
 
         panel.add(startGameButton);

@@ -37,6 +37,6 @@ public class GameViewCanvas extends JPanel
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        g2d.drawString("Score: " + String.valueOf(game.getSnake().getLength()), 0, 30);
+        g2d.drawString("Score: " + game.getSnake().getLength(), 0, 30);
     }
 }
