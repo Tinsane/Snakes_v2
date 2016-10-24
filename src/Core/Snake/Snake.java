@@ -36,7 +36,7 @@ public class Snake implements Iterable<SnakeCell>, Serializable
     public int getLength()
     {
         int length = 0;
-        for (SnakeCell cell : this)
+        for (SnakeCell ignored : this)
             ++length;
         return length;
     }

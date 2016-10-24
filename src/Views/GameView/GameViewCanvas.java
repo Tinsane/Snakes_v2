@@ -1,6 +1,5 @@
 package Views.GameView;
 
-import Core.Game.Game;
 import Core.Game.GameAlike;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.GameStyle;
@@ -35,5 +34,9 @@ public class GameViewCanvas extends JPanel
     {
         MapObjectVisitor drawer = style.CreateDrawer((Graphics2D) g, game, goneTurnPart);
         drawer.visitAll();
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setFont(new Font("Tahoma", Font.PLAIN, 30));
+        g2d.drawString("Score: " + String.valueOf(game.getSnake().getLength()), 0, 30);
     }
 }
