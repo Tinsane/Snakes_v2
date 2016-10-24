@@ -1,6 +1,7 @@
 package Views.Styles.Default;
 
 import Core.Game.Game;
+import Core.Game.GameAlike;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -22,13 +23,13 @@ import java.util.ArrayList;
 public class DefaultDrawer implements MapObjectVisitor
 {
     private double x, y;
-    private Game game;
+    private GameAlike game;
     private double turnPartLeft;
     private Graphics2D graphics;
     private DefaultStyle style;
     private ArrayList<VisualItem> visualItems;
 
-    public DefaultDrawer(DefaultStyle style, Graphics2D graphics, Game game, double turnPartLeft)
+    public DefaultDrawer(DefaultStyle style, Graphics2D graphics, GameAlike game, double turnPartLeft)
     {
         this.game = game;
         this.turnPartLeft = turnPartLeft;
@@ -77,7 +78,7 @@ public class DefaultDrawer implements MapObjectVisitor
     @Override
     public void visit(SnakeCell snakeCell)
     {
-        visualItems.add(new VisualItem(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
+        visualItems.add(new VisualItem(getRotated(snakeCell == game.getSnake().head ? style.snakeHeadImage : style.snakeCellImage,
                 VelocityVector.up.getAngle(snakeCell.getVelocity())), x, y, 2));
 //        if (snakeCell != game.snake.head)
 //            visualItems.add(new VisualItem(style.snakeSquareImage, (int)x, (int)y, 2));

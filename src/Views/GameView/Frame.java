@@ -18,7 +18,7 @@ public class Frame extends JFrame
     private Timer updateTimer;
     private int currentTick;
     private Settings settings;
-    Canvas canvas;
+    GameViewCanvas canvas;
 
     public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game) throws IOException
     {
@@ -42,7 +42,7 @@ public class Frame extends JFrame
         updateTimer = new Timer(settings.updateInterval, x -> update());
         updateTimer.setRepeats(true);
 
-        canvas = new Canvas(game, settings.style, false);
+        canvas = new GameViewCanvas(game, settings.style, false);
         add(canvas);
         addKeyListener(new GameController(game));
         setVisible(true);

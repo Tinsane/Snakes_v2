@@ -18,7 +18,7 @@ import static java.lang.Integer.min;
  * Created by Владимир on 19.09.2016.
  */
 
-public class GameCreator
+public class GameCreator implements GameAlike
 {
     private MapObject[][] map;
 
@@ -26,6 +26,10 @@ public class GameCreator
     {
         map = new MapObject[0][0];
     }
+
+    public int getWidth() { return getCurrentMap().length; }
+
+    public int getHeight() { return getCurrentMap()[0].length; }
 
     private static MapObject[][] loadMap(String fileName)
     {
@@ -127,5 +131,17 @@ public class GameCreator
     public void placeMapObjectsInLineY(int xL, int xR, int y, MapObject mapObject)
     {
         placeMapObjectsInRectangle(xL, y, xR, y, mapObject);
+    }
+
+    @Override
+    public MapObject[][] getCurrentMap()
+    {
+        return map;
+    }
+
+    @Override
+    public Snake getSnake()
+    {
+        return null;
     }
 }

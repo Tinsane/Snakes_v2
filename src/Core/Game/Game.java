@@ -18,7 +18,7 @@ import javax.swing.*;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class Game implements Serializable
+public class Game implements Serializable, GameAlike
 {
     public Snake snake;
     private GameUpdater gameUpdater;
@@ -48,6 +48,12 @@ public class Game implements Serializable
     public MapObject[][] getCurrentMap()
     {
         return maps.peekFirst();
+    }
+
+    @Override
+    public Snake getSnake()
+    {
+        return snake;
     }
 
     public void rollback(int turnsNumber)

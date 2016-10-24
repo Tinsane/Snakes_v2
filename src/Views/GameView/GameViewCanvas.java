@@ -1,6 +1,7 @@
 package Views.GameView;
 
 import Core.Game.Game;
+import Core.Game.GameAlike;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.GameStyle;
 
@@ -10,13 +11,13 @@ import java.awt.*;
 /**
  * Created by Владимир on 11.10.2016.
  */
-public class Canvas extends JPanel
+public class GameViewCanvas extends JPanel
 {
-    Game game;
-    GameStyle style;
+    private GameAlike game;
+    private GameStyle style;
     private double goneTurnPart;
 
-    Canvas(Game game, GameStyle style, boolean doubleBuffered)
+    GameViewCanvas(GameAlike game, GameStyle style, boolean doubleBuffered)
     {
         super(doubleBuffered);
         this.game = game;

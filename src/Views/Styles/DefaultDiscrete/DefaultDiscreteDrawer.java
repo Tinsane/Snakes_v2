@@ -1,6 +1,7 @@
 package Views.Styles.DefaultDiscrete;
 
 import Core.Game.Game;
+import Core.Game.GameAlike;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -21,20 +22,25 @@ import java.awt.image.BufferedImage;
 public class DefaultDiscreteDrawer implements MapObjectVisitor
 {
     private int x, y;
-    private Game game;
+    private GameAlike game;
     private Graphics2D graphics;
     private DefaultDiscreteStyle style;
 
-    public DefaultDiscreteDrawer(DefaultDiscreteStyle style, Graphics2D graphics, Game game, double turnPartLeft)
+    public DefaultDiscreteDrawer(DefaultDiscreteStyle style, Graphics2D graphics, GameAlike game, double turnPartLeft)
     {
         this.game = game;
         this.graphics = graphics;
         this.style = style;
     }
 
-    private void drawImage(BufferedImage image)
+    public void drawImage(BufferedImage image, int x, int y)
     {
         graphics.drawImage(image, x * style.getTileSize(), y * style.getTileSize(), null);
+    }
+
+    private void drawImage(BufferedImage image)
+    {
+        drawImage(image, x, y);
     }
 
     @Override
@@ -72,7 +78,7 @@ public class DefaultDiscreteDrawer implements MapObjectVisitor
     @Override
     public void visit(SnakeCell snakeCell)
     {
-        drawImage(getRotated(snakeCell == game.snake.head ? style.snakeHeadImage : style.snakeCellImage,
+        drawImage(getRotated(snakeCell == game.getSnake().head ? style.snakeHeadImage : style.snakeCellImage,
                 VelocityVector.up.getAngle(snakeCell.getVelocity())));
     }
 

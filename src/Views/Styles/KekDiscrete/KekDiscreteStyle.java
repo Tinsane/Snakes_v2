@@ -1,6 +1,7 @@
 package Views.Styles.KekDiscrete;
 
 import Core.Game.Game;
+import Core.Game.GameAlike;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.GameStyle;
 
@@ -39,7 +40,7 @@ public class KekDiscreteStyle implements GameStyle
     }
 
     @Override
-    public MapObjectVisitor CreateDrawer(Graphics2D g2d, Game game, double turnPartLeft)
+    public MapObjectVisitor CreateDrawer(Graphics2D g2d, GameAlike game, double turnPartLeft)
     {
         return new KekDiscreteDrawer(this, g2d, game, turnPartLeft);
     }

@@ -15,23 +15,37 @@ import java.io.IOException;
  */
 public class Frame extends JFrame
 {
-    GameStyle style;
-    GameCreatorWrapper gameCreator;
+    private GameStyle style;
+    private GameCreatorWrapper gameCreator;
+    private MapEditorCanvas canvas;
+
     public Frame(Views.MainMenuView.Frame mainMenuFrame) throws IOException
     {
         this(mainMenuFrame, new DefaultStyle());
     }
-    Frame(Views.MainMenuView.Frame mainMenuFrame, GameStyle style)
+
+    public Frame(Views.MainMenuView.Frame mainMenuFrame, GameStyle style) throws IOException
     {
         super();
         setTitle("SnakeMapEditor");
         addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
 
         this.style = style;
-        gameCreator = new GameCreatorWrapper();
+        gameCreator = new GameCreatorWrapper(5, 5);
+        canvas = new MapEditorCanvas(gameCreator, style, true);
 
-        addKeyListener(new MapEditorController(gameCreator));
+        setSize((gameCreator.getWidth() + 1) * style.getTileSize(),
+                (gameCreator.getHeight() + 1) * style.getTileSize());
+
+        addKeyListener(new MapEditorController(gameCreator, this));
 
         setVisible(true);
+        add(canvas);
+        update();
+    }
+
+    public void update()
+    {
+        canvas.repaint();
     }
 }

@@ -3,6 +3,7 @@ package Core.Game;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
+import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Snake.Snake;
 import Core.Utils.IntPair;
@@ -23,12 +24,13 @@ public class GameCreatorWrapper extends GameCreator
 
     private List<MapObject> mapObjects = new ArrayList<MapObject>(); // wall and berries
 
-    private IntPair mapPosition;
+    public IntPair mapPosition = new IntPair(1, 1);
     private int mapObjectIndex = 0;
 
     public Pointer pointer = Pointer.MapPosition;
 
     {
+        addObject(new EmptyCell());
         addObject(new Wall());
         addObject(new Strawberry());
         addObject(new Blueberry());
@@ -37,6 +39,12 @@ public class GameCreatorWrapper extends GameCreator
     public GameCreatorWrapper()
     {
         super();
+    }
+
+    public GameCreatorWrapper(int width, int height)
+    {
+        super();
+        resizeMap(width, height);
     }
 
     public void movePositionOrStay(VelocityVector vector)
@@ -75,14 +83,14 @@ public class GameCreatorWrapper extends GameCreator
 
     public void placeMapObject(MapObject mapObject)
     {
-        placeMapObject(mapPosition.x, mapPosition.y, mapObject);
+        placeMapObject(mapPosition.x - 1, mapPosition.y - 1, mapObject);
     }
 
-    public void placeSnake(int length)
-    {
-        if (length < 1)
-            throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", length));
-        Snake snake = new Snake(length);
-        placeMapObject(snake.head);
-    }
+//    public void placeSnake(int length)
+//    {
+//        if (length < 1)
+//            throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", length));
+//        Snake snake = new Snake(length);
+//        placeMapObject(snake.head);
+//    }
 }

@@ -3,6 +3,8 @@ package Controllers;
 import Core.Game.GameCreator;
 import Core.Game.GameCreatorWrapper;
 import Core.Utils.VelocityVector;
+import Views.MapEditorView.Frame;
+import Views.MapEditorView.MapEditorCanvas;
 
 import javax.lang.model.type.ErrorType;
 import javax.lang.model.type.UnknownTypeException;
@@ -18,10 +20,12 @@ import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
 public class MapEditorController implements KeyListener
 {
     private GameCreatorWrapper gameCreator;
+    private Frame frame;
 
-    public MapEditorController(GameCreatorWrapper gameCreator)
+    public MapEditorController(GameCreatorWrapper gameCreator, Frame frame)
     {
         this.gameCreator = gameCreator;
+        this.frame = frame;
     }
 
     @Override
@@ -40,7 +44,8 @@ public class MapEditorController implements KeyListener
             {
                 if (velocity.x == 0)
                     gameCreator.moveMapObjectIndexOrStay(velocity.y);
-            } else
+            }
+            else
                 gameCreator.movePositionOrStay(velocity);
         }
         else
@@ -53,8 +58,11 @@ public class MapEditorController implements KeyListener
                 case KeyEvent.VK_2:
                     gameCreator.pointer = MapObjectType;
                     break;
+                case KeyEvent.VK_SPACE:
+                    gameCreator.placeMapObject();
             }
         }
+        frame.update();
     }
 
     @Override

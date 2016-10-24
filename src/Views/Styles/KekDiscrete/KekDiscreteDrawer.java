@@ -1,6 +1,7 @@
 package Views.Styles.KekDiscrete;
 
 import Core.Game.Game;
+import Core.Game.GameAlike;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -22,13 +23,13 @@ import java.util.Random;
 public class KekDiscreteDrawer implements MapObjectVisitor
 {
     private int x, y;
-    private Game game;
+    private GameAlike game;
     private Graphics2D graphics;
     private KekDiscreteStyle style;
     private final Random random;
     private final double angles[] = new double[] {0, Math.PI / 2, Math.PI, -Math.PI / 2};
 
-    public KekDiscreteDrawer(KekDiscreteStyle style, Graphics2D graphics, Game game, double turnPartLeft)
+    public KekDiscreteDrawer(KekDiscreteStyle style, Graphics2D graphics, GameAlike game, double turnPartLeft)
     {
         this.game = game;
         this.graphics = graphics;
@@ -76,7 +77,7 @@ public class KekDiscreteDrawer implements MapObjectVisitor
     @Override
     public void visit(SnakeCell snakeCell)
     {
-        if (snakeCell == game.snake.head)
+        if (snakeCell == game.getSnake().head)
             drawImage(getRotated(style.snakeHeadImage,
                     VelocityVector.up.getAngle(snakeCell.getVelocity())));
         else
