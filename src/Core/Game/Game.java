@@ -1,4 +1,5 @@
-package Core.Game; /**
+package Core.Game;
+/**
  * Created by Владимир on 16.09.2016.
  */
 
@@ -13,8 +14,6 @@ import Core.Snake.Snake;
 import Core.Utils.IntPair;
 
 import java.io.Serializable;
-import javax.naming.OperationNotSupportedException;
-import javax.swing.*;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -72,7 +71,7 @@ public class Game implements Serializable, GameAlike
     private class GameUpdater implements Serializable
     {
         private Game game;
-        private Random updaterRandom;
+        private final Random updaterRandom;
         private MapObject[][] newMap;
 
         private GameUpdater(Game game)

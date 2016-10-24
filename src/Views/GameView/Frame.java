@@ -15,10 +15,10 @@ public class Frame extends JFrame
 {
     private final Views.MainMenuView.Frame mainMenuFrame;
     private Game game;
-    private Timer updateTimer;
+    private final Timer updateTimer;
     private int currentTick;
     private Settings settings;
-    GameViewCanvas canvas;
+    private final GameViewCanvas canvas;
 
     public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game) throws IOException
     {

@@ -12,7 +12,7 @@ import java.awt.*;
  */
 public class GameViewCanvas extends JPanel
 {
-    private GameAlike game;
+    private final GameAlike game;
     private GameStyle style;
     private double goneTurnPart;
 

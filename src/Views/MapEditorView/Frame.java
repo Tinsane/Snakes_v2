@@ -1,7 +1,6 @@
 package Views.MapEditorView;
 
 import Controllers.MapEditorController;
-import Core.Game.GameCreator;
 import Core.Game.GameCreatorWrapper;
 import Views.MainMenuView.MainMenuRestorer;
 import Views.Styles.Default.DefaultStyle;
@@ -15,7 +14,6 @@ import java.io.IOException;
  */
 public class Frame extends JFrame
 {
-    private GameStyle style;
     private GameCreatorWrapper gameCreator;
     private MapEditorCanvas canvas;
 
@@ -30,7 +28,6 @@ public class Frame extends JFrame
         setTitle("SnakeMapEditor");
         addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
 
-        this.style = style;
         gameCreator = new GameCreatorWrapper(5, 5);
         canvas = new MapEditorCanvas(gameCreator, style, true);
 

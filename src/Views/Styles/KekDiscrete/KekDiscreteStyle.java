@@ -1,6 +1,5 @@
 package Views.Styles.KekDiscrete;
 
-import Core.Game.Game;
 import Core.Game.GameAlike;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.GameStyle;

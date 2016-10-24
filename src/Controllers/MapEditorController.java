@@ -1,13 +1,9 @@
 package Controllers;
 
-import Core.Game.GameCreator;
 import Core.Game.GameCreatorWrapper;
 import Core.Utils.VelocityVector;
 import Views.MapEditorView.Frame;
-import Views.MapEditorView.MapEditorCanvas;
 
-import javax.lang.model.type.ErrorType;
-import javax.lang.model.type.UnknownTypeException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

@@ -1,6 +1,5 @@
 package Views.Styles.DefaultDiscrete;
 
-import Core.Game.Game;
 import Core.Game.GameAlike;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
@@ -22,9 +21,9 @@ import java.awt.image.BufferedImage;
 public class DefaultDiscreteDrawer implements MapObjectVisitor
 {
     private int x, y;
-    private GameAlike game;
-    private Graphics2D graphics;
-    private DefaultDiscreteStyle style;
+    private final GameAlike game;
+    private final Graphics2D graphics;
+    private final DefaultDiscreteStyle style;
 
     public DefaultDiscreteDrawer(DefaultDiscreteStyle style, Graphics2D graphics, GameAlike game, double turnPartLeft)
     {

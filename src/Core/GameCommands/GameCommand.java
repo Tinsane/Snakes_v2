@@ -7,5 +7,5 @@ import Core.Game.Game;
  */
 public interface GameCommand
 {
-    public void execute(Game game);
+    void execute(Game game);
 }

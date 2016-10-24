@@ -1,12 +1,10 @@
 package Views.Styles.Default;
 
-import Core.Game.Game;
 import Core.Game.GameAlike;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.GameStyle;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

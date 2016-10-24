@@ -8,7 +8,7 @@ import Core.Utils.*;
  */
 public class ChangeSnakeVelocityCommand implements GameCommand
 {
-    public VelocityVector velocity;
+    private final VelocityVector velocity;
 
     public ChangeSnakeVelocityCommand(VelocityVector velocity)
     {

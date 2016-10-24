@@ -1,6 +1,5 @@
 package Views.Styles.DefaultDiscrete;
 
-import Core.Game.Game;
 import Core.Game.GameAlike;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.GameStyle;

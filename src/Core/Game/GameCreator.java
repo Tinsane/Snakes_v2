@@ -11,7 +11,6 @@ import Core.Snake.Snake;
 import Core.Utils.IntPair;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import static java.lang.Integer.max;
 import static java.lang.Integer.min;
 
 /**

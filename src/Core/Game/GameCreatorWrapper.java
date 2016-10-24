@@ -5,7 +5,6 @@ import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.Wall;
-import Core.Snake.Snake;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
 
@@ -22,7 +21,7 @@ public class GameCreatorWrapper extends GameCreator
         MapObjectType, MapPosition
     }
 
-    private List<MapObject> mapObjects = new ArrayList<MapObject>(); // wall and berries
+    private List<MapObject> mapObjects = new ArrayList<>(); // wall and berries
 
     public IntPair mapPosition = new IntPair(1, 1);
     private int mapObjectIndex = 0;

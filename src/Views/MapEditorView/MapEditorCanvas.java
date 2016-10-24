@@ -4,13 +4,11 @@ import Core.Game.GameAlike;
 import Core.Game.GameCreatorWrapper;
 import Core.MapObjects.MapObjectVisitor;
 import Core.Utils.IntPair;
-import Views.GameView.GameViewCanvas;
 import Views.Styles.GameStyle;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 

@@ -1,6 +1,5 @@
 package Views.Styles.Default;
 
-import Core.Game.Game;
 import Core.Game.GameAlike;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
@@ -23,10 +22,10 @@ import java.util.ArrayList;
 public class DefaultDrawer implements MapObjectVisitor
 {
     private double x, y;
-    private GameAlike game;
-    private double turnPartLeft;
-    private Graphics2D graphics;
-    private DefaultStyle style;
+    private final GameAlike game;
+    private final double turnPartLeft;
+    private final Graphics2D graphics;
+    private final DefaultStyle style;
     private ArrayList<VisualItem> visualItems;
 
     public DefaultDrawer(DefaultStyle style, Graphics2D graphics, GameAlike game, double turnPartLeft)
