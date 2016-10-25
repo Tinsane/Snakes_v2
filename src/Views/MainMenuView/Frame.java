@@ -32,7 +32,7 @@ public class Frame extends JFrame
         panel.setLayout(new GridLayout(4, 1));
         Font buttonFont = new Font("Tahoma", Font.BOLD, 45);
 
-        TextButton startGameButton = new TextButton("Start Game", buttonFont);
+        TextButton startGameButton = new TextButton("Start Game", buttonFont, Color.GREEN, Color.YELLOW);
         startGameButton.addActionListener(e -> {
             setVisible(false);
             try
@@ -52,7 +52,7 @@ public class Frame extends JFrame
             }
         });
 
-        TextButton mapEditorButton = new TextButton("Map Editor", buttonFont);
+        TextButton mapEditorButton = new TextButton("Map Editor", buttonFont, Color.GREEN, Color.YELLOW);
         mapEditorButton.addActionListener(e -> {
             setVisible(false);
             try
@@ -67,9 +67,9 @@ public class Frame extends JFrame
             }
         });
 
-        TextButton settingsButton = new TextButton("Settings", buttonFont);
+        TextButton settingsButton = new TextButton("Settings", buttonFont, Color.GREEN, Color.YELLOW);
 
-        TextButton exitButton = new TextButton("Exit", buttonFont);
+        TextButton exitButton = new TextButton("Exit", buttonFont, Color.GREEN, Color.YELLOW);
         exitButton.addActionListener(e -> {setVisible(false); dispose();});
 
         panel.add(startGameButton);
