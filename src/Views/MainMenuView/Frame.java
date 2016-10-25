@@ -31,7 +31,7 @@ public class Frame extends JFrame
         JPanel panel = new JPanel();
         add(panel);
         panel.setBackground(Color.GREEN);
-        panel.setLayout(new GridLayout(4, 1));
+        panel.setLayout(new GridLayout(5, 1));
         Font buttonFont = new Font("Tahoma", Font.BOLD, 45);
 
         TextButton startGameButton = new TextButton("Start Game", buttonFont, Color.YELLOW, new Color(255, 215, 0));
@@ -70,6 +70,7 @@ public class Frame extends JFrame
             }
         });
 
+        TextButton scoreboardButton = new TextButton("Scoreboard", buttonFont, Color.YELLOW, new Color(255, 215, 0));
         TextButton settingsButton = new TextButton("Settings", buttonFont, Color.YELLOW, new Color(255, 215, 0));
 
         TextButton exitButton = new TextButton("Exit", buttonFont, Color.YELLOW, new Color(255, 215, 0));
@@ -77,6 +78,7 @@ public class Frame extends JFrame
 
         panel.add(startGameButton);
         panel.add(mapEditorButton);
+        panel.add(scoreboardButton);
         panel.add(settingsButton);
         panel.add(exitButton);
         setVisible(true);

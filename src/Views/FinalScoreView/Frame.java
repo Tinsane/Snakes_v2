@@ -35,7 +35,7 @@ public class Frame extends JFrame
         panel.add(mainMenuButton);
 
         setSize(300, 400);
-        setResizable(false);
+        //setResizable(false);
         setVisible(true);
     }
 }
