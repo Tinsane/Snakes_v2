@@ -18,7 +18,7 @@ public class SnakeCell extends DynamicMapObject
 
     public SnakeCell(SnakeCell previous)
     {
-        this(previous, VelocityVector.right);
+        this(previous, VelocityVector.zero);
     }
 
     public SnakeCell(SnakeCell previous, VelocityVector velocity)

@@ -28,7 +28,7 @@ public class TextButton extends JButton
         Graphics2D g2d = (Graphics2D) g;
         FontMetrics metrics = g2d.getFontMetrics(font);
         g2d.setFont(font);
-        if (isFocusOwner())
+        if (hasFocus())
             g2d.setColor(Color.YELLOW);
         else
             g2d.setColor(Color.GREEN);
