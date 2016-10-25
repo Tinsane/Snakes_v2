@@ -1,5 +1,6 @@
 package Views.MainMenuView;
 
+import Core.Game.Game;
 import Core.Game.GameCreator;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Views.GameView.Settings;
@@ -29,22 +30,24 @@ public class Frame extends JFrame
 
         JPanel panel = new JPanel();
         add(panel);
+        panel.setBackground(Color.GREEN);
         panel.setLayout(new GridLayout(4, 1));
         Font buttonFont = new Font("Tahoma", Font.BOLD, 45);
 
-        TextButton startGameButton = new TextButton("Start Game", buttonFont, Color.GREEN, Color.YELLOW);
+        TextButton startGameButton = new TextButton("Start Game", buttonFont, Color.YELLOW, new Color(255, 215, 0));
         startGameButton.addActionListener(e -> {
             setVisible(false);
+            GameCreator creator = new GameCreator();
+            creator.setMapSize(10, 10);
+            creator.placeWall(5, 5);
+            creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
             try
             {
-                GameCreator creator = new GameCreator();
-                creator.setMapSize(10, 10);
-                creator.placeWall(5, 5);
-                creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
                 Views.GameView.Frame gameFrame =
                         new Views.GameView.Frame(this, creator.createGame(0, 0, 1), new Settings(new DefaultStyle()));
                 gameFrame.start();
-            } catch (IOException exception)
+            }
+            catch (IOException exception)
             {
                 JOptionPane.showMessageDialog(this, "Error: can't load something.",
                         "Snake feels herself sick", JOptionPane.ERROR_MESSAGE);
@@ -52,7 +55,7 @@ public class Frame extends JFrame
             }
         });
 
-        TextButton mapEditorButton = new TextButton("Map Editor", buttonFont, Color.GREEN, Color.YELLOW);
+        TextButton mapEditorButton = new TextButton("Map Editor", buttonFont, Color.YELLOW, new Color(255, 215, 0));
         mapEditorButton.addActionListener(e -> {
             setVisible(false);
             try
@@ -67,9 +70,9 @@ public class Frame extends JFrame
             }
         });
 
-        TextButton settingsButton = new TextButton("Settings", buttonFont, Color.GREEN, Color.YELLOW);
+        TextButton settingsButton = new TextButton("Settings", buttonFont, Color.YELLOW, new Color(255, 215, 0));
 
-        TextButton exitButton = new TextButton("Exit", buttonFont, Color.GREEN, Color.YELLOW);
+        TextButton exitButton = new TextButton("Exit", buttonFont, Color.YELLOW, new Color(255, 215, 0));
         exitButton.addActionListener(e -> {setVisible(false); dispose();});
 
         panel.add(startGameButton);

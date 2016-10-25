@@ -17,7 +17,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class Game implements Serializable, GameAlike
+public class Game implements Serializable, GameAlike, Cloneable
 {
     public Snake snake;
     private GameUpdater gameUpdater;
@@ -47,6 +47,19 @@ public class Game implements Serializable, GameAlike
     public MapObject[][] getCurrentMap()
     {
         return maps.peekFirst();
+    }
+
+    @Override
+    public Game clone()
+    {
+        try
+        {
+            return (Game) super.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            throw new InternalError();
+        }
     }
 
     @Override
