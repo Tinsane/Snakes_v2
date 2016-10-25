@@ -4,6 +4,7 @@ import Core.Game.Game;
 import Core.Game.GameCreator;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Views.GameView.Settings;
+import Views.RecordsView.RecordsFrame;
 import Views.Styles.Default.DefaultStyle;
 import Views.Utils.TextButton;
 
@@ -71,6 +72,11 @@ public class Frame extends JFrame
         });
 
         TextButton scoreboardButton = new TextButton("Scoreboard", buttonFont, Color.YELLOW, new Color(255, 215, 0));
+        scoreboardButton.addActionListener(e ->
+        {
+            setVisible(false);
+            new RecordsFrame(this);
+        });
         TextButton settingsButton = new TextButton("Settings", buttonFont, Color.YELLOW, new Color(255, 215, 0));
 
         TextButton exitButton = new TextButton("Exit", buttonFont, Color.YELLOW, new Color(255, 215, 0));

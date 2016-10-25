@@ -7,6 +7,7 @@ import Views.Styles.Default.DefaultStyle;
 import Views.Styles.GameStyle;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 /**
