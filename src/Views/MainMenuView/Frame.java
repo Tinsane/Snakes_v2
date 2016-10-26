@@ -72,6 +72,10 @@ public class Frame extends JFrame
 
         TextButton scoreboardButton = new TextButton("Scoreboard", buttonFont, Color.YELLOW, new Color(255, 215, 0));
         TextButton settingsButton = new TextButton("Settings", buttonFont, Color.YELLOW, new Color(255, 215, 0));
+        settingsButton.addActionListener(e -> {
+            setVisible(false);
+            new Views.SettingsView.Frame(this);
+        });
 
         TextButton exitButton = new TextButton("Exit", buttonFont, Color.YELLOW, new Color(255, 215, 0));
         exitButton.addActionListener(e -> {setVisible(false); dispose();});
