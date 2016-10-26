@@ -22,5 +22,6 @@ public class MainMenuRestorer extends WindowAdapter
         super.windowClosing(e);
         frame.dispose();
         mainMenuFrame.setVisible(true);
+        mainMenuFrame.setAlwaysOnTop(true);
     }
 }
