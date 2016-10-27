@@ -9,6 +9,7 @@ import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
 import Core.MapObjects.MapObjectVisitor;
+import Views.Styles.Drawer;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by ISmir on 08.10.2016.
  */
-public class DefaultDrawer implements MapObjectVisitor
+public class DefaultDrawer implements MapObjectVisitor, Drawer
 {
     private double x, y;
     private final GameAlike game;
@@ -90,7 +91,7 @@ public class DefaultDrawer implements MapObjectVisitor
         mapObject.acceptVisitor(this);
     }
 
-    public void visitAll()
+    public void draw()
     {
         MapObject[][] map = game.getCurrentMap();
         for (int i = 0; i < map.length; ++i)

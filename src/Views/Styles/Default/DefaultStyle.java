@@ -2,6 +2,7 @@ package Views.Styles.Default;
 
 import Core.Game.GameAlike;
 import Core.MapObjects.MapObjectVisitor;
+import Views.Styles.Drawer;
 import Views.Styles.GameStyle;
 
 import javax.imageio.ImageIO;
@@ -22,7 +23,7 @@ public class DefaultStyle implements GameStyle
     public final BufferedImage emptyCellImage;
     public final BufferedImage snakeHeadImage;
 
-    private BufferedImage loadImage(String filename) throws IOException
+    protected BufferedImage loadImage(String filename) throws IOException
     {
         try
         {
@@ -46,7 +47,7 @@ public class DefaultStyle implements GameStyle
     }
 
     @Override
-    public MapObjectVisitor CreateDrawer(Graphics2D g2d, GameAlike game, double turnPartLeft)
+    public Drawer CreateDrawer(Graphics2D g2d, GameAlike game, double turnPartLeft)
     {
         return new DefaultDrawer(this, g2d, game, turnPartLeft);
     }

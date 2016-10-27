@@ -20,6 +20,4 @@ public interface MapObjectVisitor
     void visit(Blueberry blueberry);
 
     void visit(SnakeCell snakeCell);
-
-    void visitAll();
 }

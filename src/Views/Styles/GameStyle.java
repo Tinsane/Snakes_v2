@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public interface GameStyle
 {
-    MapObjectVisitor CreateDrawer(Graphics2D g2d, GameAlike game, double turnPartLeft);
+    Drawer CreateDrawer(Graphics2D g2d, GameAlike game, double turnPartLeft);
 
     int getTileSize();
 }

@@ -4,6 +4,7 @@ import Controllers.MapEditorController;
 import Core.Game.GameCreatorWrapper;
 import Views.MainMenuView.MainMenuRestorer;
 import Views.Styles.Default.DefaultStyle;
+import Views.Styles.Default.MapEditorDefaultStyle;
 import Views.Styles.GameStyle;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public class Frame extends JFrame
         addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
 
         gameCreator = new GameCreatorWrapper(5, 5);
-        canvas = new MapEditorCanvas(gameCreator, style, true);
+        canvas = new MapEditorCanvas(gameCreator, new MapEditorDefaultStyle(), true);
 
         setSize((gameCreator.getWidth() + 1) * style.getTileSize(),
                 (gameCreator.getHeight() + 1) * style.getTileSize());

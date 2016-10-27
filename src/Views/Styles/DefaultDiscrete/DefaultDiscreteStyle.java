@@ -2,6 +2,7 @@ package Views.Styles.DefaultDiscrete;
 
 import Core.Game.GameAlike;
 import Core.MapObjects.MapObjectVisitor;
+import Views.Styles.Drawer;
 import Views.Styles.GameStyle;
 
 import javax.imageio.ImageIO;
@@ -46,7 +47,7 @@ public class DefaultDiscreteStyle implements GameStyle
     }
 
     @Override
-    public MapObjectVisitor CreateDrawer(Graphics2D g2d, GameAlike game, double turnPartLeft)
+    public Drawer CreateDrawer(Graphics2D g2d, GameAlike game, double turnPartLeft)
     {
         return new DefaultDiscreteDrawer(this, g2d, game, turnPartLeft);
     }

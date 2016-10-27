@@ -1,7 +1,7 @@
 package Views.GameView;
 
 import Core.Game.GameAlike;
-import Core.MapObjects.MapObjectVisitor;
+import Views.Styles.Drawer;
 import Views.Styles.GameStyle;
 
 import javax.swing.*;
@@ -32,8 +32,8 @@ public class GameViewCanvas extends JPanel
     @Override
     public void paint(Graphics g)
     {
-        MapObjectVisitor drawer = style.CreateDrawer((Graphics2D) g, game, goneTurnPart);
-        drawer.visitAll();
+        Drawer drawer = style.CreateDrawer((Graphics2D) g, game, goneTurnPart);
+        drawer.draw();
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setFont(new Font("Tahoma", Font.PLAIN, 30));
