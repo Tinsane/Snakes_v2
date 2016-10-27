@@ -28,9 +28,6 @@ public class TextButton extends JButton
         this.setContentAreaFilled(false);
         this.pointedColor = pointedColor;
         this.regularColor = regularColor;
-        setBorder(null);
-        setContentAreaFilled(false);
-        setFocusPainted(false);
         isPointed = false;
         addMouseListener(new MouseListener()
         {

@@ -1,6 +1,5 @@
 package Views.MainMenuView;
 
-import Core.Game.Game;
 import Core.Game.GameCreator;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Views.GameView.Settings;
@@ -19,9 +18,11 @@ import java.io.IOException;
  */
 public class Frame extends JFrame
 {
+    public Settings settings;
     public Frame() throws IOException
     {
         super();
+        settings = new Settings(new DefaultStyle());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("SnakeMainMenu");
         setIconImage(loadImage("snakeIcon.png"));
@@ -42,18 +43,9 @@ public class Frame extends JFrame
             creator.setMapSize(10, 10);
             creator.placeWall(5, 5);
             creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
-            try
-            {
-                Views.GameView.Frame gameFrame =
-                        new Views.GameView.Frame(this, creator.createGame(0, 0, 1), new Settings(new DefaultStyle()));
-                gameFrame.start();
-            }
-            catch (IOException exception)
-            {
-                JOptionPane.showMessageDialog(this, "Error: can't load something.",
-                        "Snake feels herself sick", JOptionPane.ERROR_MESSAGE);
-                setVisible(true);
-            }
+            Views.GameView.Frame gameFrame =
+                    new Views.GameView.Frame(this, creator.createGame(0, 0, 1), settings);
+            gameFrame.start();
         });
 
         TextButton mapEditorButton = new TextButton("Map Editor", buttonFont, Color.YELLOW, new Color(255, 215, 0));
@@ -80,7 +72,7 @@ public class Frame extends JFrame
         TextButton settingsButton = new TextButton("Settings", buttonFont, Color.YELLOW, new Color(255, 215, 0));
         settingsButton.addActionListener(e -> {
             setVisible(false);
-            new Views.SettingsView.Frame(this);
+            new Views.SettingsView.Frame(this, settings);
         });
 
         TextButton exitButton = new TextButton("Exit", buttonFont, Color.YELLOW, new Color(255, 215, 0));

@@ -16,9 +16,10 @@ Maybe a good solution would be to copy settings while initializing game.
 public class Settings
 {
     private static final int DEFAULT_UPDATE_INTERVAL = 200;
+    public double speedUp = 1;
 
     public int gameUpdateFrequency = 5;
-    public int updateInterval = DEFAULT_UPDATE_INTERVAL / gameUpdateFrequency;
+    public int updateInterval = (int)Math.round(DEFAULT_UPDATE_INTERVAL / speedUp / gameUpdateFrequency);
     public GameStyle style;
 
     public Settings(GameStyle style)
