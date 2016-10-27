@@ -7,7 +7,12 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class RecordsSaver
 {
-    public void saveRecords()
+    public static void saveRecords(RecordsContainer container)
+    {
+        saveRecords(container, RecordsLoader.defaultPath);
+    }
+
+    public static void saveRecords(RecordsContainer container, String path)
     {
         throw new NotImplementedException(); // TODO: write just as records loader
     }

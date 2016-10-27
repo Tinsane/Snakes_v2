@@ -16,9 +16,9 @@ public class RecordsLoader
         return loadRecords(defaultPath);
     }
 
-    public static RecordsContainer loadRecords(String filename)
+    public static RecordsContainer loadRecords(String path)
     {
-        Scanner scanner = new Scanner(filename);
+        Scanner scanner = new Scanner(path);
         return loadRecords(scanner); // TODO: should check if file exists, if it doesn't - create
     }
 
