@@ -23,9 +23,7 @@ public class MapEditorCanvas extends MapEditorPanel
     public void paint(Graphics g)
     {
         Graphics2D g2d = (Graphics2D)g;
-        Drawer drawer = style.CreateDrawer(g2d, game, 0);
-        drawer.draw();
-        GameCreatorWrapper gameCreator = game;
+        style.CreateDrawer(g2d, gameCreator, 0).draw();
         distinguish(g2d, gameCreator.mapPosition, gameCreator.pointer == MapObjectType);
     }
 }

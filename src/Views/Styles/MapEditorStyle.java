@@ -1,5 +1,8 @@
 package Views.Styles;
 
+import Core.Game.GameAlike;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -7,6 +10,10 @@ import java.awt.image.BufferedImage;
  */
 public interface MapEditorStyle extends GameStyle
 {
+    BufferedImage getWallImage();
+    BufferedImage getEmptyCellImage();
+    BufferedImage getStrawberryImage();
+    BufferedImage getBlueberryImage();
     BufferedImage getChosenLocationImage();
     BufferedImage getActiveLocationImage();
 }

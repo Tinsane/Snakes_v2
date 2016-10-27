@@ -80,7 +80,7 @@ public class DefaultDrawer implements MapObjectVisitor, Drawer
     {
         visualItems.add(new VisualItem(getRotated(snakeCell == game.getSnake().head ? style.snakeHeadImage : style.snakeCellImage,
                 VelocityVector.up.getAngle(snakeCell.getVelocity())), x, y, 2));
-//        if (snakeCell != game.snake.head)
+//        if (snakeCell != gameCreator.snake.head)
 //            visualItems.add(new VisualItem(style.snakeSquareImage, (int)x, (int)y, 2));
     }
 

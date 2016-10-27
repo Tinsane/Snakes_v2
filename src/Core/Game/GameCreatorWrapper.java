@@ -21,7 +21,7 @@ public class GameCreatorWrapper extends GameCreator
         MapObjectType, MapPosition
     }
 
-    private List<MapObject> mapObjects = new ArrayList<>(); // wall and berries
+    private List<MapObject> mapObjects = new ArrayList<>();
 
     public IntPair mapPosition = new IntPair(1, 1);
     private int mapObjectIndex = 0;

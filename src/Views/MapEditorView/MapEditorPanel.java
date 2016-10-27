@@ -15,13 +15,13 @@ import java.io.IOException;
  */
 public abstract class MapEditorPanel extends JPanel
 {
-    protected GameCreatorWrapper game;
+    protected GameCreatorWrapper gameCreator;
     protected MapEditorStyle style;
 
-    MapEditorPanel(GameCreatorWrapper game, MapEditorStyle style, boolean doubleBuffered) throws IOException
+    MapEditorPanel(GameCreatorWrapper gameCreator, MapEditorStyle style, boolean doubleBuffered) throws IOException
     {
         super(doubleBuffered);
-        this.game = game;
+        this.gameCreator = gameCreator;
         this.style = style;
     }
 
