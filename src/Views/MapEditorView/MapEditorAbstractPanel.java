@@ -13,12 +13,12 @@ import java.io.IOException;
 /**
  * Created by ISmir on 27.10.2016.
  */
-public abstract class MapEditorPanel extends JPanel
+public abstract class MapEditorAbstractPanel extends JPanel
 {
     protected GameCreatorWrapper gameCreator;
     protected MapEditorStyle style;
 
-    MapEditorPanel(GameCreatorWrapper gameCreator, MapEditorStyle style, boolean doubleBuffered) throws IOException
+    MapEditorAbstractPanel(GameCreatorWrapper gameCreator, MapEditorStyle style, boolean doubleBuffered) throws IOException
     {
         super(doubleBuffered);
         this.gameCreator = gameCreator;
@@ -30,7 +30,7 @@ public abstract class MapEditorPanel extends JPanel
         graphics.drawImage(image, x * style.getTileSize(), y * style.getTileSize(), null);
     }
 
-    protected void distinguish(Graphics2D graphics, IntPair location, boolean active)
+    protected void highlight(Graphics2D graphics, IntPair location, boolean active)
     {
         BufferedImage distinguishImage = active ? style.getActiveLocationImage() : style.getChosenLocationImage();
         drawImage(graphics, style, distinguishImage, location.x, location.y);

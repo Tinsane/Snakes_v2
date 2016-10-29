@@ -1,7 +1,6 @@
 package Views.MapEditorView;
 
 import Core.Game.GameCreatorWrapper;
-import Views.Styles.Drawer;
 import Views.Styles.MapEditorStyle;
 
 import java.awt.*;
@@ -12,7 +11,7 @@ import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
 /**
  * Created by ISmir on 23.10.2016.
  */
-public class MapEditorCanvas extends MapEditorPanel
+public class MapEditorCanvas extends MapEditorAbstractPanel
 {
     MapEditorCanvas(GameCreatorWrapper game, MapEditorStyle style, boolean doubleBuffered) throws IOException
     {
@@ -24,6 +23,6 @@ public class MapEditorCanvas extends MapEditorPanel
     {
         Graphics2D g2d = (Graphics2D)g;
         style.CreateDrawer(g2d, gameCreator, 0).draw();
-        distinguish(g2d, gameCreator.mapPosition, gameCreator.pointer == MapObjectType);
+        highlight(g2d, gameCreator.mapPosition, gameCreator.pointer == MapObjectType);
     }
 }

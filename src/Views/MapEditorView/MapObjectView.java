@@ -7,14 +7,14 @@ import java.awt.image.BufferedImage;
 /**
  * Created by ISmir on 27.10.2016.
  */
-public class MapObjectPanel extends JPanel
+public class MapObjectView extends JPanel
 {
     BufferedImage objectImage;
 
-    public MapObjectPanel(BufferedImage objectImage)
+    public MapObjectView(BufferedImage objectImage)
     {
         this.objectImage = objectImage;
-        setSize(objectImage.getWidth(), objectImage.getHeight());
+        //setSize(objectImage.getWidth(), objectImage.getHeight());
     }
 
     @Override
