@@ -40,7 +40,13 @@ public class Frame extends JFrame
 
         addKeyListener(new MapEditorController(gameCreator, this));
 
-        setVisible(true);
+//        setVisible(true);
+//        SpringLayout layout = new SpringLayout();
+//        SpringLayout.Constraints constraints = new SpringLayout.Constraints();
+//
+//        setLayout(new SpringLayout());
+//        add(objectPanel, SpringLayout.NORTH);
+//        add(canvas, SpringLayout.VERTICAL_CENTER);
         setLayout(new GridLayout(2, 1));
         add(objectPanel);
         add(canvas);
