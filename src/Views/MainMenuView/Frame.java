@@ -30,12 +30,15 @@ public class Frame extends JFrame
         setSize(400, 400);
         setResizable(false);
 
-        MenuButton buttons[] = new MenuButton[] {new StartGameButton("Start Game", buttonFontSize, this),
+        MenuButton buttons[] = new MenuButton[] {
+                new StartGameButton("Start Game", buttonFontSize, this),
                 new MapEditorButton("Map Editor", buttonFontSize, this),
                 new ScoreboardButton("Scoreboard", buttonFontSize, this),
                 new SettingsButton("Settings", buttonFontSize, this),
                 new ExitButton("Exit", buttonFontSize, this)};
 
+        //TODO: code review by Van
+        //TODO: add(new MainMenuPanel(buttons, menuStyle));
         JPanel panel = new JPanel();
         add(panel);
         panel.setBackground(MenuStyle.backgroundColor);

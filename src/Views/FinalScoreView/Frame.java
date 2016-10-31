@@ -18,14 +18,17 @@ public class Frame extends JFrame
     {
         super();
         addWindowListener(new ParentFrameRestorer(this, mainMenuFrame));
+        //TODO: code review by Van
+        //TODO: add(new FinalScorePanel(menuStyle));
         JPanel panel = new JPanel();
         panel.setBackground(MenuStyle.backgroundColor);
         add(panel);
         panel.setLayout(new GridLayout(2, 1));
 
         JLabel scoreLabel = new JLabel("Final Score: " + finalScore, SwingConstants.CENTER);
-        scoreLabel.setForeground(Color.YELLOW);
-        scoreLabel.setFont(MenuStyle.getFont(40));
+        // TODO: code review by Van
+        scoreLabel.setForeground(Color.YELLOW); // TODO: to menuStyle
+        scoreLabel.setFont(MenuStyle.getFont(40)); // TODO: to menuStyle
         panel.add(scoreLabel);
 
         MenuButton mainMenuButton = new MenuButton("Main Menu", 40);

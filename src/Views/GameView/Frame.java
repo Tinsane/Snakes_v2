@@ -30,12 +30,15 @@ public class Frame extends JFrame
                 (game.getHeight() + 1) * settings.style.getTileSize());
         addWindowListener(new WindowAdapter()
         {
+            //TODO: code review by Van
+            //TODO: Убрать в отдельный класс. Тут это лишние 7 строчек, которые мусолят глаза.
             @Override
             public void windowClosing(WindowEvent e)
             {
                  stop();
             }
         });
+
         setTitle("Snakes_v2");
 
         currentTick = settings.gameUpdateFrequency;

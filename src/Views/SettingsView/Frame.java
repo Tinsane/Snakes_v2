@@ -24,6 +24,8 @@ public class Frame extends JFrame
     private Settings settings;
     public Frame(Views.MainMenuView.Frame mainMenuFrame)
     {
+        //TODO: code review by Van
+        //TODO: Слишком много кода - декомпозируй.
         super();
         settings = mainMenuFrame.settings;
         Container pane = getContentPane();
