@@ -76,7 +76,7 @@ public class Frame extends JFrame
         });
 
         TextButton exitButton = new TextButton("Exit", buttonFont, Color.YELLOW, new Color(255, 215, 0));
-        exitButton.addActionListener(e -> {setVisible(false); dispose();});
+        exitButton.addActionListener(Exit);
 
         panel.add(startGameButton);
         panel.add(mapEditorButton);
