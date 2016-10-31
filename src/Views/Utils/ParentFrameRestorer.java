@@ -1,4 +1,4 @@
-package Views.MainMenuView;
+package Views.Utils;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;

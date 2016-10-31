@@ -2,8 +2,9 @@ package Views.RecordsView;
 
 import Core.RecordsContainer.RecordsContainer;
 import Core.RecordsContainer.RecordsLoader;
-import Views.MainMenuView.MainMenuRestorer;
-import Views.Utils.TextButton;
+import Views.Styles.MenuStyle;
+import Views.Utils.MenuButton;
+import Views.Utils.ParentFrameRestorer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +16,9 @@ import java.util.Map;
  */
 public class RecordsFrame extends JFrame
 {
-    public static final Font font = new Font("Tahoma", Font.BOLD, 45);;
     RecordsContainer records;
 
-    public RecordsFrame(Views.MainMenuView.Frame mainMenuFrame)
+    public RecordsFrame()
     {
         super();
         records = RecordsLoader.loadRecords();
@@ -33,16 +33,14 @@ public class RecordsFrame extends JFrame
 
         JPanel panel = new JPanel();
         add(panel);
-        panel.setBackground(Color.GREEN);
+        panel.setBackground(MenuStyle.backgroundColor);
         panel.setLayout(new GridLayout(records.count(), 1));
 
         for (Map.Entry<String, Integer> record :
                 records.getRecords())
         {
-            panel.add(new TextButton(String.format("%s: %d", record.getKey(), record.getValue()), font, Color.YELLOW, new Color(255, 215, 0)));
+            panel.add(new MenuButton(String.format("%s: %d", record.getKey(), record.getValue()), 45));
         }
-
-        addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
 
         setVisible(true);
     }

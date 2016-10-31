@@ -2,12 +2,11 @@ package Views.MapEditorView;
 
 import Controllers.MapEditorController;
 import Core.Game.GameCreatorWrapper;
-import Views.MainMenuView.MainMenuRestorer;
+import Views.Utils.ParentFrameRestorer;
 import Views.Styles.Default.DefaultStyle;
 import Views.Styles.GameStyle;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -18,20 +17,21 @@ public class Frame extends JFrame
     private GameCreatorWrapper gameCreator;
     private MapEditorCanvas canvas;
 
-    public Frame(Views.MainMenuView.Frame mainMenuFrame) throws IOException
-    {
-        this(mainMenuFrame, new DefaultStyle());
-    }
-
-    public Frame(Views.MainMenuView.Frame mainMenuFrame, GameStyle style) throws IOException
+    public Frame(GameStyle style)
     {
         super();
         setTitle("SnakeMapEditor");
-        addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
 
         gameCreator = new GameCreatorWrapper(5, 5);
-        canvas = new MapEditorCanvas(gameCreator, style, true);
-
+        try
+        {
+            canvas = new MapEditorCanvas(gameCreator, style, true);
+        }
+        catch (IOException exception)
+        {
+            JOptionPane.showMessageDialog(this, "Error: can't load something.",
+                    "Snake feels herself sick", JOptionPane.ERROR_MESSAGE);
+        }
         setSize((gameCreator.getWidth() + 1) * style.getTileSize(),
                 (gameCreator.getHeight() + 1) * style.getTileSize());
 

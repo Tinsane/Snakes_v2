@@ -1,8 +1,28 @@
 package Views.MainMenuView.Buttons;
 
+import Core.Game.GameCreator;
+import Core.MapObjects.StaticMapObjects.Wall;
+import Views.Utils.FrameLoaderButton;
+
+import javax.swing.*;
+
 /**
  * Created by Владимир on 31.10.2016.
  */
-public class StartGameButton
+public class StartGameButton extends FrameLoaderButton
 {
+    public StartGameButton(String text, int fontSize, JFrame parent)
+    {
+        super(text, fontSize, parent);
+    }
+
+    @Override
+    protected JFrame createFrame(JFrame parent)
+    {
+        GameCreator creator = new GameCreator();
+        creator.setMapSize(10, 10);
+        creator.placeWall(5, 5);
+        creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
+        return new Views.GameView.Frame((Views.MainMenuView.Frame) parent, creator.createGame(0, 0, 1));
+    }
 }

@@ -1,5 +1,8 @@
 package MainPackage;
 
+import Core.Game.GameCreator;
+import Core.MapObjects.StaticMapObjects.Wall;
+
 import java.io.IOException;
 
 public class Main

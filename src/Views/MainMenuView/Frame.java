@@ -1,11 +1,10 @@
 package Views.MainMenuView;
 
-import Core.Game.GameCreator;
-import Core.MapObjects.StaticMapObjects.Wall;
 import Views.GameView.Settings;
-import Views.RecordsView.RecordsFrame;
+import Views.MainMenuView.Buttons.*;
 import Views.Styles.Default.DefaultStyle;
-import Views.Utils.TextButton;
+import Views.Styles.MenuStyle;
+import Views.Utils.MenuButton;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,6 +17,7 @@ import java.io.IOException;
  */
 public class Frame extends JFrame
 {
+    private final int buttonFontSize = 45;
     public Settings settings;
     public Frame() throws IOException
     {
@@ -30,59 +30,18 @@ public class Frame extends JFrame
         setSize(400, 400);
         setResizable(false);
 
+        MenuButton buttons[] = new MenuButton[] {new StartGameButton("Start Game", buttonFontSize, this),
+                new MapEditorButton("Map Editor", buttonFontSize, this),
+                new ScoreboardButton("Scoreboard", buttonFontSize, this),
+                new SettingsButton("Settings", buttonFontSize, this),
+                new ExitButton("Exit", buttonFontSize, this)};
+
         JPanel panel = new JPanel();
         add(panel);
-        panel.setBackground(Color.GREEN);
-        panel.setLayout(new GridLayout(5, 1));
-        Font buttonFont = new Font("Tahoma", Font.BOLD, 45);
-
-        TextButton startGameButton = new TextButton("Start Game", buttonFont, Color.YELLOW, new Color(255, 215, 0));
-        startGameButton.addActionListener(e -> {
-            setVisible(false);
-            GameCreator creator = new GameCreator();
-            creator.setMapSize(10, 10);
-            creator.placeWall(5, 5);
-            creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
-            Views.GameView.Frame gameFrame =
-                    new Views.GameView.Frame(this, creator.createGame(0, 0, 1), settings);
-            gameFrame.start();
-        });
-
-        TextButton mapEditorButton = new TextButton("Map Editor", buttonFont, Color.YELLOW, new Color(255, 215, 0));
-        mapEditorButton.addActionListener(e -> {
-            setVisible(false);
-            try
-            {
-                new Views.MapEditorView.Frame(this);
-            }
-            catch (IOException exception)
-            {
-                JOptionPane.showMessageDialog(this, "Error: can't load something.",
-                        "Snake feels herself sick", JOptionPane.ERROR_MESSAGE);
-                setVisible(true);
-            }
-        });
-
-        TextButton scoreboardButton = new TextButton("Scoreboard", buttonFont, Color.YELLOW, new Color(255, 215, 0));
-        scoreboardButton.addActionListener(e ->
-        {
-            setVisible(false);
-            new RecordsFrame(this);
-        });
-        TextButton settingsButton = new TextButton("Settings", buttonFont, Color.YELLOW, new Color(255, 215, 0));
-        settingsButton.addActionListener(e -> {
-            setVisible(false);
-            new Views.SettingsView.Frame(this, settings);
-        });
-
-        TextButton exitButton = new TextButton("Exit", buttonFont, Color.YELLOW, new Color(255, 215, 0));
-        exitButton.addActionListener(Exit);
-
-        panel.add(startGameButton);
-        panel.add(mapEditorButton);
-        panel.add(scoreboardButton);
-        panel.add(settingsButton);
-        panel.add(exitButton);
+        panel.setBackground(MenuStyle.backgroundColor);
+        panel.setLayout(new GridLayout(buttons.length, 1));
+        for(MenuButton button : buttons)
+            panel.add(button);
         setVisible(true);
     }
 
