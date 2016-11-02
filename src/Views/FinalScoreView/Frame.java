@@ -1,9 +1,10 @@
 package Views.FinalScoreView;
 
 import Views.Styles.MenuStyle;
+import Views.Utils.CloseFrameButton;
 import Views.Utils.MenuButton;
+import Views.Utils.MenuPanel;
 import Views.Utils.ParentFrameRestorer;
-import Views.Utils.TextButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,22 +19,14 @@ public class Frame extends JFrame
     {
         super();
         addWindowListener(new ParentFrameRestorer(this, mainMenuFrame));
-        //TODO: code review by Van
-        //TODO: add(new FinalScorePanel(menuStyle));
-        JPanel panel = new JPanel();
-        panel.setBackground(MenuStyle.backgroundColor);
-        add(panel);
-        panel.setLayout(new GridLayout(2, 1));
 
         JLabel scoreLabel = new JLabel("Final Score: " + finalScore, SwingConstants.CENTER);
-        // TODO: code review by Van
-        scoreLabel.setForeground(Color.YELLOW); // TODO: to menuStyle
-        scoreLabel.setFont(MenuStyle.getFont(40)); // TODO: to menuStyle
-        panel.add(scoreLabel);
+        scoreLabel.setForeground(MenuStyle.TEXT_COLOR);
+        scoreLabel.setFont(MenuStyle.getFont(40));
 
-        MenuButton mainMenuButton = new MenuButton("Main Menu", 40);
-        mainMenuButton.addActionListener(e -> dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)));
-        panel.add(mainMenuButton);
+        MenuButton mainMenuButton = new CloseFrameButton("Main Menu", 40, this);
+
+        add(new MenuPanel(new Component[] {scoreLabel, mainMenuButton}));
 
         setSize(300, 400);
         setVisible(true);

@@ -9,6 +9,6 @@ public class MenuButton extends TextButton
 {
     public MenuButton(String text, int fontSize)
     {
-        super(text, MenuStyle.getFont(fontSize), MenuStyle.textColor, MenuStyle.pressedButtonColor);
+        super(text, MenuStyle.getFont(fontSize), MenuStyle.TEXT_COLOR, MenuStyle.PRESSED_BUTTON_COLOR);
     }
 }

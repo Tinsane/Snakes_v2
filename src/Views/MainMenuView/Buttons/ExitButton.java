@@ -7,11 +7,11 @@ import javax.swing.*;
 /**
  * Created by Владимир on 31.10.2016.
  */
-public class ExitButton extends MenuButton
+public final class ExitButton extends MenuButton
 {
-    public ExitButton(String text, int fontSize, JFrame parent)
+    public ExitButton(int fontSize, JFrame parent)
     {
-        super(text, fontSize);
+        super("Exit", fontSize);
         addActionListener(e -> parent.dispose());
     }
 }

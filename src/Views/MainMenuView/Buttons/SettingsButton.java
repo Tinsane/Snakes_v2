@@ -7,11 +7,11 @@ import javax.swing.*;
 /**
  * Created by Владимир on 31.10.2016.
  */
-public class SettingsButton extends FrameLoaderButton
+public final class SettingsButton extends FrameLoaderButton
 {
-    public SettingsButton(String text, int fontSize, JFrame parent)
+    public SettingsButton(int fontSize, JFrame parent)
     {
-        super(text, fontSize, parent);
+        super("Settings", fontSize, parent);
     }
 
     @Override

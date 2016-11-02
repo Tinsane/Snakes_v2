@@ -1,7 +1,9 @@
 package Views.SettingsView;
 
 import Views.GameView.Settings;
+import Views.SettingsView.Widgets.ApplyButton;
 import Views.Styles.MenuStyle;
+import Views.Utils.CloseFrameButton;
 import Views.Utils.MenuButton;
 import Views.Utils.TextRadioButton;
 
@@ -21,26 +23,24 @@ Settings:
  */
 public class Frame extends JFrame
 {
-    private Settings settings;
+    public Settings settings;
     public Frame(Views.MainMenuView.Frame mainMenuFrame)
     {
-        //TODO: code review by Van
-        //TODO: Слишком много кода - декомпозируй.
         super();
         settings = mainMenuFrame.settings;
         Container pane = getContentPane();
-        pane.setBackground(MenuStyle.backgroundColor);
+        pane.setBackground(MenuStyle.BACKGROUND_COLOR);
         pane.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
         Box speedBox = new Box(BoxLayout.X_AXIS);
         JLabel speedLabel = new JLabel("Speed:", SwingConstants.LEFT);
-        speedLabel.setForeground(MenuStyle.textColor);
+        speedLabel.setForeground(MenuStyle.TEXT_COLOR);
         speedLabel.setFont(MenuStyle.getFont(40));
         speedBox.add(speedLabel);
         ButtonGroup speedGroup = new ButtonGroup();
         TextRadioButton button1x = new TextRadioButton("1x", MenuStyle.getFont(40),
-                MenuStyle.textColor, MenuStyle.pressedButtonColor);
+                MenuStyle.TEXT_COLOR, MenuStyle.PRESSED_BUTTON_COLOR);
         speedGroup.add(button1x);
         speedBox.add(button1x);
 
@@ -52,11 +52,8 @@ public class Frame extends JFrame
         constraints.weighty = 0.5;
         pane.add(speedBox, constraints);
 
-        MenuButton applyButton = new MenuButton("Apply", 40);
-        applyButton.addActionListener(e -> {
-            mainMenuFrame.settings = this.settings;
-            dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-        });
+
+        MenuButton applyButton = new ApplyButton(40, this, mainMenuFrame);
         constraints.gridwidth = 1;
         constraints.weighty = 0.3;
         constraints.weightx = 0.5;
@@ -64,8 +61,7 @@ public class Frame extends JFrame
         constraints.gridy = 1;
         pane.add(applyButton, constraints);
 
-        MenuButton cancelButton = new MenuButton("Cancel", 40);
-        cancelButton.addActionListener(e -> dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)));
+        MenuButton cancelButton = new CloseFrameButton("Cancel", 40, this);
         constraints.gridx = 1;
         constraints.gridy = 1;
         pane.add(cancelButton, constraints);

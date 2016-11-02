@@ -24,7 +24,7 @@ public final class MenuStyle
     {
         return new Font("Tahoma", Font.BOLD, size);
     }
-    public static final Color textColor = Color.YELLOW;
-    public static final Color pressedButtonColor = new Color(255, 215, 0);
-    public static final Color backgroundColor = Color.GREEN;
+    public static final Color TEXT_COLOR = Color.YELLOW;
+    public static final Color PRESSED_BUTTON_COLOR = new Color(255, 215, 0);
+    public static final Color BACKGROUND_COLOR = Color.GREEN;
 }

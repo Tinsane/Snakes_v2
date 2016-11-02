@@ -3,12 +3,11 @@ package Views.MainMenuView;
 import Views.GameView.Settings;
 import Views.MainMenuView.Buttons.*;
 import Views.Styles.Default.DefaultStyle;
-import Views.Styles.MenuStyle;
 import Views.Utils.MenuButton;
+import Views.Utils.MenuPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -30,21 +29,14 @@ public class Frame extends JFrame
         setSize(400, 400);
         setResizable(false);
 
-        MenuButton buttons[] = new MenuButton[] {
-                new StartGameButton("Start Game", buttonFontSize, this),
-                new MapEditorButton("Map Editor", buttonFontSize, this),
-                new ScoreboardButton("Scoreboard", buttonFontSize, this),
-                new SettingsButton("Settings", buttonFontSize, this),
-                new ExitButton("Exit", buttonFontSize, this)};
+        MenuButton buttons[] = {
+                new StartGameButton(buttonFontSize, this),
+                new MapEditorButton(buttonFontSize, this),
+                new ScoreboardButton(buttonFontSize, this),
+                new SettingsButton(buttonFontSize, this),
+                new ExitButton(buttonFontSize, this)};
 
-        //TODO: code review by Van
-        //TODO: add(new MainMenuPanel(buttons, menuStyle));
-        JPanel panel = new JPanel();
-        add(panel);
-        panel.setBackground(MenuStyle.backgroundColor);
-        panel.setLayout(new GridLayout(buttons.length, 1));
-        for(MenuButton button : buttons)
-            panel.add(button);
+        add(new MenuPanel(buttons));
         setVisible(true);
     }
 

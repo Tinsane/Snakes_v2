@@ -9,11 +9,11 @@ import javax.swing.*;
 /**
  * Created by Владимир on 31.10.2016.
  */
-public class StartGameButton extends FrameLoaderButton
+public final class StartGameButton extends FrameLoaderButton
 {
-    public StartGameButton(String text, int fontSize, JFrame parent)
+    public StartGameButton(int fontSize, JFrame parent)
     {
-        super(text, fontSize, parent);
+        super("Start Game", fontSize, parent);
     }
 
     @Override

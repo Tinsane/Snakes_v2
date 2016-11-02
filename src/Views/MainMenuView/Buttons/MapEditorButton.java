@@ -7,11 +7,11 @@ import javax.swing.*;
 /**
  * Created by Владимир on 31.10.2016.
  */
-public class MapEditorButton extends FrameLoaderButton
+public final class MapEditorButton extends FrameLoaderButton
 {
-    public MapEditorButton(String text, int fontSize, JFrame parent)
+    public MapEditorButton(int fontSize, JFrame parent)
     {
-        super(text, fontSize, parent);
+        super("Map Editor", fontSize, parent);
     }
 
     @Override

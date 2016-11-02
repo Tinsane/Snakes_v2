@@ -7,11 +7,11 @@ import javax.swing.*;
 /**
  * Created by Владимир on 31.10.2016.
  */
-public class ScoreboardButton extends FrameLoaderButton
+public final class ScoreboardButton extends FrameLoaderButton
 {
-    public ScoreboardButton(String text, int fontSize, JFrame parent)
+    public ScoreboardButton(int fontSize, JFrame parent)
     {
-        super(text, fontSize, parent);
+        super("Scoreboard", fontSize, parent);
     }
 
     @Override
