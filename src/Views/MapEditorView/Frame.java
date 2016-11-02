@@ -29,7 +29,7 @@ public class Frame extends JFrame
         }
         catch (IOException exception)
         {
-            JOptionPane.showMessageDialog(this, "Error: can't load something.",
+            JOptionPane.showMessageDialog(this, "Error: Can not load textures.",
                     "Snake feels herself sick", JOptionPane.ERROR_MESSAGE);
         }
         setSize((gameCreator.getWidth() + 1) * style.getTileSize(),

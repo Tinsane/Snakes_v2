@@ -27,8 +27,8 @@ public class RecordsFrame extends JFrame
         records = RecordsLoader.loadRecords();
 
         records = new RecordsContainer(new HashMap<>()); //TODO: delete
+        records.addRecord("Kekmaster", 91); //TODO: delete
         records.addRecord("Van", 84); //TODO: delete
-        records.addRecord("Kekmaster", 85); //TODO: delete
 
         setTitle("SnakeRecords");
 

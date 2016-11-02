@@ -8,7 +8,6 @@ import Views.Utils.ParentFrameRestorer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 
 /**
  * Created by Владимир on 24.10.2016.
