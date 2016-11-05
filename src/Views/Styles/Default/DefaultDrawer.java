@@ -5,6 +5,7 @@ import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
+import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
@@ -41,6 +42,11 @@ public class DefaultDrawer implements MapObjectVisitor, Drawer
     private void drawImage(BufferedImage image, double x, double y)
     {
         graphics.drawImage(image, (int)Math.round(x * style.getTileSize()), (int)Math.round(y * style.getTileSize()), null);
+    }
+
+    @Override
+    public void visit(EmptyCell emptyCell)
+    {
     }
 
     @Override

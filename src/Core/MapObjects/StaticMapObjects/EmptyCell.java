@@ -57,5 +57,6 @@ public class EmptyCell extends StaticMapObject
     @Override
     public void acceptVisitor(MapObjectVisitor visitor)
     {
+        visitor.visit(this);
     }
 }

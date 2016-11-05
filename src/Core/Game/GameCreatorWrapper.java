@@ -7,8 +7,11 @@ import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
+import com.sun.javafx.UnmodifiableArrayList;
+import com.sun.javafx.collections.ImmutableObservableList;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,6 +25,18 @@ public class GameCreatorWrapper extends GameCreator
     }
 
     private List<MapObject> mapObjects = new ArrayList<>();
+
+    public UnmodifiableArrayList<MapObject> getMapObjects()
+    {
+        MapObject[] mapObjectsArray = new MapObject[mapObjects.size()];
+        mapObjects.toArray(mapObjectsArray);
+        return new UnmodifiableArrayList<>(mapObjectsArray, mapObjectsArray.length);
+    }
+
+    public int getMapObjectsCount()
+    {
+        return mapObjects.size();
+    }
 
     public IntPair mapPosition = new IntPair(1, 1);
     private int mapObjectIndex = 0;

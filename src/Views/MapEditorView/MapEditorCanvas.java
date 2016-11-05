@@ -25,4 +25,11 @@ public class MapEditorCanvas extends MapEditorAbstractPanel
         style.CreateDrawer(g2d, gameCreator, 0).draw();
         highlight(g2d, gameCreator.mapPosition, gameCreator.pointer == MapObjectType);
     }
+
+    @Override
+    public Dimension getPreferredSize()
+    {
+        return new Dimension(gameCreator.getWidth() * style.getTileSize(),
+                             gameCreator.getHeight() * style.getTileSize());
+    }
 }
