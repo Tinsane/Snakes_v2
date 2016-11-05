@@ -7,6 +7,7 @@ import java.awt.*;
 import java.io.IOException;
 
 import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
+import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
 
 /**
  * Created by ISmir on 23.10.2016.
@@ -23,7 +24,7 @@ public class MapEditorCanvas extends MapEditorAbstractPanel
     {
         Graphics2D g2d = (Graphics2D)g;
         style.CreateDrawer(g2d, gameCreator, 0).draw();
-        highlight(g2d, gameCreator.mapPosition, gameCreator.pointer == MapObjectType);
+        highlight(g2d, gameCreator.mapPosition, gameCreator.pointer == MapPosition);
     }
 
     @Override

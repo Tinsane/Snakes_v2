@@ -19,7 +19,6 @@ public class Frame extends JFrame
     private GameCreatorWrapper gameCreator;
     private MapEditorCanvas canvas;
     private ObjectPanel objectPanel;
-    private MapEditorStyle style;
 
     public Frame(Views.MainMenuView.Frame mainMenuFrame) throws IOException
     {
@@ -35,7 +34,6 @@ public class Frame extends JFrame
         gameCreator = new GameCreatorWrapper(5, 5);
         canvas = new MapEditorCanvas(gameCreator, new MapEditorDefaultStyle(), true);
         objectPanel = new ObjectPanel(style, gameCreator, true);
-        this.style = style;
 
         addKeyListener(new MapEditorController(gameCreator, this));
 
@@ -51,14 +49,12 @@ public class Frame extends JFrame
 
     public void update()
     {
-        setSize(placedVertical(canvas.getPreferredSize(), objectPanel.getPreferredSize()));
-//        setSize(gameCreator.getWidth() * style.getTileSize(),
-//                gameCreator.getHeight() * style.getTileSize() + style.getMapObjectWrapper().getHeight());
-        objectPanel.repaint();
+        setSize(placedVertically(canvas.getPreferredSize(), objectPanel.getPreferredSize()));
+        objectPanel.update();
         canvas.repaint();
     }
 
-    private Dimension placedVertical(Dimension... dimensions)
+    private Dimension placedVertically(Dimension... dimensions)
     {
         return Arrays
                 .stream(dimensions)

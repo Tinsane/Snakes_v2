@@ -38,8 +38,8 @@ public class MapEditorController implements KeyListener
         {
             if (gameCreator.pointer == MapObjectType)
             {
-                if (velocity.x == 0)
-                    gameCreator.moveMapObjectIndexOrStay(velocity.y);
+                if (velocity.y == 0)
+                    gameCreator.moveMapObjectIndexOrStay(velocity.x);
             }
             else
                 gameCreator.movePositionOrStay(velocity);

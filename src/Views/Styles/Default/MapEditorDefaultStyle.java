@@ -15,12 +15,14 @@ public class MapEditorDefaultStyle extends DefaultStyle implements MapEditorStyl
     public final BufferedImage chosenLocationImage;
     public final BufferedImage activeLocationImage;
     public final BufferedImage mapObjectWrapperImage;
+    public final BufferedImage absolutelyEmptyImage;
 
     public MapEditorDefaultStyle() throws IOException
     {
         chosenLocationImage = loadImage("chosen.png");
         activeLocationImage = loadImage("active.png");
         mapObjectWrapperImage = loadImage("map_object_wrapper.png");
+        absolutelyEmptyImage = loadImage("absolutely_empty.png");
     }
 
     @Override
@@ -69,5 +71,11 @@ public class MapEditorDefaultStyle extends DefaultStyle implements MapEditorStyl
     public BufferedImage getMapObjectWrapper()
     {
         return mapObjectWrapperImage;
+    }
+
+    @Override
+    public BufferedImage getAbsolutelyEmptyImage()
+    {
+        return absolutelyEmptyImage;
     }
 }

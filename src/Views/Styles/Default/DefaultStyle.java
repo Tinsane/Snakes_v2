@@ -2,6 +2,7 @@ package Views.Styles.Default;
 
 import Core.Game.GameAlike;
 import Core.MapObjects.MapObjectVisitor;
+import Views.Styles.BaseGameStyle;
 import Views.Styles.Drawer;
 import Views.Styles.GameStyle;
 
@@ -13,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by ISmir on 18.10.2016.
  */
-public class DefaultStyle implements GameStyle
+public class DefaultStyle extends BaseGameStyle
 {
     public final BufferedImage wallImage;
     public final BufferedImage sandGlassImage;
@@ -22,18 +23,6 @@ public class DefaultStyle implements GameStyle
     public final BufferedImage snakeCellImage;
     public final BufferedImage emptyCellImage;
     public final BufferedImage snakeHeadImage;
-
-    protected BufferedImage loadImage(String filename) throws IOException
-    {
-        try
-        {
-            return ImageIO.read(getClass().getResource(filename));
-        }
-        catch (IllegalArgumentException e)
-        {
-            throw new IOException("Error: pictures weren't found.");
-        }
-    }
 
     public DefaultStyle() throws IOException
     {
@@ -50,10 +39,5 @@ public class DefaultStyle implements GameStyle
     public Drawer CreateDrawer(Graphics2D g2d, GameAlike game, double turnPartLeft)
     {
         return new DefaultDrawer(this, g2d, game, turnPartLeft);
-    }
-
-    public int getTileSize()
-    {
-        return 50;
     }
 }

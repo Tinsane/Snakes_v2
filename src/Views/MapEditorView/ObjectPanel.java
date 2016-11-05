@@ -11,6 +11,10 @@ import com.sun.javafx.geom.Dimension2D;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Vector;
+
+import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
+import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
 
 /**
  * Created by ISmir on 27.10.2016.
@@ -19,6 +23,7 @@ public class ObjectPanel extends JPanel
 {
     GameCreatorWrapper gameCreator;
     MapEditorStyle style;
+    Vector<MapObjectView> objectViews = new Vector<>();
 
     ObjectPanel(MapEditorStyle style, GameCreatorWrapper gameCreator, boolean doubleBuffered) throws IOException
     {
@@ -35,7 +40,11 @@ public class ObjectPanel extends JPanel
         MapObjectViewBuilder viewBuilder = new MapObjectViewBuilder(style);
         UnmodifiableArrayList<MapObject> mapObjects = gameCreator.getMapObjects();
         for (MapObject mapObject : mapObjects)
-            add(viewBuilder.createView(mapObject));
+        {
+            MapObjectView currentObjectView = viewBuilder.createView(mapObject);
+            add(currentObjectView);
+            objectViews.add(currentObjectView);
+        }
     }
 
     @Override
@@ -43,5 +52,16 @@ public class ObjectPanel extends JPanel
     {
         return new Dimension(gameCreator.getMapObjectsCount() * style.getMapObjectWrapper().getWidth(),
                              style.getMapObjectWrapper().getHeight());
+    }
+
+    public void update()
+    {
+        objectViews.forEach(MapObjectView::setUnselected);
+        MapObjectView selected = objectViews.get(gameCreator.mapObjectIndex);
+        if (gameCreator.pointer == MapPosition)
+            selected.setChosen();
+        else
+            selected.setActive();
+        repaint();
     }
 }

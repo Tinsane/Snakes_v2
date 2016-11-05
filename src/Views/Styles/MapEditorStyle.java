@@ -15,7 +15,9 @@ public interface MapEditorStyle extends GameStyle
     BufferedImage getStrawberryImage();
     BufferedImage getBlueberryImage();
     BufferedImage getSandGlassImage();
+
     BufferedImage getChosenLocationImage();
     BufferedImage getActiveLocationImage();
     BufferedImage getMapObjectWrapper();
+    BufferedImage getAbsolutelyEmptyImage();
 }

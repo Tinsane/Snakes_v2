@@ -39,7 +39,7 @@ public class GameCreatorWrapper extends GameCreator
     }
 
     public IntPair mapPosition = new IntPair(1, 1);
-    private int mapObjectIndex = 0;
+    public int mapObjectIndex = 0;
 
     public Pointer pointer = Pointer.MapPosition;
 
