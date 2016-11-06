@@ -20,6 +20,7 @@ public class AddSnakeListener extends MapEditorAbstractController implements Act
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        gameCreator.placeSnake(1);
+        throw new NotImplementedException();
+//        gameCreator.placeSnake(1);
     }
 }

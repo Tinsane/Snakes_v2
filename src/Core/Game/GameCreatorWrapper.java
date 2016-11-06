@@ -179,11 +179,11 @@ public class GameCreatorWrapper extends GameCreator
         return true;
     }
 
-    public void placeSnake(int length)
-    {
-        if (length < 1)
-            throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", length));
-        Snake snake = new Snake(length);
-        placeMapObject(snake.head);
-    }
+//    public void placeSnake(int length)
+//    {
+//        if (length < 1)
+//            throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", length));
+//        Snake snake = new Snake(length);
+//        placeMapObject(snake.head);
+//    }
 }
