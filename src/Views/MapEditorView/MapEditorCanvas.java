@@ -1,9 +1,13 @@
 package Views.MapEditorView;
 
 import Core.Game.GameCreatorWrapper;
+import Core.Utils.IntPair;
+import Views.Styles.GameStyle;
 import Views.Styles.MapEditorStyle;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
@@ -12,11 +16,16 @@ import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
 /**
  * Created by ISmir on 23.10.2016.
  */
-public class MapEditorCanvas extends MapEditorAbstractPanel
+public class MapEditorCanvas extends JPanel
 {
-    MapEditorCanvas(GameCreatorWrapper game, MapEditorStyle style, boolean doubleBuffered) throws IOException
+    private GameCreatorWrapper gameCreator;
+    private MapEditorStyle style;
+
+    MapEditorCanvas(GameCreatorWrapper gameCreator, MapEditorStyle style, boolean doubleBuffered) throws IOException
     {
-        super(game, style, doubleBuffered);
+        super(doubleBuffered);
+        this.gameCreator = gameCreator;
+        this.style = style;
     }
 
     @Override
@@ -24,7 +33,7 @@ public class MapEditorCanvas extends MapEditorAbstractPanel
     {
         Graphics2D g2d = (Graphics2D)g;
         style.CreateDrawer(g2d, gameCreator, 0).draw();
-        highlight(g2d, gameCreator.mapPosition, gameCreator.pointer == MapPosition);
+        highlight(g2d, gameCreator.getMapPosition(), gameCreator.pointer == MapPosition);
     }
 
     @Override
@@ -32,5 +41,16 @@ public class MapEditorCanvas extends MapEditorAbstractPanel
     {
         return new Dimension(gameCreator.getWidth() * style.getTileSize(),
                              gameCreator.getHeight() * style.getTileSize());
+    }
+
+    private void drawImage(Graphics2D graphics, GameStyle style, BufferedImage image, int x, int y)
+    {
+        graphics.drawImage(image, x * style.getTileSize(), y * style.getTileSize(), null);
+    }
+
+    private void highlight(Graphics2D graphics, IntPair location, boolean active)
+    {
+        BufferedImage distinguishImage = active ? style.getActiveLocationImage() : style.getChosenLocationImage();
+        drawImage(graphics, style, distinguishImage, location.x, location.y);
     }
 }

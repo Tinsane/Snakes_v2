@@ -5,13 +5,12 @@ import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.Wall;
+import Core.Snake.Snake;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
 import com.sun.javafx.UnmodifiableArrayList;
-import com.sun.javafx.collections.ImmutableObservableList;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,7 +37,18 @@ public class GameCreatorWrapper extends GameCreator
         return mapObjects.size();
     }
 
-    public IntPair mapPosition = new IntPair(1, 1);
+    public void updateMapPosition(IntPair mapPosition)
+    {
+        this.mapPosition = mapPosition;
+        clearBorders();
+    }
+
+    public IntPair getMapPosition()
+    {
+        return mapPosition;
+    }
+
+    private IntPair mapPosition = new IntPair(1, 1);
     public int mapObjectIndex = 0;
 
     public Pointer pointer = Pointer.MapPosition;
@@ -70,7 +80,25 @@ public class GameCreatorWrapper extends GameCreator
     {
         if (!(isCellInMap(newPosition)))
             return;
-        mapPosition = newPosition;
+        updateMapPosition(newPosition);
+    }
+
+    public void movePositionWithResizing(VelocityVector vector)
+    {
+        setPositionWithResizing(mapPosition.getAdded(vector.getIntPair()));
+    }
+
+    public void setPositionWithResizing(IntPair newPosition)
+    {
+        if (isCellInMap(newPosition))
+            updateMapPosition(newPosition);
+        else
+        {
+            IntPair xSizeAndCoordinate = getNewSizeAndCoordinate(getWidth(), newPosition.x);
+            IntPair ySizeAndCoordinate = getNewSizeAndCoordinate(getHeight(), newPosition.y);
+            resizeMap(xSizeAndCoordinate.x - 2, ySizeAndCoordinate.x - 2, Wall::new);
+            updateMapPosition(new IntPair(xSizeAndCoordinate.y, ySizeAndCoordinate.y));
+        }
     }
 
     public void moveMapObjectIndexOrStay(int shift)
@@ -100,11 +128,62 @@ public class GameCreatorWrapper extends GameCreator
         placeMapObject(mapPosition.x - 1, mapPosition.y - 1, mapObject);
     }
 
-//    public void placeSnake(int length)
-//    {
-//        if (length < 1)
-//            throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", length));
-//        Snake snake = new Snake(length);
-//        placeMapObject(snake.head);
-//    }
+    //First element is newSize
+    //Second is newCoordinate
+    private IntPair getNewSizeAndCoordinate(int currentSize, int coordinateToFit)
+    {
+        if (coordinateToFit <= 0)
+            return new IntPair(currentSize, 1);
+            //return new IntPair(currentSize + (1 - coordinateToFit),  1);
+        if (coordinateToFit >= currentSize - 1)
+            return new IntPair(currentSize + (coordinateToFit - currentSize + 2), coordinateToFit);
+        return new IntPair(currentSize, coordinateToFit);
+    }
+
+    public void clearBorders()
+    {
+        int cleanLines = 0;
+        int cleanColumns = 0;
+
+        for (int y = getHeight() - 2; y >= 0; --y)
+            if (!lineOfWalls(y) || mapPosition.y == y)
+            {
+                cleanLines = getHeight() - 2 - y;
+                break;
+            }
+        for (int x = getWidth() - 2; x >= 0; --x)
+            if (!columnOfWalls(x) || mapPosition.x == x)
+            {
+                cleanColumns = getWidth() - 2 - x;
+                break;
+            }
+
+        if (cleanColumns == 0 && cleanLines == 0)
+            return;
+        resizeMap(getWidth() - 2 - cleanColumns, getHeight() - 2 - cleanLines);
+    }
+
+    private boolean lineOfWalls(int lineNumber)
+    {
+        for (int i = 0; i < getWidth(); ++i)
+            if (!(map[i][lineNumber] instanceof Wall))
+                return false;
+        return true;
+    }
+
+    private boolean columnOfWalls(int columnNumber)
+    {
+        for (int i  = 0; i < getHeight(); ++i)
+            if (!(map[columnNumber][i] instanceof Wall))
+                return false;
+        return true;
+    }
+
+    public void placeSnake(int length)
+    {
+        if (length < 1)
+            throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", length));
+        Snake snake = new Snake(length);
+        placeMapObject(snake.head);
+    }
 }

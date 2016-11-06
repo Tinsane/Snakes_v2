@@ -11,6 +11,9 @@ import Core.Snake.Snake;
 import Core.Utils.IntPair;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
+
 import static java.lang.Integer.min;
 
 /**
@@ -19,7 +22,7 @@ import static java.lang.Integer.min;
 
 public class GameCreator implements GameAlike
 {
-    private MapObject[][] map;
+    protected MapObject[][] map;
 
     public GameCreator()
     {
@@ -61,10 +64,15 @@ public class GameCreator implements GameAlike
 
     public void setMapSize(int width, int height)
     {
-        map = new MapObject[height + 2][width + 2];
+        setMapSize(width, height, EmptyCell::new);
+    }
+
+    public void setMapSize(int width, int height, Supplier<MapObject> fillObjectBuilder)
+    {
+        map = new MapObject[width + 2][height + 2];
         for (int i = 0; i < map.length; ++i)
             for(int j = 0; j < map[0].length; ++j)
-                map[i][j] = new EmptyCell();
+                map[i][j] = fillObjectBuilder.get();
         for (int i = 0; i < map.length; ++i)
         {
             map[i][0] = new Wall();
@@ -79,8 +87,14 @@ public class GameCreator implements GameAlike
 
     public void resizeMap(int newWidth, int newHeight)
     {
+        resizeMap(newWidth, newHeight, EmptyCell::new);
+    }
+
+    public void resizeMap(int newWidth, int newHeight, Supplier<MapObject> fillObjectBuilder)
+    {
+        // possible to make faster
         MapObject[][] prevMap = map;
-        setMapSize(newWidth, newHeight);
+        setMapSize(newWidth, newHeight, fillObjectBuilder);
         for(int i = 0; i < min(prevMap.length, map.length) - 2; ++i)
             for(int j = 0; j < min(prevMap[0].length, map[0].length) - 2; ++j)
                 placeMapObject(i, j, prevMap[i + 1][j + 1]);

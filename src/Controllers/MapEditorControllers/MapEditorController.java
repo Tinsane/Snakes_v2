@@ -1,5 +1,7 @@
-package Controllers;
+package Controllers.MapEditorControllers;
 
+import Controllers.MapEditorControllers.MapEditorAbstractController;
+import Controllers.Utils;
 import Core.Game.GameCreatorWrapper;
 import Core.Utils.VelocityVector;
 import Views.MapEditorView.Frame;
@@ -13,15 +15,11 @@ import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
 /**
  * Created by Владимир on 20.10.2016.
  */
-public class MapEditorController implements KeyListener
+public class MapEditorController extends MapEditorAbstractController implements KeyListener
 {
-    private GameCreatorWrapper gameCreator;
-    private Frame frame;
-
-    public MapEditorController(GameCreatorWrapper gameCreator, Frame frame)
+    public MapEditorController(GameCreatorWrapper gameCreator, Frame mapEditorFrame)
     {
-        this.gameCreator = gameCreator;
-        this.frame = frame;
+        super(gameCreator, mapEditorFrame);
     }
 
     @Override
@@ -42,7 +40,7 @@ public class MapEditorController implements KeyListener
                     gameCreator.moveMapObjectIndexOrStay(velocity.x);
             }
             else
-                gameCreator.movePositionOrStay(velocity);
+                gameCreator.movePositionWithResizing(velocity);
         }
         else
         {
@@ -58,7 +56,7 @@ public class MapEditorController implements KeyListener
                     gameCreator.placeMapObject();
             }
         }
-        frame.update();
+        mapEditorFrame.update();
     }
 
     @Override

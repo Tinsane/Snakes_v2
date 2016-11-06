@@ -1,6 +1,6 @@
 package Views.MapEditorView;
 
-import Controllers.MapEditorController;
+import Controllers.MapEditorControllers.MapEditorController;
 import Core.Game.GameCreatorWrapper;
 import Views.MainMenuView.MainMenuRestorer;
 import Views.Styles.Default.MapEditorDefaultStyle;
@@ -40,6 +40,8 @@ public class Frame extends JFrame
         setVisible(true);
         setResizable(false);
 
+        setJMenuBar(new MapEditorMenuBar(gameCreator, this));
+
         setLayout(new BorderLayout());
         add(objectPanel, BorderLayout.PAGE_START);
         add(canvas, BorderLayout.CENTER);
@@ -49,7 +51,10 @@ public class Frame extends JFrame
 
     public void update()
     {
-        setSize(placedVertically(canvas.getPreferredSize(), objectPanel.getPreferredSize()));
+        setSize(placedVertically(
+                canvas.getPreferredSize(),
+                objectPanel.getPreferredSize(),
+                getMinimumSize())); // minimum size is sum size of menu bar and up border of window
         objectPanel.update();
         canvas.repaint();
     }
