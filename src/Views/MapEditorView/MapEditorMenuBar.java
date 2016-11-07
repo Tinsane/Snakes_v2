@@ -1,6 +1,6 @@
 package Views.MapEditorView;
 
-import Controllers.MapEditorControllers.AddSnakeListener;
+import Controllers.MapEditorControllers.PlaceSnakeListener;
 import Controllers.MapEditorControllers.ResizeMapListener;
 import Controllers.MapEditorControllers.SaveMapListener;
 import Core.Game.GameCreatorWrapper;
@@ -28,8 +28,9 @@ public class MapEditorMenuBar extends JMenuBar
         resizeItem.addActionListener(new ResizeMapListener(gameCreator, mapEditorFrame));
         editMenu.add(resizeItem);
 
-        JMenuItem addSnakeItem = new JMenuItem("Add snake");
-        resizeItem.addActionListener(new AddSnakeListener(gameCreator, mapEditorFrame));
+        JMenuItem addSnakeItem = new JMenuItem("Place snake");
+        addSnakeItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, ActionEvent.CTRL_MASK));
+        addSnakeItem.addActionListener(new PlaceSnakeListener(gameCreator, mapEditorFrame));
         editMenu.add(addSnakeItem);
 
         add(fileMenu);

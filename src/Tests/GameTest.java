@@ -19,7 +19,8 @@ public class GameTest
     {
         GameCreator gameCreator = new GameCreator();
         gameCreator.setMapSize(1, 1);
-        Game game = gameCreator.createGame(0, 0, 1);
+        gameCreator.placeSnake(0, 0, 1);
+        Game game = gameCreator.createGame();
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
         assertEquals(VelocityVector.down, game.snake.head.getVelocity());
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.left));
@@ -31,7 +32,8 @@ public class GameTest
     {
         GameCreator gameCreator = new GameCreator();
         gameCreator.setMapSize(3, 3);
-        Game game = gameCreator.createGame(1, 1, 10);
+        gameCreator.placeSnake(1, 1, 10);
+        Game game = gameCreator.createGame();
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.left));
         game.update();
         IntPair snakeHeadPos = game.snake.head.getCoordinates(game.getCurrentMap());
@@ -52,7 +54,8 @@ public class GameTest
         gameCreator.setMapSize(3, 3);
         gameCreator.placeBlueberry(1, 2);
         gameCreator.placeStrawberry(2, 2);
-        Game game = gameCreator.createGame(1, 1, 5);
+        gameCreator.placeSnake(1, 1, 5);
+        Game game = gameCreator.createGame();
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
         game.update();
         assertEquals(game.snake.getLength(), 6);
@@ -67,7 +70,8 @@ public class GameTest
         GameCreator gameCreator = new GameCreator();
         gameCreator.setMapSize(3, 3);
         gameCreator.placeWall(1, 2);
-        Game game = gameCreator.createGame(1, 1, 5);
+        gameCreator.placeSnake(1, 1, 5);
+        Game game = gameCreator.createGame();
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
         game.update();
         assertTrue(game.snake.getIsDestructed());
@@ -78,7 +82,8 @@ public class GameTest
     {
         GameCreator gameCreator = new GameCreator();
         gameCreator.setMapSize(3, 3);
-        Game game = gameCreator.createGame(1, 1, 10);
+        gameCreator.placeSnake(1, 1, 10);
+        Game game = gameCreator.createGame();
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
         game.update();
         game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.right));

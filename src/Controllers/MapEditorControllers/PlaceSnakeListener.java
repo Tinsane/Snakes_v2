@@ -10,9 +10,9 @@ import java.awt.event.ActionListener;
 /**
  * Created by ISmir on 06.11.2016.
  */
-public class AddSnakeListener extends MapEditorAbstractController implements ActionListener
+public class PlaceSnakeListener extends MapEditorAbstractController implements ActionListener
 {
-    public AddSnakeListener(GameCreatorWrapper gameCreator, Frame mapEditorFrame)
+    public PlaceSnakeListener(GameCreatorWrapper gameCreator, Frame mapEditorFrame)
     {
         super(gameCreator, mapEditorFrame);
     }
@@ -20,7 +20,7 @@ public class AddSnakeListener extends MapEditorAbstractController implements Act
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        throw new NotImplementedException();
-//        gameCreator.placeSnake(1);
+        gameCreator.placeSnake(1);
+        mapEditorFrame.update();
     }
 }

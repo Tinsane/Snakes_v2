@@ -163,6 +163,11 @@ public class GameCreatorWrapper extends GameCreator
         resizeMap(getWidth() - 2 - cleanColumns, getHeight() - 2 - cleanLines);
     }
 
+    public void placeSnake(int length)
+    {
+        placeSnake(mapPosition.x - 1, mapPosition.y - 1, 1);
+    }
+
     private boolean lineOfWalls(int lineNumber)
     {
         for (int i = 0; i < getWidth(); ++i)
@@ -178,12 +183,4 @@ public class GameCreatorWrapper extends GameCreator
                 return false;
         return true;
     }
-
-//    public void placeSnake(int length)
-//    {
-//        if (length < 1)
-//            throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", length));
-//        Snake snake = new Snake(length);
-//        placeMapObject(snake.head);
-//    }
 }

@@ -9,9 +9,9 @@ import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Snake.Snake;
 import Core.Utils.IntPair;
+import sun.plugin.dom.exception.InvalidStateException;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 
 import static java.lang.Integer.min;
@@ -23,6 +23,8 @@ import static java.lang.Integer.min;
 public class GameCreator implements GameAlike
 {
     protected MapObject[][] map;
+    protected Snake snake = null;
+    protected IntPair snakePosition = null;
 
     public GameCreator()
     {
@@ -38,16 +40,10 @@ public class GameCreator implements GameAlike
         throw new NotImplementedException();
     }
 
-    public Game createGame(int snakeX, int snakeY, int snakeLength)
+    public Game createGame()
     {
-        snakeX += 1;
-        snakeY += 1;
-        if (!isCellInMap(snakeX, snakeY) ||
-                map[snakeX][snakeY].getClass() != EmptyCell.class)
-            throw new IllegalArgumentException("Invalid snake position!");
-        SnakeCell cell = new SnakeCell(null);
-        Snake snake = new Snake(snakeLength, cell);
-        map[snakeX][snakeY] = cell;
+        if (snake == null)
+            throw new InvalidStateException("Snake is null");
         return new Game(map, snake);
     }
 
@@ -104,6 +100,8 @@ public class GameCreator implements GameAlike
     {
         if (!isCellInMap(x + 1, y + 1))
             throw new IllegalArgumentException("No such cell in the map.");
+        if (map[x + 1][y + 1] instanceof SnakeCell)
+            deleteSnake();
         map[x + 1][y + 1] = mapObject;
     }
 
@@ -127,6 +125,15 @@ public class GameCreator implements GameAlike
         placeMapObject(x, y, new SandGlass(rollbackTurnsCount));
     }
 
+    public void placeSnake(int snakeX, int snakeY, int snakeLength)
+    {
+        if (snakeLength < 1)
+            throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", snakeLength));
+        Snake snake = new Snake(snakeLength);
+        placeMapObject(snakeX, snakeY, snake.head);
+        setSnake(snake, snakeX, snakeY);
+    }
+
     // LU - left up angle of rectangle
     // RD - right down angle of rectangle
     public void placeMapObjectsInRectangle(int xLU, int yLU, int xRD, int yRD, MapObject mapObject)
@@ -146,6 +153,21 @@ public class GameCreator implements GameAlike
         placeMapObjectsInRectangle(xL, y, xR, y, mapObject);
     }
 
+    private void setSnake(Snake snake, int snakeX, int snakeY)
+    {
+        deleteSnake();
+        this.snake = snake;
+        snakePosition = new IntPair(snakeX, snakeY);
+    }
+
+    private void deleteSnake()
+    {
+        if (this.snake != null)
+            map[snakePosition.x + 1][snakePosition.y + 1] = new EmptyCell();
+        snake = null;
+        snakePosition = null;
+    }
+
     @Override
     public MapObject[][] getCurrentMap()
     {
@@ -155,6 +177,6 @@ public class GameCreator implements GameAlike
     @Override
     public Snake getSnake()
     {
-        return null;
+        return snake;
     }
 }

@@ -13,7 +13,7 @@ import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.Snake.Snake;
 import Core.Utils.IntPair;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -79,6 +79,48 @@ public class Game implements Serializable, GameAlike, Cloneable
         if (isFinished())
             throw new UnsupportedOperationException("Game finished. Impossible to update.");
         maps.addFirst(gameUpdater.getNewMap());
+    }
+
+    public static Game loadGame(String filePath) throws IOException, ClassNotFoundException
+    {
+        try (FileInputStream stream = new FileInputStream(filePath))
+        {
+            return loadGame(stream);
+        }
+    }
+
+    public static Game loadGame(FileInputStream fileInputStream) throws IOException, ClassNotFoundException
+    {
+        try (ObjectInputStream stream = new ObjectInputStream(fileInputStream))
+        {
+            return loadGame(stream);
+        }
+    }
+
+    public static Game loadGame(ObjectInputStream objectInputStream) throws IOException, ClassNotFoundException
+    {
+        return (Game)objectInputStream.readObject();
+    }
+
+    public void writeGame(String filePath) throws IOException, ClassNotFoundException
+    {
+        try (FileOutputStream stream = new FileOutputStream(filePath))
+        {
+            writeGame(stream);
+        }
+    }
+
+    public void writeGame(FileOutputStream fileOutputStream) throws IOException, ClassNotFoundException
+    {
+        try (ObjectOutputStream stream = new ObjectOutputStream(fileOutputStream))
+        {
+            writeGame(stream);
+        }
+    }
+
+    public void writeGame(ObjectOutputStream objectInputStream) throws IOException, ClassNotFoundException
+    {
+        objectInputStream.writeObject(this);
     }
 
     private class GameUpdater implements Serializable

@@ -1,10 +1,9 @@
 package Controllers.MapEditorControllers;
 
-import Controllers.MapEditorControllers.MapEditorAbstractController;
 import Core.Game.GameCreatorWrapper;
 import Views.MapEditorView.Frame;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,8 +18,18 @@ public class SaveMapListener extends MapEditorAbstractController implements Acti
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(ActionEvent e) throws IllegalStateException
     {
-        throw new NotImplementedException();
+        if (gameCreator.getSnake() == null)
+            throw new IllegalStateException("Snake not set");
+        JFileChooser fileChooser = new JFileChooser();
+        if (fileChooser.showSaveDialog(mapEditorFrame) == JFileChooser.APPROVE_OPTION)
+        {
+            throw new IWantToSleepException();
+        }
+    }
+
+    private class IWantToSleepException extends RuntimeException
+    {
     }
 }

@@ -43,8 +43,9 @@ public class Frame extends JFrame
             creator.setMapSize(10, 10);
             creator.placeWall(5, 5);
             creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
+            creator.placeSnake(0, 0, 1);
             Views.GameView.Frame gameFrame =
-                    new Views.GameView.Frame(this, creator.createGame(0, 0, 1), settings);
+                    new Views.GameView.Frame(this, creator.createGame(), settings);
             gameFrame.start();
         });
 
