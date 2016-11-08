@@ -11,7 +11,8 @@ import com.sun.javafx.geom.Dimension2D;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.Vector;
+import java.util.*;
+import java.util.List;
 
 import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
 import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
@@ -38,7 +39,7 @@ public class ObjectPanel extends JPanel
     private void addObjectsOnPanel(MapEditorStyle style, GameCreatorWrapper gameCreator)
     {
         MapObjectViewBuilder viewBuilder = new MapObjectViewBuilder(style);
-        UnmodifiableArrayList<MapObject> mapObjects = gameCreator.getMapObjects();
+        List<MapObject> mapObjects = gameCreator.getMapObjects();
         for (MapObject mapObject : mapObjects)
         {
             MapObjectView currentObjectView = viewBuilder.createView(mapObject);

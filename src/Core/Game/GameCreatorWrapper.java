@@ -12,6 +12,8 @@ import com.sun.javafx.UnmodifiableArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * Created by ISmir on 20.10.2016.
@@ -23,13 +25,14 @@ public class GameCreatorWrapper extends GameCreator
         MapObjectType, MapPosition
     }
 
-    private List<MapObject> mapObjects = new ArrayList<>();
+    private List<Supplier<MapObject>> mapObjects = new ArrayList<>();
 
-    public UnmodifiableArrayList<MapObject> getMapObjects()
+    public List<MapObject> getMapObjects()
     {
-        MapObject[] mapObjectsArray = new MapObject[mapObjects.size()];
-        mapObjects.toArray(mapObjectsArray);
-        return new UnmodifiableArrayList<>(mapObjectsArray, mapObjectsArray.length);
+        return mapObjects
+                .stream()
+                .map(Supplier::get)
+                .collect(Collectors.toList());
     }
 
     public int getMapObjectsCount()
@@ -54,10 +57,10 @@ public class GameCreatorWrapper extends GameCreator
     public Pointer pointer = Pointer.MapPosition;
 
     {
-        addObject(new EmptyCell());
-        addObject(new Wall());
-        addObject(new Strawberry());
-        addObject(new Blueberry());
+        addObject(() -> new EmptyCell());
+        addObject(() -> new Wall());
+        addObject(() -> new Strawberry());
+        addObject(() -> new Blueberry());
     }
 
     public GameCreatorWrapper()
@@ -113,14 +116,14 @@ public class GameCreatorWrapper extends GameCreator
         mapObjectIndex = newIndex;
     }
 
-    public void addObject(MapObject obj)
+    public void addObject(Supplier<MapObject> supplier)
     {
-        mapObjects.add(obj);
+        mapObjects.add(supplier);
     }
 
     public void placeMapObject()
     {
-        placeMapObject(mapObjects.get(mapObjectIndex));
+        placeMapObject(mapObjects.get(mapObjectIndex).get());
     }
 
     public void placeMapObject(MapObject mapObject)
