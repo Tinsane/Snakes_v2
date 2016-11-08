@@ -2,11 +2,10 @@ package Views.GameView;
 
 import Controllers.GameController;
 import Core.Game.Game;
-import Views.MainMenuView.MainMenuRestorer;
-import Views.Styles.Default.DefaultStyle;
 
 import javax.swing.*;
-import java.io.IOException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Created by ISmir on 08.10.2016.
@@ -20,24 +19,26 @@ public class Frame extends JFrame
     private Settings settings;
     private final GameViewCanvas canvas;
 
-    public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game) throws IOException
-    {
-        this(mainMenuFrame, game, new Settings(new DefaultStyle()));
-    }
-
-    public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game, Settings settings)
+    public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game)
     {
         super();
         this.mainMenuFrame = mainMenuFrame;
+        settings = mainMenuFrame.settings;
+        this.game = game;
         setSize((game.getWidth() + 1) * settings.style.getTileSize(),
                 (game.getHeight() + 1) * settings.style.getTileSize());
-        addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
+        addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                 stop();
+            }
+        });
+
         setTitle("Snakes_v2");
 
-        this.settings = settings;
         currentTick = settings.gameUpdateFrequency;
-
-        this.game = game;
 
         updateTimer = new Timer(settings.updateInterval, x -> update());
         updateTimer.setRepeats(true);
@@ -46,6 +47,7 @@ public class Frame extends JFrame
         add(canvas);
         addKeyListener(new GameController(game));
         setVisible(true);
+        start();
     }
 
     public void start()

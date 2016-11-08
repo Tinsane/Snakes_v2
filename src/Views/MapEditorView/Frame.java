@@ -2,12 +2,11 @@ package Views.MapEditorView;
 
 import Controllers.MapEditorControllers.MapEditorController;
 import Core.Game.GameCreatorWrapper;
-import Views.MainMenuView.MainMenuRestorer;
+import Views.Utils.ParentFrameRestorer;
 import Views.Styles.Default.MapEditorDefaultStyle;
 import Views.Styles.MapEditorStyle;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -20,7 +19,7 @@ public class Frame extends JFrame
     private MapEditorCanvas canvas;
     private ObjectPanel objectPanel;
 
-    public Frame(Views.MainMenuView.Frame mainMenuFrame) throws IOException
+    public Frame(GameStyle style)
     {
         this(mainMenuFrame, new MapEditorDefaultStyle());
     }
@@ -29,7 +28,7 @@ public class Frame extends JFrame
     {
         super();
         setTitle("SnakeMapEditor");
-        addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
+        addWindowListener(new ParentFrameRestorer(this, mainMenuFrame));
 
         gameCreator = new GameCreatorWrapper(5, 5);
         canvas = new MapEditorCanvas(gameCreator, new MapEditorDefaultStyle(), true);

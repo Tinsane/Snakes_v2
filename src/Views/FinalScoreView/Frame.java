@@ -1,7 +1,10 @@
 package Views.FinalScoreView;
 
-import Views.MainMenuView.MainMenuRestorer;
-import Views.Utils.TextButton;
+import Views.Styles.MenuStyle;
+import Views.Utils.CloseFrameButton;
+import Views.Utils.MenuButton;
+import Views.Utils.MenuPanel;
+import Views.Utils.ParentFrameRestorer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,28 +17,17 @@ public class Frame extends JFrame
     public Frame(Views.MainMenuView.Frame mainMenuFrame, int finalScore)
     {
         super();
-        addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.GREEN);
-        add(panel);
-        panel.setLayout(new GridLayout(2, 1));
+        addWindowListener(new ParentFrameRestorer(this, mainMenuFrame));
 
         JLabel scoreLabel = new JLabel("Final Score: " + finalScore, SwingConstants.CENTER);
-        scoreLabel.setForeground(Color.YELLOW);
-        scoreLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
-        panel.add(scoreLabel);
+        scoreLabel.setForeground(MenuStyle.TEXT_COLOR);
+        scoreLabel.setFont(MenuStyle.getFont(40));
 
-        TextButton mainMenuButton = new TextButton("Main Menu", new Font("Tahoma", Font.BOLD, 40),
-                Color.YELLOW, new Color(255, 215, 0));
-        mainMenuButton.addActionListener(e -> {
-            setVisible(false);
-            dispose();
-            mainMenuFrame.setVisible(true);
-        });
-        panel.add(mainMenuButton);
+        MenuButton mainMenuButton = new CloseFrameButton("Main Menu", 40, this);
+
+        add(new MenuPanel(new Component[] {scoreLabel, mainMenuButton}));
 
         setSize(300, 400);
-        //setResizable(false);
         setVisible(true);
     }
 }

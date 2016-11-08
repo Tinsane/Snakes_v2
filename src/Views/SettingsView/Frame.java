@@ -1,12 +1,15 @@
 package Views.SettingsView;
 
 import Views.GameView.Settings;
-import Views.MainMenuView.MainMenuRestorer;
-import Views.Utils.TextButton;
+import Views.SettingsView.Widgets.ApplyButton;
+import Views.Styles.MenuStyle;
+import Views.Utils.CloseFrameButton;
+import Views.Utils.MenuButton;
 import Views.Utils.TextRadioButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 
 /*
 Settings:
@@ -20,25 +23,24 @@ Settings:
  */
 public class Frame extends JFrame
 {
-    private Settings settings;
-    public Frame(Views.MainMenuView.Frame mainMenuFrame, Settings settings)
+    public Settings settings;
+    public Frame(Views.MainMenuView.Frame mainMenuFrame)
     {
         super();
-        this.settings = settings;
-        addWindowListener(new MainMenuRestorer(this, mainMenuFrame));
+        settings = mainMenuFrame.settings;
         Container pane = getContentPane();
-        pane.setBackground(Color.GREEN);
+        pane.setBackground(MenuStyle.BACKGROUND_COLOR);
         pane.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
         Box speedBox = new Box(BoxLayout.X_AXIS);
         JLabel speedLabel = new JLabel("Speed:", SwingConstants.LEFT);
-        speedLabel.setForeground(Color.YELLOW);
-        speedLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
+        speedLabel.setForeground(MenuStyle.TEXT_COLOR);
+        speedLabel.setFont(MenuStyle.getFont(40));
         speedBox.add(speedLabel);
         ButtonGroup speedGroup = new ButtonGroup();
-        TextRadioButton button1x = new TextRadioButton("1x", new Font("Tahoma", Font.BOLD, 40),
-                Color.YELLOW, new Color(255, 215, 0));
+        TextRadioButton button1x = new TextRadioButton("1x", MenuStyle.getFont(40),
+                MenuStyle.TEXT_COLOR, MenuStyle.PRESSED_BUTTON_COLOR);
         speedGroup.add(button1x);
         speedBox.add(button1x);
 
@@ -50,13 +52,8 @@ public class Frame extends JFrame
         constraints.weighty = 0.5;
         pane.add(speedBox, constraints);
 
-        TextButton applyButton = new TextButton("Apply", new Font("Tahoma", Font.BOLD, 40),
-                Color.YELLOW, new Color(255, 215, 0));
-        applyButton.addActionListener(e -> {
-            mainMenuFrame.settings = this.settings;
-            dispose();
-            mainMenuFrame.setVisible(true);
-        });
+
+        MenuButton applyButton = new ApplyButton(40, this, mainMenuFrame);
         constraints.gridwidth = 1;
         constraints.weighty = 0.3;
         constraints.weightx = 0.5;
@@ -64,12 +61,7 @@ public class Frame extends JFrame
         constraints.gridy = 1;
         pane.add(applyButton, constraints);
 
-        TextButton cancelButton = new TextButton("Cancel", new Font("Tahoma", Font.BOLD, 40),
-                Color.YELLOW, new Color(255, 215, 0));
-        cancelButton.addActionListener(e -> {
-            dispose();
-            mainMenuFrame.setVisible(true);
-        });
+        MenuButton cancelButton = new CloseFrameButton("Cancel", 40, this);
         constraints.gridx = 1;
         constraints.gridy = 1;
         pane.add(cancelButton, constraints);

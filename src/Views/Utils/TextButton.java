@@ -15,10 +15,6 @@ public class TextButton extends JButton
     private final Color pointedColor;
     private final Color regularColor;
     private boolean isPointed;
-    public TextButton(String text, Font font)
-    {
-        this(text, font, Color.black, Color.gray);
-    }
     public TextButton(String text, Font font, Color regularColor, Color pointedColor)
     {
         super();

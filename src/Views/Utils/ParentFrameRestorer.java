@@ -1,4 +1,4 @@
-package Views.MainMenuView;
+package Views.Utils;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -7,21 +7,21 @@ import java.awt.event.WindowEvent;
 /**
  * Created by Владимир on 20.10.2016.
  */
-public class MainMenuRestorer extends WindowAdapter
+public class ParentFrameRestorer extends WindowAdapter
 {
     private final JFrame frame;
-    private final Frame mainMenuFrame;
-    public MainMenuRestorer(JFrame frame, Frame mainMenuFrame)
+    private final JFrame parentFrame;
+    public ParentFrameRestorer(JFrame frame, JFrame parentFrame)
     {
         this.frame = frame;
-        this.mainMenuFrame = mainMenuFrame;
+        this.parentFrame = parentFrame;
     }
     @Override
     public void windowClosing(WindowEvent e)
     {
         super.windowClosing(e);
         frame.dispose();
-        mainMenuFrame.setVisible(true);
-        mainMenuFrame.setAlwaysOnTop(true);
+        parentFrame.setVisible(true);
+        parentFrame.setAlwaysOnTop(true);
     }
 }
