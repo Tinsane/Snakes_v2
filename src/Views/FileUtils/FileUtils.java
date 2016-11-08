@@ -1,7 +1,6 @@
-package Core.FileUtils;
+package Views.FileUtils;
 
 import Core.Game.Game;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
 import java.io.*;
@@ -11,7 +10,7 @@ import java.io.*;
  */
 public class FileUtils
 {
-    public File ChooseFile(JFrame frame)
+    public static File ChooseFile(JFrame frame)
     {
         JFileChooser fileChooser = new JFileChooser();
         if (fileChooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION)
@@ -19,7 +18,7 @@ public class FileUtils
         return null;
     }
 
-    public Game LoadGameFromFile(JFrame frame) throws IOException, ClassNotFoundException
+    public static Game LoadGameFromFile(JFrame frame) throws IOException, ClassNotFoundException
     {
         File file = ChooseFile(frame);
         if (file == null)
@@ -30,7 +29,7 @@ public class FileUtils
         }
     }
 
-    public void SaveGameToFile(JFrame frame, Game game) throws IOException, ClassNotFoundException
+    public static void SaveGameToFile(JFrame frame, Game game) throws IOException, ClassNotFoundException
     {
         File file = ChooseFile(frame);
         if (file != null)

@@ -1,6 +1,7 @@
 package Controllers.MapEditorControllers;
 
 import Core.Game.GameCreatorWrapper;
+import Views.FileUtils.FileUtils;
 import Views.MapEditorView.Frame;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -24,21 +25,13 @@ public class SaveMapListener extends MapEditorAbstractController implements Acti
     {
         if (gameCreator.getSnake() == null)
             throw new IllegalStateException("Snake not set"); // TODO: show window
-        JFileChooser fileChooser = new JFileChooser();
-        if (fileChooser.showSaveDialog(mapEditorFrame) == JFileChooser.APPROVE_OPTION)
+        try
         {
-            File file = fileChooser.getSelectedFile();
-            try
-            {
-                try(FileOutputStream outputStream = new FileOutputStream(file))
-                {
-                    gameCreator.createGame().writeGame(outputStream);
-                }
-            } catch (IOException | ClassNotFoundException e1)
-            {
-                throw new NotImplementedException();
-                //TODO: write to log, show window
-            }
+            FileUtils.SaveGameToFile(mapEditorFrame, gameCreator.createGame());
+        } catch (IOException | ClassNotFoundException e1)
+        {
+            throw new NotImplementedException();
+            //TODO: write to log, show window
         }
     }
 }
