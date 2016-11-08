@@ -39,8 +39,9 @@ public class MapEditorCanvas extends JPanel
     @Override
     public Dimension getPreferredSize()
     {
-        return new Dimension(gameCreator.getWidth() * style.getTileSize(),
-                             gameCreator.getHeight() * style.getTileSize());
+        return new Dimension(
+                gameCreator.getWidth() * style.getTileSize(),
+                gameCreator.getHeight() * style.getTileSize());
     }
 
     private void drawImage(Graphics2D graphics, GameStyle style, BufferedImage image, int x, int y)

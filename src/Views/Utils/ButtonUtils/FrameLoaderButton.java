@@ -1,4 +1,6 @@
-package Views.Utils;
+package Views.Utils.ButtonUtils;
+
+import Views.Utils.ParentFrameRestorer;
 
 import javax.swing.*;
 
@@ -15,8 +17,10 @@ public abstract class FrameLoaderButton extends MenuButton
 
     private void loadFrame(JFrame parent)
     {
-        parent.setVisible(false);
         JFrame frame = createFrame(parent);
+        if (frame == null)
+            return; // in case user changes mind and doesn't open frame, for example, when he has to choose file.
+        parent.setVisible(false);
         frame.addWindowListener(new ParentFrameRestorer(frame, parent));
     }
 

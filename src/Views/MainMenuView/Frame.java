@@ -3,8 +3,8 @@ package Views.MainMenuView;
 import Views.GameView.Settings;
 import Views.MainMenuView.Buttons.*;
 import Views.Styles.Default.DefaultStyle;
-import Views.Utils.MenuButton;
-import Views.Utils.MenuPanel;
+import Views.Utils.ButtonUtils.MenuButton;
+import Views.Utils.PanelUtils.MenuPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,7 +16,9 @@ import java.io.IOException;
  */
 public class Frame extends JFrame
 {
+    private final int buttonSize = 80;
     private final int buttonFontSize = 45;
+
     public Settings settings;
     public Frame() throws IOException
     {
@@ -26,7 +28,6 @@ public class Frame extends JFrame
         setTitle("SnakeMainMenu");
         setIconImage(loadImage("snakeIcon.png"));
 
-        setSize(400, 400);
         setResizable(false);
 
         MenuButton buttons[] = {
@@ -36,6 +37,8 @@ public class Frame extends JFrame
                 new ScoreboardButton(buttonFontSize, this),
                 new SettingsButton(buttonFontSize, this),
                 new ExitButton(buttonFontSize, this)};
+
+        setSize(400, buttonSize * buttons.length);
 
         add(new MenuPanel(buttons));
         setVisible(true);

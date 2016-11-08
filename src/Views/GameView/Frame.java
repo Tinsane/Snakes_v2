@@ -4,6 +4,7 @@ import Controllers.GameController;
 import Core.Game.Game;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -25,8 +26,6 @@ public class Frame extends JFrame
         this.mainMenuFrame = mainMenuFrame;
         settings = mainMenuFrame.settings;
         this.game = game;
-        setSize((game.getWidth() + 1) * settings.style.getTileSize(),
-                (game.getHeight() + 1) * settings.style.getTileSize());
         addWindowListener(new WindowAdapter()
         {
             @Override
@@ -44,8 +43,11 @@ public class Frame extends JFrame
         updateTimer.setRepeats(true);
 
         canvas = new GameViewCanvas(game, settings.style, false);
+
         add(canvas);
+
         addKeyListener(new GameController(game));
+        pack();
         setVisible(true);
         start();
     }

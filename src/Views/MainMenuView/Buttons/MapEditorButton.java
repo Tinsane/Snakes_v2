@@ -1,6 +1,6 @@
 package Views.MainMenuView.Buttons;
 
-import Views.Utils.FrameLoaderButton;
+import Views.Utils.ButtonUtils.FrameLoaderButton;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;

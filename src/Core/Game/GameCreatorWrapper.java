@@ -1,14 +1,13 @@
 package Core.Game;
 
+import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.Wall;
-import Core.Snake.Snake;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
-import com.sun.javafx.UnmodifiableArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,13 @@ public class GameCreatorWrapper extends GameCreator
     }
 
     private List<Supplier<MapObject>> mapObjects = new ArrayList<>();
+
+    public void Populate(GameAlike game)
+    {
+        map = game.getCurrentMap();
+        snake = game.getSnake();
+        snakePosition = findSnakePosition();
+    }
 
     public List<MapObject> getMapObjects()
     {
@@ -185,5 +191,14 @@ public class GameCreatorWrapper extends GameCreator
             if (!(map[columnNumber][i] instanceof Wall))
                 return false;
         return true;
+    }
+
+    private IntPair findSnakePosition()
+    {
+        for (int i = 0; i < getWidth(); ++i)
+            for (int j = 0; j < getHeight(); ++j)
+                if (map[i][j] instanceof SnakeCell)
+                    return new IntPair(i - 1, j - 1);
+        return null;
     }
 }

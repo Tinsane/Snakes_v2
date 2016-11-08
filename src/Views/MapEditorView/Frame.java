@@ -2,8 +2,6 @@ package Views.MapEditorView;
 
 import Controllers.MapEditorControllers.MapEditorController;
 import Core.Game.GameCreatorWrapper;
-import Views.Styles.GameStyle;
-import Views.Utils.ParentFrameRestorer;
 import Views.Styles.Default.MapEditorDefaultStyle;
 import Views.Styles.MapEditorStyle;
 
@@ -11,6 +9,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
+
+import Views.Utils.DimensionUtils;
+
+import static Views.Utils.DimensionUtils.placedVertically;
 
 /**
  * Created by Владимир on 20.10.2016.
@@ -58,14 +60,5 @@ public class Frame extends JFrame
                 getMinimumSize())); // minimum size is sum size of menu bar and up border of window
         objectPanel.update();
         canvas.repaint();
-    }
-
-    private Dimension placedVertically(Dimension... dimensions)
-    {
-        return Arrays
-                .stream(dimensions)
-                .reduce((x, y) -> new Dimension((int)Math.max(x.getWidth(), y.getWidth()),
-                                                (int)(x.getHeight() + y.getHeight())))
-                .get();
     }
 }

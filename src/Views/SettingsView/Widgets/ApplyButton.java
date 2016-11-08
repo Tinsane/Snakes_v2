@@ -1,7 +1,6 @@
 package Views.SettingsView.Widgets;
 
-import Views.Utils.CloseFrameButton;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import Views.Utils.ButtonUtils.CloseFrameButton;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

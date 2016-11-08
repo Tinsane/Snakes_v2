@@ -11,4 +11,7 @@ public interface GameAlike
     MapObject[][] getCurrentMap();
 
     Snake getSnake();
+
+    int getWidth();
+    int getHeight();
 }

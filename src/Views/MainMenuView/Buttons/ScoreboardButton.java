@@ -1,6 +1,6 @@
 package Views.MainMenuView.Buttons;
 
-import Views.Utils.FrameLoaderButton;
+import Views.Utils.ButtonUtils.FrameLoaderButton;
 
 import javax.swing.*;
 

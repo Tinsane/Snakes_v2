@@ -1,4 +1,4 @@
-package Views.Utils;
+package Views.Utils.ButtonUtils;
 
 import Views.Styles.MenuStyle;
 

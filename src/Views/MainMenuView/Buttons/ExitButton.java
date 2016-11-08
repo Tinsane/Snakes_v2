@@ -1,6 +1,6 @@
 package Views.MainMenuView.Buttons;
 
-import Views.Utils.MenuButton;
+import Views.Utils.ButtonUtils.MenuButton;
 
 import javax.swing.*;
 

@@ -2,7 +2,7 @@ package Views.MainMenuView.Buttons;
 
 import Core.Game.GameCreator;
 import Core.MapObjects.StaticMapObjects.Wall;
-import Views.Utils.FrameLoaderButton;
+import Views.Utils.ButtonUtils.FrameLoaderButton;
 
 import javax.swing.*;
 

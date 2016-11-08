@@ -1,9 +1,9 @@
 package Views.FinalScoreView;
 
 import Views.Styles.MenuStyle;
-import Views.Utils.CloseFrameButton;
-import Views.Utils.MenuButton;
-import Views.Utils.MenuPanel;
+import Views.Utils.ButtonUtils.CloseFrameButton;
+import Views.Utils.ButtonUtils.MenuButton;
+import Views.Utils.PanelUtils.MenuPanel;
 import Views.Utils.ParentFrameRestorer;
 
 import javax.swing.*;

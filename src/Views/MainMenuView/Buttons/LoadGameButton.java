@@ -1,10 +1,8 @@
 package Views.MainMenuView.Buttons;
 
 import Core.Game.Game;
-import Core.Game.GameCreator;
-import Core.MapObjects.StaticMapObjects.Wall;
-import Views.FileUtils.FileUtils;
-import Views.Utils.FrameLoaderButton;
+import Views.Utils.FileUtils;
+import Views.Utils.ButtonUtils.FrameLoaderButton;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
@@ -24,13 +22,9 @@ public class LoadGameButton extends FrameLoaderButton
     protected JFrame createFrame(JFrame parent)
     {
         Game game;
-        try
-        {
-            game = FileUtils.LoadGameFromFile(parent);
-        } catch (IOException | ClassNotFoundException e)
-        {
-            throw new NotImplementedException(); //TODO: game wasn't loaded
-        }
+        game = FileUtils.LoadGameFromFileExceptionsHandled(parent);
+        if (game == null)
+            return null;
         return new Views.GameView.Frame((Views.MainMenuView.Frame) parent, game);
     }
 }

@@ -3,13 +3,12 @@ package Views.SettingsView;
 import Views.GameView.Settings;
 import Views.SettingsView.Widgets.ApplyButton;
 import Views.Styles.MenuStyle;
-import Views.Utils.CloseFrameButton;
-import Views.Utils.MenuButton;
-import Views.Utils.TextRadioButton;
+import Views.Utils.ButtonUtils.CloseFrameButton;
+import Views.Utils.ButtonUtils.MenuButton;
+import Views.Utils.ButtonUtils.TextRadioButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
 
 /*
 Settings:

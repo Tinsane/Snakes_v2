@@ -2,17 +2,11 @@ package Views.RecordsView;
 
 import Core.RecordsContainer.RecordsContainer;
 import Core.RecordsContainer.RecordsLoader;
-import Views.Styles.MenuStyle;
-import Views.Utils.MenuButton;
-import Views.Utils.MenuPanel;
+import Views.Utils.ButtonUtils.MenuButton;
+import Views.Utils.PanelUtils.MenuPanel;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Stream;
 
 /**
  * Created by ISmir on 25.10.2016.

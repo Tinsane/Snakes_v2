@@ -1,8 +1,8 @@
 package Views.MapEditorView;
 
-import Controllers.MapEditorControllers.PlaceSnakeListener;
-import Controllers.MapEditorControllers.ResizeMapListener;
-import Controllers.MapEditorControllers.SaveMapListener;
+import Controllers.MapEditorControllers.ActionListeners.LoadMapListener;
+import Controllers.MapEditorControllers.ActionListeners.PlaceSnakeListener;
+import Controllers.MapEditorControllers.ActionListeners.SaveMapListener;
 import Core.Game.GameCreatorWrapper;
 
 import javax.swing.*;
@@ -17,16 +17,18 @@ public class MapEditorMenuBar extends JMenuBar
     public MapEditorMenuBar(GameCreatorWrapper gameCreator, Frame mapEditorFrame)
     {
         JMenu fileMenu = new JMenu("File");
+
         JMenuItem saveItem = new JMenuItem("Save");
         saveItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
         saveItem.addActionListener(new SaveMapListener(gameCreator, mapEditorFrame));
         fileMenu.add(saveItem);
 
+        JMenuItem openItem = new JMenuItem("Open");
+        openItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+        openItem.addActionListener(new LoadMapListener(gameCreator, mapEditorFrame));
+        fileMenu.add(openItem);
+
         JMenu editMenu = new JMenu("Edit");
-        JMenuItem resizeItem = new JMenuItem("Change map size");
-        resizeItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
-        resizeItem.addActionListener(new ResizeMapListener(gameCreator, mapEditorFrame));
-        editMenu.add(resizeItem);
 
         JMenuItem addSnakeItem = new JMenuItem("Place snake");
         addSnakeItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, ActionEvent.CTRL_MASK));
