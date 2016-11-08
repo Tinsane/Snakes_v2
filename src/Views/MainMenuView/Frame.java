@@ -35,8 +35,6 @@ public class Frame extends JFrame
                 new ScoreboardButton(buttonFontSize, this),
                 new SettingsButton(buttonFontSize, this),
                 new ExitButton(buttonFontSize, this)};
-            creator.placeSnake(0, 0, 1);
-                    new Views.GameView.Frame(this, creator.createGame(), settings);
 
         add(new MenuPanel(buttons));
         setVisible(true);

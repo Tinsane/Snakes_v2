@@ -1,8 +1,10 @@
 package Views.MainMenuView.Buttons;
 
 import Views.Utils.FrameLoaderButton;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
+import java.io.IOException;
 
 /**
  * Created by Владимир on 31.10.2016.
@@ -17,7 +19,12 @@ public final class MapEditorButton extends FrameLoaderButton
     @Override
     protected JFrame createFrame(JFrame parent)
     {
-        Views.MainMenuView.Frame mainMenu = (Views.MainMenuView.Frame) parent;
-        return new Views.MapEditorView.Frame(mainMenu.settings.style);
+        try
+        {
+            return new Views.MapEditorView.Frame();
+        } catch (IOException e)
+        {
+            throw new NotImplementedException(); // TODO: map editor didn't load
+        }
     }
 }

@@ -23,6 +23,7 @@ public final class StartGameButton extends FrameLoaderButton
         creator.setMapSize(10, 10);
         creator.placeWall(5, 5);
         creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
-        return new Views.GameView.Frame((Views.MainMenuView.Frame) parent, creator.createGame(0, 0, 1));
+        creator.placeSnake(0, 0, 1);
+        return new Views.GameView.Frame((Views.MainMenuView.Frame) parent, creator.createGame());
     }
 }
