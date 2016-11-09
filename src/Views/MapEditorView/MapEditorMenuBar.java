@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
  */
 public class MapEditorMenuBar extends JMenuBar
 {
+    // TODO: DRY
     public MapEditorMenuBar(GameCreatorWrapper gameCreator, Frame mapEditorFrame)
     {
         JMenu fileMenu = new JMenu("File");

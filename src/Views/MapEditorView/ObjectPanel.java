@@ -29,6 +29,7 @@ public class ObjectPanel extends JPanel
     ObjectPanel(MapEditorStyle style, GameCreatorWrapper gameCreator, boolean doubleBuffered) throws IOException
     {
         super(doubleBuffered);
+        // TODO: constant
         setBackground(new Color(239, 228, 176));
         setLayout(new GridLayout(1, gameCreator.getMapObjectsCount()));
         addObjectsOnPanel(style, gameCreator);
