@@ -22,6 +22,8 @@ import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
  */
 public class ObjectPanel extends JPanel
 {
+    private final Color BACKGROUND_COLOR = new Color(239, 228, 176);
+
     GameCreatorWrapper gameCreator;
     MapEditorStyle style;
     Vector<MapObjectView> objectViews = new Vector<>();
@@ -29,8 +31,7 @@ public class ObjectPanel extends JPanel
     ObjectPanel(MapEditorStyle style, GameCreatorWrapper gameCreator, boolean doubleBuffered) throws IOException
     {
         super(doubleBuffered);
-        // TODO: constant
-        setBackground(new Color(239, 228, 176));
+        setBackground(BACKGROUND_COLOR);
         setLayout(new GridLayout(1, gameCreator.getMapObjectsCount()));
         addObjectsOnPanel(style, gameCreator);
         this.gameCreator = gameCreator;
