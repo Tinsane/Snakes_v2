@@ -20,7 +20,7 @@ public class MapEditorMenuBar extends JMenuBar
     private final String EDIT = "Edit";
     private final String SAVE = "Save";
     private final String OPEN = "Open";
-    private final String PLACE_SNAKE = "Place snake";
+    private final String PLACE_SNAKE = "Place snakes";
 
     HashMap<String, JMenu> menus = new HashMap<>();
 

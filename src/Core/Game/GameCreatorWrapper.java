@@ -29,8 +29,7 @@ public class GameCreatorWrapper extends GameCreator
     public void Populate(GameAlike game)
     {
         map = game.getCurrentMap();
-        snake = game.getSnake();
-        snakePosition = findSnakePosition();
+        snakes = game.getSnakes();
     }
 
     public List<MapObject> getMapObjects()
@@ -63,10 +62,10 @@ public class GameCreatorWrapper extends GameCreator
     public Pointer pointer = Pointer.MapPosition;
 
     {
-        addObject(() -> new EmptyCell());
-        addObject(() -> new Wall());
-        addObject(() -> new Strawberry());
-        addObject(() -> new Blueberry());
+        addObject(EmptyCell::new);
+        addObject(Wall::new);
+        addObject(Strawberry::new);
+        addObject(Blueberry::new);
     }
 
     public GameCreatorWrapper()
@@ -172,7 +171,7 @@ public class GameCreatorWrapper extends GameCreator
         resizeMap(getWidth() - 2 - cleanColumns, getHeight() - 2 - cleanLines);
     }
 
-    public void placeSnake(int length)
+    public void placeSnake()
     {
         placeSnake(mapPosition.x - 1, mapPosition.y - 1, 1);
     }

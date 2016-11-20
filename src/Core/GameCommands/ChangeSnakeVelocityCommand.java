@@ -8,16 +8,18 @@ import Core.Utils.*;
  */
 public class ChangeSnakeVelocityCommand implements GameCommand
 {
+    private final int snakeIndex;
     private final VelocityVector velocity;
 
-    public ChangeSnakeVelocityCommand(VelocityVector velocity)
+    public ChangeSnakeVelocityCommand(int snakeIndex, VelocityVector velocity)
     {
+        this.snakeIndex = snakeIndex;
         this.velocity = velocity;
     }
 
     @Override
     public void execute(Game game)
     {
-        game.snake.setVelocity(velocity);
+        game.getSnakes().get(snakeIndex).setVelocity(velocity);
     }
 }

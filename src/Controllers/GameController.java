@@ -12,11 +12,15 @@ import java.awt.event.KeyListener;
  */
 public class GameController implements KeyListener
 {
-    private Game game;
+    private final Game game;
+    private final int snakeIndex;
+    private final MovementBinds binds;
 
-    public GameController(Game game)
+    public GameController(Game game, int snakeIndex, MovementBinds binds)
     {
         this.game = game;
+        this.snakeIndex = snakeIndex;
+        this.binds = binds;
     }
 
     @Override
@@ -28,9 +32,9 @@ public class GameController implements KeyListener
     @Override
     public void keyPressed(KeyEvent e)
     {
-        VelocityVector newSnakeVelocity = Utils.getDirection(e);
+        VelocityVector newSnakeVelocity = binds.getDirection(e);
         if (newSnakeVelocity != null)
-            game.executeCommand(new ChangeSnakeVelocityCommand(newSnakeVelocity));
+            game.executeCommand(new ChangeSnakeVelocityCommand(snakeIndex, newSnakeVelocity));
     }
 
     @Override

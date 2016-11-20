@@ -14,12 +14,13 @@ import Core.Snake.Snake;
 import Core.Utils.IntPair;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
 public class Game implements Serializable, GameAlike, Cloneable
 {
-    public Snake snake;
+    public ArrayList<Snake> snakes;
     private GameUpdater gameUpdater;
     private LinkedList<MapObject[][]> maps;
 
@@ -28,14 +29,14 @@ public class Game implements Serializable, GameAlike, Cloneable
     public int getHeight() { return getCurrentMap()[0].length; }
     public boolean isFinished()
     {
-        return snake.getIsDestructed();
+        return snakes.stream().anyMatch(Snake::getIsDestructed);
     }
 
-    Game(MapObject[][] map, Snake snake)
+    Game(MapObject[][] map, ArrayList<Snake> snakes)
     {
         maps = new LinkedList<>();
         maps.addFirst(map);
-        this.snake = snake;
+        this.snakes = snakes;
         gameUpdater = new GameUpdater(this);
     }
 
@@ -63,9 +64,17 @@ public class Game implements Serializable, GameAlike, Cloneable
     }
 
     @Override
-    public Snake getSnake()
+    public ArrayList<Snake> getSnakes()
     {
-        return snake;
+        return snakes;
+    }
+
+    public Snake getOwner(SnakeCell cell)
+    {
+        for (Snake snake : snakes)
+            if (snake.contains(cell))
+                return snake;
+        throw new IllegalArgumentException("Abeyant snake cell.");
     }
 
     public void rollback(int turnsNumber)
@@ -202,10 +211,13 @@ public class Game implements Serializable, GameAlike, Cloneable
             moveObject(cellPosition);
         }
 
-        private void moveSnake()
+        private void moveSnakes()
         {
-            SnakeCell snakeHead = game.snake.head;
-            moveSnakeCell(snakeHead, snakeHead.getCoordinates(getCurrentMap()));
+            for (Snake snake : snakes)
+            {
+                SnakeCell snakeHead = snake.head;
+                moveSnakeCell(snakeHead, snakeHead.getCoordinates(getCurrentMap()));
+            }
         }
 
         private void moveObject(IntPair position)
@@ -228,7 +240,7 @@ public class Game implements Serializable, GameAlike, Cloneable
                             curObject.getClass() == SnakeCell.class || curObject.getClass() == EmptyCell.class))
                         moveObject(new IntPair(x, y));
                 }
-            moveSnake();
+            moveSnakes();
             clearDestructedObjects();
             fillEmptyCells();
             boolean doesMapContainBerries = false;

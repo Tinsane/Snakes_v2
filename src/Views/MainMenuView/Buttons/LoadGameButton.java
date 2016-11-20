@@ -1,12 +1,12 @@
 package Views.MainMenuView.Buttons;
 
 import Core.Game.Game;
+import Views.GameView.MultiplayerFrame;
+import Views.GameView.SinglePlayerFrame;
 import Views.Utils.FileUtils;
 import Views.Utils.ButtonUtils.FrameLoaderButton;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.swing.*;
-import java.io.IOException;
 
 /**
  * Created by ISmir on 08.11.2016.
@@ -25,6 +25,6 @@ public class LoadGameButton extends FrameLoaderButton
         game = FileUtils.LoadGameFromFileExceptionsHandled(parent);
         if (game == null)
             return null;
-        return new Views.GameView.Frame((Views.MainMenuView.Frame) parent, game);
+        return new MultiplayerFrame((Views.MainMenuView.Frame) parent, game);
     }
 }

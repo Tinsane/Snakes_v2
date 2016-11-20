@@ -21,10 +21,10 @@ public class GameTest
         gameCreator.setMapSize(1, 1);
         gameCreator.placeSnake(0, 0, 1);
         Game game = gameCreator.createGame();
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
-        assertEquals(VelocityVector.down, game.snake.head.getVelocity());
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.left));
-        assertEquals(VelocityVector.left, game.snake.head.getVelocity());
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.down));
+        assertEquals(VelocityVector.down, game.snakes.get(0).head.getVelocity());
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.left));
+        assertEquals(VelocityVector.left, game.snakes.get(0).head.getVelocity());
     }
 
     @Test
@@ -34,14 +34,14 @@ public class GameTest
         gameCreator.setMapSize(3, 3);
         gameCreator.placeSnake(1, 1, 10);
         Game game = gameCreator.createGame();
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.left));
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.left));
         game.update();
-        IntPair snakeHeadPos = game.snake.head.getCoordinates(game.getCurrentMap());
+        IntPair snakeHeadPos = game.snakes.get(0).head.getCoordinates(game.getCurrentMap());
         assertEquals(1, snakeHeadPos.x);
         assertEquals(2, snakeHeadPos.y);
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.up));
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.up));
         game.update();
-        snakeHeadPos = game.snake.head.getCoordinates(game.getCurrentMap());
+        snakeHeadPos = game.snakes.get(0).head.getCoordinates(game.getCurrentMap());
         assertEquals(1, snakeHeadPos.x);
         assertEquals(1, snakeHeadPos.y);
     }
@@ -56,12 +56,12 @@ public class GameTest
         gameCreator.placeStrawberry(2, 2);
         gameCreator.placeSnake(1, 1, 5);
         Game game = gameCreator.createGame();
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.down));
         game.update();
-        assertEquals(game.snake.getLength(), 6);
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.right));
+        assertEquals(game.snakes.get(0).getLength(), 6);
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.right));
         game.update();
-        assertEquals(game.snake.getLength(), 9);
+        assertEquals(game.snakes.get(0).getLength(), 9);
     }
 
     @Test
@@ -72,9 +72,9 @@ public class GameTest
         gameCreator.placeWall(1, 2);
         gameCreator.placeSnake(1, 1, 5);
         Game game = gameCreator.createGame();
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.down));
         game.update();
-        assertTrue(game.snake.getIsDestructed());
+        assertTrue(game.snakes.get(0).getIsDestructed());
     }
 
     @Test
@@ -84,15 +84,15 @@ public class GameTest
         gameCreator.setMapSize(3, 3);
         gameCreator.placeSnake(1, 1, 10);
         Game game = gameCreator.createGame();
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.down));
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.down));
         game.update();
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.right));
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.right));
         game.update();
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.up));
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.up));
         game.update();
-        assertFalse(game.snake.getIsDestructed());
-        game.executeCommand(new ChangeSnakeVelocityCommand(VelocityVector.left));
+        assertFalse(game.snakes.get(0).getIsDestructed());
+        game.executeCommand(new ChangeSnakeVelocityCommand(0, VelocityVector.left));
         game.update();
-        assertTrue(game.snake.getIsDestructed());
+        assertTrue(game.snakes.get(0).getIsDestructed());
     }
 }

@@ -9,9 +9,11 @@ import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Snake.Snake;
 import Core.Utils.IntPair;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import sun.plugin.dom.exception.InvalidStateException;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.ArrayList;
 import java.util.function.Supplier;
 
 import static java.lang.Integer.min;
@@ -23,8 +25,7 @@ import static java.lang.Integer.min;
 public class GameCreator implements GameAlike
 {
     protected MapObject[][] map;
-    protected Snake snake = null;
-    protected IntPair snakePosition = null;
+    protected ArrayList<Snake> snakes = new ArrayList<>();
 
     public GameCreator()
     {
@@ -42,9 +43,9 @@ public class GameCreator implements GameAlike
 
     public Game createGame()
     {
-        if (snake == null)
+        if (snakes == null)
             throw new InvalidStateException("Snake is null");
-        return new Game(map, snake);
+        return new Game(map, snakes);
     }
 
     protected boolean isCellInMap(int x, int y)
@@ -101,7 +102,7 @@ public class GameCreator implements GameAlike
         if (!isCellInMap(x + 1, y + 1))
             throw new IllegalArgumentException("No such cell in the map.");
         if (map[x + 1][y + 1] instanceof SnakeCell)
-            deleteSnake();
+            deleteSnake(x, y);
         map[x + 1][y + 1] = mapObject;
     }
 
@@ -131,7 +132,7 @@ public class GameCreator implements GameAlike
             throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", snakeLength));
         Snake snake = new Snake(snakeLength);
         placeMapObject(snakeX, snakeY, snake.head);
-        setSnake(snake, snakeX, snakeY);
+        addSnake(snake);
     }
 
     // LU - left up angle of rectangle
@@ -153,19 +154,17 @@ public class GameCreator implements GameAlike
         placeMapObjectsInRectangle(xL, y, xR, y, mapObject);
     }
 
-    private void setSnake(Snake snake, int snakeX, int snakeY)
+    private void addSnake(Snake snake)
     {
-        deleteSnake();
-        this.snake = snake;
-        snakePosition = new IntPair(snakeX, snakeY);
+        this.snakes.add(snake);
     }
 
-    private void deleteSnake()
+    private void deleteSnake(int x, int y)
     {
-        if (this.snake != null)
-            map[snakePosition.x + 1][snakePosition.y + 1] = new EmptyCell();
-        snake = null;
-        snakePosition = null;
+        if (!(map[x + 1][y + 1] instanceof SnakeCell))
+            throw new IllegalArgumentException("There is no snake cell.");
+        snakes.removeIf(snake->snake.head == map[x + 1][y + 1]);
+        map[x + 1][y + 1] = new EmptyCell();
     }
 
     @Override
@@ -175,8 +174,8 @@ public class GameCreator implements GameAlike
     }
 
     @Override
-    public Snake getSnake()
+    public ArrayList<Snake> getSnakes()
     {
-        return snake;
+        return snakes;
     }
 }

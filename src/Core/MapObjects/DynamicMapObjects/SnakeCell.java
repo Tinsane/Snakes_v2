@@ -5,6 +5,7 @@ import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
+import Core.Snake.Snake;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
 import Core.MapObjects.MapObjectVisitor;
@@ -65,20 +66,24 @@ public class SnakeCell extends DynamicMapObject
     {
         // probably need to check if cell is head
         berry.setIsDestructed(true);
-        game.snake.extend(berry.getSatisfactionCoefficient());
+        game.getOwner(this).extend(berry.getSatisfactionCoefficient());
     }
 
     @Override
     public void processCollision(SnakeCell snakeCell, Game game)
     {
         // let's just kill the snake
-        game.snake.setIsDestructed(true);
+        Snake snake = game.getOwner(this);
+        if (this == snake.head)
+            snake.setIsDestructed(true);
+        else
+            snakeCell.processCollision(this, game);
     }
 
     @Override
     public void processCollision(Wall wall, Game game)
     {
-        game.snake.setIsDestructed(true);
+        game.getOwner(this).setIsDestructed(true);
     }
 
     @Override

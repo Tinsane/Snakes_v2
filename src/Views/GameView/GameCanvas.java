@@ -1,8 +1,6 @@
 package Views.GameView;
 
 import Core.Game.Game;
-import Core.Game.GameAlike;
-import Views.Styles.Drawer;
 import Views.Styles.GameStyle;
 
 import javax.swing.*;
@@ -11,13 +9,13 @@ import java.awt.*;
 /**
  * Created by Владимир on 11.10.2016.
  */
-public class GameViewCanvas extends JPanel
+public class GameCanvas extends JPanel
 {
-    private final Game game;
+    protected final Game game;
     private GameStyle style;
     private double goneTurnPart;
 
-    GameViewCanvas(Game game, GameStyle style, boolean doubleBuffered)
+    GameCanvas(Game game, GameStyle style, boolean doubleBuffered)
     {
         super(doubleBuffered);
         this.game = game;
@@ -37,7 +35,6 @@ public class GameViewCanvas extends JPanel
         style.CreateDrawer(g2d, game, goneTurnPart).draw();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        g2d.drawString("Score: " + game.getSnake().getLength(), 0, 30);
     }
 
     @Override

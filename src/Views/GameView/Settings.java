@@ -1,6 +1,10 @@
 package Views.GameView;
 
+import Controllers.MovementBinds;
 import Views.Styles.GameStyle;
+
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * Created by ISmir on 09.10.2016.
@@ -21,9 +25,13 @@ public class Settings
     public int gameUpdateFrequency = 5;
     public int updateInterval = (int)Math.round(DEFAULT_UPDATE_INTERVAL / speedUp / gameUpdateFrequency);
     public GameStyle style;
+    public ArrayList<MovementBinds> movementBinds;
 
     public Settings(GameStyle style)
     {
         this.style = style;
+        movementBinds = new ArrayList<>();
+        movementBinds.add(new MovementBinds(KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT));
+        movementBinds.add(new MovementBinds(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A));
     }
 }

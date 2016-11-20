@@ -3,8 +3,6 @@ package Controllers.MapEditorControllers.ActionListeners;
 import Core.Game.GameCreatorWrapper;
 import Views.MapEditorView.Frame;
 
-import java.awt.event.ActionEvent;
-
 /**
  * Created by ISmir on 06.11.2016.
  */
@@ -18,6 +16,6 @@ public class PlaceSnakeListener extends MapEditorAbstractActionListener
     @Override
     public void mapEditorActionPerformed()
     {
-        gameCreator.placeSnake(1);
+        gameCreator.placeSnake();
     }
 }

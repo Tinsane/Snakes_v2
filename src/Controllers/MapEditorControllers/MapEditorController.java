@@ -1,7 +1,6 @@
 package Controllers.MapEditorControllers;
 
-import Controllers.MapEditorControllers.MapEditorAbstractController;
-import Controllers.Utils;
+import Controllers.MovementBinds;
 import Core.Game.GameCreatorWrapper;
 import Core.Utils.VelocityVector;
 import Views.MapEditorView.Frame;
@@ -17,9 +16,11 @@ import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
  */
 public class MapEditorController extends MapEditorAbstractController implements KeyListener
 {
+    private final MovementBinds movementBinds;
     public MapEditorController(GameCreatorWrapper gameCreator, Frame mapEditorFrame)
     {
         super(gameCreator, mapEditorFrame);
+        movementBinds = new MovementBinds(KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class MapEditorController extends MapEditorAbstractController implements 
     @Override
     public void keyPressed(KeyEvent e)
     {
-        VelocityVector velocity = Utils.getDirection(e);
+        VelocityVector velocity = movementBinds.getDirection(e);
         if (velocity != null)
         {
             if (gameCreator.pointer == MapObjectType)

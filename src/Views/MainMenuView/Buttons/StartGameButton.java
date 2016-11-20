@@ -2,6 +2,7 @@ package Views.MainMenuView.Buttons;
 
 import Core.Game.GameCreator;
 import Core.MapObjects.StaticMapObjects.Wall;
+import Views.GameView.SinglePlayerFrame;
 import Views.Utils.ButtonUtils.FrameLoaderButton;
 
 import javax.swing.*;
@@ -24,6 +25,6 @@ public final class StartGameButton extends FrameLoaderButton
         creator.placeWall(5, 5);
         creator.placeMapObjectsInLineX(4, 1, 7, new Wall());
         creator.placeSnake(0, 0, 1);
-        return new Views.GameView.Frame((Views.MainMenuView.Frame) parent, creator.createGame());
+        return new SinglePlayerFrame((Views.MainMenuView.Frame) parent, creator.createGame());
     }
 }

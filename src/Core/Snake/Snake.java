@@ -72,4 +72,12 @@ public class Snake implements Iterable<SnakeCell>, Serializable
     {
         return new SnakeCellIterator(head);
     }
+
+    public boolean contains(SnakeCell cell)
+    {
+        for (SnakeCell snakeCell : this)
+            if (snakeCell == cell)
+                return true;
+        return false;
+    }
 }

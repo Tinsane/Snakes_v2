@@ -4,21 +4,20 @@ import Controllers.GameController;
 import Core.Game.Game;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
  * Created by ISmir on 08.10.2016.
  */
-public class Frame extends JFrame
+public abstract class Frame extends JFrame
 {
-    private final Views.MainMenuView.Frame mainMenuFrame;
-    private Game game;
+    protected final Views.MainMenuView.Frame mainMenuFrame;
+    protected GameCanvas canvas;
+    protected Game game;
     private final Timer updateTimer;
     private int currentTick;
-    private Settings settings;
-    private final GameViewCanvas canvas;
+    protected Settings settings;
 
     public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game)
     {
@@ -41,15 +40,6 @@ public class Frame extends JFrame
 
         updateTimer = new Timer(settings.updateInterval, x -> update());
         updateTimer.setRepeats(true);
-
-        canvas = new GameViewCanvas(game, settings.style, false);
-
-        add(canvas);
-
-        addKeyListener(new GameController(game));
-        pack();
-        setVisible(true);
-        start();
     }
 
     public void start()
@@ -62,14 +52,18 @@ public class Frame extends JFrame
         updateTimer.stop();
     }
 
+    protected void onGameFinished()
+    {
+        stop();
+        setVisible(false);
+        dispose();
+    }
+
     private void update()
     {
         if (game.isFinished())
         {
-            stop();
-            setVisible(false);
-            dispose();
-            new Views.FinalScoreView.Frame(mainMenuFrame, game.getSnake().getLength());
+            onGameFinished();
             return;
         }
 
