@@ -1,5 +1,6 @@
 package Core.Game;
 
+import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.Snake.Snake;
 
@@ -13,6 +14,8 @@ public interface GameAlike
     MapObject[][] getCurrentMap();
 
     ArrayList<Snake> getSnakes();
+    Snake getOwner(SnakeCell cell);
+    int getOwnerIndex(SnakeCell cell);
 
     int getWidth();
     int getHeight();

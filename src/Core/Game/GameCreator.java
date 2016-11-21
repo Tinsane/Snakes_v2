@@ -22,7 +22,7 @@ import static java.lang.Integer.min;
  * Created by Владимир on 19.09.2016.
  */
 
-public class GameCreator implements GameAlike
+public class GameCreator extends AbstractGame
 {
     protected MapObject[][] map;
     protected ArrayList<Snake> snakes = new ArrayList<>();
@@ -31,10 +31,6 @@ public class GameCreator implements GameAlike
     {
         map = new MapObject[0][0];
     }
-
-    public int getWidth() { return getCurrentMap().length; }
-
-    public int getHeight() { return getCurrentMap()[0].length; }
 
     private static MapObject[][] loadMap(String fileName)
     {

@@ -12,7 +12,7 @@ import java.awt.*;
 
 /*
 Settings:
-    1) Choose game style
+    1) Choose game singlePlayerStyle
     2) Choose game speed
     3) Volume (in future)
 */

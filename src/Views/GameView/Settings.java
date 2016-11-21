@@ -2,6 +2,7 @@ package Views.GameView;
 
 import Controllers.MovementBinds;
 import Views.Styles.GameStyle;
+import Views.Styles.MultiplayerGameStyle;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -27,12 +28,14 @@ public class Settings
 
     public int gameUpdateFrequency = 5;
     public int updateInterval = (int)Math.round(DEFAULT_UPDATE_INTERVAL / speedUp / gameUpdateFrequency);
-    public GameStyle style;
+    public GameStyle singlePlayerStyle;
+    public MultiplayerGameStyle multiplayerStyle;
     public ArrayList<MovementBinds> movementControls;
 
-    public Settings(GameStyle style)
+    public Settings(GameStyle singlePlayerStyle, MultiplayerGameStyle multiplayerStyle)
     {
-        this.style = style;
+        this.singlePlayerStyle = singlePlayerStyle;
+        this.multiplayerStyle = multiplayerStyle;
         movementControls = new ArrayList<>();
         movementControls.add(new MovementBinds(KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT));
         movementControls.add(new MovementBinds(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A));

@@ -27,7 +27,7 @@ public class SinglePlayerFrame extends Frame
     {
         super.restartGame();
         clear();
-        canvas = new SinglePlayerGameCanvas(this.game, settings.style, false);
+        canvas = new SinglePlayerGameCanvas(this.game, settings.singlePlayerStyle, false);
         add(canvas);
         addKeyListener(new GameController(this.game, 0, settings.movementControls.get(Settings.ARROWS_CONTROL)));
         setVisible(true);

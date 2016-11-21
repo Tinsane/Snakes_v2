@@ -2,6 +2,7 @@ package Views.MainMenuView;
 
 import Views.GameView.Settings;
 import Views.MainMenuView.Buttons.*;
+import Views.Styles.Default.DefaultMultiplayerStyle;
 import Views.Styles.Default.DefaultStyle;
 import Views.Utils.ButtonUtils.MenuButton;
 import Views.Utils.PanelUtils.MenuPanel;
@@ -23,7 +24,7 @@ public class Frame extends JFrame
     public Frame() throws IOException
     {
         super();
-        settings = new Settings(new DefaultStyle());
+        settings = new Settings(new DefaultStyle(), new DefaultMultiplayerStyle());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("SnakeMainMenu");
         setIconImage(loadImage("snakeIcon.png"));

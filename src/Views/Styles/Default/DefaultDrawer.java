@@ -24,11 +24,11 @@ import java.util.ArrayList;
 public class DefaultDrawer implements MapObjectVisitor, Drawer
 {
     private double x, y;
-    private final GameAlike game;
+    protected final GameAlike game;
     private final double turnPartLeft;
     private final Graphics2D graphics;
-    private final DefaultStyle style;
-    private ArrayList<VisualItem> visualItems;
+    protected final DefaultStyle style;
+    protected ArrayList<VisualItem> visualItems;
 
     public DefaultDrawer(DefaultStyle style, Graphics2D graphics, GameAlike game, double turnPartLeft)
     {
@@ -81,15 +81,18 @@ public class DefaultDrawer implements MapObjectVisitor, Drawer
                 AffineTransformOp.TYPE_BILINEAR).filter(image, null);
     }
 
+    protected void addSnakeCell(SnakeCell snakeCell, BufferedImage headImage, BufferedImage cellImage)
+    {
+        visualItems.add(new VisualItem(getRotated(game.getSnakes().stream().anyMatch(snake -> snake.head == snakeCell) ?
+                        headImage :
+                        cellImage,
+                VelocityVector.up.getAngle(snakeCell.getVelocity())), x, y, 2));
+    }
+
     @Override
     public void visit(SnakeCell snakeCell)
     {
-        visualItems.add(new VisualItem(getRotated(game.getSnakes().stream().anyMatch(snake -> snake.head == snakeCell) ?
-                        style.snakeHeadImage :
-                        style.snakeCellImage,
-                VelocityVector.up.getAngle(snakeCell.getVelocity())), x, y, 2));
-//        if (snakeCell != gameCreator.snakes.head)
-//            visualItems.add(new VisualItem(style.snakeSquareImage, (int)x, (int)y, 2));
+        addSnakeCell(snakeCell, style.snakeHeadImage, style.snakeCellImage);
     }
 
     private void draw(MapObject mapObject, int x, int y)

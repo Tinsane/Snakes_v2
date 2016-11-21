@@ -22,7 +22,7 @@ public abstract class Frame extends JFrame
         restartButton.addActionListener(e ->
         {
             setVisible(false);
-            dispose();;
+            dispose();
             restart.run();
         });
 

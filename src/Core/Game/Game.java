@@ -19,15 +19,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class Game implements Serializable, GameAlike, Cloneable
+public class Game extends AbstractGame implements Serializable, Cloneable
 {
     public ArrayList<Snake> snakes;
     private GameUpdater gameUpdater;
     private LinkedList<MapObject[][]> maps;
-
-    public int getWidth() { return getCurrentMap().length; }
-
-    public int getHeight() { return getCurrentMap()[0].length; }
     public boolean isFinished()
     {
         return snakes.stream().anyMatch(Snake::getIsDestructed);
@@ -52,6 +48,12 @@ public class Game implements Serializable, GameAlike, Cloneable
     }
 
     @Override
+    public ArrayList<Snake> getSnakes()
+    {
+        return snakes;
+    }
+
+    @Override
     public Game clone()
     {
         try
@@ -62,20 +64,6 @@ public class Game implements Serializable, GameAlike, Cloneable
         {
             throw new InternalError();
         }
-    }
-
-    @Override
-    public ArrayList<Snake> getSnakes()
-    {
-        return snakes;
-    }
-
-    public Snake getOwner(SnakeCell cell)
-    {
-        for (Snake snake : snakes)
-            if (snake.contains(cell))
-                return snake;
-        throw new IllegalArgumentException("Abeyant snake cell.");
     }
 
     public void rollback(int turnsNumber)
