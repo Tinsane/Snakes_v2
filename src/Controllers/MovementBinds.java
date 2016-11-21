@@ -5,7 +5,7 @@ import Core.Utils.VelocityVector;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-/**
+/**d
  * Created by ISmir on 21.10.2016.
  */
 public class MovementBinds extends ArrayList<DirectionBind>

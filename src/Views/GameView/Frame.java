@@ -2,8 +2,10 @@ package Views.GameView;
 
 import Controllers.GameController;
 import Core.Game.Game;
+import Views.Utils.GameCopyUtils;
 
 import javax.swing.*;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -17,6 +19,7 @@ public abstract class Frame extends JFrame
     protected Game game;
     private final Timer updateTimer;
     private int currentTick;
+    private Game initialGame;
     protected Settings settings;
 
     public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game)
@@ -24,37 +27,41 @@ public abstract class Frame extends JFrame
         super();
         this.mainMenuFrame = mainMenuFrame;
         settings = mainMenuFrame.settings;
-        this.game = game;
+        initialGame = game;
         addWindowListener(new WindowAdapter()
         {
             @Override
             public void windowClosing(WindowEvent e)
             {
-                 stop();
+                updateTimer.stop();
             }
         });
 
         setTitle("Snakes_v2");
 
-        currentTick = settings.gameUpdateFrequency;
-
         updateTimer = new Timer(settings.updateInterval, x -> update());
         updateTimer.setRepeats(true);
     }
 
-    public void start()
+    protected void clear()
     {
-        updateTimer.start();
+        if (canvas != null)
+            remove(canvas);
+        KeyListener[] listeners = getKeyListeners();
+        for (KeyListener listener : listeners)
+            removeKeyListener(listener);
     }
 
-    public void stop()
+    protected void restartGame()
     {
-        updateTimer.stop();
+        game = GameCopyUtils.CopyGame(initialGame);
+        currentTick = settings.gameUpdateFrequency;
+        updateTimer.restart();
     }
 
     protected void onGameFinished()
     {
-        stop();
+        updateTimer.stop();
         setVisible(false);
         dispose();
     }

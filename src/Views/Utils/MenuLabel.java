@@ -1,4 +1,4 @@
-package Views.FinalScoreView.Utils;
+package Views.Utils;
 
 import Views.Styles.MenuStyle;
 
@@ -7,9 +7,9 @@ import javax.swing.*;
 /**
  * Created by ISmir on 21.11.2016.
  */
-public class ScoreLabel extends JLabel
+public class MenuLabel extends JLabel
 {
-    public ScoreLabel(String text, int fontSize)
+    public MenuLabel(String text, int fontSize)
     {
         super(text, SwingConstants.CENTER);
         setForeground(MenuStyle.TEXT_COLOR);

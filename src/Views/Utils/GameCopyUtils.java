@@ -4,16 +4,19 @@ import Core.Game.Game;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
-import java.util.Base64;
 
 /**
  * Created by ISmir on 21.11.2016.
  */
-public class SerializationUtils
+public class GameCopyUtils
 {
-    private static Game fromString( String s )
+    public static Game CopyGame(Game game)
     {
-        byte [] data = Base64.getDecoder().decode( s );
+        return fromString(toString(game));
+    }
+
+    private static Game fromString( byte[] data )
+    {
         try (ByteArrayInputStream byteArrayStream = new ByteArrayInputStream(data);
                 ObjectInputStream objectStream = new ObjectInputStream(byteArrayStream))
         {
@@ -22,14 +25,10 @@ public class SerializationUtils
         {
             throw new NotImplementedException();
         }
-        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(  data ) );
-        Object o  = ois.readObject();
-        ois.close();
-        return o;
     }
 
     /** Write the object to a Base64 string. */
-    private static String toString( Serializable o )
+    private static byte[] toString( Serializable o )
     {
         ByteArrayOutputStream byteArrayStream = new ByteArrayOutputStream();
         try (ObjectOutputStream objectStream = new ObjectOutputStream( byteArrayStream ))
@@ -39,6 +38,6 @@ public class SerializationUtils
         {
             throw new NotImplementedException();
         }
-        return Base64.getEncoder().encodeToString(byteArrayStream.toByteArray());
+        return byteArrayStream.toByteArray();
     }
 }

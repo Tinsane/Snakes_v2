@@ -20,18 +20,21 @@ Maybe a good solution would be to copy settings while initializing game.
 public class Settings
 {
     private static final int DEFAULT_UPDATE_INTERVAL = 200;
+    public static final int ARROWS_CONTROL = 0;
+    public static final int WASD_CONTROL = 1;
+
     public double speedUp = 1;
 
     public int gameUpdateFrequency = 5;
     public int updateInterval = (int)Math.round(DEFAULT_UPDATE_INTERVAL / speedUp / gameUpdateFrequency);
     public GameStyle style;
-    public ArrayList<MovementBinds> movementBinds;
+    public ArrayList<MovementBinds> movementControls;
 
     public Settings(GameStyle style)
     {
         this.style = style;
-        movementBinds = new ArrayList<>();
-        movementBinds.add(new MovementBinds(KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT));
-        movementBinds.add(new MovementBinds(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A));
+        movementControls = new ArrayList<>();
+        movementControls.add(new MovementBinds(KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_RIGHT, KeyEvent.VK_LEFT));
+        movementControls.add(new MovementBinds(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A));
     }
 }

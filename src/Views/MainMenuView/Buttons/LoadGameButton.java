@@ -25,6 +25,9 @@ public class LoadGameButton extends FrameLoaderButton
         game = FileUtils.LoadGameFromFileExceptionsHandled(parent);
         if (game == null)
             return null;
+
+        if (game.getSnakes().size() == 1)
+            return new SinglePlayerFrame((Views.MainMenuView.Frame) parent, game);
         return new MultiplayerFrame((Views.MainMenuView.Frame) parent, game);
     }
 }

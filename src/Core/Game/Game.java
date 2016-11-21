@@ -10,6 +10,7 @@ import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
+import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Snake.Snake;
 import Core.Utils.IntPair;
 
@@ -132,6 +133,15 @@ public class Game implements Serializable, GameAlike, Cloneable
         objectInputStream.writeObject(this);
     }
 
+    public int getAliveSnakeIndex()
+    {
+        for(int i = 0; i < snakes.size(); ++i)
+            if (!snakes.get(i).getIsDestructed())
+                return i;
+        return -1;
+    }
+
+
     private class GameUpdater implements Serializable
     {
         private Game game;
@@ -140,7 +150,6 @@ public class Game implements Serializable, GameAlike, Cloneable
         private GameUpdater(Game game)
         {
             this.game = game;
-
         }
 
         private void generateBerry()
@@ -252,5 +261,27 @@ public class Game implements Serializable, GameAlike, Cloneable
                 generateBerry();
             return newMap;
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        MapObject[][] map = getCurrentMap();
+
+        for (int i = 0; i < getWidth(); ++i)
+        {
+            for (int j = 0; j < getHeight(); ++j)
+                if (map[i][j] instanceof Wall)
+                    builder.append('#');
+                else if (map[i][j] instanceof EmptyCell)
+                    builder.append('.');
+                else if (map[i][j] instanceof Berry)
+                    builder.append('B');
+                else if (map[i][j] instanceof SnakeCell)
+                    builder.append('S');
+            builder.append('\n');
+        }
+        return builder.toString();
     }
 }
