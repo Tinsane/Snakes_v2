@@ -1,6 +1,5 @@
 package Views.MapEditorView;
 
-import Core.MapObjects.MapObject;
 import Views.Styles.MapEditorStyle;
 
 import javax.swing.*;
@@ -20,23 +19,23 @@ public class MapObjectView extends JPanel
     {
         this.objectImage = objectImage;
         this.style = style;
-        setUnselected();
+        unselect();
         //setMinimumSize(new Dimension(objectImage.getWidth(), objectImage.getHeight()));
     }
 
-    public void setUnselected()
+    public void unselect()
     {
         currentStateImage = style.getAbsolutelyEmptyImage();
     }
 
-    public void setChosen()
+    public void select()
     {
-        currentStateImage = style.getChosenLocationImage();
+        currentStateImage = style.getSelectedLocationImage();
     }
 
-    public void setActive()
+    public void focus()
     {
-        currentStateImage = style.getActiveLocationImage();
+        currentStateImage = style.getFocusedLocationImage();
     }
 
     @Override

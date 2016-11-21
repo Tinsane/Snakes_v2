@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
 import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
 
 /**
@@ -51,7 +50,7 @@ public class MapEditorCanvas extends JPanel
 
     private void highlight(Graphics2D graphics, IntPair location, boolean active)
     {
-        BufferedImage distinguishImage = active ? style.getActiveLocationImage() : style.getChosenLocationImage();
+        BufferedImage distinguishImage = active ? style.getFocusedLocationImage() : style.getSelectedLocationImage();
         drawImage(graphics, style, distinguishImage, location.x, location.y);
     }
 }

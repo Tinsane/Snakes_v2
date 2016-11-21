@@ -1,12 +1,8 @@
 package Views.MapEditorView;
 
-import Core.Game.Game;
 import Core.Game.GameCreatorWrapper;
 import Core.MapObjects.MapObject;
 import Views.Styles.MapEditorStyle;
-import com.sun.javafx.UnmodifiableArrayList;
-import com.sun.javafx.collections.ImmutableObservableList;
-import com.sun.javafx.geom.Dimension2D;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +10,6 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
 import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
 
 /**
@@ -59,12 +54,12 @@ public class ObjectPanel extends JPanel
 
     public void update()
     {
-        objectViews.forEach(MapObjectView::setUnselected);
+        objectViews.forEach(MapObjectView::unselect);
         MapObjectView selected = objectViews.get(gameCreator.mapObjectIndex);
         if (gameCreator.pointer == MapPosition)
-            selected.setChosen();
+            selected.select();
         else
-            selected.setActive();
+            selected.focus();
         repaint();
     }
 }
