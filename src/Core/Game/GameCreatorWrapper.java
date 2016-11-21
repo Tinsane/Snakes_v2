@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
+
 /**
  * Created by ISmir on 20.10.2016.
  */
@@ -174,6 +176,17 @@ public class GameCreatorWrapper extends GameCreator
     public void placeSnake()
     {
         placeSnake(mapPosition.x - 1, mapPosition.y - 1, 1);
+    }
+
+    public void moveFocusedPositionOnVector(VelocityVector velocity)
+    {
+        if (pointer == MapObjectType)
+        {
+            if (velocity.y == 0)
+                moveMapObjectIndexOrStay(velocity.x);
+        }
+        else
+            movePositionWithResizing(velocity);
     }
 
     private boolean lineOfWalls(int lineNumber)

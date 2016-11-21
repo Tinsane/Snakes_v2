@@ -19,8 +19,8 @@ public class MapEditorDefaultStyle extends DefaultStyle implements MapEditorStyl
 
     public MapEditorDefaultStyle() throws IOException
     {
-        chosenLocationImage = loadImage("chosen.png");
-        activeLocationImage = loadImage("active.png");
+        chosenLocationImage = loadImage("selected.png");
+        activeLocationImage = loadImage("focused.png");
         mapObjectWrapperImage = loadImage("map_object_wrapper.png");
         absolutelyEmptyImage = loadImage("absolutely_empty.png");
     }
@@ -56,13 +56,13 @@ public class MapEditorDefaultStyle extends DefaultStyle implements MapEditorStyl
     }
 
     @Override
-    public BufferedImage getChosenLocationImage()
+    public BufferedImage getSelectedLocationImage()
     {
         return chosenLocationImage;
     }
 
     @Override
-    public BufferedImage getActiveLocationImage()
+    public BufferedImage getFocusedLocationImage()
     {
         return activeLocationImage;
     }

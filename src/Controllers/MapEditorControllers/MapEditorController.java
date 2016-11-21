@@ -35,13 +35,7 @@ public class MapEditorController extends MapEditorAbstractController implements 
         VelocityVector velocity = movementBinds.getDirection(e);
         if (velocity != null)
         {
-            if (gameCreator.pointer == MapObjectType)
-            {
-                if (velocity.y == 0)
-                    gameCreator.moveMapObjectIndexOrStay(velocity.x);
-            }
-            else
-                gameCreator.movePositionWithResizing(velocity);
+            gameCreator.moveFocusedPositionOnVector(velocity);
         }
         else
         {

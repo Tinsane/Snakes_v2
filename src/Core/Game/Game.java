@@ -135,17 +135,17 @@ public class Game implements Serializable, GameAlike, Cloneable
     private class GameUpdater implements Serializable
     {
         private Game game;
-        private final Random updaterRandom;
         private MapObject[][] newMap;
 
         private GameUpdater(Game game)
         {
             this.game = game;
-            updaterRandom = new Random();
+
         }
 
         private void generateBerry()
         {
+            Random updaterRandom = new Random();
             int freeCellsCnt = 0;
             for (MapObject[] row : newMap)
                 for (MapObject cell : row)
@@ -154,7 +154,7 @@ public class Game implements Serializable, GameAlike, Cloneable
             if (freeCellsCnt == 0)
                 return;
             int berryCellNumber = updaterRandom.nextInt(freeCellsCnt);
-            outerloop:
+            outerLoop:
             for (int x = 0; x < newMap.length; ++x)
                 for (int y = 0; y < newMap[0].length; ++y)
                 {
@@ -163,7 +163,7 @@ public class Game implements Serializable, GameAlike, Cloneable
                     if (berryCellNumber == 0)
                     {
                         newMap[x][y] = updaterRandom.nextBoolean() ? new Blueberry() : new Strawberry();
-                        break outerloop;
+                        break outerLoop;
                     }
                     --berryCellNumber;
                 }
