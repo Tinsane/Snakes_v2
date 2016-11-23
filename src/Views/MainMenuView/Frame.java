@@ -32,11 +32,11 @@ public class Frame extends JFrame
         setResizable(false);
 
         MenuButton buttons[] = {
-                new StartGameButton(buttonFontSize, this),
-                new LoadGameButton(buttonFontSize, this),
+                new StartGameButton(buttonFontSize, this, settings),
+                new LoadGameButton(buttonFontSize, this, settings),
                 new MapEditorButton(buttonFontSize, this),
                 new ScoreboardButton(buttonFontSize, this),
-                new SettingsButton(buttonFontSize, this),
+                new SettingsButton(buttonFontSize, this, settings),
                 new ExitButton(buttonFontSize, this)};
 
         setSize(400, buttonSize * buttons.length);

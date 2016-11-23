@@ -2,6 +2,7 @@ package Views.MainMenuView.Buttons;
 
 import Core.Game.Game;
 import Views.GameView.MultiplayerFrame;
+import Views.GameView.Settings;
 import Views.GameView.SinglePlayerFrame;
 import Views.Utils.FileUtils;
 import Views.Utils.ButtonUtils.FrameLoaderButton;
@@ -13,9 +14,11 @@ import javax.swing.*;
  */
 public class LoadGameButton extends FrameLoaderButton
 {
-    public LoadGameButton(int fontSize, JFrame parent)
+    private Settings settings;
+    public LoadGameButton(int fontSize, JFrame parent, Settings settings)
     {
         super("Load game", fontSize, parent);
+        this.settings = settings;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class LoadGameButton extends FrameLoaderButton
             return null;
 
         if (game.getSnakes().size() == 1)
-            return new SinglePlayerFrame((Views.MainMenuView.Frame) parent, game);
-        return new MultiplayerFrame((Views.MainMenuView.Frame) parent, game);
+            return new SinglePlayerFrame((Views.MainMenuView.Frame) parent, game, settings);
+        return new MultiplayerFrame((Views.MainMenuView.Frame) parent, game, settings);
     }
 }

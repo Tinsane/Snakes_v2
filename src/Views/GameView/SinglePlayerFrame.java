@@ -9,9 +9,9 @@ import Views.FinalScoreView.SinglePlayerFinalScoreFrame;
  */
 public class SinglePlayerFrame extends Frame
 {
-    public SinglePlayerFrame(Views.MainMenuView.Frame mainMenuFrame, Game game)
+    public SinglePlayerFrame(Views.MainMenuView.Frame mainMenuFrame, Game game, Settings settings)
     {
-        super(mainMenuFrame, game);
+        super(mainMenuFrame, game, settings);
         restartGame();
     }
 

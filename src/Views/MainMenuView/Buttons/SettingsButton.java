@@ -1,5 +1,6 @@
 package Views.MainMenuView.Buttons;
 
+import Views.GameView.Settings;
 import Views.Utils.ButtonUtils.FrameLoaderButton;
 
 import javax.swing.*;
@@ -9,14 +10,16 @@ import javax.swing.*;
  */
 public final class SettingsButton extends FrameLoaderButton
 {
-    public SettingsButton(int fontSize, JFrame parent)
+    private final Settings settings;
+    public SettingsButton(int fontSize, JFrame parent, Settings settings)
     {
         super("Settings", fontSize, parent);
+        this.settings = settings;
     }
 
     @Override
     protected JFrame createFrame(JFrame parent)
     {
-        return new Views.SettingsView.Frame((Views.MainMenuView.Frame) parent);
+        return new Views.SettingsView.Frame((Views.MainMenuView.Frame) parent, settings);
     }
 }

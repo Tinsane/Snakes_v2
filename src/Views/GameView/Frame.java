@@ -22,11 +22,11 @@ public abstract class Frame extends JFrame
     private Game initialGame;
     protected Settings settings;
 
-    public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game)
+    public Frame(Views.MainMenuView.Frame mainMenuFrame, Game game, Settings settings)
     {
         super();
         this.mainMenuFrame = mainMenuFrame;
-        settings = mainMenuFrame.settings;
+        this.settings = settings;
         initialGame = game;
         addWindowListener(new WindowAdapter()
         {

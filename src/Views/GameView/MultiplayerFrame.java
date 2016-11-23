@@ -9,9 +9,9 @@ import Views.FinalScoreView.MultiplayerFinalScoreFrame;
  */
 public class MultiplayerFrame extends Frame
 {
-    public MultiplayerFrame(Views.MainMenuView.Frame mainMenuFrame, Game game)
+    public MultiplayerFrame(Views.MainMenuView.Frame mainMenuFrame, Game game, Settings settings)
     {
-        super(mainMenuFrame, game);
+        super(mainMenuFrame, game, settings);
         restartGame();
     }
 

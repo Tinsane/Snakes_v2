@@ -23,10 +23,10 @@ Settings:
 public class Frame extends JFrame
 {
     public Settings settings;
-    public Frame(Views.MainMenuView.Frame mainMenuFrame)
+    public Frame(Views.MainMenuView.Frame mainMenuFrame, Settings settings)
     {
         super();
-        settings = mainMenuFrame.settings;
+        this.settings = settings;
         Container pane = getContentPane();
         pane.setBackground(MenuStyle.BACKGROUND_COLOR);
         pane.setLayout(new GridBagLayout());
