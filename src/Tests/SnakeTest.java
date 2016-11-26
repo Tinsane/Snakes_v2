@@ -1,7 +1,7 @@
 package Tests;
 
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
-import Core.Snake.Snake;
+import Core.GameObjects.Snake.Snake;
 import Core.Utils.VelocityVector;
 
 import static org.junit.Assert.assertEquals;

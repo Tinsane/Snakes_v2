@@ -1,5 +1,7 @@
-package Core.Game;
+package Core.Game.GameCreators;
 
+import Core.Game.GameAlike;
+import Core.Game.GameUpdaters.GameUpdater;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -14,7 +16,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
+import static Core.Game.GameCreators.GameCreatorWrapper.Pointer.MapObjectType;
 
 /**
  * Created by ISmir on 20.10.2016.
@@ -31,7 +33,7 @@ public class GameCreatorWrapper extends GameCreator
     public void Populate(GameAlike game)
     {
         map = game.getCurrentMap();
-        snakes = game.getSnakes();
+        gameObjects = game.getGameObjects();
     }
 
     public List<MapObject> getMapObjects()
@@ -70,14 +72,14 @@ public class GameCreatorWrapper extends GameCreator
         addObject(Blueberry::new);
     }
 
-    public GameCreatorWrapper()
+    public GameCreatorWrapper(GameUpdater gameUpdater)
     {
-        super();
+        super(gameUpdater);
     }
 
-    public GameCreatorWrapper(int width, int height)
+    public GameCreatorWrapper(int width, int height, GameUpdater gameUpdater)
     {
-        super();
+        super(gameUpdater);
         resizeMap(width, height);
     }
 

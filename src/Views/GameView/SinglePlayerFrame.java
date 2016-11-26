@@ -2,6 +2,7 @@ package Views.GameView;
 
 import Controllers.GameController;
 import Core.Game.Game;
+import Core.GameObjects.Snake.Snake;
 import Views.FinalScoreView.SinglePlayerFinalScoreFrame;
 
 /**
@@ -19,7 +20,7 @@ public class SinglePlayerFrame extends Frame
     protected void onGameFinished()
     {
         super.onGameFinished();
-        new SinglePlayerFinalScoreFrame(mainMenuFrame, this::restartGame, game.getSnakes().get(0).getLength());
+        new SinglePlayerFinalScoreFrame(mainMenuFrame, this::restartGame, Snake.getSnake(game).getLength());
     }
 
     @Override

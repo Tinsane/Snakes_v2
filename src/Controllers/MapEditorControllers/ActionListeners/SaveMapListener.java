@@ -1,6 +1,6 @@
 package Controllers.MapEditorControllers.ActionListeners;
 
-import Core.Game.GameCreatorWrapper;
+import Core.Game.GameCreators.GameCreatorWrapper;
 import Views.Utils.FileUtils;
 import Views.MapEditorView.Frame;
 
@@ -17,7 +17,7 @@ public class SaveMapListener extends MapEditorAbstractActionListener
     @Override
     public void mapEditorActionPerformed()
     {
-        if (gameCreator.getSnakes() == null)
+        if (gameCreator.getGameObjects() == null)
             throw new IllegalStateException("Snake not set"); // TODO: show window
         FileUtils.SaveGameToFileExceptionsHandled(mapEditorFrame, gameCreator.createGame());
     }

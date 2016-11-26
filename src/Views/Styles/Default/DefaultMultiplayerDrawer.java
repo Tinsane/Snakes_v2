@@ -10,15 +10,18 @@ import java.awt.*;
  */
 public class DefaultMultiplayerDrawer extends DefaultDrawer
 {
+    private final DefaultMultiplayerStyle style;
+
     public DefaultMultiplayerDrawer(DefaultMultiplayerStyle style, Graphics2D graphics, GameAlike game, double turnPartLeft)
     {
         super(style, graphics, game, turnPartLeft);
+        this.style = style;
     }
 
     @Override
     public void visit(SnakeCell snakeCell)
     {
-        addSnakeCell(snakeCell, ((DefaultMultiplayerStyle)style).snakesHeads.get(game.getOwnerIndex(snakeCell)),
-                ((DefaultMultiplayerStyle)style).snakesCells.get(game.getOwnerIndex(snakeCell)));
+        addSnakeCell(snakeCell, style.snakesHeads.get(game.getOwnerIndex(snakeCell)),
+                style.snakesCells.get(game.getOwnerIndex(snakeCell)));
     }
 }

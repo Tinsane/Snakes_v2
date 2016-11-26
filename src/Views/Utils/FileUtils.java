@@ -58,7 +58,7 @@ public class FileUtils
             SaveGameToFile(frame, game);
         } catch (IOException | ClassNotFoundException e)
         {
-            throw new NotImplementedException();
+            e.printStackTrace();
         }
     }
 }

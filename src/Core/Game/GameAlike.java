@@ -1,8 +1,7 @@
 package Core.Game;
 
-import Core.MapObjects.DynamicMapObjects.SnakeCell;
+import Core.GameObjects.GameObject;
 import Core.MapObjects.MapObject;
-import Core.Snake.Snake;
 
 import java.util.ArrayList;
 
@@ -13,9 +12,10 @@ public interface GameAlike
 {
     MapObject[][] getCurrentMap();
 
-    ArrayList<Snake> getSnakes();
-    Snake getOwner(SnakeCell cell);
-    int getOwnerIndex(SnakeCell cell);
+    ArrayList<GameObject> getGameObjects();
+    GameObject getGameObject(Class objectClass, int index);
+    GameObject getOwner(MapObject cell);
+    int getOwnerIndex(MapObject cell);
 
     int getWidth();
     int getHeight();

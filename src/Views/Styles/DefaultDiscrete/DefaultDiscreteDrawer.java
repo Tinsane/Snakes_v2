@@ -84,7 +84,7 @@ public class DefaultDiscreteDrawer implements MapObjectVisitor, Drawer
     @Override
     public void visit(SnakeCell snakeCell)
     {
-        drawImage(getRotated(game.getSnakes().stream().anyMatch(snake -> snake.head == snakeCell) ?
+        drawImage(getRotated(game.getGameObjects().stream().anyMatch(object -> object.contains(snakeCell)) ?
                         style.snakeHeadImage :
                         style.snakeCellImage,
                 VelocityVector.up.getAngle(snakeCell.getVelocity())));

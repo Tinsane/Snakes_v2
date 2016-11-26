@@ -19,7 +19,7 @@ public class MultiplayerFrame extends Frame
     protected void onGameFinished()
     {
         super.onGameFinished();
-        new MultiplayerFinalScoreFrame(mainMenuFrame, this::restartGame, game.getAliveSnakeIndex());
+        new MultiplayerFinalScoreFrame(mainMenuFrame, this::restartGame, game.getAliveObjectIndex());
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MultiplayerFrame extends Frame
         clear();
         canvas = new GameCanvas(this.game, settings.multiplayerStyle, false);
         add(canvas);
-        for (int i = 0; i < this.game.getSnakes().size(); ++i) // TODO: create two players frame
+        for (int i = 0; i < this.game.getGameObjects().size(); ++i) // TODO: create two players frame
             addKeyListener(new GameController(this.game, i, settings.movementControls.get(i)));
         setVisible(true);
         pack();

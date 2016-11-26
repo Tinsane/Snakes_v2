@@ -1,13 +1,8 @@
 package Controllers.MapEditorControllers.ActionListeners;
 
 import Core.Game.Game;
-import Core.Game.GameCreator;
-import Core.Game.GameCreatorWrapper;
+import Core.Game.GameCreators.GameCreatorWrapper;
 import Views.MapEditorView.Frame;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import static Views.Utils.FileUtils.LoadGameFromFileExceptionsHandled;
 

@@ -1,6 +1,6 @@
 package Views.MainMenuView.Buttons;
 
-import Core.Game.GameCreator;
+import Core.Game.GameCreators.GameCreator;
 import Core.MapObjects.StaticMapObjects.Wall;
 import Views.GameView.Settings;
 import Views.GameView.SinglePlayerFrame;
@@ -23,7 +23,7 @@ public final class StartGameButton extends FrameLoaderButton
     @Override
     protected JFrame createFrame(JFrame parent)
     {
-        GameCreator creator = new GameCreator();
+        GameCreator creator = new GameCreator(settings.gameUpdater);
         creator.setMapSize(10, 10);
         creator.placeWall(5, 5);
         creator.placeMapObjectsInLineX(4, 1, 7, new Wall());

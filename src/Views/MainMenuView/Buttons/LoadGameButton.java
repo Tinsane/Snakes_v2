@@ -29,7 +29,7 @@ public class LoadGameButton extends FrameLoaderButton
         if (game == null)
             return null;
 
-        if (game.getSnakes().size() == 1)
+        if (game.getGameObjects().size() == 1)
             return new SinglePlayerFrame((Views.MainMenuView.Frame) parent, game, settings);
         return new MultiplayerFrame((Views.MainMenuView.Frame) parent, game, settings);
     }

@@ -1,6 +1,7 @@
 package Core.GameCommands;
 
 import Core.Game.Game;
+import Core.GameObjects.Snake.Snake;
 import Core.Utils.*;
 
 /**
@@ -20,6 +21,6 @@ public class ChangeSnakeVelocityCommand implements GameCommand
     @Override
     public void execute(Game game)
     {
-        game.getSnakes().get(snakeIndex).setVelocity(velocity);
+        Snake.getSnake(game, snakeIndex).setVelocity(velocity);
     }
 }

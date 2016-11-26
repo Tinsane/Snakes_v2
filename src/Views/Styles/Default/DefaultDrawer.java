@@ -1,6 +1,7 @@
 package Views.Styles.Default;
 
 import Core.Game.GameAlike;
+import Core.GameObjects.Snake.Snake;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -83,10 +84,13 @@ public class DefaultDrawer implements MapObjectVisitor, Drawer
 
     protected void addSnakeCell(SnakeCell snakeCell, BufferedImage headImage, BufferedImage cellImage)
     {
-        visualItems.add(new VisualItem(getRotated(game.getSnakes().stream().anyMatch(snake -> snake.head == snakeCell) ?
-                        headImage :
-                        cellImage,
-                VelocityVector.up.getAngle(snakeCell.getVelocity())), x, y, 2));
+        boolean isHead = game
+                .getGameObjects()
+                .stream()
+                .anyMatch(gameObject -> Snake.getSnakeOwner(game, snakeCell).head == snakeCell);
+        BufferedImage image = isHead ? headImage : cellImage;
+        BufferedImage rotatedImage = getRotated(image, VelocityVector.up.getAngle(snakeCell.getVelocity()));
+        visualItems.add(new VisualItem(rotatedImage, x, y, 2));
     }
 
     @Override

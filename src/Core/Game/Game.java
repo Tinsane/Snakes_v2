@@ -3,38 +3,38 @@ package Core.Game;
  * Created by Владимир on 16.09.2016.
  */
 
+import Core.Game.GameUpdaters.GameUpdater;
 import Core.GameCommands.GameCommand;
+import Core.GameObjects.GameObject;
+import Core.GameObjects.Snake.Snake;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
-import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
-import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.Wall;
-import Core.Snake.Snake;
-import Core.Utils.IntPair;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Random;
 
 public class Game extends AbstractGame implements Serializable, Cloneable
 {
-    public ArrayList<Snake> snakes;
+    public ArrayList<GameObject> gameObjects;
     private GameUpdater gameUpdater;
     private LinkedList<MapObject[][]> maps;
+
     public boolean isFinished()
     {
-        return snakes.stream().anyMatch(Snake::getIsDestructed);
-    }
+        return gameObjects.stream().anyMatch(GameObject::getIsDestructed);
+    } // TODO: let gameUpdater decide when game finishes
 
-    Game(MapObject[][] map, ArrayList<Snake> snakes)
+    public Game(MapObject[][] map, ArrayList<GameObject> gameObjects, GameUpdater gameUpdater)
     {
         maps = new LinkedList<>();
         maps.addFirst(map);
-        this.snakes = snakes;
-        gameUpdater = new GameUpdater(this);
+        this.gameObjects = gameObjects;
+        gameUpdater.setGame(this);
+        this.gameUpdater = gameUpdater;
     }
 
     public void executeCommand(GameCommand command)
@@ -48,9 +48,9 @@ public class Game extends AbstractGame implements Serializable, Cloneable
     }
 
     @Override
-    public ArrayList<Snake> getSnakes()
+    public ArrayList<GameObject> getGameObjects()
     {
-        return snakes;
+        return gameObjects;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class Game extends AbstractGame implements Serializable, Cloneable
     {
         if (isFinished())
             throw new UnsupportedOperationException("Game finished. Impossible to update.");
-        maps.addFirst(gameUpdater.getNewMap());
+        maps.addFirst(gameUpdater.getUpdatedMap());
     }
 
     public static Game loadGame(String filePath) throws IOException, ClassNotFoundException
@@ -121,134 +121,12 @@ public class Game extends AbstractGame implements Serializable, Cloneable
         objectInputStream.writeObject(this);
     }
 
-    public int getAliveSnakeIndex()
+    public int getAliveObjectIndex()
     {
-        for(int i = 0; i < snakes.size(); ++i)
-            if (!snakes.get(i).getIsDestructed())
+        for(int i = 0; i < gameObjects.size(); ++i)
+            if (!gameObjects.get(i).getIsDestructed())
                 return i;
         return -1;
-    }
-
-
-    private class GameUpdater implements Serializable
-    {
-        private Game game;
-        private MapObject[][] newMap;
-
-        private GameUpdater(Game game)
-        {
-            this.game = game;
-        }
-
-        private void generateBerry()
-        {
-            Random updaterRandom = new Random();
-            int freeCellsCnt = 0;
-            for (MapObject[] row : newMap)
-                for (MapObject cell : row)
-                    if (cell instanceof EmptyCell)
-                        ++freeCellsCnt;
-            if (freeCellsCnt == 0)
-                return;
-            int berryCellNumber = updaterRandom.nextInt(freeCellsCnt);
-            outerLoop:
-            for (int x = 0; x < newMap.length; ++x)
-                for (int y = 0; y < newMap[0].length; ++y)
-                {
-                    if (!(newMap[x][y] instanceof EmptyCell))
-                        continue;
-                    if (berryCellNumber == 0)
-                    {
-                        newMap[x][y] = updaterRandom.nextBoolean() ? new Blueberry() : new Strawberry();
-                        break outerLoop;
-                    }
-                    --berryCellNumber;
-                }
-        }
-
-        private void clearDestructedObjects()
-        {
-            for (int x = 0; x < newMap.length; ++x)
-                for (int y = 0; y < newMap[0].length; ++y)
-                    if (newMap[x][y] != null && newMap[x][y].getIsDestructed())
-                        newMap[x][y] = null;
-        }
-
-        private void fillEmptyCells()
-        {
-            for (int x = 0; x < newMap.length; ++x)
-                for (int y = 0; y < newMap[0].length; ++y)
-                    if (newMap[x][y] == null)
-                        newMap[x][y] = new EmptyCell();
-        }
-
-        private void placeObject(MapObject object, IntPair position)
-        {
-            if (newMap[position.x][position.y] != null)
-            {
-                object.processCollision(newMap[position.x][position.y], game);
-                if (!newMap[position.x][position.y].getIsDestructed() && !object.getIsDestructed())
-                    throw new IllegalArgumentException("Objects can't decide which one stays alive.");
-            }
-            if (!object.getIsDestructed())
-                newMap[position.x][position.y] = object;
-        }
-
-        private void moveSnakeCell(SnakeCell cell, IntPair cellPosition)
-        {
-            if (cell.previous != null)
-            {
-                IntPair previousPosition = SnakeCell.getPreviousCoordinates(game.getCurrentMap(), cellPosition);
-                if (previousPosition == null)
-                    placeObject(cell.previous, cellPosition);
-                else
-                    moveSnakeCell(cell.previous, previousPosition);
-                cell.previous.setVelocity(cell.getVelocity());
-            }
-            moveObject(cellPosition);
-        }
-
-        private void moveSnakes()
-        {
-            for (Snake snake : snakes)
-            {
-                SnakeCell snakeHead = snake.head;
-                moveSnakeCell(snakeHead, snakeHead.getCoordinates(getCurrentMap()));
-            }
-        }
-
-        private void moveObject(IntPair position)
-        {
-            MapObject[][] curMap = getCurrentMap();
-            MapObject curObject = curMap[position.x][position.y];
-            IntPair newPosition = position.getAdded(curObject.getVelocity().getIntPair());
-            placeObject(curObject, newPosition);
-        }
-
-        private MapObject[][] getNewMap()
-        {
-            MapObject[][] curMap = game.getCurrentMap();
-            newMap = new MapObject[curMap.length][curMap[0].length];
-            for (int x = 0; x < curMap.length; ++x)
-                for (int y = 0; y < curMap[0].length; ++y)
-                {
-                    MapObject curObject = curMap[x][y];
-                    if (!(curObject.getIsDestructed() ||
-                            curObject.getClass() == SnakeCell.class || curObject.getClass() == EmptyCell.class))
-                        moveObject(new IntPair(x, y));
-                }
-            moveSnakes();
-            clearDestructedObjects();
-            fillEmptyCells();
-            boolean doesMapContainBerries = false;
-            for(MapObject[] row : newMap)
-                for(MapObject cell : row)
-                    if (cell instanceof Berry)
-                        doesMapContainBerries = true;
-            if (!doesMapContainBerries)
-                generateBerry();
-            return newMap;
-        }
     }
 
     @Override

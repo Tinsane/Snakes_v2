@@ -1,4 +1,4 @@
-package Core.Snake;
+package Core.GameObjects.Snake;
 
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 

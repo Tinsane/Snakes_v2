@@ -1,6 +1,7 @@
 package Views.GameView;
 
 import Core.Game.Game;
+import Core.GameObjects.Snake.Snake;
 import Views.Styles.GameStyle;
 
 import java.awt.*;
@@ -20,6 +21,6 @@ public class SinglePlayerGameCanvas extends GameCanvas
     {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawString("Score: " + game.getSnakes().get(0).getLength(), 0, 30);
+        g2d.drawString("Score: " + Snake.getSnake(game).getLength(), 0, 30);
     }
 }

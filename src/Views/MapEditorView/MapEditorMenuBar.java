@@ -3,7 +3,7 @@ package Views.MapEditorView;
 import Controllers.MapEditorControllers.ActionListeners.LoadMapListener;
 import Controllers.MapEditorControllers.ActionListeners.PlaceSnakeListener;
 import Controllers.MapEditorControllers.ActionListeners.SaveMapListener;
-import Core.Game.GameCreatorWrapper;
+import Core.Game.GameCreators.GameCreatorWrapper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,7 +20,7 @@ public class MapEditorMenuBar extends JMenuBar
     private final String EDIT = "Edit";
     private final String SAVE = "Save";
     private final String OPEN = "Open";
-    private final String PLACE_SNAKE = "Place snakes";
+    private final String PLACE_SNAKE = "Place gameObjects";
 
     HashMap<String, JMenu> menus = new HashMap<>();
 

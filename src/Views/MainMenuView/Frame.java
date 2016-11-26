@@ -34,7 +34,7 @@ public class Frame extends JFrame
         MenuButton buttons[] = {
                 new StartGameButton(buttonFontSize, this, settings),
                 new LoadGameButton(buttonFontSize, this, settings),
-                new MapEditorButton(buttonFontSize, this),
+                new MapEditorButton(buttonFontSize, this, settings),
                 new ScoreboardButton(buttonFontSize, this),
                 new SettingsButton(buttonFontSize, this, settings),
                 new ExitButton(buttonFontSize, this)};

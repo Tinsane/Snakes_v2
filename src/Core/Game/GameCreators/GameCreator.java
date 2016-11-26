@@ -1,5 +1,9 @@
-package Core.Game;
+package Core.Game.GameCreators;
 
+import Core.Game.AbstractGame;
+import Core.Game.Game;
+import Core.Game.GameUpdaters.GameUpdater;
+import Core.GameObjects.GameObject;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -7,9 +11,8 @@ import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
-import Core.Snake.Snake;
+import Core.GameObjects.Snake.Snake;
 import Core.Utils.IntPair;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import sun.plugin.dom.exception.InvalidStateException;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -25,11 +28,13 @@ import static java.lang.Integer.min;
 public class GameCreator extends AbstractGame
 {
     protected MapObject[][] map;
-    protected ArrayList<Snake> snakes = new ArrayList<>();
+    protected ArrayList<GameObject> gameObjects = new ArrayList<>();
+    private GameUpdater gameUpdater;
 
-    public GameCreator()
+    public GameCreator(GameUpdater updater)
     {
         map = new MapObject[0][0];
+        gameUpdater = updater;
     }
 
     private static MapObject[][] loadMap(String fileName)
@@ -39,9 +44,9 @@ public class GameCreator extends AbstractGame
 
     public Game createGame()
     {
-        if (snakes == null)
+        if (gameObjects == null)
             throw new InvalidStateException("Snake is null");
-        return new Game(map, snakes);
+        return new Game(map, gameObjects, gameUpdater);
     }
 
     protected boolean isCellInMap(int x, int y)
@@ -98,7 +103,7 @@ public class GameCreator extends AbstractGame
         if (!isCellInMap(x + 1, y + 1))
             throw new IllegalArgumentException("No such cell in the map.");
         if (map[x + 1][y + 1] instanceof SnakeCell)
-            deleteSnake(x, y);
+            deleteObject(x, y);
         map[x + 1][y + 1] = mapObject;
     }
 
@@ -152,14 +157,14 @@ public class GameCreator extends AbstractGame
 
     private void addSnake(Snake snake)
     {
-        this.snakes.add(snake);
+        this.gameObjects.add(snake);
     }
 
-    private void deleteSnake(int x, int y)
+    private void deleteObject(int x, int y)
     {
-        if (!(map[x + 1][y + 1] instanceof SnakeCell))
-            throw new IllegalArgumentException("There is no snake cell.");
-        snakes.removeIf(snake->snake.head == map[x + 1][y + 1]);
+        if (!(map[x + 1][y + 1] instanceof GameObject))
+            throw new IllegalArgumentException("There is no game object here.");
+        gameObjects.removeIf(object -> object.contains(map[x + 1][y + 1]));
         map[x + 1][y + 1] = new EmptyCell();
     }
 
@@ -170,8 +175,8 @@ public class GameCreator extends AbstractGame
     }
 
     @Override
-    public ArrayList<Snake> getSnakes()
+    public ArrayList<GameObject> getGameObjects()
     {
-        return snakes;
+        return gameObjects;
     }
 }

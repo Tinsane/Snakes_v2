@@ -1,6 +1,6 @@
 package Views.MapEditorView;
 
-import Core.Game.GameCreatorWrapper;
+import Core.Game.GameCreators.GameCreatorWrapper;
 import Core.MapObjects.MapObject;
 import Views.Styles.MapEditorStyle;
 
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
+import static Core.Game.GameCreators.GameCreatorWrapper.Pointer.MapPosition;
 
 /**
  * Created by ISmir on 27.10.2016.

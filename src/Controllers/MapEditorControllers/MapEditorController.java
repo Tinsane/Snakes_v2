@@ -1,15 +1,15 @@
 package Controllers.MapEditorControllers;
 
 import Controllers.MovementBinds;
-import Core.Game.GameCreatorWrapper;
+import Core.Game.GameCreators.GameCreatorWrapper;
 import Core.Utils.VelocityVector;
 import Views.MapEditorView.Frame;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import static Core.Game.GameCreatorWrapper.Pointer.MapObjectType;
-import static Core.Game.GameCreatorWrapper.Pointer.MapPosition;
+import static Core.Game.GameCreators.GameCreatorWrapper.Pointer.MapObjectType;
+import static Core.Game.GameCreators.GameCreatorWrapper.Pointer.MapPosition;
 
 /**
  * Created by Владимир on 20.10.2016.

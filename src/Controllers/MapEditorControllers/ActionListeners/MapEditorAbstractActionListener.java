@@ -1,7 +1,7 @@
 package Controllers.MapEditorControllers.ActionListeners;
 
 import Controllers.MapEditorControllers.MapEditorAbstractController;
-import Core.Game.GameCreatorWrapper;
+import Core.Game.GameCreators.GameCreatorWrapper;
 import Views.MapEditorView.Frame;
 
 import java.awt.event.ActionEvent;

@@ -1,6 +1,6 @@
 package Controllers.MapEditorControllers.ActionListeners;
 
-import Core.Game.GameCreatorWrapper;
+import Core.Game.GameCreators.GameCreatorWrapper;
 import Views.MapEditorView.Frame;
 
 /**

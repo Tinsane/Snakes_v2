@@ -83,7 +83,7 @@ public class KekDiscreteDrawer implements MapObjectVisitor, Drawer
     @Override
     public void visit(SnakeCell snakeCell)
     {
-        if (game.getSnakes().stream().anyMatch(snake -> snake.head == snakeCell))
+        if (game.getGameObjects().stream().anyMatch(gameObject -> gameObject.contains(snakeCell)))
             drawImage(getRotated(style.snakeHeadImage,
                     VelocityVector.up.getAngle(snakeCell.getVelocity())));
         else

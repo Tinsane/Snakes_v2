@@ -1,5 +1,6 @@
 package Views.MainMenuView.Buttons;
 
+import Views.GameView.Settings;
 import Views.Utils.ButtonUtils.FrameLoaderButton;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -11,9 +12,12 @@ import java.io.IOException;
  */
 public final class MapEditorButton extends FrameLoaderButton
 {
-    public MapEditorButton(int fontSize, JFrame parent)
+    private final Settings settings;
+
+    public MapEditorButton(int fontSize, JFrame parent, Settings settings)
     {
         super("Map Editor", fontSize, parent);
+        this.settings = settings;
     }
 
     @Override
@@ -21,7 +25,7 @@ public final class MapEditorButton extends FrameLoaderButton
     {
         try
         {
-            return new Views.MapEditorView.Frame();
+            return new Views.MapEditorView.Frame(settings);
         } catch (IOException e)
         {
             throw new NotImplementedException(); // TODO: map editor didn't load
