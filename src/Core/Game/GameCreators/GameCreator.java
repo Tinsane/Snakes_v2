@@ -2,6 +2,7 @@ package Core.Game.GameCreators;
 
 import Core.Game.AbstractGame;
 import Core.Game.Game;
+import Core.GameObjects.CatDog;
 import Core.GameObjects.GameObject;
 import Core.GameUpdatingSystem.GameUpdatingSystem;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
@@ -102,8 +103,9 @@ public class GameCreator extends AbstractGame
     {
         if (!isCellInMap(x + 1, y + 1))
             throw new IllegalArgumentException("No such cell in the map.");
-        if (map[x + 1][y + 1] instanceof SnakeCell)
-            deleteObject(x, y);
+        GameObject owner = getOwner(map[x + 1][y + 1]);
+        if (owner != null)
+            deleteGameObject(owner);
         map[x + 1][y + 1] = mapObject;
     }
 
@@ -133,7 +135,17 @@ public class GameCreator extends AbstractGame
             throw new IllegalArgumentException(String.format("Snake length should be positive. Given : %1$d", snakeLength));
         Snake snake = new Snake(snakeLength);
         placeMapObject(snakeX, snakeY, snake.head);
-        addSnake(snake);
+        addGameObject(snake);
+    }
+
+    public void placeCatDog(int catDogX, int catDogY, int catDogLength)
+    {
+        if (catDogLength < 2)
+            throw new IllegalArgumentException(String.format("CatDog length should be positive. Given : %1$d", catDogLength));
+        CatDog catDog = new CatDog(catDogLength);
+        placeMapObject(catDogX, catDogY, catDog.head); // TODO for me: use getCat and getDog instead
+        placeMapObject(catDogX + 1, catDogY, catDog.tail);
+        addGameObject(catDog);
     }
 
     // LU - left up angle of rectangle
@@ -155,17 +167,17 @@ public class GameCreator extends AbstractGame
         placeMapObjectsInRectangle(xL, y, xR, y, mapObject);
     }
 
-    private void addSnake(Snake snake)
+    private void addGameObject(GameObject gameObject)
     {
-        this.gameObjects.add(snake);
+        this.gameObjects.add(gameObject);
     }
 
-    private void deleteObject(int x, int y)
+    private void deleteGameObject(GameObject gameObject)
     {
-        if (!(map[x + 1][y + 1] instanceof GameObject))
-            throw new IllegalArgumentException("There is no game object here.");
-        gameObjects.removeIf(object -> object.contains(map[x + 1][y + 1]));
-        map[x + 1][y + 1] = new EmptyCell();
+        for (int x = 0; x < getWidth() - 2; ++x)
+            for (int y = 0; y < getHeight() - 2; ++y)
+                if (gameObject.contains(map[x + 1][y + 1]))
+                    map[x + 1][y + 1] = new EmptyCell();
     }
 
     @Override

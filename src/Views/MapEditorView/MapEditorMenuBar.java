@@ -1,6 +1,7 @@
 package Views.MapEditorView;
 
 import Controllers.MapEditorControllers.ActionListeners.LoadMapListener;
+import Controllers.MapEditorControllers.ActionListeners.PlaceCatDogListener;
 import Controllers.MapEditorControllers.ActionListeners.PlaceSnakeListener;
 import Controllers.MapEditorControllers.ActionListeners.SaveMapListener;
 import Core.Game.GameCreators.GameCreatorWrapper;
@@ -21,6 +22,7 @@ public class MapEditorMenuBar extends JMenuBar
     private final String SAVE = "Save";
     private final String OPEN = "Open";
     private final String PLACE_SNAKE = "Place gameObjects";
+    private final String PLACE_CAT_DOG = "Place CatDog";
 
     HashMap<String, JMenu> menus = new HashMap<>();
 
@@ -68,5 +70,6 @@ public class MapEditorMenuBar extends JMenuBar
         addFileMenuItem(SAVE, WithCtrl(KeyEvent.VK_S), new SaveMapListener(gameCreator, mapEditorFrame));
         addFileMenuItem(OPEN, WithCtrl(KeyEvent.VK_O), new LoadMapListener(gameCreator, mapEditorFrame));
         addEditMenuItem(PLACE_SNAKE, WithCtrl(KeyEvent.VK_SPACE), new PlaceSnakeListener(gameCreator, mapEditorFrame));
+        addEditMenuItem(PLACE_CAT_DOG, WithCtrl(KeyEvent.VK_ENTER), new PlaceCatDogListener(gameCreator, mapEditorFrame));
     }
 }

@@ -180,6 +180,13 @@ public class GameCreatorWrapper extends GameCreator
         placeSnake(mapPosition.x - 1, mapPosition.y - 1, 1);
     }
 
+    public void placeCatDog()
+    {
+        if (mapPosition.x == getWidth() - 2)
+            resizeMap(getWidth() - 1, getHeight() - 2);
+        placeCatDog(mapPosition.x - 1, mapPosition.y - 1, 2);
+    }
+
     public void moveFocusedPositionOnVector(VelocityVector velocity)
     {
         if (pointer == MapObjectType)
