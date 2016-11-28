@@ -1,6 +1,7 @@
 package Core.MapObjects.StaticMapObjects;
 
 import Core.Game.Game;
+import Core.MapObjects.DynamicMapObjects.CatDogCell;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
@@ -40,6 +41,12 @@ public class EmptyCell extends StaticMapObject
     public void processCollision(SnakeCell snakeCell, Game game)
     {
         snakeCell.processCollision(this, game);
+    }
+
+    @Override
+    public void processCollision(CatDogCell catDogCell, Game game)
+    {
+        catDogCell.processCollision(this, game);
     }
 
     @Override

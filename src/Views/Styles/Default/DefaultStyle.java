@@ -1,12 +1,8 @@
 package Views.Styles.Default;
 
 import Core.Game.GameAlike;
-import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.BaseGameStyle;
 import Views.Styles.Drawer;
-import Views.Styles.GameStyle;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -23,6 +19,10 @@ public class DefaultStyle extends BaseGameStyle
     public final BufferedImage snakeCellImage;
     public final BufferedImage emptyCellImage;
     public final BufferedImage snakeHeadImage;
+    public final BufferedImage catImage;
+    public final BufferedImage dogImage;
+    public final BufferedImage catDogBodyImage;
+    public final BufferedImage catDogLegsImage;
 
     public DefaultStyle() throws IOException
     {
@@ -33,6 +33,10 @@ public class DefaultStyle extends BaseGameStyle
         snakeCellImage = loadImage("snake_body_thick.png");
         emptyCellImage = loadImage("empty_cell.bmp");
         snakeHeadImage = loadImage("head.png");
+        catImage = loadImage("cat_face.png");
+        dogImage = loadImage("dog_face.png");
+        catDogBodyImage = loadImage("cat_dog_body.png");
+        catDogLegsImage = loadImage("body_with_legs.png");
     }
 
     @Override

@@ -19,7 +19,7 @@ public class MultiplayerFrame extends Frame
     protected void onGameFinished()
     {
         super.onGameFinished();
-        new MultiplayerFinalScoreFrame(mainMenuFrame, this::restartGame, game.getAliveObjectIndex());
+        new MultiplayerFinalScoreFrame(mainMenuFrame, this::restartGame, game.getAliveSnakeIndex());
     }
 
     @Override

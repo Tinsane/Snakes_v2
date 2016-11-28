@@ -1,7 +1,7 @@
 package Views.GameView;
 
 import Core.Game.Game;
-import Core.GameObjects.Snake.Snake;
+import Core.GameObjects.Snake;
 import Views.Styles.GameStyle;
 
 import java.awt.*;

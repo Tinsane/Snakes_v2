@@ -1,7 +1,9 @@
 package Views.Styles.Default;
 
 import Core.Game.GameAlike;
-import Core.GameObjects.Snake.Snake;
+import Core.GameObjects.CatDog;
+import Core.GameObjects.Snake;
+import Core.MapObjects.DynamicMapObjects.CatDogCell;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -12,6 +14,7 @@ import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.Drawer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -97,6 +100,29 @@ public class DefaultDrawer implements MapObjectVisitor, Drawer
     public void visit(SnakeCell snakeCell)
     {
         addSnakeCell(snakeCell, style.snakeHeadImage, style.snakeCellImage);
+    }
+
+    @Override
+    public void visit(CatDogCell catDogCell)
+    {
+        addCatDogCell(catDogCell, style.catImage, style.dogImage, style.catDogBodyImage, style.catDogLegsImage);
+    }
+
+    private void addCatDogCell(CatDogCell cell, BufferedImage catImage, BufferedImage dogImage,
+                               BufferedImage bodyImage, BufferedImage legsImage)
+    {
+        CatDog owner = CatDog.getCatDogOwner(game, cell);
+        BufferedImage image;
+        if (owner.head == cell)
+            image = catImage;
+        else if(owner.tail == cell)
+            image = dogImage;
+        else if (owner.head.previous == cell || cell.previous == owner.tail)
+            image = legsImage;
+        else
+            image = bodyImage;
+        BufferedImage rotatedImage = getRotated(image, VelocityVector.up.getAngle(cell.getVelocity()));
+        visualItems.add(new VisualItem(rotatedImage, x, y, 2));
     }
 
     private void draw(MapObject mapObject, int x, int y)

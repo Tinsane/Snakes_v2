@@ -2,7 +2,7 @@ package Views.GameView;
 
 import Controllers.GameController;
 import Core.Game.Game;
-import Core.GameObjects.Snake.Snake;
+import Core.GameObjects.Snake;
 import Views.FinalScoreView.SinglePlayerFinalScoreFrame;
 
 /**

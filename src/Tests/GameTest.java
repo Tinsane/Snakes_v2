@@ -2,10 +2,9 @@ package Tests;
 
 import Core.Game.Game;
 import Core.Game.GameCreators.GameCreator;
-import Core.Game.GameUpdaters.BaseGameUpdater;
 import Core.Game.GameUpdaters.OneBerryGameUpdater;
 import Core.GameCommands.ChangeSnakeVelocityCommand;
-import Core.GameObjects.Snake.Snake;
+import Core.GameObjects.Snake;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
 import org.junit.Before;

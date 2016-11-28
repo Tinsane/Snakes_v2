@@ -1,7 +1,8 @@
 package Tests;
 
+import Core.MapObjects.DynamicMapObjects.BigObjectCell;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
-import Core.GameObjects.Snake.Snake;
+import Core.GameObjects.Snake;
 import Core.Utils.VelocityVector;
 
 import static org.junit.Assert.assertEquals;
@@ -59,7 +60,7 @@ public class SnakeTest
         snake.extend(10);
         snake.setIsDestructed(true);
         assertTrue(snake.getIsDestructed());
-        for (SnakeCell cell : snake)
+        for (BigObjectCell cell : snake)
             assertTrue(cell.getIsDestructed());
     }
 

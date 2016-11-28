@@ -1,6 +1,7 @@
 package Views.Styles.KekDiscrete;
 
 import Core.Game.GameAlike;
+import Core.MapObjects.DynamicMapObjects.CatDogCell;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -11,6 +12,7 @@ import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.Drawer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -89,6 +91,12 @@ public class KekDiscreteDrawer implements MapObjectVisitor, Drawer
         else
             drawImage(getRotated(getRotated(style.snakeHeadImage, angles[random.nextInt(angles.length)]),
                     VelocityVector.up.getAngle(snakeCell.getVelocity())));
+    }
+
+    @Override
+    public void visit(CatDogCell catDogCell)
+    {
+        throw new NotImplementedException(); //TODO: implement
     }
 
     public void draw(MapObject mapObject, int x, int y)

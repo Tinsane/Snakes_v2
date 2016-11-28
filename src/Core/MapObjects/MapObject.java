@@ -1,5 +1,6 @@
 package Core.MapObjects;
 
+import Core.MapObjects.DynamicMapObjects.CatDogCell;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
@@ -22,6 +23,7 @@ public interface MapObject
 
     void processCollision(Berry berry, Game game);
     void processCollision(SnakeCell snakeCell, Game game);
+    void processCollision(CatDogCell catDogCell, Game game);
     void processCollision(Wall wall, Game game);
     void processCollision(SandGlass sandGlass, Game game);
     void processCollision(EmptyCell emptyCell, Game game);

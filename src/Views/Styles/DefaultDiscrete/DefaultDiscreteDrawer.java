@@ -1,6 +1,7 @@
 package Views.Styles.DefaultDiscrete;
 
 import Core.Game.GameAlike;
+import Core.MapObjects.DynamicMapObjects.CatDogCell;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -11,6 +12,7 @@ import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.Drawer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -88,6 +90,12 @@ public class DefaultDiscreteDrawer implements MapObjectVisitor, Drawer
                         style.snakeHeadImage :
                         style.snakeCellImage,
                 VelocityVector.up.getAngle(snakeCell.getVelocity())));
+    }
+
+    @Override
+    public void visit(CatDogCell catDogCell)
+    {
+        throw new NotImplementedException(); //TODO: implement
     }
 
     public void draw(MapObject mapObject, int x, int y)

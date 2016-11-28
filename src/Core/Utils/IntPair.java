@@ -22,6 +22,14 @@ public class IntPair implements Serializable
         y += pair.y;
     }
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null || !(obj instanceof IntPair)) return false;
+        IntPair pair = (IntPair) obj;
+        return pair.x == x && pair.y == y;
+    }
+
     public IntPair getAdded(IntPair pair)
     {
         return new IntPair(x + pair.x, y + pair.y);

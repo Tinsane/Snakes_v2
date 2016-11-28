@@ -1,5 +1,6 @@
 package Core.MapObjects;
 
+import Core.MapObjects.DynamicMapObjects.CatDogCell;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
@@ -23,4 +24,6 @@ public interface MapObjectVisitor
     void visit(Blueberry blueberry);
 
     void visit(SnakeCell snakeCell);
+
+    void visit(CatDogCell catDogCell);
 }

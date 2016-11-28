@@ -2,26 +2,26 @@ package Core.MapObjects.DynamicMapObjects;
 
 import Core.Game.Game;
 import Core.MapObjects.MapObject;
+import Core.MapObjects.MapObjectVisitor;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
-import Core.GameObjects.Snake;
 import Core.Utils.VelocityVector;
-import Core.MapObjects.MapObjectVisitor;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * Created by Владимир on 16.09.2016.
+ * Created by Владимир on 27.11.2016.
  */
-public class SnakeCell extends BigObjectCell
+public class CatDogCell extends BigObjectCell
 {
-    public SnakeCell() {super();}
+    public CatDogCell() { super(); }
 
-    public SnakeCell(SnakeCell previous)
+    public CatDogCell(CatDogCell previous)
     {
         super(previous);
     }
 
-    public SnakeCell(SnakeCell previous, VelocityVector velocity)
+    public CatDogCell(CatDogCell previous, VelocityVector velocity)
     {
         super(previous, velocity);
     }
@@ -35,39 +35,32 @@ public class SnakeCell extends BigObjectCell
     @Override
     public void processCollision(Berry berry, Game game)
     {
-        // probably need to check if cell is head
         berry.setIsDestructed(true);
-        Snake.getSnakeOwner(game, this).extend(berry.getSatisfactionCoefficient());
+
     }
 
     @Override
     public void processCollision(SnakeCell snakeCell, Game game)
     {
-        // let's just kill the snake
-        Snake snake = Snake.getSnakeOwner(game, this);
-        if (this == snake.head)
-            snake.setIsDestructed(true);
-        else
-            snakeCell.processCollision(this, game);
+        snakeCell.processCollision(this, game);
     }
 
     @Override
     public void processCollision(CatDogCell catDogCell, Game game)
     {
-        Snake.getSnakeOwner(game, this).setIsDestructed(true);
+        throw new NotImplementedException();
     }
 
     @Override
     public void processCollision(Wall wall, Game game)
     {
-        Snake.getSnakeOwner(game, this).setIsDestructed(true);
+        throw new NotImplementedException();
     }
 
     @Override
     public void processCollision(SandGlass sandGlass, Game game)
     {
-        game.rollback(sandGlass.getRollbackTurnsNumber());
-        sandGlass.setIsDestructed(true);
+        throw new NotImplementedException();
     }
 
     @Override

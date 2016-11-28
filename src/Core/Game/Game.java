@@ -6,12 +6,13 @@ package Core.Game;
 import Core.Game.GameUpdaters.GameUpdater;
 import Core.GameCommands.GameCommand;
 import Core.GameObjects.GameObject;
-import Core.GameObjects.Snake.Snake;
+import Core.GameObjects.Snake;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.Wall;
+import Core.Utils.IntPair;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -121,12 +122,20 @@ public class Game extends AbstractGame implements Serializable, Cloneable
         objectInputStream.writeObject(this);
     }
 
-    public int getAliveObjectIndex()
+    public int getAliveSnakeIndex()
     {
-        for(int i = 0; i < gameObjects.size(); ++i)
-            if (!gameObjects.get(i).getIsDestructed())
+        GameObject[] snakes = gameObjects.stream()
+                .filter(gameObject -> gameObject instanceof Snake)
+                .toArray(GameObject[]::new);
+        for(int i = 0; i < snakes.length; ++i)
+            if (!snakes[i].getIsDestructed())
                 return i;
         return -1;
+    }
+
+    public MapObject getCellAt(IntPair coordinates)
+    {
+        return getCurrentMap()[coordinates.x][coordinates.y];
     }
 
     @Override

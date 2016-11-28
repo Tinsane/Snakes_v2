@@ -34,4 +34,10 @@ public abstract class Berry extends StaticMapObject
     {
         snakeCell.processCollision(this, game);
     }
+
+    @Override
+    public void processCollision(CatDogCell catDogCell, Game game)
+    {
+        catDogCell.processCollision(this, game);
+    }
 }

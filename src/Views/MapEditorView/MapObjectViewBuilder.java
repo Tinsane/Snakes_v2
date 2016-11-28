@@ -1,5 +1,6 @@
 package Views.MapEditorView;
 
+import Core.MapObjects.DynamicMapObjects.CatDogCell;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.MapObjectVisitor;
@@ -61,6 +62,12 @@ public class MapObjectViewBuilder implements MapObjectVisitor
     public void visit(SnakeCell snakeCell)
     {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public void visit(CatDogCell catDogCell)
+    {
+        throw new NotImplementedException(); // TODO: implement
     }
 
     public MapObjectView createView(MapObject object)

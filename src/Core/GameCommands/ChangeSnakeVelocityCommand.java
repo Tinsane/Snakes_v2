@@ -1,7 +1,7 @@
 package Core.GameCommands;
 
 import Core.Game.Game;
-import Core.GameObjects.Snake.Snake;
+import Core.GameObjects.Snake;
 import Core.Utils.*;
 
 /**

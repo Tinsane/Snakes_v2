@@ -13,11 +13,17 @@ public class VelocityVector implements Serializable
     public static final VelocityVector down = new VelocityVector(0, 1);
     public static final VelocityVector left = new VelocityVector(-1, 0);
     public static final VelocityVector right = new VelocityVector(1, 0);
+    public static final VelocityVector[] directions = new VelocityVector[] {
+            VelocityVector.down,
+            VelocityVector.up,
+            VelocityVector.left,
+            VelocityVector.right,
+    };
 
     public int x;
     public int y;
 
-    VelocityVector(int x, int y) // TODO: maybe better to make it private
+    private VelocityVector(int x, int y)
     {
         if (Math.abs(x) + Math.abs(y) > 1)
             throw new IllegalArgumentException("x and y should be coordinates of axis parallel unit or zero vector");

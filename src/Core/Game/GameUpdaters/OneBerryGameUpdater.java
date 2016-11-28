@@ -1,6 +1,5 @@
 package Core.Game.GameUpdaters;
 
-import Core.Game.Game;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;

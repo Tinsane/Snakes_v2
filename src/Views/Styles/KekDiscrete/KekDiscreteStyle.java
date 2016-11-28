@@ -22,6 +22,10 @@ public class KekDiscreteStyle implements GameStyle
     public final BufferedImage snakeCellImage;
     public final BufferedImage emptyCellImage;
     public final BufferedImage snakeHeadImage;
+    public final BufferedImage catImage;
+    public final BufferedImage dogImage;
+    public final BufferedImage catDogBodyImage;
+    public final BufferedImage catDogLegsImage;
 
     private BufferedImage loadImage(String filename) throws IOException
     {
@@ -44,6 +48,10 @@ public class KekDiscreteStyle implements GameStyle
         snakeCellImage = loadImage("snake_body.bmp");
         emptyCellImage = loadImage("emptyCell.jpg");
         snakeHeadImage = loadImage("Yura.jpg");
+        catImage = null;
+        dogImage = null;
+        catDogBodyImage = null;
+        catDogLegsImage = null;
     }
 
     @Override
