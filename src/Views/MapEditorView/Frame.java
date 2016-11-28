@@ -32,7 +32,7 @@ public class Frame extends JFrame
         setTitle("SnakeMapEditor");
         //addWindowListener(new ParentFrameRestorer(this, mainMenuFrame));
 
-        gameCreator = new GameCreatorWrapper(5, 5, settings.gameUpdater);
+        gameCreator = new GameCreatorWrapper(5, 5, settings.gameUpdatingSystem);
         canvas = new MapEditorCanvas(gameCreator, style, true);
         objectPanel = new ObjectPanel(style, gameCreator, true);
 

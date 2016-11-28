@@ -23,7 +23,7 @@ public final class StartGameButton extends FrameLoaderButton
     @Override
     protected JFrame createFrame(JFrame parent)
     {
-        GameCreator creator = new GameCreator(settings.gameUpdater);
+        GameCreator creator = new GameCreator(settings.gameUpdatingSystem);
         creator.setMapSize(10, 10);
         creator.placeWall(5, 5);
         creator.placeMapObjectsInLineX(4, 1, 7, new Wall());

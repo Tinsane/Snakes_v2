@@ -1,6 +1,6 @@
 package Core.GameObjects;
 
-import Core.Game.GameUpdaters.GameUpdater;
+import Core.GameUpdatingSystem.GameUpdaters.GameMovementUpdater;
 import Core.MapObjects.MapObject;
 
 import java.io.Serializable;
@@ -12,5 +12,5 @@ public interface GameObject extends Serializable
 {
     boolean contains(MapObject mapObject);
     boolean getIsDestructed();
-    void updatePosition(GameUpdater updater);
+    void updatePosition(GameMovementUpdater updater);
 }

@@ -2,13 +2,18 @@ package Tests;
 
 import Core.Game.Game;
 import Core.Game.GameCreators.GameCreator;
-import Core.Game.GameUpdaters.OneBerryGameUpdater;
 import Core.GameCommands.ChangeSnakeVelocityCommand;
 import Core.GameObjects.Snake;
+import Core.GameUpdatingSystem.GameUpdaters.BaseGameUpdater;
+import Core.GameUpdatingSystem.GameUpdaters.GameMovementUpdater;
+import Core.GameUpdatingSystem.GameUpdaters.OneBerryGameUpdater;
+import Core.GameUpdatingSystem.GameUpdatingSystem;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +27,12 @@ public class GameTest
     @Before
     public void setUp()
     {
-        gameCreator = new GameCreator(new OneBerryGameUpdater());
+        GameUpdatingSystem gameUpdatingSystem;
+        ArrayList<BaseGameUpdater> gameUpdaters = new ArrayList<>();
+        gameUpdaters.add(new GameMovementUpdater());
+        gameUpdaters.add(new OneBerryGameUpdater());
+        gameUpdatingSystem = new GameUpdatingSystem(gameUpdaters);
+        gameCreator = new GameCreator(gameUpdatingSystem);
     }
 
     @Test

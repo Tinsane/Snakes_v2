@@ -1,7 +1,7 @@
 package Core.Game.GameCreators;
 
 import Core.Game.GameAlike;
-import Core.Game.GameUpdaters.GameUpdater;
+import Core.GameUpdatingSystem.GameUpdatingSystem;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -72,14 +72,14 @@ public class GameCreatorWrapper extends GameCreator
         addObject(Blueberry::new);
     }
 
-    public GameCreatorWrapper(GameUpdater gameUpdater)
+    public GameCreatorWrapper(GameUpdatingSystem gameUpdatingSystem)
     {
-        super(gameUpdater);
+        super(gameUpdatingSystem);
     }
 
-    public GameCreatorWrapper(int width, int height, GameUpdater gameUpdater)
+    public GameCreatorWrapper(int width, int height, GameUpdatingSystem gameUpdatingSystem)
     {
-        super(gameUpdater);
+        super(gameUpdatingSystem);
         resizeMap(width, height);
     }
 

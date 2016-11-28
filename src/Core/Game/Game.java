@@ -3,10 +3,10 @@ package Core.Game;
  * Created by Владимир on 16.09.2016.
  */
 
-import Core.Game.GameUpdaters.GameUpdater;
 import Core.GameCommands.GameCommand;
 import Core.GameObjects.GameObject;
 import Core.GameObjects.Snake;
+import Core.GameUpdatingSystem.GameUpdatingSystem;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
@@ -21,21 +21,19 @@ import java.util.LinkedList;
 public class Game extends AbstractGame implements Serializable, Cloneable
 {
     public ArrayList<GameObject> gameObjects;
-    private GameUpdater gameUpdater;
-    private LinkedList<MapObject[][]> maps;
+    private GameUpdatingSystem gameUpdatingSystem;
+    private MapObject[][] map;
 
     public boolean isFinished()
     {
         return gameObjects.stream().anyMatch(GameObject::getIsDestructed);
-    } // TODO: let gameUpdater decide when game finishes
+    } // TODO: let gameUpdatingSystem decide when game finishes
 
-    public Game(MapObject[][] map, ArrayList<GameObject> gameObjects, GameUpdater gameUpdater)
+    public Game(MapObject[][] map, ArrayList<GameObject> gameObjects, GameUpdatingSystem gameUpdatingSystem)
     {
-        maps = new LinkedList<>();
-        maps.addFirst(map);
+        this.map = map;
         this.gameObjects = gameObjects;
-        gameUpdater.setGame(this);
-        this.gameUpdater = gameUpdater;
+        this.gameUpdatingSystem = gameUpdatingSystem;
     }
 
     public void executeCommand(GameCommand command)
@@ -45,7 +43,11 @@ public class Game extends AbstractGame implements Serializable, Cloneable
 
     public MapObject[][] getCurrentMap()
     {
-        return maps.peekFirst();
+        return map;
+    }
+    public void setCurrentMap(MapObject[][] map)
+    {
+        this.map = map;
     }
 
     @Override
@@ -67,17 +69,11 @@ public class Game extends AbstractGame implements Serializable, Cloneable
         }
     }
 
-    public void rollback(int turnsNumber)
-    {
-        for (int i = 0; i < turnsNumber && maps.size() > 1; ++i)
-            maps.removeFirst();
-    }
-
     public void update()
     {
         if (isFinished())
             throw new UnsupportedOperationException("Game finished. Impossible to update.");
-        maps.addFirst(gameUpdater.getUpdatedMap());
+        gameUpdatingSystem.updateGame(this);
     }
 
     public static Game loadGame(String filePath) throws IOException, ClassNotFoundException

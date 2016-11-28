@@ -1,6 +1,6 @@
 package Core.GameObjects;
 
-import Core.Game.GameUpdaters.GameUpdater;
+import Core.GameUpdatingSystem.GameUpdaters.GameMovementUpdater;
 import Core.MapObjects.DynamicMapObjects.BigObjectCell;
 import Core.MapObjects.MapObject;
 import Core.Utils.IntPair;
@@ -49,7 +49,7 @@ public abstract class BigMapObject implements GameObject, Iterable<BigObjectCell
             cell.setIsDestructed(isDestructed);
     }
 
-    private void moveFromHead(GameUpdater updater, BigObjectCell cell, IntPair cellPosition)
+    private void moveFromHead(GameMovementUpdater updater, BigObjectCell cell, IntPair cellPosition)
     {
         if (cell.previous != null)
         {
@@ -64,7 +64,7 @@ public abstract class BigMapObject implements GameObject, Iterable<BigObjectCell
     }
 
     @Override
-    public void updatePosition(GameUpdater updater)
+    public void updatePosition(GameMovementUpdater updater)
     {
         moveFromHead(updater, head, head.getCoordinates(updater.getCurrentMap()));
     }

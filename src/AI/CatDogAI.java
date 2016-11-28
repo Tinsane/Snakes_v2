@@ -24,7 +24,7 @@ public class CatDogAI extends BaseAI
     private final CatDog catDog;
     private LinkedList<IntPair> path = new LinkedList<>();
     private boolean madness = false;
-    CatDogAI(Game game, CatDog catDog)
+    public CatDogAI(Game game, CatDog catDog)
     {
         super(game);
         this.catDog = catDog;

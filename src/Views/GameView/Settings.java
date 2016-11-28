@@ -1,8 +1,10 @@
 package Views.GameView;
 
 import Controllers.MovementBinds;
-import Core.Game.GameUpdaters.GameUpdater;
-import Core.Game.GameUpdaters.OneBerryGameUpdater;
+import Core.GameUpdatingSystem.GameUpdaters.BaseGameUpdater;
+import Core.GameUpdatingSystem.GameUpdaters.GameMovementUpdater;
+import Core.GameUpdatingSystem.GameUpdaters.OneBerryGameUpdater;
+import Core.GameUpdatingSystem.GameUpdatingSystem;
 import Views.Styles.GameStyle;
 import Views.Styles.MultiplayerGameStyle;
 
@@ -33,10 +35,14 @@ public class Settings
     public GameStyle singlePlayerStyle;
     public MultiplayerGameStyle multiplayerStyle;
     public ArrayList<MovementBinds> movementControls;
-    public GameUpdater gameUpdater = new OneBerryGameUpdater();
+    public GameUpdatingSystem gameUpdatingSystem;
 
     public Settings(GameStyle singlePlayerStyle, MultiplayerGameStyle multiplayerStyle)
     {
+        ArrayList<BaseGameUpdater> gameUpdaters = new ArrayList<>();
+        gameUpdaters.add(new GameMovementUpdater());
+        gameUpdaters.add(new OneBerryGameUpdater());
+        gameUpdatingSystem = new GameUpdatingSystem(gameUpdaters);
         this.singlePlayerStyle = singlePlayerStyle;
         this.multiplayerStyle = multiplayerStyle;
         movementControls = new ArrayList<>();

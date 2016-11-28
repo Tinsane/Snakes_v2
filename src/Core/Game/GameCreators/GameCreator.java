@@ -2,8 +2,8 @@ package Core.Game.GameCreators;
 
 import Core.Game.AbstractGame;
 import Core.Game.Game;
-import Core.Game.GameUpdaters.GameUpdater;
 import Core.GameObjects.GameObject;
+import Core.GameUpdatingSystem.GameUpdatingSystem;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
@@ -29,12 +29,12 @@ public class GameCreator extends AbstractGame
 {
     protected MapObject[][] map;
     protected ArrayList<GameObject> gameObjects = new ArrayList<>();
-    private GameUpdater gameUpdater;
+    private GameUpdatingSystem gameUpdatingSystem;
 
-    public GameCreator(GameUpdater updater)
+    public GameCreator(GameUpdatingSystem gameUpdatingSystem)
     {
         map = new MapObject[0][0];
-        gameUpdater = updater;
+        this.gameUpdatingSystem = gameUpdatingSystem;
     }
 
     private static MapObject[][] loadMap(String fileName)
@@ -46,7 +46,7 @@ public class GameCreator extends AbstractGame
     {
         if (gameObjects == null)
             throw new InvalidStateException("Snake is null");
-        return new Game(map, gameObjects, gameUpdater);
+        return new Game(map, gameObjects, gameUpdatingSystem);
     }
 
     protected boolean isCellInMap(int x, int y)

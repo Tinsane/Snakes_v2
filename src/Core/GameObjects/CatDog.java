@@ -1,7 +1,7 @@
 package Core.GameObjects;
 
 import Core.Game.GameAlike;
-import Core.Game.GameUpdaters.GameUpdater;
+import Core.GameUpdatingSystem.GameUpdaters.GameMovementUpdater;
 import Core.MapObjects.DynamicMapObjects.BigObjectCell;
 import Core.MapObjects.DynamicMapObjects.CatDogCell;
 import Core.Utils.IntPair;
@@ -22,7 +22,7 @@ public class CatDog extends BigMapObject
         super(length, head);
     }
 
-    private void moveFromTail(GameUpdater updater, BigObjectCell cell, IntPair cellPosition)
+    private void moveFromTail(GameMovementUpdater updater, BigObjectCell cell, IntPair cellPosition)
     {
         if (cell.previous != null)
         {
@@ -59,7 +59,7 @@ public class CatDog extends BigMapObject
     }
 
     @Override
-    public void updatePosition(GameUpdater updater)
+    public void updatePosition(GameMovementUpdater updater)
     {
         if (!tailRules)
         {

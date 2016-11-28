@@ -66,7 +66,7 @@ public class SnakeCell extends BigObjectCell
     @Override
     public void processCollision(SandGlass sandGlass, Game game)
     {
-        game.rollback(sandGlass.getRollbackTurnsNumber());
+//        game.rollback(sandGlass.getRollbackTurnsNumber());
         sandGlass.setIsDestructed(true);
     }
 
