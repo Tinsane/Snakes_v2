@@ -14,5 +14,5 @@ public abstract class BaseAI implements Serializable
     {
         this.game = game;
     }
-    public abstract void updateStrategy();
+    public abstract void updateStrategy(); // TODO for Vova: rename to "Order"
 }

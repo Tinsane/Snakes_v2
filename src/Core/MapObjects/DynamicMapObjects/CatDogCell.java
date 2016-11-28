@@ -36,7 +36,8 @@ public class CatDogCell extends BigObjectCell
     public void processCollision(Berry berry, Game game)
     {
         berry.setIsDestructed(true);
-
+        // TODO for Vova: haven't you forgotten to extend?
+        // TODO for Vova: btw, this logic is similar to SnakeCell
     }
 
     @Override

@@ -20,7 +20,7 @@ import java.util.Random;
 public class CatDogAI extends BaseAI
 {
     private static final double MADNESS_TRIGGER_CHANCE = 0.1;
-    private final Random random;
+    private final Random random; // TODO for Vova: create in function
     private final CatDog catDog;
     private LinkedList<IntPair> path = new LinkedList<>();
     private boolean madness = false;
@@ -44,7 +44,7 @@ public class CatDogAI extends BaseAI
         return !path.isEmpty();
     }
 
-    private IntPair getRulerCoordinates()
+    private IntPair getRulerCoordinates() // TODO for Vova: move inside CatDog
     {
         return catDog.tailRules ?
                 catDog.tail.getCoordinates(game.getCurrentMap()) :
