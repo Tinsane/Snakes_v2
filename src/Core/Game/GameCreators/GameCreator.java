@@ -150,7 +150,7 @@ public class GameCreator extends AbstractGame
         if (catDogLength < 2)
             throw new IllegalArgumentException(String.format("CatDog length should be positive. Given : %1$d", catDogLength));
         CatDog catDog = new CatDog(catDogLength);
-        placeMapObject(catDogX, catDogY, catDog.getCat()); // TODO for me: use getCat and getDog instead
+        placeMapObject(catDogX, catDogY, catDog.getCat());
         placeMapObject(catDogX + 1, catDogY, catDog.getDog());
         addGameObject(catDog);
     }
