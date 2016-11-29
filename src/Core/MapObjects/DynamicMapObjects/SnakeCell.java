@@ -35,7 +35,6 @@ public class SnakeCell extends BigObjectCell
     @Override
     public void processCollision(Berry berry, Game game)
     {
-        // probably need to check if cell is head
         berry.setIsDestructed(true);
         Snake.getSnakeOwner(game, this).extend(berry.getSatisfactionCoefficient());
     }

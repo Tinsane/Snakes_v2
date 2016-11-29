@@ -1,11 +1,13 @@
 package Core.Game.GameCreators;
 
+import AI.BaseAI;
+import AI.CatDogAI;
 import Core.Game.AbstractGame;
 import Core.Game.Game;
 import Core.GameObjects.CatDog;
 import Core.GameObjects.GameObject;
+import Core.GameUpdatingSystem.GameUpdaters.AIGameUpdater;
 import Core.GameUpdatingSystem.GameUpdatingSystem;
-import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.StaticMapObjects.Berries.Blueberry;
 import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
@@ -47,6 +49,11 @@ public class GameCreator extends AbstractGame
     {
         if (gameObjects == null)
             throw new InvalidStateException("Snake is null");
+        gameUpdatingSystem.gameUpdaters.add(new AIGameUpdater(
+                gameObjects.stream()
+                        .filter(gameObject -> gameObject instanceof CatDog)
+                        .map(gameObject -> new CatDogAI((CatDog) gameObject))
+                        .toArray(CatDogAI[]::new)));
         return new Game(map, gameObjects, gameUpdatingSystem);
     }
 
@@ -143,8 +150,8 @@ public class GameCreator extends AbstractGame
         if (catDogLength < 2)
             throw new IllegalArgumentException(String.format("CatDog length should be positive. Given : %1$d", catDogLength));
         CatDog catDog = new CatDog(catDogLength);
-        placeMapObject(catDogX, catDogY, catDog.head); // TODO for me: use getCat and getDog instead
-        placeMapObject(catDogX + 1, catDogY, catDog.tail);
+        placeMapObject(catDogX, catDogY, catDog.getCat()); // TODO for me: use getCat and getDog instead
+        placeMapObject(catDogX + 1, catDogY, catDog.getDog());
         addGameObject(catDog);
     }
 

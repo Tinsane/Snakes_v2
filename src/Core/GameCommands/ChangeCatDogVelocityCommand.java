@@ -19,6 +19,6 @@ public class ChangeCatDogVelocityCommand implements GameCommand
     @Override
     public void execute(Game game)
     {
-        catDog.setVelocity(velocity);
+        catDog.setVelocity(velocity, game.getCurrentMap());
     }
 }

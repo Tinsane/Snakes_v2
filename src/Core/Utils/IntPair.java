@@ -34,4 +34,10 @@ public class IntPair implements Serializable
     {
         return new IntPair(x + pair.x, y + pair.y);
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("(%d, %d)", x, y);
+    }
 }

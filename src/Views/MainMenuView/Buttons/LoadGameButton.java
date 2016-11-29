@@ -1,6 +1,7 @@
 package Views.MainMenuView.Buttons;
 
 import Core.Game.Game;
+import Core.GameObjects.Snake;
 import Views.GameView.MultiplayerFrame;
 import Views.GameView.Settings;
 import Views.GameView.SinglePlayerFrame;
@@ -29,7 +30,7 @@ public class LoadGameButton extends FrameLoaderButton
         if (game == null)
             return null;
 
-        if (game.getGameObjects().size() == 1)
+        if (game.getGameObjects().stream().filter(gameObject -> gameObject instanceof Snake).count() == 1)
             return new SinglePlayerFrame((Views.MainMenuView.Frame) parent, game, settings);
         return new MultiplayerFrame((Views.MainMenuView.Frame) parent, game, settings);
     }

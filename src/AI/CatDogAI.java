@@ -20,15 +20,13 @@ import java.util.Random;
 public class CatDogAI extends BaseAI
 {
     private static final double MADNESS_TRIGGER_CHANCE = 0.1;
-    private final Random random; // TODO for Vova: create in function
     private final CatDog catDog;
     private LinkedList<IntPair> path = new LinkedList<>();
     private boolean madness = false;
-    public CatDogAI(Game game, CatDog catDog)
+    public CatDogAI(CatDog catDog)
     {
-        super(game);
+        super();
         this.catDog = catDog;
-        random = new Random();
     }
 
     private boolean isPassable(MapObject mapObject)
@@ -36,7 +34,7 @@ public class CatDogAI extends BaseAI
         return mapObject instanceof EmptyCell || mapObject instanceof Berry;
     }
 
-    private boolean checkPath()
+    private boolean checkPath(Game game)
     {
         for(IntPair cellPosition : path)
             if (!isPassable(game.getCellAt(cellPosition)))
@@ -44,36 +42,34 @@ public class CatDogAI extends BaseAI
         return !path.isEmpty();
     }
 
-    private IntPair getRulerCoordinates() // TODO for Vova: move inside CatDog
+    private VelocityVector getRandomMovementDirection(IntPair position, Game game, boolean[][] visited)
     {
-        return catDog.tailRules ?
-                catDog.tail.getCoordinates(game.getCurrentMap()) :
-                catDog.head.getCoordinates(game.getCurrentMap());
-    }
-
-    private VelocityVector getRandomMovementDirection(IntPair position)
-    {
+        Random random = new Random();
         ArrayList<VelocityVector> validDirections = new ArrayList<>();
         for(VelocityVector direction : VelocityVector.directions)
-            if (isPassable(game.getCellAt(position.getAdded(direction.getIntPair()))))
+        {
+            IntPair newPosition = position.getAdded(direction.getIntPair());
+            if ((visited == null || !visited[newPosition.x][newPosition.y]) && isPassable(game.getCellAt(newPosition)))
                 validDirections.add(direction);
+        }
         if (validDirections.isEmpty())
             return null;
         return validDirections.get(random.nextInt(validDirections.size()));
     }
 
-    private void makeMadMove()
+    private void makeMadMove(Game game)
     {
         game.executeCommand(new ChangeCatDogRulerCommand(catDog));
-        VelocityVector randomDirection = getRandomMovementDirection(getRulerCoordinates());
+        VelocityVector randomDirection = getRandomMovementDirection(catDog.getRulerCoordinates(game.getCurrentMap()), game, null);
         if (randomDirection == null)
             randomDirection = VelocityVector.zero;
         game.executeCommand(new ChangeCatDogVelocityCommand(catDog, randomDirection));
     }
 
     @Override
-    public void updateStrategy()
+    public void Order(Game game)
     {
+        Random random = new Random();
         if (random.nextDouble() < MADNESS_TRIGGER_CHANCE)
         {
             madness = !madness;
@@ -81,27 +77,27 @@ public class CatDogAI extends BaseAI
         }
         if (madness)
         {
-            makeMadMove();
+            makeMadMove(game);
             return;
         }
-        if (!checkPath())
-            path = findFoodPath();
+        if (!checkPath(game))
+            path = findFoodPath(game);
         if (path.size() == 0)
         {
             game.executeCommand(new ChangeCatDogVelocityCommand(catDog, VelocityVector.zero));
             return;
         }
-        IntPair rulerCoordinates = getRulerCoordinates();
+        IntPair rulerCoordinates = catDog.getRulerCoordinates(game.getCurrentMap());
         for(VelocityVector vector : VelocityVector.directions)
             if (path.get(0).equals(rulerCoordinates.getAdded(vector.getIntPair())))
                 game.executeCommand(new ChangeCatDogVelocityCommand(catDog, vector));
         path.removeFirst();
     }
 
-    private LinkedList<IntPair> findFoodPath()
+    private LinkedList<IntPair> findFoodPath(Game game)
     {
         LinkedList<IntPair> path = new LinkedList<>();
-        path.add(getRulerCoordinates());
+        path.add(catDog.getRulerCoordinates(game.getCurrentMap()));
         MapObject[][] map = game.getCurrentMap();
         boolean[][] visited = new boolean[map.length][map[0].length];
         while(!path.isEmpty())
@@ -113,7 +109,7 @@ public class CatDogAI extends BaseAI
                 path.removeFirst();
                 return path;
             }
-            VelocityVector move = getRandomMovementDirection(currentPosition);
+            VelocityVector move = getRandomMovementDirection(currentPosition, game, visited);
             if (move == null)
                 path.removeLast();
             else

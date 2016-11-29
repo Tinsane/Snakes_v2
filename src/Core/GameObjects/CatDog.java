@@ -4,24 +4,41 @@ import Core.Game.GameAlike;
 import Core.GameUpdatingSystem.GameUpdaters.GameMovementUpdater;
 import Core.MapObjects.DynamicMapObjects.BigObjectCell;
 import Core.MapObjects.DynamicMapObjects.CatDogCell;
+import Core.MapObjects.MapObject;
 import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
-import sun.plugin.dom.exception.InvalidStateException;
 
 /**
  * Created by Владимир on 27.11.2016.
  */
 
-// TODO for Vova: create properties for cat and dog.
 public class CatDog extends BigMapObject
 {
-    public boolean tailRules = false;
-    private int extension = 0;
+    public boolean tailRules;
+    private int extension;
     public CatDog(int length) { this(length, new CatDogCell()); }
 
     public CatDog(int length, CatDogCell head)
     {
-        super(length, head);
+        super(1, head);
+        extension = length - 1;
+        tailRules = false;
+        extendNonRuler();
+    }
+
+    public CatDogCell getCat()
+    {
+        return (CatDogCell) head;
+    }
+
+    public CatDogCell getDog()
+    {
+        return (CatDogCell) tail;
+    }
+
+    public CatDogCell getRuler()
+    {
+        return (CatDogCell) (tailRules ? tail : head);
     }
 
     private void moveFromTail(GameMovementUpdater updater, BigObjectCell cell, IntPair cellPosition)
@@ -30,51 +47,49 @@ public class CatDog extends BigMapObject
         {
             IntPair previousPosition = cellPosition == null ? cell.previous.getCoordinates(updater.getCurrentMap()) :
                     cell.getPreviousCoordinates(updater.getCurrentMap(), cellPosition);
+            VelocityVector previousVelocity = cell.previous.getVelocity();
             moveFromTail(updater, cell.previous, previousPosition);
             if (cellPosition == null)
-            {
-                cellPosition = previousPosition;
-                setVelocity(VelocityVector.zero);
-            }
+                updater.placeObject(cell, previousPosition);
             else
-                setVelocity(cell.previous.getVelocity());
+                updater.moveObject(cellPosition);
+            cell.setVelocity(previousVelocity);
+            return;
         }
         updater.moveObject(cellPosition);
     }
 
-    private void extendTail() // TODO for Vova: create function create ruler
-    {
-        if (extension <= 0)
-            throw new InvalidStateException("Cannot extend with non positive extension.");
-        CatDogCell newTail = new CatDogCell();
-        tail.previous = newTail;
-        tail = newTail; // TODO for Vova: create function setRuler
-        --extension;
-    }
-
-    private void extendHead()// TODO for Vova: create function create ruler
-    {
-        if (extension <= 0)
-            throw new InvalidStateException("Cannot extend with non positive extension.");
-        head = new CatDogCell((CatDogCell) head);
-        --extension;
-    }
-
     @Override
-    public void updatePosition(GameMovementUpdater updater)
+    public void updatePosition(GameMovementUpdater updater) // TODO: fix stable problem
     {
-        if (!tailRules) // TODO for Vova: here try to do without if
+        if (!getRuler().getVelocity().equals(VelocityVector.zero) && extension != 0)
         {
-            if (head.getVelocity() != VelocityVector.zero && extension != 0)
-                extendTail();
+            extendNonRuler();
+            if (tailRules)
+            {
+                moveFromTail(updater, head, null);
+                return;
+            }
+        }
+        if (tailRules)
+            moveFromTail(updater, head, head.getCoordinates(updater.getCurrentMap()));
+        else
             super.updatePosition(updater);
+    }
+
+    private void extendNonRuler()
+    {
+        if (extension <= 0)
+            throw new UnsupportedOperationException("Cannot extend with non positive extension.");
+        --extension;
+        if (!tailRules)
+        {
+            CatDogCell newTail = new CatDogCell();
+            tail.previous = newTail;
+            tail = newTail;
         }
         else
-        {
-            if (tail.getVelocity() != VelocityVector.zero && extension != 0)
-                extendHead();
-            moveFromTail(updater, head, null);
-        }
+            head = new CatDogCell((CatDogCell) head);
     }
 
     @Override
@@ -83,13 +98,38 @@ public class CatDog extends BigMapObject
         return super.getLength() + extension;
     }
 
-    public void setVelocity(VelocityVector vector)
+    public void setVelocity(VelocityVector vector, MapObject[][] map)
     {
-        if (tailRules) // TODO for Vova: the same, getRuler.setVelocity(vector);
-            tail.setVelocity(vector);
-        else
-            head.setVelocity(vector);
+        if (getRuler().getVelocity().equals(vector))
+            return;
+        if (vector.equals(VelocityVector.zero))
+        {
+            for(BigObjectCell bigObjectCell : this)
+                bigObjectCell.setVelocity(vector);
+            return;
+        }
+        if (getRuler().getVelocity().equals(VelocityVector.zero))
+            setCellVelocity(head, map, head.getCoordinates(map));
+        getRuler().setVelocity(vector);
     }
+
+    private void setCellVelocity(BigObjectCell cell, MapObject[][] map, IntPair cellPosition)
+    {
+        if (cell.previous == null)
+            return;
+        IntPair previousPosition = cell.getPreviousCoordinates(map, cellPosition);
+        setCellVelocity(cell.previous, map, previousPosition);
+        for(VelocityVector vector : VelocityVector.directions)
+            if (previousPosition.getAdded(vector.getIntPair()).equals(cellPosition))
+            {
+                if (tailRules)
+                    cell.setVelocity(vector.getReversed());
+                else
+                    cell.previous.setVelocity(vector);
+                return;
+            }
+    }
+
     @Override
     public void incLength()
     {
@@ -99,5 +139,10 @@ public class CatDog extends BigMapObject
     public static CatDog getCatDogOwner(GameAlike game, CatDogCell cell)
     {
         return (CatDog) game.getOwner(cell);
+    }
+
+    public IntPair getRulerCoordinates(MapObject[][] map)
+    {
+        return getRuler().getCoordinates(map);
     }
 }

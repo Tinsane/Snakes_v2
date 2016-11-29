@@ -54,10 +54,35 @@ public class VelocityVector implements Serializable
     public VelocityVector getReversed()
     {
         return new VelocityVector(-x, -y);
+//        if(this == VelocityVector.zero)
+//            return this;
+//        else if (this == VelocityVector.down)
+//            return VelocityVector.up;
+//        else if (this == VelocityVector.up)
+//            return VelocityVector.down;
+//        else if (this == VelocityVector.left)
+//            return VelocityVector.right;
+//        else
+//            return VelocityVector.left;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null || !(obj instanceof VelocityVector))
+            return false;
+        VelocityVector vector = (VelocityVector) obj;
+        return x == vector.x && y == vector.y;
     }
 
     public IntPair getIntPair()
     {
         return new IntPair(x, y);
+    }
+
+    @Override
+    public String toString()
+    {
+        return String.format("(%d, %d)", x, y);
     }
 }

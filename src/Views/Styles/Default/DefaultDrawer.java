@@ -14,7 +14,6 @@ import Core.MapObjects.StaticMapObjects.Wall;
 import Core.Utils.VelocityVector;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.Drawer;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -113,9 +112,9 @@ public class DefaultDrawer implements MapObjectVisitor, Drawer
     {
         CatDog owner = CatDog.getCatDogOwner(game, cell);
         BufferedImage image;
-        if (owner.head == cell)
+        if (owner.getCat() == cell)
             image = catImage;
-        else if(owner.tail == cell)
+        else if(owner.getDog() == cell)
             image = dogImage;
         else if (owner.head.previous == cell || cell.previous == owner.tail)
             image = legsImage;

@@ -1,6 +1,7 @@
 package Core.MapObjects.DynamicMapObjects;
 
 import Core.Game.Game;
+import Core.GameObjects.CatDog;
 import Core.MapObjects.MapObject;
 import Core.MapObjects.MapObjectVisitor;
 import Core.MapObjects.StaticMapObjects.Berries.Berry;
@@ -36,8 +37,7 @@ public class CatDogCell extends BigObjectCell
     public void processCollision(Berry berry, Game game)
     {
         berry.setIsDestructed(true);
-        // TODO for Vova: haven't you forgotten to extend?
-        // TODO for Vova: btw, this logic is similar to SnakeCell
+        CatDog.getCatDogOwner(game, this).extend(berry.getSatisfactionCoefficient());
     }
 
     @Override

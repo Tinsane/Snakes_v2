@@ -9,10 +9,8 @@ import java.io.Serializable;
  */
 public abstract class BaseAI implements Serializable
 {
-    protected final Game game;
-    BaseAI(Game game)
+    BaseAI()
     {
-        this.game = game;
     }
-    public abstract void updateStrategy(); // TODO for Vova: rename to "Order"
+    public abstract void Order(Game game);
 }

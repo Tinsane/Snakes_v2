@@ -4,6 +4,7 @@ package Core.Game;
  */
 
 import Core.GameCommands.GameCommand;
+import Core.GameObjects.CatDog;
 import Core.GameObjects.GameObject;
 import Core.GameObjects.Snake;
 import Core.GameUpdatingSystem.GameUpdatingSystem;
@@ -16,7 +17,6 @@ import Core.Utils.IntPair;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Game extends AbstractGame implements Serializable, Cloneable
 {

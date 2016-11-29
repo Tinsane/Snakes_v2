@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public class AIGameUpdater extends BaseGameUpdater
 {
-    private ArrayList<BaseAI> AIs;
-    public AIGameUpdater(ArrayList<BaseAI> AIs)
+    private BaseAI[] AIs;
+    public AIGameUpdater(BaseAI[] AIs)
     {
         super(0);
         this.AIs = AIs;
@@ -20,6 +20,7 @@ public class AIGameUpdater extends BaseGameUpdater
     @Override
     public void execute(Game game)
     {
-        AIs.forEach(BaseAI::updateStrategy);
+        for(BaseAI baseAI : AIs)
+            baseAI.Order(game);
     }
 }
