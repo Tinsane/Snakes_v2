@@ -18,17 +18,26 @@ public abstract class AbstractGame implements GameAlike
 
     public int getOwnerIndex(MapObject mapObject)
     {
+        return getIndex(getOwner(mapObject));
+    }
+
+    @Override
+    public int getIndex(GameObject gameObject)
+    {
         ArrayList<GameObject> gameObjects = getGameObjects();
         for(int i = 0; i < gameObjects.size(); ++i)
-            if (gameObjects.get(i).contains(mapObject))
+            if (gameObjects.get(i) == gameObject)
                 return i;
         return -1;
     }
 
     public GameObject getOwner(MapObject mapObject)
     {
-        int ownerIndex = getOwnerIndex(mapObject);
-        return (ownerIndex != -1) ? getGameObjects().get(ownerIndex) : null;
+        ArrayList<GameObject> gameObjects = getGameObjects();
+        for(GameObject gameObject : gameObjects)
+            if (gameObject.contains(mapObject))
+                return gameObject;
+        return null;
     }
 
     @Override

@@ -10,7 +10,7 @@ import java.util.Iterator;
 /**
  * Created by Владимир on 27.11.2016.
  */
-public abstract class BigMapObject implements GameObject, Iterable<BigObjectCell>
+public abstract class BigMapObject implements GameObject<BigObjectCell>
 {
     public BigObjectCell head;
     public BigObjectCell tail;

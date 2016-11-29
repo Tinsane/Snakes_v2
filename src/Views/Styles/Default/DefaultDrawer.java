@@ -2,7 +2,10 @@ package Views.Styles.Default;
 
 import Core.Game.GameAlike;
 import Core.GameObjects.CatDog;
+import Core.GameObjects.GameObject;
+import Core.GameObjects.GameObjectVisitor;
 import Core.GameObjects.Snake;
+import Core.MapObjects.DynamicMapObjects.BigObjectCell;
 import Core.MapObjects.DynamicMapObjects.CatDogCell;
 import Core.MapObjects.DynamicMapObjects.SnakeCell;
 import Core.MapObjects.MapObject;
@@ -11,10 +14,13 @@ import Core.MapObjects.StaticMapObjects.Berries.Strawberry;
 import Core.MapObjects.StaticMapObjects.EmptyCell;
 import Core.MapObjects.StaticMapObjects.SandGlass;
 import Core.MapObjects.StaticMapObjects.Wall;
+import Core.Utils.IntPair;
 import Core.Utils.VelocityVector;
 import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.Drawer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -24,7 +30,7 @@ import java.util.ArrayList;
 /**
  * Created by ISmir on 08.10.2016.
  */
-public class DefaultDrawer implements MapObjectVisitor, Drawer
+public class DefaultDrawer implements MapObjectVisitor, GameObjectVisitor, Drawer
 {
     private double x, y;
     protected final GameAlike game;
@@ -84,50 +90,33 @@ public class DefaultDrawer implements MapObjectVisitor, Drawer
                 AffineTransformOp.TYPE_BILINEAR).filter(image, null);
     }
 
-    protected void addSnakeCell(SnakeCell snakeCell, BufferedImage headImage, BufferedImage cellImage)
-    {
-        boolean isHead = game
-                .getGameObjects()
-                .stream()
-                .anyMatch(gameObject -> Snake.getSnakeOwner(game, snakeCell).head == snakeCell);
-        BufferedImage image = isHead ? headImage : cellImage;
-        BufferedImage rotatedImage = getRotated(image, VelocityVector.up.getAngle(snakeCell.getVelocity()));
-        visualItems.add(new VisualItem(rotatedImage, x, y, 2));
-    }
-
     @Override
     public void visit(SnakeCell snakeCell)
     {
-        addSnakeCell(snakeCell, style.snakeHeadImage, style.snakeCellImage);
+        throw new NotImplementedException();
     }
 
     @Override
     public void visit(CatDogCell catDogCell)
     {
-        addCatDogCell(catDogCell, style.catImage, style.dogImage, style.catDogBodyImage, style.catDogLegsImage);
+        throw new NotImplementedException();
     }
 
-    private void addCatDogCell(CatDogCell cell, BufferedImage catImage, BufferedImage dogImage,
-                               BufferedImage bodyImage, BufferedImage legsImage)
+    protected void addRotatedImage(BufferedImage image, VelocityVector direction, int drawingPriority)
     {
-        CatDog owner = CatDog.getCatDogOwner(game, cell);
-        BufferedImage image;
-        if (owner.getCat() == cell)
-            image = catImage;
-        else if(owner.getDog() == cell)
-            image = dogImage;
-        else if (owner.head.previous == cell || cell.previous == owner.tail)
-            image = legsImage;
-        else
-            image = bodyImage;
-        BufferedImage rotatedImage = getRotated(image, VelocityVector.up.getAngle(cell.getVelocity()));
-        visualItems.add(new VisualItem(rotatedImage, x, y, 2));
+        BufferedImage rotatedImage = getRotated(image, VelocityVector.up.getAngle(direction));
+        visualItems.add(new VisualItem(rotatedImage, x, y, drawingPriority));
+    }
+
+    private void setCoordinates(MapObject mapObject, int x, int y)
+    {
+        this.x = x + mapObject.getVelocity().x * turnPartLeft;
+        this.y = y + mapObject.getVelocity().y * turnPartLeft;
     }
 
     private void draw(MapObject mapObject, int x, int y)
     {
-        this.x = x + mapObject.getVelocity().x * turnPartLeft;
-        this.y = y + mapObject.getVelocity().y * turnPartLeft;
+        setCoordinates(mapObject, x, y);
         mapObject.acceptVisitor(this);
     }
 
@@ -138,10 +127,62 @@ public class DefaultDrawer implements MapObjectVisitor, Drawer
             for (int j = 0; j < map[0].length; ++j)
             {
                 drawImage(style.emptyCellImage, i, j);
-                draw(map[i][j], i, j);
+                if (game.getOwner(map[i][j]) == null)
+                    draw(map[i][j], i, j);
             }
+        for(GameObject gameObject : game.getGameObjects())
+            gameObject.acceptVisitor(this);
         visualItems.sort((a, b) -> a.priority.compareTo(b.priority));
         for (VisualItem item : visualItems)
             drawImage(item.image, item.x, item.y);
+    }
+
+    private void addCatDogImage(CatDog owner, CatDogCell cell, VelocityVector direction)
+    {
+        BufferedImage image;
+        if (cell == owner.getCat())
+            image = style.catImage;
+        else if(cell == owner.getDog())
+            image = style.dogImage;
+        else
+            image = style.catDogBodyImage;
+        addRotatedImage(image, direction, 2);
+    }
+
+    @Override
+    public void visit(CatDog catDog)
+    {
+        IntPair coordinates = catDog.head.getCoordinates(game.getCurrentMap());
+        VelocityVector direction = catDog.head.getDirectionToPrevious(game.getCurrentMap(), coordinates).getReversed();
+        for(BigObjectCell cell : catDog)
+        {
+            if (coordinates == null)
+                break;
+            setCoordinates(cell, coordinates.x, coordinates.y);
+            addCatDogImage(catDog, (CatDogCell) cell, direction);
+            direction = cell.getDirectionToPrevious(game.getCurrentMap(), coordinates);
+            if (cell.previous != null)
+                coordinates = cell.getPreviousCoordinates(game.getCurrentMap(), coordinates);
+        }
+    }
+
+    protected void addSnakeCellImage(Snake owner, SnakeCell cell)
+    {
+        addRotatedImage(cell == owner.head ? style.snakeHeadImage : style.snakeCellImage, cell.getVelocity(), 2);
+    }
+
+    @Override
+    public void visit(Snake snake)
+    {
+        IntPair coordinates = snake.head.getCoordinates(game.getCurrentMap());
+        for(BigObjectCell cell : snake)
+        {
+            if (coordinates == null)
+                break;
+            setCoordinates(cell, coordinates.x, coordinates.y);
+            addSnakeCellImage(snake, (SnakeCell) cell);
+            if (cell.previous != null)
+                coordinates = cell.getPreviousCoordinates(game.getCurrentMap(), coordinates);
+        }
     }
 }

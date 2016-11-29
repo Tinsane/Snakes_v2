@@ -15,6 +15,7 @@ public interface GameAlike
     ArrayList<GameObject> getGameObjects();
     GameObject getGameObject(Class objectClass, int index);
     GameObject getOwner(MapObject cell);
+    int getIndex(GameObject gameObject);
     int getOwnerIndex(MapObject cell);
 
     int getWidth();

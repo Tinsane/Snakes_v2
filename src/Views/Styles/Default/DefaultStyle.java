@@ -22,7 +22,6 @@ public class DefaultStyle extends BaseGameStyle
     public final BufferedImage catImage;
     public final BufferedImage dogImage;
     public final BufferedImage catDogBodyImage;
-    public final BufferedImage catDogLegsImage;
 
     public DefaultStyle() throws IOException
     {
@@ -33,10 +32,9 @@ public class DefaultStyle extends BaseGameStyle
         snakeCellImage = loadImage("snake_body_thick.png");
         emptyCellImage = loadImage("empty_cell.bmp");
         snakeHeadImage = loadImage("head.png");
-        catImage = loadImage("cat_face.png");
-        dogImage = loadImage("dog_face.png");
-        catDogBodyImage = loadImage("cat_dog_body.png");
-        catDogLegsImage = loadImage("body_with_legs.png");
+        catImage = loadImage("big_cat_face.png");
+        dogImage = loadImage("big_dog_face.png");
+        catDogBodyImage = loadImage("big_cat_dog_body.png");
     }
 
     @Override

@@ -26,11 +26,19 @@ public abstract class BigObjectCell extends DynamicMapObject
 
     public IntPair getPreviousCoordinates(MapObject[][] map, IntPair coordinates)
     {
+        VelocityVector direction = getDirectionToPrevious(map, coordinates);
+        if (direction == null)
+            return null;
+        return coordinates.getAdded(direction.getIntPair());
+    }
+
+    public VelocityVector getDirectionToPrevious(MapObject[][] map, IntPair coordinates)
+    {
         for (VelocityVector direction : VelocityVector.directions)
         {
             IntPair newPair = coordinates.getAdded(direction.getIntPair());
             if (map[newPair.x][newPair.y] == previous)
-                return newPair;
+                return direction;
         }
         return null;
     }

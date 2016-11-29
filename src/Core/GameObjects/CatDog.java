@@ -60,7 +60,7 @@ public class CatDog extends BigMapObject
     }
 
     @Override
-    public void updatePosition(GameMovementUpdater updater) // TODO: fix stable problem
+    public void updatePosition(GameMovementUpdater updater)
     {
         if (!getRuler().getVelocity().equals(VelocityVector.zero) && extension != 0)
         {
@@ -75,6 +75,12 @@ public class CatDog extends BigMapObject
             moveFromTail(updater, head, head.getCoordinates(updater.getCurrentMap()));
         else
             super.updatePosition(updater);
+    }
+
+    @Override
+    public void acceptVisitor(GameObjectVisitor visitor)
+    {
+        visitor.visit(this);
     }
 
     private void extendNonRuler()
@@ -119,15 +125,11 @@ public class CatDog extends BigMapObject
             return;
         IntPair previousPosition = cell.getPreviousCoordinates(map, cellPosition);
         setCellVelocity(cell.previous, map, previousPosition);
-        for(VelocityVector vector : VelocityVector.directions)
-            if (previousPosition.getAdded(vector.getIntPair()).equals(cellPosition))
-            {
-                if (tailRules)
-                    cell.setVelocity(vector.getReversed());
-                else
-                    cell.previous.setVelocity(vector);
-                return;
-            }
+        VelocityVector vector = cell.getDirectionToPrevious(map, cellPosition);
+        if (tailRules)
+            cell.setVelocity(vector);
+        else
+            cell.previous.setVelocity(vector.getReversed());
     }
 
     @Override

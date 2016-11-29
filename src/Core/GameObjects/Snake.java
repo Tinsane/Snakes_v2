@@ -46,4 +46,10 @@ public class Snake extends BigMapObject
     {
         return (Snake)game.getOwner(cell);
     }
+
+    @Override
+    public void acceptVisitor(GameObjectVisitor visitor)
+    {
+        visitor.visit(this);
+    }
 }

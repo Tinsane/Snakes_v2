@@ -84,7 +84,7 @@ public class CatDogAI extends BaseAI
             path = findFoodPath(game);
         if (path.size() == 0)
         {
-            game.executeCommand(new ChangeCatDogVelocityCommand(catDog, VelocityVector.zero));
+            game.executeCommand(new ChangeCatDogRulerCommand(catDog));
             return;
         }
         IntPair rulerCoordinates = catDog.getRulerCoordinates(game.getCurrentMap());
