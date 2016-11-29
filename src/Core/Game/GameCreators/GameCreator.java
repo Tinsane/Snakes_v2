@@ -185,6 +185,7 @@ public class GameCreator extends AbstractGame
             for (int y = 0; y < getHeight() - 2; ++y)
                 if (gameObject.contains(map[x + 1][y + 1]))
                     map[x + 1][y + 1] = new EmptyCell();
+        gameObjects.remove(gameObject);
     }
 
     @Override
