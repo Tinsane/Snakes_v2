@@ -20,7 +20,6 @@ import Core.MapObjects.MapObjectVisitor;
 import Views.Styles.Drawer;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -90,6 +89,14 @@ public class DefaultDrawer implements MapObjectVisitor, GameObjectVisitor, Drawe
                 AffineTransformOp.TYPE_BILINEAR).filter(image, null);
     }
 
+    private BufferedImage getReflectedVertically(BufferedImage image)
+    {
+        AffineTransform at = new AffineTransform();
+        at.concatenate(AffineTransform.getScaleInstance(-1, 1));
+        at.concatenate(AffineTransform.getTranslateInstance(-image.getWidth(), 0));
+        return new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR).filter(image, null);
+    }
+
     @Override
     public void visit(SnakeCell snakeCell)
     {
@@ -141,7 +148,7 @@ public class DefaultDrawer implements MapObjectVisitor, GameObjectVisitor, Drawe
     {
         BufferedImage image;
         if (cell == owner.getCat())
-            image = style.catImage;
+            image = getReflectedVertically(style.catImage);
         else if(cell == owner.getDog())
             image = style.dogImage;
         else
