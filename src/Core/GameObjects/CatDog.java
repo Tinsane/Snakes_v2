@@ -12,7 +12,7 @@ import Core.Utils.VelocityVector;
  * Created by Владимир on 27.11.2016.
  */
 
-public class CatDog extends BigMapObject
+public class CatDog extends BigGameObject
 {
     public boolean tailRules;
     private int extension;

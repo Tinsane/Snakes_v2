@@ -44,10 +44,11 @@ public class SnakeCell extends BigObjectCell
     {
         // let's just kill the snake
         Snake snake = Snake.getSnakeOwner(game, this);
+        Snake anotherSnake = Snake.getSnakeOwner(game, snakeCell);
         if (this == snake.head)
             snake.setIsDestructed(true);
-        else
-            snakeCell.processCollision(this, game);
+        if (snakeCell == anotherSnake.head)
+            anotherSnake.setIsDestructed(true);
     }
 
     @Override

@@ -10,13 +10,13 @@ import java.util.Iterator;
 /**
  * Created by Владимир on 27.11.2016.
  */
-public abstract class BigMapObject implements GameObject<BigObjectCell>
+public abstract class BigGameObject implements GameObject<BigObjectCell>
 {
     public BigObjectCell head;
     public BigObjectCell tail;
     private boolean isDestructed = false;
 
-    public BigMapObject(int length, BigObjectCell head)
+    public BigGameObject(int length, BigObjectCell head)
     {
         if (length <= 0)
             throw new IllegalArgumentException();

@@ -70,9 +70,11 @@ public class CatDogAI extends BaseAI
     public void Order(Game game)
     {
         Random random = new Random();
-        if (random.nextDouble() < MADNESS_TRIGGER_CHANCE)
+        if (madness)
+            madness = false;
+        else if (!madness && random.nextDouble() < MADNESS_TRIGGER_CHANCE)
         {
-            madness = !madness;
+            madness = true;
             path.clear();
         }
         if (madness)

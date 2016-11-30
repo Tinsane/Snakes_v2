@@ -7,7 +7,7 @@ import Core.Utils.VelocityVector;
 /**
  * Created by Владимир on 16.09.2016.
  */
-public class Snake extends BigMapObject
+public class Snake extends BigGameObject
 {
     public Snake(int length)
     {
@@ -45,6 +45,19 @@ public class Snake extends BigMapObject
     public static Snake getSnakeOwner(GameAlike game, SnakeCell cell)
     {
         return (Snake)game.getOwner(cell);
+    }
+
+    public static int getSnakeIndex(GameAlike game, GameObject gameObject)
+    {
+        Snake[] snakes = game
+                .getGameObjects()
+                .stream()
+                .filter(gameObj -> gameObj instanceof Snake)
+                .toArray(Snake[]::new);
+        for (int i = 0; i < snakes.length; ++i)
+            if (snakes[i] == gameObject)
+                return i;
+        return -1;
     }
 
     @Override

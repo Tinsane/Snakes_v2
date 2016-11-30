@@ -26,8 +26,8 @@ public class DefaultMultiplayerDrawer extends DefaultDrawer
     protected void addSnakeCellImage(Snake owner, SnakeCell cell)
     {
         addRotatedImage(cell == owner.head ?
-                style.snakesHeads.get(game.getIndex(owner)) :
-                style.snakesCells.get(game.getIndex(owner)),
+                style.snakesHeads.get(Snake.getSnakeIndex(game, owner)) :
+                style.snakesCells.get(Snake.getSnakeIndex(game, owner)),
                 cell.getVelocity(), 2);
     }
 }

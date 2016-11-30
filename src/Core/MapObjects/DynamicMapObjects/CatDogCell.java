@@ -49,7 +49,12 @@ public class CatDogCell extends BigObjectCell
     @Override
     public void processCollision(CatDogCell catDogCell, Game game)
     {
-        throw new NotImplementedException();
+        CatDog snake = CatDog.getCatDogOwner(game, this);
+        CatDog anotherSnake = CatDog.getCatDogOwner(game, catDogCell);
+        if (this == snake.head)
+            snake.setIsDestructed(true);
+        if (catDogCell == anotherSnake.head)
+            anotherSnake.setIsDestructed(true);
     }
 
     @Override
