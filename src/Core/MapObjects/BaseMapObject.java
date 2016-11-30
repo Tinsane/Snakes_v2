@@ -30,7 +30,7 @@ public abstract class BaseMapObject implements MapObject, Serializable
             for (int y = 0; y < map[0].length; ++y)
                 if (map[x][y] == this)
                     return new IntPair(x, y);
-        throw new IllegalArgumentException();
+        return null;
     }
 
     @Override

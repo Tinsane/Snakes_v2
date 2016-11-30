@@ -2,6 +2,8 @@ package Views.GameView;
 
 import Controllers.GameController;
 import Core.Game.Game;
+import Core.GameObjects.GameObject;
+import Core.GameObjects.Snake;
 import Views.FinalScoreView.MultiplayerFinalScoreFrame;
 
 /**
@@ -29,7 +31,7 @@ public class MultiplayerFrame extends Frame
         clear();
         canvas = new GameCanvas(this.game, settings.multiplayerStyle, false);
         add(canvas);
-        for (int i = 0; i < this.game.getGameObjects().size(); ++i) // TODO: create two players frame
+        for(int i = 0; i < game.gameObjects.stream().filter(gameObject -> gameObject instanceof Snake).count(); ++i)
             addKeyListener(new GameController(this.game, i, settings.movementControls.get(i)));
         setVisible(true);
         pack();
